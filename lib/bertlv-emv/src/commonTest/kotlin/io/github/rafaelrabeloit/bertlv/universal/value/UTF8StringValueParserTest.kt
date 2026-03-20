@@ -9,13 +9,13 @@ class UTF8StringValueParserTest {
 
     @Test
     fun givenAsciiBytesWhenParseThenShouldReturnCorrectString() {
-        val bytes = "Hello, World!".toByteArray(Charsets.UTF_8)
+        val bytes = "Hello, World!".encodeToByteArray()
         assertEquals("Hello, World!", parser.bytesToValue(bytes))
     }
 
     @Test
     fun givenUtf8BytesWhenParseThenShouldReturnCorrectString() {
-        val bytes = "Hello, 世界!".toByteArray(Charsets.UTF_8)
+        val bytes = "Hello, 世界!".encodeToByteArray()
         assertEquals("Hello, 世界!", parser.bytesToValue(bytes))
     }
 
@@ -27,13 +27,13 @@ class UTF8StringValueParserTest {
     @Test
     fun givenAsciiStringWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val bytes = parser.valueToBytes("Hello, World!")
-        assertContentEquals("Hello, World!".toByteArray(Charsets.UTF_8), bytes)
+        assertContentEquals("Hello, World!".encodeToByteArray(), bytes)
     }
 
     @Test
     fun givenUtf8StringWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val bytes = parser.valueToBytes("Hello, 世界!")
-        assertContentEquals("Hello, 世界!".toByteArray(Charsets.UTF_8), bytes)
+        assertContentEquals("Hello, 世界!".encodeToByteArray(), bytes)
     }
 
     @Test

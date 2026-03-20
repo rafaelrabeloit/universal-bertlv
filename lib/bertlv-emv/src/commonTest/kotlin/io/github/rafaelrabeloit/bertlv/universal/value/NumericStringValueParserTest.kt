@@ -10,13 +10,13 @@ class NumericStringValueParserTest {
 
     @Test
     fun givenValidNumericBytesWhenParseThenShouldReturnCorrectString() {
-        val bytes = "1234567890".toByteArray(Charsets.US_ASCII)
+        val bytes = "1234567890".encodeToByteArray()
         assertEquals("1234567890", parser.bytesToValue(bytes))
     }
 
     @Test
     fun givenBytesWithSpacesWhenParseThenShouldReturnCorrectString() {
-        val bytes = "123 456 7890".toByteArray(Charsets.US_ASCII)
+        val bytes = "123 456 7890".encodeToByteArray()
         assertEquals("123 456 7890", parser.bytesToValue(bytes))
     }
 
@@ -27,7 +27,7 @@ class NumericStringValueParserTest {
 
     @Test
     fun givenBytesWithInvalidCharactersWhenParseThenShouldThrowException() {
-        val bytes = "123abc".toByteArray(Charsets.US_ASCII)
+        val bytes = "123abc".encodeToByteArray()
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(bytes)
         }
@@ -36,13 +36,13 @@ class NumericStringValueParserTest {
     @Test
     fun givenValidNumericStringWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val bytes = parser.valueToBytes("1234567890")
-        assertContentEquals("1234567890".toByteArray(Charsets.US_ASCII), bytes)
+        assertContentEquals("1234567890".encodeToByteArray(), bytes)
     }
 
     @Test
     fun givenStringWithSpacesWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val bytes = parser.valueToBytes("123 456 7890")
-        assertContentEquals("123 456 7890".toByteArray(Charsets.US_ASCII), bytes)
+        assertContentEquals("123 456 7890".encodeToByteArray(), bytes)
     }
 
     @Test

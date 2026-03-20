@@ -10,13 +10,13 @@ class IA5StringValueParserTest {
 
     @Test
     fun givenValidIa5BytesWhenParseThenShouldReturnCorrectString() {
-        val bytes = "Hello, World!".toByteArray(Charsets.US_ASCII)
+        val bytes = "Hello, World!".encodeToByteArray()
         assertEquals("Hello, World!", parser.bytesToValue(bytes))
     }
 
     @Test
     fun givenBytesWithSpecialCharactersWhenParseThenShouldReturnCorrectString() {
-        val bytes = "Hello, World! (123)".toByteArray(Charsets.US_ASCII)
+        val bytes = "Hello, World! (123)".encodeToByteArray()
         assertEquals("Hello, World! (123)", parser.bytesToValue(bytes))
     }
 
@@ -47,18 +47,18 @@ class IA5StringValueParserTest {
     @Test
     fun givenValidIa5StringWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val bytes = parser.valueToBytes("Hello, World!")
-        assertContentEquals("Hello, World!".toByteArray(Charsets.US_ASCII), bytes)
+        assertContentEquals("Hello, World!".encodeToByteArray(), bytes)
     }
 
     @Test
     fun givenStringWithSpecialCharactersWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val bytes = parser.valueToBytes("Hello, World! (123)")
-        assertContentEquals("Hello, World! (123)".toByteArray(Charsets.US_ASCII), bytes)
+        assertContentEquals("Hello, World! (123)".encodeToByteArray(), bytes)
     }
 
     @Test
     fun givenStringWithAllAsciiCharactersWhenConvertToBytesThenShouldReturnCorrectBytes() {
-        val str = String(ByteArray(128) { it.toByte() })
+        val str = ByteArray(128) { it.toByte() }.decodeToString()
         val bytes = parser.valueToBytes(str)
         assertEquals(128, bytes.size)
         for (i in 0..127) {
