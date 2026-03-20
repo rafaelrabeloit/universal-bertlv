@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Example app for the bertlv_emv plugin.">
+  <title>bertlv_emv_example</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- Load EMV Tools JavaScript modules BEFORE Flutter -->
+  <script src="js/kotlin-kotlin-stdlib.js"></script>
+  <script src="js/bitfield-parser.js"></script>
+  <script src="js/emv-tools-bertlv-emv.js"></script>
+
+  <!-- Expose Kotlin/JS module exports to global scope for dart:js_interop -->
+  <script>
+    (function() {
+      var moduleKey = 'io.github.rafaelrabeloit.emv-tools:bertlv-emv';
+      var mod = globalThis[moduleKey];
+      if (mod && mod.io && mod.io.github && mod.io.github.rafaelrabeloit &&
+          mod.io.github.rafaelrabeloit.bertlv && mod.io.github.rafaelrabeloit.bertlv.ffi) {
+        // Hoist the nested namespace to globalThis so @JS('io.github...') works
+        if (!globalThis.io) globalThis.io = {};
+        if (!globalThis.io.github) globalThis.io.github = {};
+        if (!globalThis.io.github.rafaelrabeloit) globalThis.io.github.rafaelrabeloit = {};
+        if (!globalThis.io.github.rafaelrabeloit.bertlv) globalThis.io.github.rafaelrabeloit.bertlv = {};
+        globalThis.io.github.rafaelrabeloit.bertlv.ffi = mod.io.github.rafaelrabeloit.bertlv.ffi;
+        console.log('EMV Tools module hoisted to global scope');
+        console.log('Available:', Object.keys(globalThis.io.github.rafaelrabeloit.bertlv.ffi));
+      } else {
+        console.error('EMV Tools module not found or missing ffi namespace');
+        console.error('Module keys:', mod ? Object.keys(mod) : 'module undefined');
+      }
+    })();
+  </script>
+
+  <script src="flutter_bootstrap.js"></script>
+</body>
+</html>

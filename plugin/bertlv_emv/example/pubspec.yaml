@@ -1,0 +1,27 @@
+name: bertlv_emv_example
+description: Demonstrates the Universal BERTLV-EMV plugin on Android, iOS, and Web.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  bertlv_emv:
+    path: ../
+  bertlv_emv_mobile:
+    path: ../../bertlv_emv_mobile
+  bertlv_emv_web:
+    path: ../../bertlv_emv_web
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true

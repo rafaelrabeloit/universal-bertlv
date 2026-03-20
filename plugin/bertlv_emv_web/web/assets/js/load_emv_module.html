@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>EMV Tools Module Loader</title>
+</head>
+<body>
+    <!-- Load dependencies in order -->
+    <script src="kotlin-kotlin-stdlib.js"></script>
+    <script src="bitfield-parser.js"></script>
+    <script src="emv-tools-bertlv-emv.js"></script>
+    
+    <script>
+        // Verify module loaded correctly
+        if (typeof io !== 'undefined' && 
+            io.github && 
+            io.github.rafaelrabeloit && 
+            io.github.rafaelrabeloit.bertlv && 
+            io.github.rafaelrabeloit.bertlv.ffi) {
+            console.log('EMV Tools module loaded successfully');
+            console.log('Available functions:', Object.keys(io.github.rafaelrabeloit.bertlv.ffi));
+        } else {
+            console.error('EMV Tools module failed to load');
+        }
+    </script>
+</body>
+</html>

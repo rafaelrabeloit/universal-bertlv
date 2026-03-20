@@ -1,0 +1,37 @@
+name: bertlv_emv_web
+description: >-
+  Universal BERTLV-EMV — Web implementation of the bertlv_emv plugin using
+  dart:js_interop.
+version: 0.0.1
+homepage: https://github.com/rafaelrabeloit/emv-tools
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  web: ^1.0.0
+  bertlv_emv:
+    path: ../bertlv_emv
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  plugin:
+    implements: bertlv_emv
+    platforms:
+      web:
+        pluginClass: BertlvEmvWeb
+        fileName: bertlv_emv_web.dart
+
+  assets:
+    - web/assets/js/kotlin-kotlin-stdlib.js
+    - web/assets/js/bitfield-parser.js
+    - web/assets/js/emv-tools-bertlv-emv.js

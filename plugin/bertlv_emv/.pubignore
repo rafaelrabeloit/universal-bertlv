@@ -1,0 +1,4 @@
+# Exclude non-package files from pub.dev publishing
+example/
+.dart_tool/
+build/

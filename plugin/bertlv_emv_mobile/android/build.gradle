@@ -1,0 +1,51 @@
+group 'com.example.bertlv_emv'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '2.3.0'
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.example.bertlv_emv'
+    compileSdkVersion 35
+
+    defaultConfig {
+        minSdkVersion 21
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+// No JVM dependencies needed — using Kotlin/Native .so via dart:ffi
+// The .so is bundled in src/main/jniLibs/

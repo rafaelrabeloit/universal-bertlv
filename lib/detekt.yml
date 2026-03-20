@@ -1,0 +1,85 @@
+build:
+  maxIssues: 0
+  weights:
+    complexity: 2
+    formatting: 1
+    LongParameterList: 1
+    comments: 1
+
+complexity:
+  TooManyFunctions:
+    thresholdInFiles: 20
+    thresholdInClasses: 15
+    thresholdInInterfaces: 10
+    thresholdInObjects: 15
+  LongParameterList:
+    functionThreshold: 8
+    constructorThreshold: 8
+  CyclomaticComplexMethod:
+    threshold: 15
+    ignoreSingleWhenExpression: true
+  LargeClass:
+    threshold: 450
+  LongMethod:
+    threshold: 70
+  NestedBlockDepth:
+    threshold: 4
+
+style:
+  MagicNumber:
+    active: true
+    ignoreNumbers: ['-1', '0', '1', '2']
+    ignoreHashCodeFunction: true
+    ignoreEnums: true
+  NewLineAtEndOfFile:
+    active: true
+  TrailingWhitespace:
+    active: true
+  MaxLineLength:
+    active: false
+
+# Formatting rules (requires detekt-formatting plugin)
+formatting:
+  active: true
+  android: false
+  autoCorrect: true
+  MaximumLineLength:
+    maxLineLength: 120
+    ignoreBackTickedIdentifier: true
+
+empty-blocks:
+  EmptyFunctionBlock:
+    active: true
+  EmptyClassBlock:
+    active: true
+  EmptyIfBlock:
+    active: true
+  EmptyWhileBlock:
+    active: true
+  EmptyForBlock:
+    active: true
+  EmptyTryBlock:
+    active: true
+  EmptyCatchBlock:
+    active: true
+  EmptyFinallyBlock:
+    active: true
+  EmptyDoWhileBlock:
+    active: true
+  EmptyElseBlock:
+    active: true
+  EmptyWhenBlock:
+    active: true
+  EmptyInitBlock:
+    active: true
+  EmptySecondaryConstructor:
+    active: true
+
+potential-bugs:
+  UnsafeCallOnNullableType:
+    active: true
+  UnsafeCast:
+    active: true
+
+# Removed deprecated and misspelled rules
+# Removed rules that are now handled by the compiler or are not present in Detekt 1.23.5

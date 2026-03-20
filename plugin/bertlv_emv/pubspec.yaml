@@ -1,0 +1,31 @@
+name: bertlv_emv
+description: >-
+  Universal BERTLV-EMV — Flutter plugin for EMV BER-TLV parsing and tag
+  explanation. Delegates to platform-specific implementations (mobile via
+  dart:ffi, web via dart:js_interop).
+version: 0.0.1
+homepage: https://github.com/rafaelrabeloit/emv-tools
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: bertlv_emv_mobile
+      ios:
+        default_package: bertlv_emv_mobile
+      web:
+        default_package: bertlv_emv_web
