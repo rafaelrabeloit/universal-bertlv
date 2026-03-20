@@ -65,7 +65,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlinx.datetime)
-                implementation("io.github.rafaelrabeloit:bitfield-parser:0.1.0")
+                implementation("io.github.rafaelrabeloit:universal-bitfield:0.2.0")
             }
         }
 

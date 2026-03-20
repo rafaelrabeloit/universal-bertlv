@@ -36,3 +36,8 @@ jobs:
         run: ./gradlew :bertlv-emv:jvmTest :console-emv:jvmTest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run JS tests
+        run: ./gradlew :bertlv-emv:jsTest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
