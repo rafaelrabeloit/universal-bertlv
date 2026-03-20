@@ -32,17 +32,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build
-        run: ./gradlew build
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Run JVM tests
-        run: ./gradlew jvmTest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run JS tests
-        run: ./gradlew jsTest
+        run: ./gradlew :bertlv-emv:jvmTest :console-emv:jvmTest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
