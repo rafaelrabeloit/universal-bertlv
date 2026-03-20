@@ -19,7 +19,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/rafaelrabeloit/bitfield-parser")
+            url = uri("https://maven.pkg.github.com/rafaelrabeloit/universal-bitfield")
             credentials {
                 username = providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR") ?: ""
                 password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN") ?: ""
@@ -28,6 +28,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "emv-tools"
+rootProject.name = "universal-bertlv"
 include(":bertlv-emv")
 include(":console-emv")

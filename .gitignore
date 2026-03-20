@@ -21,6 +21,12 @@ pubspec.lock
 *.swp
 *.swo
 
+# Kotlin metadata cache
+.kotlin/
+
+# Agent workspace files
+AGENTS.md
+
 # OS
 .DS_Store
 Thumbs.db
