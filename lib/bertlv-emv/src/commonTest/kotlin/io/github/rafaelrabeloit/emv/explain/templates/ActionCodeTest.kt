@@ -23,7 +23,7 @@ class ActionCodeTest {
      */
     class GeneralTests {
         @Test
-        fun `Given action code with all bits set When explaining Then shows all bit explanations`() {
+        fun givenActionCodeWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
             val actionCode = byteArrayOf(0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte())
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "SDA Failed - Static Data Authentication failed")
@@ -32,7 +32,7 @@ class ActionCodeTest {
         }
 
         @Test
-        fun `Given action code with invalid length When explaining Then throws exception`() {
+        fun givenActionCodeWithInvalidLengthWhenExplainingThenThrowsException() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x00, 0x00)
             assertFailsWith<IllegalArgumentException> {
                 TestActionCode.explain(actionCode, "\n").toString()
@@ -40,7 +40,7 @@ class ActionCodeTest {
         }
 
         @Test
-        fun `Given action code with custom line separator When explaining Then uses correct separator`() {
+        fun givenActionCodeWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
             val actionCode = byteArrayOf(0x80.toByte(), 0x00, 0x00, 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "|").toString()
             assertContains(meaning, "SDA Failed - Static Data Authentication failed|")
@@ -52,21 +52,21 @@ class ActionCodeTest {
      */
     class OfflineDataAuthenticationTests {
         @Test
-        fun `Given action code with SDA failed When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithSdaFailedWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x80.toByte(), 0x00, 0x00, 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "SDA Failed - Static Data Authentication failed")
         }
 
         @Test
-        fun `Given action code with ICC data missing When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithIccDataMissingWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x40.toByte(), 0x00, 0x00, 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "ICC Data Missing - ICC data required for offline processing is missing")
         }
 
         @Test
-        fun `Given action code with card on exception file When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithCardOnExceptionFileWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x20.toByte(), 0x00, 0x00, 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(
@@ -81,21 +81,21 @@ class ActionCodeTest {
      */
     class CardholderVerificationTests {
         @Test
-        fun `Given action code with different application versions When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithDifferentApplicationVersionsWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x80.toByte(), 0x00, 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "ICC and Terminal Have Different Application Versions")
         }
 
         @Test
-        fun `Given action code with expired application When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithExpiredApplicationWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x40.toByte(), 0x00, 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Expired Application - Application has expired")
         }
 
         @Test
-        fun `Given action code with application not yet effective When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithApplicationNotYetEffectiveWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x20.toByte(), 0x00, 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Application Not Yet Effective - Application is not yet effective")
@@ -107,21 +107,21 @@ class ActionCodeTest {
      */
     class TransactionResultsTests {
         @Test
-        fun `Given action code with floor limit exceeded When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithFloorLimitExceededWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x80.toByte(), 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Transaction Exceeds Floor Limit")
         }
 
         @Test
-        fun `Given action code with lower offline limit exceeded When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithLowerOfflineLimitExceededWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x40.toByte(), 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Lower Consecutive Offline Limit Exceeded")
         }
 
         @Test
-        fun `Given action code with upper offline limit exceeded When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithUpperOfflineLimitExceededWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x20.toByte(), 0x00, 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Upper Consecutive Offline Limit Exceeded")
@@ -133,7 +133,7 @@ class ActionCodeTest {
      */
     class TerminalRiskManagementTests {
         @Test
-        fun `Given action code with default TDOL used When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithDefaultTdolUsedWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x00, 0x80.toByte(), 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(
@@ -143,14 +143,14 @@ class ActionCodeTest {
         }
 
         @Test
-        fun `Given action code with issuer authentication failed When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithIssuerAuthenticationFailedWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x00, 0x40.toByte(), 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Issuer Authentication Failed")
         }
 
         @Test
-        fun `Given action code with script processing failed When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithScriptProcessingFailedWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x00, 0x20.toByte(), 0x00)
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Script Processing Failed Before Final GENERATE AC")
@@ -162,7 +162,7 @@ class ActionCodeTest {
      */
     class IssuerDiscretionaryTests {
         @Test
-        fun `Given action code with issuer discretionary bits When explaining Then shows correct bit explanation`() {
+        fun givenActionCodeWithIssuerDiscretionaryBitsWhenExplainingThenShowsCorrectBitExplanation() {
             val actionCode = byteArrayOf(0x00, 0x00, 0x00, 0x00, 0xFF.toByte())
             val meaning = TestActionCode.explain(actionCode, "\n").toString()
             assertContains(meaning, "Issuer Discretionary - All bits in this byte are reserved for issuer use")

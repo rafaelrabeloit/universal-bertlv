@@ -79,7 +79,7 @@ class EmvTLVTest {
     }
 
     @Test
-    fun `Given PAN tag When parse Then should correctly parse numeric value`() {
+    fun givenPanTagWhenParseThenShouldCorrectlyParseNumericValue() {
         val parsedTLV = TLV.fromTlvBuffer(PAN_TLV, listOf(ASNOneSpecification, EmvSpecification))
 
         // Verify tag
@@ -93,7 +93,7 @@ class EmvTLVTest {
     }
 
     @Test
-    fun `Given Application Label tag When parse Then should correctly parse alphanumeric value`() {
+    fun givenApplicationLabelTagWhenParseThenShouldCorrectlyParseAlphanumericValue() {
         val parsedTLV = TLV.fromTlvBuffer(APPLICATION_LABEL_TLV, listOf(ASNOneSpecification, EmvSpecification))
 
         // Verify tag
@@ -107,7 +107,7 @@ class EmvTLVTest {
     }
 
     @Test
-    fun `Given Amount Authorized tag When parse Then should correctly parse numeric number value`() {
+    fun givenAmountAuthorizedTagWhenParseThenShouldCorrectlyParseNumericNumberValue() {
         val parsedTLV = TLV.fromTlvBuffer(AMOUNT_AUTHORIZED_TLV, listOf(ASNOneSpecification, EmvSpecification))
 
         // Verify tag
@@ -121,7 +121,7 @@ class EmvTLVTest {
     }
 
     @Test
-    fun `Given Application Cryptogram tag When parse Then should correctly parse binary value`() {
+    fun givenApplicationCryptogramTagWhenParseThenShouldCorrectlyParseBinaryValue() {
         val parsedTLV = TLV.fromTlvBuffer(APPLICATION_CRYPTOGRAM_TLV, listOf(ASNOneSpecification, EmvSpecification))
 
         // Verify tag
@@ -138,7 +138,7 @@ class EmvTLVTest {
     }
 
     @Test
-    fun `Given constructed tag When parse Then should correctly parse nested TLVs`() {
+    fun givenConstructedTagWhenParseThenShouldCorrectlyParseNestedTlvs() {
         val parsedTLV = TLV.fromTlvBuffer(APPLICATION_TEMPLATE_TLV, listOf(ASNOneSpecification, EmvSpecification))
 
         // Verify tag

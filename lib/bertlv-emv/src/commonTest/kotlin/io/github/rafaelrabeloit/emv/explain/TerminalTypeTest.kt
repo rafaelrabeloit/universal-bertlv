@@ -15,42 +15,42 @@ class TerminalTypeTest {
      */
     class TerminalEnvironmentTests {
         @Test
-        fun `Given Terminal Type with attended bit set When explaining Then shows correct bit explanation`() {
+        fun givenTerminalTypeWithAttendedBitSetWhenExplainingThenShowsCorrectBitExplanation() {
             val terminalType = byteArrayOf(0x80.toByte())
             val meaning = TerminalType.explain(terminalType, "\n").toString()
             assertContains(meaning, "Attended - Terminal is attended by a merchant")
         }
 
         @Test
-        fun `Given Terminal Type with unattended bit set When explaining Then shows correct bit explanation`() {
+        fun givenTerminalTypeWithUnattendedBitSetWhenExplainingThenShowsCorrectBitExplanation() {
             val terminalType = byteArrayOf(0x40.toByte())
             val meaning = TerminalType.explain(terminalType, "\n").toString()
             assertContains(meaning, "Unattended - Terminal is unattended")
         }
 
         @Test
-        fun `Given Terminal Type with electronic cash register bit set When explaining Then shows bit explanation`() {
+        fun givenTerminalTypeWithElectronicCashRegisterBitSetWhenExplainingThenShowsBitExplanation() {
             val terminalType = byteArrayOf(0x20.toByte())
             val meaning = TerminalType.explain(terminalType, "\n").toString()
             assertContains(meaning, "Electronic Cash Register - Terminal is an electronic cash register")
         }
 
         @Test
-        fun `Given Terminal Type with POS terminal bit set When explaining Then shows correct bit explanation`() {
+        fun givenTerminalTypeWithPosTerminalBitSetWhenExplainingThenShowsCorrectBitExplanation() {
             val terminalType = byteArrayOf(0x10.toByte())
             val meaning = TerminalType.explain(terminalType, "\n").toString()
             assertContains(meaning, "POS Terminal - Terminal is a point of sale terminal")
         }
 
         @Test
-        fun `Given Terminal Type with mobile bit set When explaining Then shows correct bit explanation`() {
+        fun givenTerminalTypeWithMobileBitSetWhenExplainingThenShowsCorrectBitExplanation() {
             val terminalType = byteArrayOf(0x08.toByte())
             val meaning = TerminalType.explain(terminalType, "\n").toString()
             assertContains(meaning, "Mobile - Terminal is mobile")
         }
 
         @Test
-        fun `Given Terminal Type with internet bit set When explaining Then shows correct bit explanation`() {
+        fun givenTerminalTypeWithInternetBitSetWhenExplainingThenShowsCorrectBitExplanation() {
             val terminalType = byteArrayOf(0x04.toByte())
             val meaning = TerminalType.explain(terminalType, "\n").toString()
             assertContains(meaning, "Internet - Terminal is internet-based")
@@ -62,7 +62,7 @@ class TerminalTypeTest {
      */
     class GeneralTests {
         @Test
-        fun `Given Terminal Type with all bits set When explaining Then shows all bit explanations`() {
+        fun givenTerminalTypeWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
             val terminalType = byteArrayOf(0xFF.toByte())
             val meaning = TerminalType.explain(terminalType, "\n").toString()
             assertContains(meaning, "Attended - Terminal is attended by a merchant")
@@ -71,7 +71,7 @@ class TerminalTypeTest {
         }
 
         @Test
-        fun `Given Terminal Type with invalid length When explaining Then throws exception`() {
+        fun givenTerminalTypeWithInvalidLengthWhenExplainingThenThrowsException() {
             val terminalType = byteArrayOf(0x00, 0x00)
             assertFailsWith<IllegalArgumentException> {
                 TerminalType.explain(terminalType, "\n").toString()
@@ -79,7 +79,7 @@ class TerminalTypeTest {
         }
 
         @Test
-        fun `Given Terminal Type with custom line separator When explaining Then uses correct separator`() {
+        fun givenTerminalTypeWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
             val terminalType = byteArrayOf(0x80.toByte())
             val meaning = TerminalType.explain(terminalType, "|").toString()
             assertContains(meaning, "Attended - Terminal is attended by a merchant|")

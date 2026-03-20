@@ -9,18 +9,18 @@ class PrintableStringValueParserTest {
     private val parser = PrintableStringValueParser()
 
     @Test
-    fun `Given valid printable bytes When parse Then should return correct string`() {
+    fun givenValidPrintableBytesWhenParseThenShouldReturnCorrectString() {
         val bytes = "Hello World'()+,-./:=?".toByteArray(Charsets.US_ASCII)
         assertEquals("Hello World'()+,-./:=?", parser.bytesToValue(bytes))
     }
 
     @Test
-    fun `Given empty bytes When parse Then should return empty string`() {
+    fun givenEmptyBytesWhenParseThenShouldReturnEmptyString() {
         assertEquals("", parser.bytesToValue(ByteArray(0)))
     }
 
     @Test
-    fun `Given bytes with invalid characters When parse Then should throw exception`() {
+    fun givenBytesWithInvalidCharactersWhenParseThenShouldThrowException() {
         val bytes = "Hello!@#".toByteArray(Charsets.US_ASCII)
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(bytes)
@@ -28,7 +28,7 @@ class PrintableStringValueParserTest {
     }
 
     @Test
-    fun `Given bytes with control characters When parse Then should throw exception`() {
+    fun givenBytesWithControlCharactersWhenParseThenShouldThrowException() {
         val bytes = "Hello\u0000World".toByteArray(Charsets.US_ASCII)
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(bytes)
@@ -36,7 +36,7 @@ class PrintableStringValueParserTest {
     }
 
     @Test
-    fun `Given bytes with non-printable characters When parse Then should throw exception`() {
+    fun givenBytesWithNonPrintableCharactersWhenParseThenShouldThrowException() {
         val bytes = "Hello\u007FWorld".toByteArray(Charsets.US_ASCII)
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(bytes)
@@ -44,40 +44,40 @@ class PrintableStringValueParserTest {
     }
 
     @Test
-    fun `Given valid printable string When convert to bytes Then should return correct bytes`() {
+    fun givenValidPrintableStringWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val value = "Hello World'()+,-./:=?"
         val bytes = parser.valueToBytes(value)
         assertContentEquals(value.toByteArray(Charsets.US_ASCII), bytes)
     }
 
     @Test
-    fun `Given empty string When convert to bytes Then should return empty array`() {
+    fun givenEmptyStringWhenConvertToBytesThenShouldReturnEmptyArray() {
         assertContentEquals(ByteArray(0), parser.valueToBytes(""))
     }
 
     @Test
-    fun `Given string with invalid characters When convert to bytes Then should throw exception`() {
+    fun givenStringWithInvalidCharactersWhenConvertToBytesThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.valueToBytes("Hello!@#")
         }
     }
 
     @Test
-    fun `Given string with control characters When convert to bytes Then should throw exception`() {
+    fun givenStringWithControlCharactersWhenConvertToBytesThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.valueToBytes("Hello\u0000World")
         }
     }
 
     @Test
-    fun `Given string with non-printable characters When convert to bytes Then should throw exception`() {
+    fun givenStringWithNonPrintableCharactersWhenConvertToBytesThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.valueToBytes("Hello\u007FWorld")
         }
     }
 
     @Test
-    fun `Given value When convert to string Then should return same string`() {
+    fun givenValueWhenConvertToStringThenShouldReturnSameString() {
         assertEquals("Hello World'()+,-./:=?", parser.valueToString("Hello World'()+,-./:=?"))
     }
 }

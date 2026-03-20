@@ -15,7 +15,7 @@ class TerminalCapabilitiesTest {
      */
     class CardDataInputCapabilityTests {
         @Test
-        fun `Given Terminal Capabilities with manual key entry When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithManualKeyEntryWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x80.toByte(), 0x00, 0x00)
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -25,7 +25,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with magnetic stripe When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithMagneticStripeWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x40.toByte(), 0x00, 0x00)
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -35,7 +35,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with ICC When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithIccWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x20.toByte(), 0x00, 0x00)
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -50,7 +50,7 @@ class TerminalCapabilitiesTest {
      */
     class CVMCapabilityTests {
         @Test
-        fun `Given Terminal Capabilities with plaintext PIN When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithPlaintextPinWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x00, 0x80.toByte(), 0x00)
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -60,7 +60,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with enciphered PIN When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithEncipheredPinWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x00, 0x40.toByte(), 0x00)
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -70,7 +70,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with signature When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithSignatureWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x00, 0x20.toByte(), 0x00)
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -85,7 +85,7 @@ class TerminalCapabilitiesTest {
      */
     class SecurityCapabilityTests {
         @Test
-        fun `Given Terminal Capabilities with SDA When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithSdaWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x00, 0x00, 0x80.toByte())
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -95,7 +95,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with DDA When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithDdaWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x00, 0x00, 0x40.toByte())
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -105,7 +105,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with CDA When explaining Then shows correct bit explanation`() {
+        fun givenTerminalCapabilitiesWithCdaWhenExplainingThenShowsCorrectBitExplanation() {
             val capabilities = byteArrayOf(0x00, 0x00, 0x20.toByte())
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(
@@ -120,7 +120,7 @@ class TerminalCapabilitiesTest {
      */
     class GeneralTests {
         @Test
-        fun `Given Terminal Capabilities with all bits set When explaining Then shows all bit explanations`() {
+        fun givenTerminalCapabilitiesWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
             val capabilities = byteArrayOf(0xFF.toByte(), 0xFF.toByte(), 0xFF.toByte())
             val meaning = TerminalCapabilities.explain(capabilities, "\n").toString()
             assertContains(meaning, "Manual Key Entry - Terminal can accept manual key entry")
@@ -132,7 +132,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with invalid length When explaining Then throws exception`() {
+        fun givenTerminalCapabilitiesWithInvalidLengthWhenExplainingThenThrowsException() {
             val capabilities = byteArrayOf(0x00, 0x00)
             assertFailsWith<IllegalArgumentException> {
                 TerminalCapabilities.explain(capabilities, "\n").toString()
@@ -140,7 +140,7 @@ class TerminalCapabilitiesTest {
         }
 
         @Test
-        fun `Given Terminal Capabilities with custom line separator When explaining Then uses correct separator`() {
+        fun givenTerminalCapabilitiesWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
             val capabilities = byteArrayOf(0x80.toByte(), 0x00, 0x00)
             val meaning = TerminalCapabilities.explain(capabilities, "|").toString()
             assertContains(meaning, "Manual Key Entry - Terminal can accept manual key entry|")

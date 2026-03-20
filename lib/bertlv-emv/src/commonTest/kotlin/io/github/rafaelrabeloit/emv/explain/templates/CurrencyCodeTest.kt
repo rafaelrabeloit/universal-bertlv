@@ -23,26 +23,26 @@ class CurrencyCodeTest {
      */
     class GeneralTests {
         @Test
-        fun `Given valid currency code When explaining Then shows correct currency description`() {
+        fun givenValidCurrencyCodeWhenExplainingThenShowsCorrectCurrencyDescription() {
             val meaning = TestCurrencyCode.explain(840, "\n").toString()
             assertEquals("US Dollar", meaning)
         }
 
         @Test
-        fun `Given invalid currency code When explaining Then shows unknown currency code`() {
+        fun givenInvalidCurrencyCodeWhenExplainingThenShowsUnknownCurrencyCode() {
             val meaning = TestCurrencyCode.explain(998, "\n").toString()
             assertEquals("Unknown Currency Code", meaning)
         }
 
         @Test
-        fun `Given negative currency code When explaining Then throws exception`() {
+        fun givenNegativeCurrencyCodeWhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 TestCurrencyCode.explain(-1, "\n").toString()
             }
         }
 
         @Test
-        fun `Given currency code above 999 When explaining Then throws exception`() {
+        fun givenCurrencyCodeAbove999WhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 TestCurrencyCode.explain(1000, "\n").toString()
             }
@@ -54,19 +54,19 @@ class CurrencyCodeTest {
      */
     class SpecificCurrencyCodeTests {
         @Test
-        fun `Given EUR currency code When explaining Then shows Euro description`() {
+        fun givenEurCurrencyCodeWhenExplainingThenShowsEuroDescription() {
             val meaning = TestCurrencyCode.explain(978, "\n").toString()
             assertEquals("Euro", meaning)
         }
 
         @Test
-        fun `Given GBP currency code When explaining Then shows Pound Sterling description`() {
+        fun givenGbpCurrencyCodeWhenExplainingThenShowsPoundSterlingDescription() {
             val meaning = TestCurrencyCode.explain(826, "\n").toString()
             assertEquals("Pound Sterling", meaning)
         }
 
         @Test
-        fun `Given JPY currency code When explaining Then shows Yen description`() {
+        fun givenJpyCurrencyCodeWhenExplainingThenShowsYenDescription() {
             val meaning = TestCurrencyCode.explain(392, "\n").toString()
             assertEquals("Yen", meaning)
         }

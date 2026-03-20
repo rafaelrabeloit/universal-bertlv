@@ -6,14 +6,14 @@ import kotlin.test.assertFailsWith
 
 class LanguagePreferenceTest {
     @Test
-    fun `test single language code`() {
+    fun testSingleLanguageCode() {
         assertEquals("English", LanguagePreference.explain("en", "\n").toString())
         assertEquals("Spanish", LanguagePreference.explain("es", "\n").toString())
         assertEquals("Japanese", LanguagePreference.explain("ja", "\n").toString())
     }
 
     @Test
-    fun `test multiple language codes`() {
+    fun testMultipleLanguageCodes() {
         assertEquals(
             "English\nFrench",
             LanguagePreference.explain("enfr", "\n").toString(),
@@ -29,7 +29,7 @@ class LanguagePreferenceTest {
     }
 
     @Test
-    fun `test invalid language code`() {
+    fun testInvalidLanguageCode() {
         assertEquals("Unknown Language Code", LanguagePreference.explain("xx", "\n").toString())
         assertEquals(
             "English\nUnknown Language Code",
@@ -38,7 +38,7 @@ class LanguagePreferenceTest {
     }
 
     @Test
-    fun `test incorrect length`() {
+    fun testIncorrectLength() {
         assertFailsWith<IllegalArgumentException> {
             LanguagePreference.explain("eng", "\n").toString()
         }
@@ -48,14 +48,14 @@ class LanguagePreferenceTest {
     }
 
     @Test
-    fun `test empty string`() {
+    fun testEmptyString() {
         assertFailsWith<IllegalArgumentException> {
             LanguagePreference.explain("", "\n").toString()
         }
     }
 
     @Test
-    fun `test odd length`() {
+    fun testOddLength() {
         assertFailsWith<IllegalArgumentException> {
             LanguagePreference.explain("enf", "\n").toString()
         }

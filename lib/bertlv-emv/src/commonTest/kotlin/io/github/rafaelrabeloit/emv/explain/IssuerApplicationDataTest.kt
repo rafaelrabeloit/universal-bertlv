@@ -18,7 +18,7 @@ class IssuerApplicationDataTest {
      */
     class Cvn10Tests {
         @Test
-        fun `Given Visa IAD with CVN 10 When explaining Then shows format and DKI`() {
+        fun givenVisaIadWithCvn10WhenExplainingThenShowsFormatAndDki() {
             val value = byteArrayOf(
                 0x01,
                 0x0A,
@@ -36,7 +36,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with TC in Gen AC When explaining Then shows TC`() {
+        fun givenCvn10WithTcInGenAcWhenExplainingThenShowsTc() {
             // CVR byte 1: 0b01010000 = TC in 2nd, TC in 1st
             val value = byteArrayOf(
                 0x01,
@@ -60,7 +60,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with ARQC in Gen AC When explaining Then shows ARQC`() {
+        fun givenCvn10WithArqcInGenAcWhenExplainingThenShowsArqc() {
             // CVR byte 1: 0xA0 = ARQC in 2nd, ARQC in 1st
             val value = byteArrayOf(
                 0x01,
@@ -79,7 +79,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with AAC in Gen AC When explaining Then shows AAC`() {
+        fun givenCvn10WithAacInGenAcWhenExplainingThenShowsAac() {
             val value = byteArrayOf(
                 0x01,
                 0x0A,
@@ -97,7 +97,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with offline PIN performed When explaining Then shows Yes`() {
+        fun givenCvn10WithOfflinePinPerformedWhenExplainingThenShowsYes() {
             // CVR byte 1: bit 3 set = 0x08
             val value = byteArrayOf(
                 0x01,
@@ -115,7 +115,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with PIN try counter When explaining Then shows counter`() {
+        fun givenCvn10WithPinTryCounterWhenExplainingThenShowsCounter() {
             // CVR byte 2: upper nibble = 3
             val value = byteArrayOf(
                 0x01,
@@ -130,7 +130,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with issuer auth failed When explaining Then shows Yes`() {
+        fun givenCvn10WithIssuerAuthFailedWhenExplainingThenShowsYes() {
             // CVR byte 3: bit 7 (0x80)
             val value = byteArrayOf(
                 0x01,
@@ -148,7 +148,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with script received When explaining Then shows Yes`() {
+        fun givenCvn10WithScriptReceivedWhenExplainingThenShowsYes() {
             // CVR byte 3: bit 6 (0x40)
             val value = byteArrayOf(
                 0x01,
@@ -163,7 +163,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with IDD When explaining Then shows IDD hex`() {
+        fun givenCvn10WithIddWhenExplainingThenShowsIddHex() {
             val value = byteArrayOf(
                 0x01,
                 0x0A,
@@ -184,7 +184,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with no IDD When explaining Then does not show IDD`() {
+        fun givenCvn10WithNoIddWhenExplainingThenDoesNotShowIdd() {
             val value = byteArrayOf(
                 0x01,
                 0x0A,
@@ -198,7 +198,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 10 with limit exceeded flags When explaining Then shows correctly`() {
+        fun givenCvn10WithLimitExceededFlagsWhenExplainingThenShowsCorrectly() {
             // CVR byte 2: 0x03 = both limits exceeded
             val value = byteArrayOf(
                 0x01,
@@ -225,7 +225,7 @@ class IssuerApplicationDataTest {
      */
     class Cvn17Tests {
         @Test
-        fun `Given Visa IAD with CVN 17 When explaining Then shows format`() {
+        fun givenVisaIadWithCvn17WhenExplainingThenShowsFormat() {
             val value = byteArrayOf(
                 0x02,
                 0x11,
@@ -242,7 +242,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 17 with ARQC in 1st AC When explaining Then shows ARQC`() {
+        fun givenCvn17WithArqcIn1stAcWhenExplainingThenShowsArqc() {
             // CVR byte 1: 0x20 = ARQC in 1st
             val value = byteArrayOf(
                 0x01,
@@ -263,7 +263,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 17 with CIAC skipped flag When explaining Then shows Yes`() {
+        fun givenCvn17WithCiacSkippedFlagWhenExplainingThenShowsYes() {
             // CVR byte 3: bit 6 (0x40)
             val value = byteArrayOf(
                 0x01,
@@ -283,7 +283,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 17 with match in check table When explaining Then shows Yes`() {
+        fun givenCvn17WithMatchInCheckTableWhenExplainingThenShowsYes() {
             // CVR byte 3: bit 3 (0x08)
             val value = byteArrayOf(
                 0x01,
@@ -303,7 +303,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 17 with IDD When explaining Then shows IDD hex`() {
+        fun givenCvn17WithIddWhenExplainingThenShowsIddHex() {
             val value = byteArrayOf(
                 0x01,
                 0x11,
@@ -329,7 +329,7 @@ class IssuerApplicationDataTest {
      */
     class Cvn18Tests {
         @Test
-        fun `Given Visa IAD with CVN 18 When explaining Then shows format`() {
+        fun givenVisaIadWithCvn18WhenExplainingThenShowsFormat() {
             val value = byteArrayOf(
                 0x03,
                 0x12,
@@ -351,7 +351,7 @@ class IssuerApplicationDataTest {
      */
     class UnknownFormatTests {
         @Test
-        fun `Given non-Visa IAD When explaining Then shows raw hex`() {
+        fun givenNonVisaIadWhenExplainingThenShowsRawHex() {
             val value = byteArrayOf(
                 0x01,
                 0x05,
@@ -363,14 +363,14 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given short data When explaining Then shows raw hex`() {
+        fun givenShortDataWhenExplainingThenShowsRawHex() {
             val value = byteArrayOf(0x01, 0x02)
             val result = explain(value)
             assertContains(result, "Raw Data: 0102")
         }
 
         @Test
-        fun `Given single byte When explaining Then shows raw hex`() {
+        fun givenSingleByteWhenExplainingThenShowsRawHex() {
             val value = byteArrayOf(0x42)
             val result = explain(value)
             assertContains(result, "Raw Data: 42")
@@ -382,7 +382,7 @@ class IssuerApplicationDataTest {
      */
     class InvalidInputTests {
         @Test
-        fun `Given empty byte array When explaining Then throws exception`() {
+        fun givenEmptyByteArrayWhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 IssuerApplicationData.explain(byteArrayOf(), "\n")
             }
@@ -394,7 +394,7 @@ class IssuerApplicationDataTest {
      */
     class AcTypeTests {
         @Test
-        fun `Given AAC type When describing Then returns correct label`() {
+        fun givenAacTypeWhenDescribingThenReturnsCorrectLabel() {
             assertEquals(
                 "AAC (Transaction Declined)",
                 IssuerApplicationData.describeAcType(0),
@@ -402,7 +402,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given TC type When describing Then returns correct label`() {
+        fun givenTcTypeWhenDescribingThenReturnsCorrectLabel() {
             assertEquals(
                 "TC (Transaction Approved)",
                 IssuerApplicationData.describeAcType(1),
@@ -410,7 +410,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given ARQC type When describing Then returns correct label`() {
+        fun givenArqcTypeWhenDescribingThenReturnsCorrectLabel() {
             assertEquals(
                 "ARQC (Online Authorisation Requested)",
                 IssuerApplicationData.describeAcType(2),
@@ -418,7 +418,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given RFU type When describing Then returns correct label`() {
+        fun givenRfuTypeWhenDescribingThenReturnsCorrectLabel() {
             assertEquals(
                 "RFU",
                 IssuerApplicationData.describeAcType(3),
@@ -431,7 +431,7 @@ class IssuerApplicationDataTest {
      */
     class CvnDescriptionTests {
         @Test
-        fun `Given CVN 10 When describing Then returns correct label`() {
+        fun givenCvn10WhenDescribingThenReturnsCorrectLabel() {
             assertContains(
                 IssuerApplicationData.describeCvn(0x0A),
                 "CVN 10",
@@ -439,7 +439,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 17 When describing Then returns correct label`() {
+        fun givenCvn17WhenDescribingThenReturnsCorrectLabel() {
             assertContains(
                 IssuerApplicationData.describeCvn(0x11),
                 "CVN 17",
@@ -447,7 +447,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given CVN 18 When describing Then returns correct label`() {
+        fun givenCvn18WhenDescribingThenReturnsCorrectLabel() {
             assertContains(
                 IssuerApplicationData.describeCvn(0x12),
                 "CVN 18",
@@ -455,7 +455,7 @@ class IssuerApplicationDataTest {
         }
 
         @Test
-        fun `Given unknown CVN When describing Then returns Unknown`() {
+        fun givenUnknownCvnWhenDescribingThenReturnsUnknown() {
             assertContains(
                 IssuerApplicationData.describeCvn(0xFF),
                 "Unknown",
@@ -468,7 +468,7 @@ class IssuerApplicationDataTest {
      */
     class LineSeparatorTests {
         @Test
-        fun `Given Visa IAD with custom separator When explaining Then uses separator`() {
+        fun givenVisaIadWithCustomSeparatorWhenExplainingThenUsesSeparator() {
             val value = byteArrayOf(
                 0x01,
                 0x0A,

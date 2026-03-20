@@ -23,26 +23,26 @@ class CountryCodeTest {
      */
     class GeneralTests {
         @Test
-        fun `Given valid country code When explaining Then shows correct country description`() {
+        fun givenValidCountryCodeWhenExplainingThenShowsCorrectCountryDescription() {
             val meaning = TestCountryCode.explain(840, "\n").toString()
             assertEquals("United States", meaning)
         }
 
         @Test
-        fun `Given invalid country code When explaining Then shows unknown country code`() {
+        fun givenInvalidCountryCodeWhenExplainingThenShowsUnknownCountryCode() {
             val meaning = TestCountryCode.explain(999, "\n").toString()
             assertEquals("Unknown Country Code", meaning)
         }
 
         @Test
-        fun `Given negative country code When explaining Then throws exception`() {
+        fun givenNegativeCountryCodeWhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 TestCountryCode.explain(-1, "\n").toString()
             }
         }
 
         @Test
-        fun `Given country code above 999 When explaining Then throws exception`() {
+        fun givenCountryCodeAbove999WhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 TestCountryCode.explain(1000, "\n").toString()
             }
@@ -54,19 +54,19 @@ class CountryCodeTest {
      */
     class SpecificCountryCodeTests {
         @Test
-        fun `Given US country code When explaining Then shows United States description`() {
+        fun givenUsCountryCodeWhenExplainingThenShowsUnitedStatesDescription() {
             val meaning = TestCountryCode.explain(840, "\n").toString()
             assertEquals("United States", meaning)
         }
 
         @Test
-        fun `Given GB country code When explaining Then shows United Kingdom description`() {
+        fun givenGbCountryCodeWhenExplainingThenShowsUnitedKingdomDescription() {
             val meaning = TestCountryCode.explain(826, "\n").toString()
             assertEquals("United Kingdom", meaning)
         }
 
         @Test
-        fun `Given JP country code When explaining Then shows Japan description`() {
+        fun givenJpCountryCodeWhenExplainingThenShowsJapanDescription() {
             val meaning = TestCountryCode.explain(392, "\n").toString()
             assertEquals("Japan", meaning)
         }

@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 class MerchantCategoryCodeTest {
 
     @Test
-    fun `Given valid MCC When explaining Then shows correct description and category`() {
+    fun givenValidMccWhenExplainingThenShowsCorrectDescriptionAndCategory() {
         val mcc = 5411L // Groceries and supermarkets
         val meaning = MerchantCategoryCode.explain(mcc, "\n").toString()
         assertEquals(
@@ -21,7 +21,7 @@ class MerchantCategoryCodeTest {
     }
 
     @Test
-    fun `Given valid MCC for transportation When explaining Then shows correct description and category`() {
+    fun givenValidMccForTransportationWhenExplainingThenShowsCorrectDescriptionAndCategory() {
         val mcc = 4111L // Local and suburban commuter passenger transportation
         val meaning = MerchantCategoryCode.explain(mcc, "\n").toString()
         assertEquals(
@@ -32,7 +32,7 @@ class MerchantCategoryCodeTest {
     }
 
     @Test
-    fun `Given valid MCC for professional services When explaining Then shows correct description and category`() {
+    fun givenValidMccForProfessionalServicesWhenExplainingThenShowsCorrectDescriptionAndCategory() {
         val mcc = 8011L // Doctors and physicians
         val meaning = MerchantCategoryCode.explain(mcc, "\n").toString()
         assertEquals(
@@ -43,14 +43,14 @@ class MerchantCategoryCodeTest {
     }
 
     @Test
-    fun `Given invalid MCC When explaining Then shows unknown message`() {
+    fun givenInvalidMccWhenExplainingThenShowsUnknownMessage() {
         val mcc = 9999L // Invalid MCC
         val meaning = MerchantCategoryCode.explain(mcc, "\n").toString()
         assertEquals("Unknown Merchant Category Code", meaning)
     }
 
     @Test
-    fun `Given valid MCC with custom line separator When explaining Then uses correct separator`() {
+    fun givenValidMccWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val mcc = 5411L // Groceries and supermarkets
         val meaning = MerchantCategoryCode.explain(mcc, "|").toString()
         assertEquals(

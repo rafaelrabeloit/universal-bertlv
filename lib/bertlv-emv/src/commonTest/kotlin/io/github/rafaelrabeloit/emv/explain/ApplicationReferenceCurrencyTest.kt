@@ -11,51 +11,51 @@ import kotlin.test.assertFailsWith
 class ApplicationReferenceCurrencyTest {
 
     @Test
-    fun `Given single valid currency code When explaining Then returns currency name`() {
+    fun givenSingleValidCurrencyCodeWhenExplainingThenReturnsCurrencyName() {
         val meaning = ApplicationReferenceCurrency.explain("840", "\n").toString()
         assertEquals("US Dollar", meaning)
     }
 
     @Test
-    fun `Given multiple valid currency codes When explaining Then returns all currency names`() {
+    fun givenMultipleValidCurrencyCodesWhenExplainingThenReturnsAllCurrencyNames() {
         val meaning = ApplicationReferenceCurrency.explain("840978", "\n").toString()
         assertEquals("US Dollar\nEuro", meaning)
     }
 
     @Test
-    fun `Given invalid currency code When explaining Then returns unknown message`() {
+    fun givenInvalidCurrencyCodeWhenExplainingThenReturnsUnknownMessage() {
         val meaning = ApplicationReferenceCurrency.explain("000", "\n").toString()
         assertEquals("Unknown Currency Code", meaning)
     }
 
     @Test
-    fun `Given currency code with wrong length When explaining Then throws exception`() {
+    fun givenCurrencyCodeWithWrongLengthWhenExplainingThenThrowsException() {
         assertFailsWith<IllegalArgumentException> {
             ApplicationReferenceCurrency.explain("12345", "\n").toString()
         }
     }
 
     @Test
-    fun `Given currency code with odd length When explaining Then throws exception`() {
+    fun givenCurrencyCodeWithOddLengthWhenExplainingThenThrowsException() {
         assertFailsWith<IllegalArgumentException> {
             ApplicationReferenceCurrency.explain("12", "\n").toString()
         }
     }
 
     @Test
-    fun `Given currency code with custom line separator When explaining Then uses correct separator`() {
+    fun givenCurrencyCodeWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val meaning = ApplicationReferenceCurrency.explain("840978", "|").toString()
         assertEquals("US Dollar|Euro", meaning)
     }
 
     @Test
-    fun `Given maximum length currency codes When explaining Then returns all currency names`() {
+    fun givenMaximumLengthCurrencyCodesWhenExplainingThenReturnsAllCurrencyNames() {
         val meaning = ApplicationReferenceCurrency.explain("840978826", "\n").toString()
         assertEquals("US Dollar\nEuro\nPound Sterling", meaning)
     }
 
     @Test
-    fun `Given minimum length currency code When explaining Then returns currency name`() {
+    fun givenMinimumLengthCurrencyCodeWhenExplainingThenReturnsCurrencyName() {
         val meaning = ApplicationReferenceCurrency.explain("840", "\n").toString()
         assertEquals("US Dollar", meaning)
     }

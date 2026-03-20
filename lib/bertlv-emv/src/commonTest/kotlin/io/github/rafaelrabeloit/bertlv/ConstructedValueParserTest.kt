@@ -41,7 +41,7 @@ class ConstructedValueParserTest {
     }
 
     @Test
-    fun `Given a constructed TLV value When parse Then should correctly parse nested TLVs`() {
+    fun givenAConstructedTlvValueWhenParseThenShouldCorrectlyParseNestedTlvs() {
         val bytes = APPLICATION_LABEL_TLV + PAN_TLV
 
         val parser = ConstructedValueParser(listOf(ASNOneSpecification))
@@ -90,7 +90,7 @@ class ConstructedValueParserTest {
     }
 
     @Test
-    fun `Given a constructed TLV value When convert to string Then should return hex representation`() {
+    fun givenAConstructedTlvValueWhenConvertToStringThenShouldReturnHexRepresentation() {
         val parser = ConstructedValueParser(listOf(ASNOneSpecification))
         val result = parser.bytesToValue(APPLICATION_LABEL_TLV)
 
@@ -98,7 +98,7 @@ class ConstructedValueParserTest {
     }
 
     @Test
-    fun `Given a constructed TLV value When convert to bytes Then should return original bytes`() {
+    fun givenAConstructedTlvValueWhenConvertToBytesThenShouldReturnOriginalBytes() {
         val parser = ConstructedValueParser(listOf(ASNOneSpecification))
         val result = parser.bytesToValue(APPLICATION_LABEL_TLV)
 

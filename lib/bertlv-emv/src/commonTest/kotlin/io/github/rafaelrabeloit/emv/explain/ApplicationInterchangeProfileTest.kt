@@ -11,7 +11,7 @@ import kotlin.test.assertFailsWith
 class ApplicationInterchangeProfileTest {
 
     @Test
-    fun `Given AIP with CDA supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithCdaSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x80.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(
@@ -22,70 +22,70 @@ class ApplicationInterchangeProfileTest {
     }
 
     @Test
-    fun `Given AIP with DDA supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithDdaSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x40.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "DDA Supported - Card supports Dynamic Data Authentication")
     }
 
     @Test
-    fun `Given AIP with SDA supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithSdaSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x20.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "SDA Supported - Card supports Static Data Authentication")
     }
 
     @Test
-    fun `Given AIP with Cardholder Verification supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithCardholderVerificationSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x10.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "Cardholder Verification is supported")
     }
 
     @Test
-    fun `Given AIP with Terminal Risk Management When explaining Then shows correct bit explanation`() {
+    fun givenAipWithTerminalRiskManagementWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x08.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "Terminal Risk Management is to be performed")
     }
 
     @Test
-    fun `Given AIP with Issuer Authentication supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithIssuerAuthenticationSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x04.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "Issuer Authentication is supported")
     }
 
     @Test
-    fun `Given AIP with On-device Cardholder Verification supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithOnDeviceCardholderVerificationSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x02.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "On-device Cardholder Verification is supported")
     }
 
     @Test
-    fun `Given AIP with RFU bit set When explaining Then shows correct bit explanation`() {
+    fun givenAipWithRfuBitSetWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x01.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "RFU - Reserved for Future Use")
     }
 
     @Test
-    fun `Given AIP with EMV Mode supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithEmvModeSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x00, 0x80.toByte())
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "EMV Mode supported")
     }
 
     @Test
-    fun `Given AIP with Contactless EMV Mode supported When explaining Then shows correct bit explanation`() {
+    fun givenAipWithContactlessEmvModeSupportedWhenExplainingThenShowsCorrectBitExplanation() {
         val aip = byteArrayOf(0x00, 0x40.toByte())
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(meaning, "Contactless EMV Mode supported")
     }
 
     @Test
-    fun `Given AIP with all bits set When explaining Then shows all bit explanations`() {
+    fun givenAipWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
         val aip = byteArrayOf(0xFF.toByte(), 0xFF.toByte())
         val meaning = ApplicationInterchangeProfile.explain(aip, "\n").toString()
         assertContains(
@@ -105,7 +105,7 @@ class ApplicationInterchangeProfileTest {
     }
 
     @Test
-    fun `Given AIP with invalid length When explaining Then throws exception`() {
+    fun givenAipWithInvalidLengthWhenExplainingThenThrowsException() {
         val aip = byteArrayOf(0x00)
         assertFailsWith<IllegalArgumentException> {
             ApplicationInterchangeProfile.explain(aip, "\n").toString()
@@ -113,7 +113,7 @@ class ApplicationInterchangeProfileTest {
     }
 
     @Test
-    fun `Given AIP with custom line separator When explaining Then uses correct separator`() {
+    fun givenAipWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val aip = byteArrayOf(0x80.toByte(), 0x00)
         val meaning = ApplicationInterchangeProfile.explain(aip, "|").toString()
         assertContains(

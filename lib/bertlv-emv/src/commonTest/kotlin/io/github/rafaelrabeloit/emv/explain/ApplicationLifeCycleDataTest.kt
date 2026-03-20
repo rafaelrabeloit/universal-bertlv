@@ -11,42 +11,42 @@ import kotlin.test.assertFailsWith
 class ApplicationLifeCycleDataTest {
 
     @Test
-    fun `Given Application Life Cycle Data with Application Not Yet Active When explaining Then shows correct bit explanation`() {
+    fun givenApplicationLifeCycleDataWithApplicationNotYetActiveWhenExplainingThenShowsCorrectBitExplanation() {
         val data = byteArrayOf(0x80.toByte())
         val meaning = ApplicationLifeCycleData.explain(data, "\n").toString()
         assertContains(meaning, "Application Not Yet Active - Application is not yet active")
     }
 
     @Test
-    fun `Given Application Life Cycle Data with Application Active When explaining Then shows correct bit explanation`() {
+    fun givenApplicationLifeCycleDataWithApplicationActiveWhenExplainingThenShowsCorrectBitExplanation() {
         val data = byteArrayOf(0x40.toByte())
         val meaning = ApplicationLifeCycleData.explain(data, "\n").toString()
         assertContains(meaning, "Application Active - Application is active")
     }
 
     @Test
-    fun `Given Application Life Cycle Data with Application Suspended When explaining Then shows correct bit explanation`() {
+    fun givenApplicationLifeCycleDataWithApplicationSuspendedWhenExplainingThenShowsCorrectBitExplanation() {
         val data = byteArrayOf(0x20.toByte())
         val meaning = ApplicationLifeCycleData.explain(data, "\n").toString()
         assertContains(meaning, "Application Suspended - Application is suspended")
     }
 
     @Test
-    fun `Given Application Life Cycle Data with Application Terminated When explaining Then shows correct bit explanation`() {
+    fun givenApplicationLifeCycleDataWithApplicationTerminatedWhenExplainingThenShowsCorrectBitExplanation() {
         val data = byteArrayOf(0x10.toByte())
         val meaning = ApplicationLifeCycleData.explain(data, "\n").toString()
         assertContains(meaning, "Application Terminated - Application is terminated")
     }
 
     @Test
-    fun `Given Application Life Cycle Data with RFU bits set When explaining Then shows correct bit explanation`() {
+    fun givenApplicationLifeCycleDataWithRfuBitsSetWhenExplainingThenShowsCorrectBitExplanation() {
         val data = byteArrayOf(0x0F.toByte())
         val meaning = ApplicationLifeCycleData.explain(data, "\n").toString()
         assertContains(meaning, "RFU - Reserved for Future Use")
     }
 
     @Test
-    fun `Given Application Life Cycle Data with all bits set When explaining Then shows all bit explanations`() {
+    fun givenApplicationLifeCycleDataWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
         val data = byteArrayOf(0xFF.toByte())
         val meaning = ApplicationLifeCycleData.explain(data, "\n").toString()
         assertContains(meaning, "Application Not Yet Active - Application is not yet active")
@@ -57,7 +57,7 @@ class ApplicationLifeCycleDataTest {
     }
 
     @Test
-    fun `Given Application Life Cycle Data with invalid length When explaining Then throws exception`() {
+    fun givenApplicationLifeCycleDataWithInvalidLengthWhenExplainingThenThrowsException() {
         val data = byteArrayOf(0x00, 0x00)
         assertFailsWith<IllegalArgumentException> {
             ApplicationLifeCycleData.explain(data, "\n").toString()
@@ -65,7 +65,7 @@ class ApplicationLifeCycleDataTest {
     }
 
     @Test
-    fun `Given Application Life Cycle Data with custom line separator When explaining Then uses correct separator`() {
+    fun givenApplicationLifeCycleDataWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val data = byteArrayOf(0x80.toByte())
         val meaning = ApplicationLifeCycleData.explain(data, "|").toString()
         assertContains(meaning, "Application Not Yet Active - Application is not yet active|")

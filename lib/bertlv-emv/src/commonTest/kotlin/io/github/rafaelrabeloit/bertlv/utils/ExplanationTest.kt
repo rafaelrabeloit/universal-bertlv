@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class ExplanationTest {
     @Test
-    fun `Explanation should collect and iterate elements`() {
+    fun explanationShouldCollectAndIterateElements() {
         val explanation = Explanation("\n")
         explanation.add(Line("first"))
         explanation.add(Line("second"))
@@ -20,13 +20,13 @@ class ExplanationTest {
     }
 
     @Test
-    fun `Table should require at least two rows and one column`() {
+    fun tableShouldRequireAtLeastTwoRowsAndOneColumn() {
         assertFailsWith<IllegalArgumentException> { Table(rows = 1, columns = 1) }
         assertFailsWith<IllegalArgumentException> { Table(rows = 2, columns = 0) }
     }
 
     @Test
-    fun `Table header and cell operations should work`() {
+    fun tableHeaderAndCellOperationsShouldWork() {
         val table = Table(rows = 2, columns = 2)
         table.header.cells[0] = "H1"
         table.set(1, 0, "V1")
@@ -40,7 +40,7 @@ class ExplanationTest {
     }
 
     @Test
-    fun `TabGroup should expose its tabs`() {
+    fun tabgroupShouldExposeItsTabs() {
         val group = TabGroup(
             listOf(
                 Tab("A", Line("alpha")),
@@ -53,7 +53,7 @@ class ExplanationTest {
     }
 
     @Test
-    fun `Explanation toString should join lines`() {
+    fun explanationTostringShouldJoinLines() {
         val explanation = Explanation(
             "\n",
             listOf(
@@ -75,7 +75,7 @@ class ExplanationTest {
     }
 
     @Test
-    fun `TabGroup toString should render tabs`() {
+    fun tabgroupTostringShouldRenderTabs() {
         val explanation = Explanation(
             "\n",
             listOf(
@@ -102,7 +102,7 @@ class ExplanationTest {
     }
 
     @Test
-    fun `Table toString should render rows`() {
+    fun tableTostringShouldRenderRows() {
         val table = Table(rows = 2, columns = 2)
         table.header.cells[0] = "H1"
         table.header.cells[1] = "H2"
@@ -125,7 +125,7 @@ class ExplanationTest {
 
     @Test
     @Suppress("LongMethod")
-    fun `Explanation should match TLVTag explain output`() {
+    fun explanationShouldMatchTlvtagExplainOutput() {
         val classification = TLVTag.Classification.CONTEXT_SPECIFIC.run { "$info - $description" }
         val construction = TLVTag.Construction.PRIMITIVE.run { "$info - $description" }
         val form = TLVTag.Form.SHORT.run { "$info - $description" }
@@ -186,7 +186,7 @@ class ExplanationTest {
     }
 
     @Test
-    fun `Explanation should match ValueExplainer output`() {
+    fun explanationShouldMatchValueexplainerOutput() {
         val explanation = Explanation(
             "\n",
             listOf(

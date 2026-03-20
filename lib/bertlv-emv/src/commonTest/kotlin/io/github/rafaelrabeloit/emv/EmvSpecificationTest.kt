@@ -16,21 +16,21 @@ class EmvSpecificationTest {
     private val specification = EmvSpecification
 
     @Test
-    fun `Given existing tag When check if exists Then should return true`() {
+    fun givenExistingTagWhenCheckIfExistsThenShouldReturnTrue() {
         val tag = TLVTag.fromTag(0x9F26)
         val exists = specification.tagExists(tag)
         assertEquals(true, exists)
     }
 
     @Test
-    fun `Given non existing tag When check if exists Then should return false`() {
+    fun givenNonExistingTagWhenCheckIfExistsThenShouldReturnFalse() {
         val tag = TLVTag.fromTag(0x9F99)
         val exists = specification.tagExists(tag)
         assertEquals(false, exists)
     }
 
     @Test
-    fun `Given existing tag When get context Then should return correct context`() {
+    fun givenExistingTagWhenGetContextThenShouldReturnCorrectContext() {
         val tag = TLVTag.fromTag(0x9F26)
         val context = specification.contextForTag(tag)
         assertEquals("Application Cryptogram", context.info)
@@ -38,7 +38,7 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun `Given non existing tag When get context Then should throw exception`() {
+    fun givenNonExistingTagWhenGetContextThenShouldThrowException() {
         val tag = TLVTag.fromTag(0x9F99)
         assertFailsWith<Specification.TagNotExistException> {
             specification.contextForTag(tag)
@@ -46,7 +46,7 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun `Given numeric tag When get value handler Then should return numeric value handler`() {
+    fun givenNumericTagWhenGetValueHandlerThenShouldReturnNumericValueHandler() {
         val tag = TLVTag.fromTag(0x5A)
         val handler = specification.handlerOfValue(tag)
         assertNotNull(handler)
@@ -54,7 +54,7 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun `Given binary tag When get value handler Then should return binary value handler`() {
+    fun givenBinaryTagWhenGetValueHandlerThenShouldReturnBinaryValueHandler() {
         val tag = TLVTag.fromTag(0x9F26)
         val handler = specification.handlerOfValue(tag)
         assertNotNull(handler)
@@ -62,7 +62,7 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun `Given alphanumeric tag When get value handler Then should return alphanumeric value handler`() {
+    fun givenAlphanumericTagWhenGetValueHandlerThenShouldReturnAlphanumericValueHandler() {
         val tag = TLVTag.fromTag(0x9F20)
         val handler = specification.handlerOfValue(tag)
         assertNotNull(handler)
@@ -70,7 +70,7 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun `Given alphanumeric special tag When get value handler Then should return alphanumeric special handler`() {
+    fun givenAlphanumericSpecialTagWhenGetValueHandlerThenShouldReturnAlphanumericSpecialHandler() {
         val tag = TLVTag.fromTag(0x9F4E)
         val handler = specification.handlerOfValue(tag)
         assertNotNull(handler)
@@ -78,7 +78,7 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun `Given non existing tag When get value handler Then should throw exception`() {
+    fun givenNonExistingTagWhenGetValueHandlerThenShouldThrowException() {
         val tag = TLVTag.fromTag(0x9F99)
         assertFailsWith<Specification.TagNotExistException> {
             specification.handlerOfValue(tag)
@@ -86,7 +86,7 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun `handlerOfValue returns NumericNumberValueParser for amount tags`() {
+    fun handlerofvalueReturnsNumericnumbervalueparserForAmountTags() {
         // Test AMOUNT_AUTHORISED tag
         val amountAuthorisedTag = TLVTag.fromTag(0x9F02)
         val amountAuthorisedHandler = EmvSpecification.handlerOfValue(amountAuthorisedTag)

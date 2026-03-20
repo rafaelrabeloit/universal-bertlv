@@ -11,91 +11,91 @@ import kotlin.test.assertFailsWith
 class TransactionStatusInformationTest {
 
     @Test
-    fun `Given Transaction Status Information with offline data authentication performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithOfflineDataAuthenticationPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x80.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Offline Data Authentication Performed - Offline data authentication was performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with offline data authentication failed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithOfflineDataAuthenticationFailedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x40.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Offline Data Authentication Failed - Offline data authentication failed")
     }
 
     @Test
-    fun `Given Transaction Status Information with SDA performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithSdaPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x20.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "SDA Performed - Static Data Authentication was performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with DDA performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithDdaPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x10.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "DDA Performed - Dynamic Data Authentication was performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with CDA performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithCdaPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x08.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "CDA Performed - Combined DDA/AC was performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with cardholder verification performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithCardholderVerificationPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x04.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Cardholder Verification Performed - Cardholder verification was performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with cardholder verification failed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithCardholderVerificationFailedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x02.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Cardholder Verification Failed - Cardholder verification failed")
     }
 
     @Test
-    fun `Given Transaction Status Information with cardholder verification not performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithCardholderVerificationNotPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x01.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Cardholder Verification Not Performed - Cardholder verification was not performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with issuer authentication performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithIssuerAuthenticationPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x00, 0x80.toByte())
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Issuer Authentication Performed - Issuer authentication was performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with issuer authentication failed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithIssuerAuthenticationFailedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x00, 0x40.toByte())
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Issuer Authentication Failed - Issuer authentication failed")
     }
 
     @Test
-    fun `Given Transaction Status Information with issuer authentication not performed When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithIssuerAuthenticationNotPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x00, 0x20.toByte())
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Issuer Authentication Not Performed - Issuer authentication was not performed")
     }
 
     @Test
-    fun `Given Transaction Status Information with RFU bits set When explaining Then shows correct bit explanation`() {
+    fun givenTransactionStatusInformationWithRfuBitsSetWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x00, 0x1F.toByte())
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "RFU - Reserved for Future Use")
     }
 
     @Test
-    fun `Given Transaction Status Information with all bits set When explaining Then shows all bit explanations`() {
+    fun givenTransactionStatusInformationWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
         val statusInfo = byteArrayOf(0xFF.toByte(), 0xFF.toByte())
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "Offline Data Authentication Performed - Offline data authentication was performed")
@@ -113,7 +113,7 @@ class TransactionStatusInformationTest {
     }
 
     @Test
-    fun `Given Transaction Status Information with invalid length When explaining Then throws exception`() {
+    fun givenTransactionStatusInformationWithInvalidLengthWhenExplainingThenThrowsException() {
         val statusInfo = byteArrayOf(0x00)
         assertFailsWith<IllegalArgumentException> {
             TransactionStatusInformation.explain(statusInfo, "\n").toString()
@@ -121,7 +121,7 @@ class TransactionStatusInformationTest {
     }
 
     @Test
-    fun `Given Transaction Status Information with custom line separator When explaining Then uses correct separator`() {
+    fun givenTransactionStatusInformationWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val statusInfo = byteArrayOf(0x80.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "|").toString()
         assertContains(meaning, "Offline Data Authentication Performed - Offline data authentication was performed|")

@@ -11,26 +11,26 @@ import kotlin.test.assertFailsWith
 class IssuerCountryCodeAlpha2Test {
 
     @Test
-    fun `Given valid alpha2 country code When explaining Then returns country name`() {
+    fun givenValidAlpha2CountryCodeWhenExplainingThenReturnsCountryName() {
         val meaning = IssuerCountryCodeAlpha2.explain("US", "\n").toString()
         assertEquals("United States", meaning)
     }
 
     @Test
-    fun `Given invalid alpha2 country code When explaining Then returns unknown message`() {
+    fun givenInvalidAlpha2CountryCodeWhenExplainingThenReturnsUnknownMessage() {
         val meaning = IssuerCountryCodeAlpha2.explain("XX", "\n").toString()
         assertEquals("Unknown Country Code", meaning)
     }
 
     @Test
-    fun `Given alpha2 country code with wrong length When explaining Then throws exception`() {
+    fun givenAlpha2CountryCodeWithWrongLengthWhenExplainingThenThrowsException() {
         assertFailsWith<IllegalArgumentException> {
             IssuerCountryCodeAlpha2.explain("USA", "\n").toString()
         }
     }
 
     @Test
-    fun `Given alpha2 country code with custom line separator When explaining Then returns country name`() {
+    fun givenAlpha2CountryCodeWithCustomLineSeparatorWhenExplainingThenReturnsCountryName() {
         val meaning = IssuerCountryCodeAlpha2.explain("BR", "|").toString()
         assertEquals("Brazil", meaning)
     }

@@ -8,43 +8,43 @@ class OctetStringValueParserTest {
     private val parser = OctetStringValueParser()
 
     @Test
-    fun `Given byte array When parse Then should return same array`() {
+    fun givenByteArrayWhenParseThenShouldReturnSameArray() {
         val bytes = byteArrayOf(0x01, 0x02, 0x03, 0xFF.toByte())
         assertContentEquals(bytes, parser.bytesToValue(bytes))
     }
 
     @Test
-    fun `Given value When convert to bytes Then should return same array`() {
+    fun givenValueWhenConvertToBytesThenShouldReturnSameArray() {
         val value = byteArrayOf(0x0A, 0x0B, 0x0C)
         assertContentEquals(value, parser.valueToBytes(value))
     }
 
     @Test
-    fun `Given value When convert to string Then should return hex string`() {
+    fun givenValueWhenConvertToStringThenShouldReturnHexString() {
         val value = byteArrayOf(0xDE.toByte(), 0xAD.toByte(), 0xBE.toByte(), 0xEF.toByte())
         assertEquals("deadbeef", parser.valueToString(value))
     }
 
     @Test
-    fun `Given empty array When parse Then should return empty array`() {
+    fun givenEmptyArrayWhenParseThenShouldReturnEmptyArray() {
         val bytes = ByteArray(0)
         assertContentEquals(bytes, parser.bytesToValue(bytes))
     }
 
     @Test
-    fun `Given empty array When convert to bytes Then should return empty array`() {
+    fun givenEmptyArrayWhenConvertToBytesThenShouldReturnEmptyArray() {
         val value = ByteArray(0)
         assertContentEquals(value, parser.valueToBytes(value))
     }
 
     @Test
-    fun `Given single byte array When parse Then should return same array`() {
+    fun givenSingleByteArrayWhenParseThenShouldReturnSameArray() {
         val bytes = byteArrayOf(0x7F)
         assertContentEquals(bytes, parser.bytesToValue(bytes))
     }
 
     @Test
-    fun `Given large array When parse Then should return same array`() {
+    fun givenLargeArrayWhenParseThenShouldReturnSameArray() {
         val bytes = ByteArray(256) { it.toByte() }
         assertContentEquals(bytes, parser.bytesToValue(bytes))
     }

@@ -11,7 +11,7 @@ class TLVTagTest {
 
     class TagParseTests {
         @Test
-        fun `Given a valid tlv When parse a tag Then should correctly parse 1 byte tag`() {
+        fun givenAValidTlvWhenParseATagThenShouldCorrectlyParse1ByteTag() {
             val oneByteTagTlv = byteArrayOf(
                 0x95.toByte(),
                 0x05.toByte(),
@@ -37,7 +37,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse a tag Then should correctly parse 2 byte tag`() {
+        fun givenAValidTlvWhenParseATagThenShouldCorrectlyParse2ByteTag() {
             val twoBytesTagTlv = byteArrayOf(
                 0x9F.toByte(),
                 0x02.toByte(),
@@ -66,7 +66,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse a tag Then should correctly parse 3 byte tag`() {
+        fun givenAValidTlvWhenParseATagThenShouldCorrectlyParse3ByteTag() {
             val threeBytesTagTlv = byteArrayOf(
                 0xDF.toByte(),
                 0x81.toByte(),
@@ -97,7 +97,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given a universal tag When parse a tag Then should correctly identify type`() {
+        fun givenAUniversalTagWhenParseATagThenShouldCorrectlyIdentifyType() {
             val universalTagTlv = byteArrayOf(
                 0x04.toByte(),
                 0x05.toByte(),
@@ -123,7 +123,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given a universal constructed tag When parse a tag Then should correctly identify type`() {
+        fun givenAUniversalConstructedTagWhenParseATagThenShouldCorrectlyIdentifyType() {
             val universalConstructedTagTlv = byteArrayOf(
                 0x30.toByte(),
                 0x05.toByte(),
@@ -151,7 +151,7 @@ class TLVTagTest {
 
     class TagCreateTests {
         @Test
-        fun `Given an integer tag When create a tag Then should correctly create 1 byte tag`() {
+        fun givenAnIntegerTagWhenCreateATagThenShouldCorrectlyCreate1ByteTag() {
             val tag = TLVTag.fromTag(0x95)
 
             assertContentEquals(
@@ -165,7 +165,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given an integer tag When create a tag Then should correctly create 2 byte tag`() {
+        fun givenAnIntegerTagWhenCreateATagThenShouldCorrectlyCreate2ByteTag() {
             val tag = TLVTag.fromTag(0x9F02)
 
             assertContentEquals(
@@ -179,7 +179,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given an integer tag When create a tag Then should correctly create 3 byte tag`() {
+        fun givenAnIntegerTagWhenCreateATagThenShouldCorrectlyCreate3ByteTag() {
             val tag = TLVTag.fromTag(0xDF8115)
 
             assertContentEquals(
@@ -193,7 +193,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given an integer universal tag When create a tag Then should correctly identify type`() {
+        fun givenAnIntegerUniversalTagWhenCreateATagThenShouldCorrectlyIdentifyType() {
             val tag = TLVTag.fromTag(0x04)
 
             assertContentEquals(
@@ -207,7 +207,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given an integer universal constructed tag When create a tag Then should correctly identify type`() {
+        fun givenAnIntegerUniversalConstructedTagWhenCreateATagThenShouldCorrectlyIdentifyType() {
             val tag = TLVTag.fromTag(0x30)
 
             assertContentEquals(
@@ -223,7 +223,7 @@ class TLVTagTest {
 
     class TagExplainTests {
         @Test
-        fun `Given a single byte tag When explain Then should show correct bit pattern`() {
+        fun givenASingleByteTagWhenExplainThenShouldShowCorrectBitPattern() {
             val tag = TLVTag.fromTag(0x95)
             val result = tag.explain("\n").toString()
 
@@ -246,7 +246,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given a two byte tag When explain Then should show correct bit patterns`() {
+        fun givenATwoByteTagWhenExplainThenShouldShowCorrectBitPatterns() {
             val tag = TLVTag.fromTag(0x9F02)
             val result = tag.explain("\n").toString()
 
@@ -275,7 +275,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given a universal tag When explain Then should show correct bit pattern`() {
+        fun givenAUniversalTagWhenExplainThenShouldShowCorrectBitPattern() {
             val tag = TLVTag.fromTag(0x04, listOf(ASNOneSpecification)::contextualize)
             val result = tag.explain("\n").toString()
 
@@ -299,7 +299,7 @@ class TLVTagTest {
         }
 
         @Test
-        fun `Given a universal constructed tag When explain Then should show correct bit pattern`() {
+        fun givenAUniversalConstructedTagWhenExplainThenShouldShowCorrectBitPattern() {
             val tag = TLVTag.fromTag(0x30, listOf(ASNOneSpecification)::contextualize)
             val result = tag.explain("\n").toString()
 

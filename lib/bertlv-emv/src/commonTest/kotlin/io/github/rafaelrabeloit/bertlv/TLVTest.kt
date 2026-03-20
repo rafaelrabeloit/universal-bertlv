@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 class TLVTest {
 
     @Test
-    fun `Given a valid tlv When parse Then should correctly parse primitive tag with small length`() {
+    fun givenAValidTlvWhenParseThenShouldCorrectlyParsePrimitiveTagWithSmallLength() {
         val tlv = byteArrayOf(
             0x95.toByte(), // Tag: Context-specific, Primitive
             0x05.toByte(), // Length: 5 bytes
@@ -51,7 +51,7 @@ class TLVTest {
     }
 
     @Test
-    fun `Given a valid tlv When parse Then should correctly parse universal tag with small length`() {
+    fun givenAValidTlvWhenParseThenShouldCorrectlyParseUniversalTagWithSmallLength() {
         val tlv = byteArrayOf(
             0x04.toByte(), // Tag: Universal, Primitive, OCTET_STRING
             0x03.toByte(), // Length: 3 bytes
@@ -86,7 +86,7 @@ class TLVTest {
     }
 
     @Test
-    fun `Given a valid tlv When parse Then should correctly parse constructed tag with small length`() {
+    fun givenAValidTlvWhenParseThenShouldCorrectlyParseConstructedTagWithSmallLength() {
         val tlv = byteArrayOf(
             0x30.toByte(), // Tag: Universal, Constructed, SEQUENCE
             0x04.toByte(), // Length: 4 bytes
@@ -124,7 +124,7 @@ class TLVTest {
 
     class TLVCreateTagAndValueTests {
         @Test
-        fun `Given tag and value When create Then should correctly create primitive tag with small length`() {
+        fun givenTagAndValueWhenCreateThenShouldCorrectlyCreatePrimitiveTagWithSmallLength() {
             val tag = 0x95 // Context-specific, Primitive
             val value = byteArrayOf(
                 0x01.toByte(),
@@ -153,7 +153,7 @@ class TLVTest {
         }
 
         @Test
-        fun `Given tag and value When create Then should correctly create universal tag with small length`() {
+        fun givenTagAndValueWhenCreateThenShouldCorrectlyCreateUniversalTagWithSmallLength() {
             val tag = 0x04 // Universal, Primitive, OCTET_STRING
             val value = byteArrayOf(
                 0x01.toByte(),
@@ -180,7 +180,7 @@ class TLVTest {
         }
 
         @Test
-        fun `Given tag and value When create Then should correctly create constructed tag with small length`() {
+        fun givenTagAndValueWhenCreateThenShouldCorrectlyCreateConstructedTagWithSmallLength() {
             val tag = 0x30 // Universal, Constructed, SEQUENCE
             val value = byteArrayOf(
                 0x01.toByte(),
@@ -210,7 +210,7 @@ class TLVTest {
 
     class TLVExplainTests {
         @Test
-        fun `Given a TLV When explain Then should return explanation with all components`() {
+        fun givenATlvWhenExplainThenShouldReturnExplanationWithAllComponents() {
             val tlv = byteArrayOf(
                 0x95.toByte(), // Tag: Context-specific, Primitive
                 0x05.toByte(), // Length: 5 bytes
@@ -241,7 +241,7 @@ class TLVTest {
         }
 
         @Test
-        fun `Given a TLV with custom line separator When explain Then should use the custom separator`() {
+        fun givenATlvWithCustomLineSeparatorWhenExplainThenShouldUseTheCustomSeparator() {
             val tlv = byteArrayOf(
                 0x04.toByte(), // Tag: Universal, Primitive, OCTET_STRING
                 0x03.toByte(), // Length: 3 bytes
@@ -264,7 +264,7 @@ class TLVTest {
         }
 
         @Test
-        fun `Given a TLV with specifications When explain Then should include specification context`() {
+        fun givenATlvWithSpecificationsWhenExplainThenShouldIncludeSpecificationContext() {
             val tlv = byteArrayOf(
                 0x04.toByte(), // Tag: Universal, Primitive, OCTET_STRING
                 0x03.toByte(), // Length: 3 bytes

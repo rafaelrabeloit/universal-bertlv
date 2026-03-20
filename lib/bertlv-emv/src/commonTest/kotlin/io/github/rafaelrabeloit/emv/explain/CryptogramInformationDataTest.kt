@@ -11,63 +11,63 @@ import kotlin.test.assertFailsWith
 class CryptogramInformationDataTest {
 
     @Test
-    fun `Given CID with AAC cryptogram When explaining Then shows correct bit explanation`() {
+    fun givenCidWithAacCryptogramWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x00)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Application Authentication Cryptogram (AAC)")
     }
 
     @Test
-    fun `Given CID with ARQC cryptogram When explaining Then shows correct bit explanation`() {
+    fun givenCidWithArqcCryptogramWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x01)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Authorization Request Cryptogram (ARQC)")
     }
 
     @Test
-    fun `Given CID with TC cryptogram When explaining Then shows correct bit explanation`() {
+    fun givenCidWithTcCryptogramWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x02)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Transaction Certificate (TC)")
     }
 
     @Test
-    fun `Given CID with RFU cryptogram When explaining Then shows correct bit explanation`() {
+    fun givenCidWithRfuCryptogramWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x03)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Reserved for Future Use")
     }
 
     @Test
-    fun `Given CID with ATC provided When explaining Then shows correct bit explanation`() {
+    fun givenCidWithAtcProvidedWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x04)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Application Transaction Counter (ATC) - ATC provided")
     }
 
     @Test
-    fun `Given CID with ATC not provided When explaining Then shows correct bit explanation`() {
+    fun givenCidWithAtcNotProvidedWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x00)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Application Transaction Counter (ATC) - ATC not provided")
     }
 
     @Test
-    fun `Given CID with IAD provided When explaining Then shows correct bit explanation`() {
+    fun givenCidWithIadProvidedWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x08)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Issuer Application Data (IAD) - IAD provided")
     }
 
     @Test
-    fun `Given CID with IAD not provided When explaining Then shows correct bit explanation`() {
+    fun givenCidWithIadNotProvidedWhenExplainingThenShowsCorrectBitExplanation() {
         val cid = byteArrayOf(0x00)
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Issuer Application Data (IAD) - IAD not provided")
     }
 
     @Test
-    fun `Given CID with all bits set When explaining Then shows all bit explanations`() {
+    fun givenCidWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
         val cid = byteArrayOf(0xFF.toByte())
         val meaning = CryptogramInformationData.explain(cid, "\n").toString()
         assertContains(meaning, "Reserved for Future Use")
@@ -77,7 +77,7 @@ class CryptogramInformationDataTest {
     }
 
     @Test
-    fun `Given CID with invalid length When explaining Then throws exception`() {
+    fun givenCidWithInvalidLengthWhenExplainingThenThrowsException() {
         val cid = byteArrayOf(0x00, 0x00)
         assertFailsWith<IllegalArgumentException> {
             CryptogramInformationData.explain(cid, "\n").toString()
@@ -85,7 +85,7 @@ class CryptogramInformationDataTest {
     }
 
     @Test
-    fun `Given CID with custom line separator When explaining Then uses correct separator`() {
+    fun givenCidWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val cid = byteArrayOf(0x00)
         val meaning = CryptogramInformationData.explain(cid, "|").toString()
         assertContains(meaning, "Application Authentication Cryptogram (AAC)|")

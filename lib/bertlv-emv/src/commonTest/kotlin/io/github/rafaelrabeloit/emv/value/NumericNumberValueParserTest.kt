@@ -8,7 +8,7 @@ class NumericNumberValueParserTest {
     private val parser = NumericNumberValueParser()
 
     @Test
-    fun `Given valid BCD bytes When bytesToValue is called Then it returns the correct Long value`() {
+    fun givenValidBcdBytesWhenBytestovalueIsCalledThenItReturnsTheCorrectLongValue() {
         val bytes = byteArrayOf(0x12, 0x34, 0x56, 0x78)
         val expected = 12345678L
         val result = parser.bytesToValue(bytes)
@@ -16,7 +16,7 @@ class NumericNumberValueParserTest {
     }
 
     @Test
-    fun `Given invalid BCD bytes When bytesToValue is called Then it throws an exception`() {
+    fun givenInvalidBcdBytesWhenBytestovalueIsCalledThenItThrowsAnException() {
         val bytes = byteArrayOf(0x12, 0x3A, 0x56, 0x78)
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(bytes)
@@ -24,7 +24,7 @@ class NumericNumberValueParserTest {
     }
 
     @Test
-    fun `Given a valid Long value When valueToBytes is called Then it returns the correct BCD bytes`() {
+    fun givenAValidLongValueWhenValuetobytesIsCalledThenItReturnsTheCorrectBcdBytes() {
         val value = 12345678L
         val expected = byteArrayOf(0x12, 0x34, 0x56, 0x78)
         val result = parser.valueToBytes(value)
@@ -32,7 +32,7 @@ class NumericNumberValueParserTest {
     }
 
     @Test
-    fun `Given an invalid Long value When valueToBytes is called Then it throws an exception`() {
+    fun givenAnInvalidLongValueWhenValuetobytesIsCalledThenItThrowsAnException() {
         val value = -1L
         assertFailsWith<IllegalArgumentException> {
             parser.valueToBytes(value)
@@ -40,7 +40,7 @@ class NumericNumberValueParserTest {
     }
 
     @Test
-    fun `Given a Long value When valueToString is called Then it returns the correct string representation`() {
+    fun givenALongValueWhenValuetostringIsCalledThenItReturnsTheCorrectStringRepresentation() {
         val value = 12345678L
         val expected = "12345678"
         val result = parser.valueToString(value)

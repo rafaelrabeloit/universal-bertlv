@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 class TLVListTest {
 
     @Test
-    fun `Given a valid tlv list When parse Then should correctly parse multiple primitive tlvs`() {
+    fun givenAValidTlvListWhenParseThenShouldCorrectlyParseMultiplePrimitiveTlvs() {
         val tlvList = byteArrayOf(
             // First TLV
             0x95.toByte(), // Tag: Context-specific, Primitive
@@ -64,7 +64,7 @@ class TLVListTest {
     }
 
     @Test
-    fun `Given a valid tlv list When parse Then should correctly parse mixed tlvs`() {
+    fun givenAValidTlvListWhenParseThenShouldCorrectlyParseMixedTlvs() {
         val tlvList = byteArrayOf(
             // First TLV (Primitive)
             0x04.toByte(), // Tag: Universal, Primitive, OCTET_STRING
@@ -141,7 +141,7 @@ class TLVListTest {
     }
 
     @Test
-    fun `Given a list of tlvs When create Then should correctly create tlv list`() {
+    fun givenAListOfTlvsWhenCreateThenShouldCorrectlyCreateTlvList() {
         // Create first TLV
         val firstTag = TLVTag.fromTag(0x95)
         val firstValue = TLVValue.fromBinaryValue(byteArrayOf(0x01.toByte(), 0x02.toByte()))
@@ -176,7 +176,7 @@ class TLVListTest {
     }
 
     @Test
-    fun `Given an empty list of tlvs When create Then should correctly create empty tlv list`() {
+    fun givenAnEmptyListOfTlvsWhenCreateThenShouldCorrectlyCreateEmptyTlvList() {
         val tlvList = TLVList.fromTlvs(emptyList())
 
         assertEquals(0, tlvList.tlvs.size)

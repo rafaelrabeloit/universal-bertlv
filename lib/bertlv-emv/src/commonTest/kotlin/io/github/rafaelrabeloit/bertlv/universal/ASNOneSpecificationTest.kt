@@ -24,7 +24,7 @@ import kotlin.test.assertTrue
 class ASNOneSpecificationTest {
 
     @Test
-    fun `tagExists returns false for non-universal tags`() {
+    fun tagexistsReturnsFalseForNonUniversalTags() {
         // Test different tag classifications
         assertFalse(ASNOneSpecification.tagExists(TLVTag.fromTag(0x9F01))) // Application tag
         assertFalse(ASNOneSpecification.tagExists(TLVTag.fromTag(0xBF01))) // Context-specific tag
@@ -32,7 +32,7 @@ class ASNOneSpecificationTest {
     }
 
     @Test
-    fun `tagExists returns true for known universal tags`() {
+    fun tagexistsReturnsTrueForKnownUniversalTags() {
         // Test a few representative universal tags
         assertTrue(ASNOneSpecification.tagExists(TLVTag.fromTag(0x01))) // Boolean
         assertTrue(ASNOneSpecification.tagExists(TLVTag.fromTag(0x02))) // Integer
@@ -40,20 +40,20 @@ class ASNOneSpecificationTest {
     }
 
     @Test
-    fun `tagExists returns false for unknown universal tags`() {
+    fun tagexistsReturnsFalseForUnknownUniversalTags() {
         // Test universal tags that don't exist in UniversalTagDescription
         assertFalse(ASNOneSpecification.tagExists(TLVTag.fromTag(0x3F35))) // Non-existent universal tag
     }
 
     @Test
-    fun `contextForTag throws TagNotExistException for non-universal tags`() {
+    fun contextfortagThrowsTagnotexistexceptionForNonUniversalTags() {
         assertFailsWith<Specification.TagNotExistException> {
             ASNOneSpecification.contextForTag(TLVTag.fromTag(0x9F01)) // Application tag
         }
     }
 
     @Test
-    fun `contextForTag returns correct context for known universal tags`() {
+    fun contextfortagReturnsCorrectContextForKnownUniversalTags() {
         val booleanContext = ASNOneSpecification.contextForTag(TLVTag.fromTag(0x01))
         assertEquals("Boolean", booleanContext.info)
         assertTrue(booleanContext.description.isNotEmpty())
@@ -64,21 +64,21 @@ class ASNOneSpecificationTest {
     }
 
     @Test
-    fun `contextForTag throws TagNotExistException for unknown universal tags`() {
+    fun contextfortagThrowsTagnotexistexceptionForUnknownUniversalTags() {
         assertFailsWith<Specification.TagNotExistException> {
             ASNOneSpecification.contextForTag(TLVTag.fromTag(0x3F35)) // Non-existent universal tag
         }
     }
 
     @Test
-    fun `handlerOfValue throws TagNotExistException for non-universal tags`() {
+    fun handlerofvalueThrowsTagnotexistexceptionForNonUniversalTags() {
         assertFailsWith<Specification.TagNotExistException> {
             ASNOneSpecification.handlerOfValue(TLVTag.fromTag(0x9F01)) // Application tag
         }
     }
 
     @Test
-    fun `handlerOfValue returns correct parser for all universal tag types`() {
+    fun handlerofvalueReturnsCorrectParserForAllUniversalTagTypes() {
         // Boolean
         val booleanHandler = ASNOneSpecification.handlerOfValue(TLVTag.fromTag(0x01))
         assertTrue(booleanHandler.parser is BooleanValueParser)
@@ -133,7 +133,7 @@ class ASNOneSpecificationTest {
     }
 
     @Test
-    fun `handlerOfValue throws TagNotExistException for unknown universal tags`() {
+    fun handlerofvalueThrowsTagnotexistexceptionForUnknownUniversalTags() {
         assertFailsWith<Specification.TagNotExistException> {
             ASNOneSpecification.handlerOfValue(TLVTag.fromTag(0x3F35)) // Non-existent universal tag
         }

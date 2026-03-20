@@ -9,7 +9,7 @@ class ObjectIdentifierValueParserTest {
     private val parser = ObjectIdentifierValueParser()
 
     @Test
-    fun `Given valid OID bytes When parse Then should return correct components`() {
+    fun givenValidOidBytesWhenParseThenShouldReturnCorrectComponents() {
         // 1.3.6.1.4.1.311.21.20
         val bytes = byteArrayOf(
             0x2B.toByte(), // 1.3
@@ -25,35 +25,35 @@ class ObjectIdentifierValueParserTest {
     }
 
     @Test
-    fun `Given empty bytes When parse Then should throw exception`() {
+    fun givenEmptyBytesWhenParseThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(ByteArray(0))
         }
     }
 
     @Test
-    fun `Given invalid first component When convert to bytes Then should throw exception`() {
+    fun givenInvalidFirstComponentWhenConvertToBytesThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.valueToBytes(listOf(3, 40))
         }
     }
 
     @Test
-    fun `Given invalid second component When convert to bytes Then should throw exception`() {
+    fun givenInvalidSecondComponentWhenConvertToBytesThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.valueToBytes(listOf(1, 40))
         }
     }
 
     @Test
-    fun `Given too few components When convert to bytes Then should throw exception`() {
+    fun givenTooFewComponentsWhenConvertToBytesThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.valueToBytes(listOf(1))
         }
     }
 
     @Test
-    fun `Given valid OID When convert to bytes Then should return correct bytes`() {
+    fun givenValidOidWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val bytes = parser.valueToBytes(listOf(1, 3, 6, 1, 4, 1, 311, 21, 20))
         assertContentEquals(
             byteArrayOf(
@@ -71,7 +71,7 @@ class ObjectIdentifierValueParserTest {
     }
 
     @Test
-    fun `Given value When convert to string Then should return dot-separated string`() {
+    fun givenValueWhenConvertToStringThenShouldReturnDotSeparatedString() {
         assertEquals("1.3.6.1.4.1.311.21.20", parser.valueToString(listOf(1, 3, 6, 1, 4, 1, 311, 21, 20)))
     }
 }

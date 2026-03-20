@@ -8,7 +8,7 @@ class TLVLengthTest {
 
     class LengthParseTests {
         @Test
-        fun `Given a valid tlv When parse length Then should correctly parse short form 1 byte length`() {
+        fun givenAValidTlvWhenParseLengthThenShouldCorrectlyParseShortForm1ByteLength() {
             val shortFormLengthTlv = byteArrayOf(
                 0x04.toByte(),
                 0x05.toByte(),
@@ -31,7 +31,7 @@ class TLVLengthTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse length Then should correctly parse long form 2 bytes length`() {
+        fun givenAValidTlvWhenParseLengthThenShouldCorrectlyParseLongForm2BytesLength() {
             val longForm2BytesLengthTlv = byteArrayOf(
                 0x03.toByte(),
                 0x81.toByte(),
@@ -56,7 +56,7 @@ class TLVLengthTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse length Then should correctly parse long form 3 bytes length`() {
+        fun givenAValidTlvWhenParseLengthThenShouldCorrectlyParseLongForm3BytesLength() {
             val longForm3BytesLengthTlv = byteArrayOf(
                 0x30.toByte(),
                 0x82.toByte(),
@@ -85,7 +85,7 @@ class TLVLengthTest {
 
     class LengthCreateTests {
         @Test
-        fun `Given a length value When create from length Then should correctly create short form length`() {
+        fun givenALengthValueWhenCreateFromLengthThenShouldCorrectlyCreateShortFormLength() {
             val length = TLVLength.fromLength(5)
 
             assertContentEquals(
@@ -97,7 +97,7 @@ class TLVLengthTest {
         }
 
         @Test
-        fun `Given a length value When create from length Then should correctly create long form 2 bytes length`() {
+        fun givenALengthValueWhenCreateFromLengthThenShouldCorrectlyCreateLongForm2BytesLength() {
             val length = TLVLength.fromLength(130)
 
             assertContentEquals(
@@ -112,7 +112,7 @@ class TLVLengthTest {
         }
 
         @Test
-        fun `Given a length value When create from length Then should correctly create long form 3 bytes length`() {
+        fun givenALengthValueWhenCreateFromLengthThenShouldCorrectlyCreateLongForm3BytesLength() {
             val length = TLVLength.fromLength(1024)
 
             assertContentEquals(
@@ -130,7 +130,7 @@ class TLVLengthTest {
 
     class LengthExplainTests {
         @Test
-        fun `Given a short form length When explain Then should show correct bit pattern`() {
+        fun givenAShortFormLengthWhenExplainThenShouldShowCorrectBitPattern() {
             val length = TLVLength.fromLength(5)
             val result = length.explain("\n").toString()
 
@@ -151,7 +151,7 @@ class TLVLengthTest {
         }
 
         @Test
-        fun `Given a long form 2 bytes length When explain Then should show correct bit patterns`() {
+        fun givenALongForm2BytesLengthWhenExplainThenShouldShowCorrectBitPatterns() {
             val length = TLVLength.fromLength(130)
             val result = length.explain("\n").toString()
 
@@ -177,7 +177,7 @@ class TLVLengthTest {
         }
 
         @Test
-        fun `Given a long form 3 bytes length When explain Then should show correct bit patterns`() {
+        fun givenALongForm3BytesLengthWhenExplainThenShouldShowCorrectBitPatterns() {
             val length = TLVLength.fromLength(1024)
             val result = length.explain("\n").toString()
 

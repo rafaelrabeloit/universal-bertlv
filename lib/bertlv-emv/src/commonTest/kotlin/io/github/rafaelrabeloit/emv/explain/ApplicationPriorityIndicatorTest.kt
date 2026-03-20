@@ -11,21 +11,21 @@ import kotlin.test.assertFailsWith
 class ApplicationPriorityIndicatorTest {
 
     @Test
-    fun `Given Application Priority Indicator with priority bit set When explaining Then shows correct bit explanation`() {
+    fun givenApplicationPriorityIndicatorWithPriorityBitSetWhenExplainingThenShowsCorrectBitExplanation() {
         val priorityIndicator = byteArrayOf(0x80.toByte())
         val meaning = ApplicationPriorityIndicator.explain(priorityIndicator, "\n").toString()
         assertContains(meaning, "Priority - Application has priority")
     }
 
     @Test
-    fun `Given Application Priority Indicator with RFU bits set When explaining Then shows correct bit explanation`() {
+    fun givenApplicationPriorityIndicatorWithRfuBitsSetWhenExplainingThenShowsCorrectBitExplanation() {
         val priorityIndicator = byteArrayOf(0x7F.toByte())
         val meaning = ApplicationPriorityIndicator.explain(priorityIndicator, "\n").toString()
         assertContains(meaning, "RFU - Reserved for Future Use")
     }
 
     @Test
-    fun `Given Application Priority Indicator with all bits set When explaining Then shows all bit explanations`() {
+    fun givenApplicationPriorityIndicatorWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
         val priorityIndicator = byteArrayOf(0xFF.toByte())
         val meaning = ApplicationPriorityIndicator.explain(priorityIndicator, "\n").toString()
         assertContains(meaning, "Priority - Application has priority")
@@ -33,7 +33,7 @@ class ApplicationPriorityIndicatorTest {
     }
 
     @Test
-    fun `Given Application Priority Indicator with invalid length When explaining Then throws exception`() {
+    fun givenApplicationPriorityIndicatorWithInvalidLengthWhenExplainingThenThrowsException() {
         val priorityIndicator = byteArrayOf(0x00, 0x00)
         assertFailsWith<IllegalArgumentException> {
             ApplicationPriorityIndicator.explain(priorityIndicator, "\n").toString()
@@ -41,7 +41,7 @@ class ApplicationPriorityIndicatorTest {
     }
 
     @Test
-    fun `Given Application Priority Indicator with custom line separator When explaining Then uses correct separator`() {
+    fun givenApplicationPriorityIndicatorWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val priorityIndicator = byteArrayOf(0x80.toByte())
         val meaning = ApplicationPriorityIndicator.explain(priorityIndicator, "|").toString()
         assertContains(meaning, "Priority - Application has priority|")

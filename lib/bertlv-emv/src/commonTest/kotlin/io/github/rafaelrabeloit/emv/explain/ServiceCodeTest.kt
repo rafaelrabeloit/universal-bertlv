@@ -8,25 +8,25 @@ class ServiceCodeTest {
 
     class Digit1InterchangeTests {
         @Test
-        fun `Given service code 101 When explaining Then digit 1 is International interchange OK`() {
+        fun givenServiceCode101WhenExplainingThenDigit1IsInternationalInterchangeOk() {
             val result = ServiceCode.explain("0101", "\n").toString()
             assertContains(result, "International interchange OK")
         }
 
         @Test
-        fun `Given service code 201 When explaining Then digit 1 is use IC where feasible`() {
+        fun givenServiceCode201WhenExplainingThenDigit1IsUseIcWhereFeasible() {
             val result = ServiceCode.explain("0201", "\n").toString()
             assertContains(result, "use IC (chip) where feasible")
         }
 
         @Test
-        fun `Given service code 501 When explaining Then digit 1 is National interchange only`() {
+        fun givenServiceCode501WhenExplainingThenDigit1IsNationalInterchangeOnly() {
             val result = ServiceCode.explain("0501", "\n").toString()
             assertContains(result, "National interchange only")
         }
 
         @Test
-        fun `Given service code 901 When explaining Then digit 1 is Test`() {
+        fun givenServiceCode901WhenExplainingThenDigit1IsTest() {
             val result = ServiceCode.explain("0901", "\n").toString()
             assertContains(result, "Digit 1 (Interchange): Test")
         }
@@ -34,13 +34,13 @@ class ServiceCodeTest {
 
     class Digit2AuthorizationTests {
         @Test
-        fun `Given service code 100 When explaining Then digit 2 is Normal`() {
+        fun givenServiceCode100WhenExplainingThenDigit2IsNormal() {
             val result = ServiceCode.explain("0100", "\n").toString()
             assertContains(result, "Digit 2 (Authorization): Normal")
         }
 
         @Test
-        fun `Given service code 120 When explaining Then digit 2 is Contact issuer via online`() {
+        fun givenServiceCode120WhenExplainingThenDigit2IsContactIssuerViaOnline() {
             val result = ServiceCode.explain("0120", "\n").toString()
             assertContains(result, "Contact issuer via online means")
         }
@@ -48,25 +48,25 @@ class ServiceCodeTest {
 
     class Digit3ServicesTests {
         @Test
-        fun `Given service code 110 When explaining Then digit 3 is No restrictions PIN required`() {
+        fun givenServiceCode110WhenExplainingThenDigit3IsNoRestrictionsPinRequired() {
             val result = ServiceCode.explain("0110", "\n").toString()
             assertContains(result, "No restrictions, PIN required")
         }
 
         @Test
-        fun `Given service code 111 When explaining Then digit 3 is No restrictions`() {
+        fun givenServiceCode111WhenExplainingThenDigit3IsNoRestrictions() {
             val result = ServiceCode.explain("0111", "\n").toString()
             assertContains(result, "Digit 3 (Services/PIN): No restrictions")
         }
 
         @Test
-        fun `Given service code 112 When explaining Then digit 3 is Goods and services only`() {
+        fun givenServiceCode112WhenExplainingThenDigit3IsGoodsAndServicesOnly() {
             val result = ServiceCode.explain("0112", "\n").toString()
             assertContains(result, "Goods and services only (no cash)")
         }
 
         @Test
-        fun `Given service code 113 When explaining Then digit 3 is ATM only`() {
+        fun givenServiceCode113WhenExplainingThenDigit3IsAtmOnly() {
             val result = ServiceCode.explain("0113", "\n").toString()
             assertContains(result, "ATM only, PIN required")
         }
@@ -74,7 +74,7 @@ class ServiceCodeTest {
 
     class ThreeDigitInput {
         @Test
-        fun `Given 3-digit service code When explaining Then parses correctly`() {
+        fun given3DigitServiceCodeWhenExplainingThenParsesCorrectly() {
             val result = ServiceCode.explain("201", "\n").toString()
             assertContains(result, "International interchange")
             assertContains(result, "Normal")
@@ -84,7 +84,7 @@ class ServiceCodeTest {
 
     class FullServiceCodeTests {
         @Test
-        fun `Given typical chip card code 201 When explaining Then returns all three digits`() {
+        fun givenTypicalChipCardCode201WhenExplainingThenReturnsAllThreeDigits() {
             val result = ServiceCode.explain("0201", "\n").toString()
             assertContains(result, "Digit 1 (Interchange):")
             assertContains(result, "Digit 2 (Authorization):")
@@ -94,21 +94,21 @@ class ServiceCodeTest {
 
     class InvalidInput {
         @Test
-        fun `Given empty string When explaining Then throws exception`() {
+        fun givenEmptyStringWhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 ServiceCode.explain("", "\n")
             }
         }
 
         @Test
-        fun `Given string shorter than 3 When explaining Then throws exception`() {
+        fun givenStringShorterThan3WhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 ServiceCode.explain("01", "\n")
             }
         }
 
         @Test
-        fun `Given string longer than 4 When explaining Then throws exception`() {
+        fun givenStringLongerThan4WhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 ServiceCode.explain("00201", "\n")
             }

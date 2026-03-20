@@ -9,24 +9,24 @@ class NullValueParserTest {
     private val parser = NullValueParser()
 
     @Test
-    fun `Given empty bytes When parse Then should return Unit`() {
+    fun givenEmptyBytesWhenParseThenShouldReturnUnit() {
         assertEquals(Unit, parser.bytesToValue(ByteArray(0)))
     }
 
     @Test
-    fun `Given non-empty bytes When parse Then should throw exception`() {
+    fun givenNonEmptyBytesWhenParseThenShouldThrowException() {
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(byteArrayOf(0x00.toByte()))
         }
     }
 
     @Test
-    fun `Given Unit When convert to bytes Then should return empty array`() {
+    fun givenUnitWhenConvertToBytesThenShouldReturnEmptyArray() {
         assertContentEquals(ByteArray(0), parser.valueToBytes(Unit))
     }
 
     @Test
-    fun `Given value When convert to string Then should return NULL`() {
+    fun givenValueWhenConvertToStringThenShouldReturnNull() {
         assertEquals("NULL", parser.valueToString(Unit))
     }
 }

@@ -16,7 +16,7 @@ class CvmListTest {
      */
     class AmountExtractionTests {
         @Test
-        fun `Given CVM List with zero amounts and no rules When explaining Then shows amounts`() {
+        fun givenCvmListWithZeroAmountsAndNoRulesWhenExplainingThenShowsAmounts() {
             // 8 bytes: Amount X = 0, Amount Y = 0, no rules
             val value = byteArrayOf(0, 0, 0, 0, 0, 0, 0, 0)
             val result = CvmList.explain(value, "\n").toString()
@@ -26,7 +26,7 @@ class CvmListTest {
         }
 
         @Test
-        fun `Given CVM List with non-zero amounts When explaining Then shows correct amounts`() {
+        fun givenCvmListWithNonZeroAmountsWhenExplainingThenShowsCorrectAmounts() {
             // Amount X = 1000 (0x000003E8), Amount Y = 5000 (0x00001388)
             val value = byteArrayOf(
                 0x00, 0x00, 0x03, 0xE8.toByte(),
@@ -44,54 +44,54 @@ class CvmListTest {
      */
     class CvmCodeTests {
         @Test
-        fun `Given rule with Fail CVM processing When explaining Then describes correctly`() {
+        fun givenRuleWithFailCvmProcessingWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x00)
             assertEquals("Fail CVM processing", result)
         }
 
         @Test
-        fun `Given rule with plaintext PIN by ICC When explaining Then describes correctly`() {
+        fun givenRuleWithPlaintextPinByIccWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x01)
             assertContains(result, "Plaintext PIN")
             assertContains(result, "ICC")
         }
 
         @Test
-        fun `Given rule with enciphered PIN online When explaining Then describes correctly`() {
+        fun givenRuleWithEncipheredPinOnlineWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x02)
             assertContains(result, "Enciphered PIN")
             assertContains(result, "online")
         }
 
         @Test
-        fun `Given rule with plaintext PIN and signature When explaining Then describes correctly`() {
+        fun givenRuleWithPlaintextPinAndSignatureWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x03)
             assertContains(result, "Plaintext PIN")
             assertContains(result, "signature")
         }
 
         @Test
-        fun `Given rule with enciphered PIN by ICC When explaining Then describes correctly`() {
+        fun givenRuleWithEncipheredPinByIccWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x04)
             assertContains(result, "Enciphered PIN")
             assertContains(result, "ICC")
         }
 
         @Test
-        fun `Given rule with enciphered PIN and signature When explaining Then describes correctly`() {
+        fun givenRuleWithEncipheredPinAndSignatureWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x05)
             assertContains(result, "Enciphered PIN")
             assertContains(result, "signature")
         }
 
         @Test
-        fun `Given rule with signature When explaining Then describes correctly`() {
+        fun givenRuleWithSignatureWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x1E)
             assertContains(result, "Signature")
         }
 
         @Test
-        fun `Given rule with no CVM required When explaining Then describes correctly`() {
+        fun givenRuleWithNoCvmRequiredWhenExplainingThenDescribesCorrectly() {
             val result = CvmList.describeCvmCode(0x1F)
             assertEquals("No CVM required", result)
         }
@@ -102,12 +102,12 @@ class CvmListTest {
      */
     class CvmConditionTests {
         @Test
-        fun `Given condition Always When explaining Then describes correctly`() {
+        fun givenConditionAlwaysWhenExplainingThenDescribesCorrectly() {
             assertEquals("Always", CvmList.describeCvmCondition(0x00))
         }
 
         @Test
-        fun `Given condition unattended cash When explaining Then describes correctly`() {
+        fun givenConditionUnattendedCashWhenExplainingThenDescribesCorrectly() {
             assertContains(
                 CvmList.describeCvmCondition(0x01),
                 "unattended cash",
@@ -115,7 +115,7 @@ class CvmListTest {
         }
 
         @Test
-        fun `Given condition terminal supports CVM When explaining Then describes correctly`() {
+        fun givenConditionTerminalSupportsCvmWhenExplainingThenDescribesCorrectly() {
             assertContains(
                 CvmList.describeCvmCondition(0x03),
                 "terminal supports the CVM",
@@ -123,7 +123,7 @@ class CvmListTest {
         }
 
         @Test
-        fun `Given condition under X value When explaining Then describes correctly`() {
+        fun givenConditionUnderXValueWhenExplainingThenDescribesCorrectly() {
             assertContains(
                 CvmList.describeCvmCondition(0x06),
                 "under X value",
@@ -131,7 +131,7 @@ class CvmListTest {
         }
 
         @Test
-        fun `Given condition over X value When explaining Then describes correctly`() {
+        fun givenConditionOverXValueWhenExplainingThenDescribesCorrectly() {
             assertContains(
                 CvmList.describeCvmCondition(0x07),
                 "over X value",
@@ -139,7 +139,7 @@ class CvmListTest {
         }
 
         @Test
-        fun `Given reserved condition When explaining Then describes as reserved`() {
+        fun givenReservedConditionWhenExplainingThenDescribesAsReserved() {
             assertContains(
                 CvmList.describeCvmCondition(0x0A),
                 "Reserved",
@@ -147,7 +147,7 @@ class CvmListTest {
         }
 
         @Test
-        fun `Given payment system condition When explaining Then describes as reserved`() {
+        fun givenPaymentSystemConditionWhenExplainingThenDescribesAsReserved() {
             assertContains(
                 CvmList.describeCvmCondition(0x80),
                 "Reserved",
@@ -161,7 +161,7 @@ class CvmListTest {
     class RuleParsingTests {
         @Test
         @Suppress("MagicNumber")
-        fun `Given CVM List with single rule When explaining Then shows rule details`() {
+        fun givenCvmListWithSingleRuleWhenExplainingThenShowsRuleDetails() {
             // Amount X = 0, Amount Y = 0
             // Rule: 0x42 = apply next + enciphered PIN online, condition 0x00 = always
             val value = byteArrayOf(
@@ -177,7 +177,7 @@ class CvmListTest {
 
         @Test
         @Suppress("MagicNumber")
-        fun `Given CVM List with fail-on-unsuccessful rule When explaining Then shows fail`() {
+        fun givenCvmListWithFailOnUnsuccessfulRuleWhenExplainingThenShowsFail() {
             // Rule: 0x02 = do NOT apply next + enciphered PIN online
             val value = byteArrayOf(
                 0, 0, 0, 0, 0, 0, 0, 0,
@@ -189,7 +189,7 @@ class CvmListTest {
 
         @Test
         @Suppress("MagicNumber")
-        fun `Given CVM List with multiple rules When explaining Then shows all rules`() {
+        fun givenCvmListWithMultipleRulesWhenExplainingThenShowsAllRules() {
             // Rule 1: 0x42 = apply next + enciphered PIN online, always
             // Rule 2: 0x5E = apply next + signature, always
             // Rule 3: 0x1F = no CVM required (fail if unsuccessful), always
@@ -210,7 +210,7 @@ class CvmListTest {
 
         @Test
         @Suppress("MagicNumber")
-        fun `Given typical Visa CVM List When explaining Then parses correctly`() {
+        fun givenTypicalVisaCvmListWhenExplainingThenParsesCorrectly() {
             // Real-world example: Amount X=5000, Amount Y=10000
             // Rule 1: Enciphered PIN online, apply next, if terminal supports
             // Rule 2: Signature, apply next, always
@@ -237,21 +237,21 @@ class CvmListTest {
      */
     class InvalidInputTests {
         @Test
-        fun `Given empty byte array When explaining Then throws exception`() {
+        fun givenEmptyByteArrayWhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 CvmList.explain(byteArrayOf(), "\n")
             }
         }
 
         @Test
-        fun `Given byte array too short When explaining Then throws exception`() {
+        fun givenByteArrayTooShortWhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 CvmList.explain(ByteArray(7), "\n")
             }
         }
 
         @Test
-        fun `Given byte array with odd rule bytes When explaining Then throws exception`() {
+        fun givenByteArrayWithOddRuleBytesWhenExplainingThenThrowsException() {
             assertFailsWith<IllegalArgumentException> {
                 CvmList.explain(ByteArray(9), "\n")
             }

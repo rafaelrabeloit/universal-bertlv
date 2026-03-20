@@ -13,7 +13,7 @@ class TLVValueTest {
 
     class ValueParseTests {
         @Test
-        fun `Given a valid tlv When parse value Then should correctly extract value from 1 byte tag`() {
+        fun givenAValidTlvWhenParseValueThenShouldCorrectlyExtractValueFrom1ByteTag() {
             val oneByteTagTlv = byteArrayOf(
                 0x95.toByte(), // tag
                 0x05.toByte(), // length
@@ -41,7 +41,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse value Then should correctly extract value from 2 byte tag`() {
+        fun givenAValidTlvWhenParseValueThenShouldCorrectlyExtractValueFrom2ByteTag() {
             val twoBytesTagTlv = byteArrayOf(
                 0x9F.toByte(), // tag
                 0x02.toByte(), // tag continuation
@@ -72,7 +72,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse value Then should correctly extract value from 3 byte tag`() {
+        fun givenAValidTlvWhenParseValueThenShouldCorrectlyExtractValueFrom3ByteTag() {
             val threeBytesTagTlv = byteArrayOf(
                 0xDF.toByte(), // tag
                 0x81.toByte(), // tag continuation
@@ -104,7 +104,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse value Then should correctly extract value from universal tag`() {
+        fun givenAValidTlvWhenParseValueThenShouldCorrectlyExtractValueFromUniversalTag() {
             val universalTagTlv = byteArrayOf(
                 0x04.toByte(), // OCTET STRING tag
                 0x05.toByte(), // length
@@ -132,7 +132,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given a valid tlv When parse value Then should correctly extract value from universal constructed tag`() {
+        fun givenAValidTlvWhenParseValueThenShouldCorrectlyExtractValueFromUniversalConstructedTag() {
             val universalConstructedTagTlv = byteArrayOf(
                 0x30.toByte(), // SEQUENCE tag
                 0x05.toByte(), // length
@@ -162,7 +162,7 @@ class TLVValueTest {
 
     class ValueCreateTests {
         @Test
-        fun `Given a byte array When create value Then should correctly create value`() {
+        fun givenAByteArrayWhenCreateValueThenShouldCorrectlyCreateValue() {
             val valueBytes = byteArrayOf(
                 0x01.toByte(),
                 0x02.toByte(),
@@ -178,7 +178,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given an empty byte array When create value Then should correctly create empty value`() {
+        fun givenAnEmptyByteArrayWhenCreateValueThenShouldCorrectlyCreateEmptyValue() {
             val valueBytes = ByteArray(0)
 
             val value = TLVValue.fromBinaryValue(valueBytes)
@@ -188,7 +188,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given a single byte When create value Then should correctly create single byte value`() {
+        fun givenASingleByteWhenCreateValueThenShouldCorrectlyCreateSingleByteValue() {
             val valueBytes = byteArrayOf(0xFF.toByte())
 
             val value = TLVValue.fromBinaryValue(valueBytes)
@@ -200,7 +200,7 @@ class TLVValueTest {
 
     class ValueExplainTests {
         @Test
-        fun `Given a binary value When explain Then should show hex representation`() {
+        fun givenABinaryValueWhenExplainThenShouldShowHexRepresentation() {
             val valueBytes = byteArrayOf(
                 0x01.toByte(),
                 0x02.toByte(),
@@ -216,7 +216,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given an empty binary value When explain Then should show empty hex representation`() {
+        fun givenAnEmptyBinaryValueWhenExplainThenShouldShowEmptyHexRepresentation() {
             val valueBytes = ByteArray(0)
 
             val value = TLVValue.fromBinaryValue(valueBytes)
@@ -226,7 +226,7 @@ class TLVValueTest {
         }
 
         @Test
-        fun `Given a binary value with explainer When explain Then should show hex representation and explanation`() {
+        fun givenABinaryValueWithExplainerWhenExplainThenShouldShowHexRepresentationAndExplanation() {
             val valueBytes = byteArrayOf(
                 0x01.toByte(),
                 0x02.toByte(),

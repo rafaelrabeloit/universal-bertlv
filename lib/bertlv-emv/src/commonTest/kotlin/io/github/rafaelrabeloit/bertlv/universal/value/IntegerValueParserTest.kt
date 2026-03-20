@@ -11,25 +11,25 @@ class IntegerValueParserTest {
         val parser = IntegerValueParser()
 
         @Test
-        fun `Given single byte When parse Then should return correct integer`() {
+        fun givenSingleByteWhenParseThenShouldReturnCorrectInteger() {
             val bytes = byteArrayOf(0x7F.toByte())
             assertEquals(127, parser.bytesToValue(bytes))
         }
 
         @Test
-        fun `Given multiple bytes When parse Then should return correct integer`() {
+        fun givenMultipleBytesWhenParseThenShouldReturnCorrectInteger() {
             val bytes = byteArrayOf(0x00.toByte(), 0xFF.toByte(), 0xFF.toByte())
             assertEquals(65535, parser.bytesToValue(bytes))
         }
 
         @Test
-        fun `Given negative bytes When parse Then should return correct integer`() {
+        fun givenNegativeBytesWhenParseThenShouldReturnCorrectInteger() {
             val bytes = byteArrayOf(0xFF.toByte())
             assertEquals(-1, parser.bytesToValue(bytes))
         }
 
         @Test
-        fun `Given maximum positive integer When parse Then should return correct value`() {
+        fun givenMaximumPositiveIntegerWhenParseThenShouldReturnCorrectValue() {
             val bytes =
                 byteArrayOf(
                     0x7F.toByte(),
@@ -45,7 +45,7 @@ class IntegerValueParserTest {
         }
 
         @Test
-        fun `Given minimum negative integer When parse Then should return correct value`() {
+        fun givenMinimumNegativeIntegerWhenParseThenShouldReturnCorrectValue() {
             val bytes =
                 byteArrayOf(
                     0x80.toByte(),
@@ -61,7 +61,7 @@ class IntegerValueParserTest {
         }
 
         @Test
-        fun `Given invalid leading zeros When parse Then should throw exception`() {
+        fun givenInvalidLeadingZerosWhenParseThenShouldThrowException() {
             // Per ASN.1 minimal encoding: bits of first octet and bit 8 of second SHALL NOT all be zero
             val bytes = byteArrayOf(0x00.toByte(), 0x00.toByte(), 0x7F.toByte())
             assertFailsWith<IllegalArgumentException> {
@@ -70,7 +70,7 @@ class IntegerValueParserTest {
         }
 
         @Test
-        fun `Given invalid leading 0xFF bytes When parse Then should throw exception`() {
+        fun givenInvalidLeading0xffBytesWhenParseThenShouldThrowException() {
             // Per ASN.1 minimal encoding: bits of first octet and bit 8 of second SHALL NOT all be ones
             val bytes = byteArrayOf(0xFF.toByte(), 0xFF.toByte(), 0x80.toByte())
             assertFailsWith<IllegalArgumentException> {
@@ -79,7 +79,7 @@ class IntegerValueParserTest {
         }
 
         @Test
-        fun `Given empty bytes When parse Then should throw exception`() {
+        fun givenEmptyBytesWhenParseThenShouldThrowException() {
             assertFailsWith<IllegalArgumentException> {
                 parser.bytesToValue(ByteArray(0))
             }
@@ -90,25 +90,25 @@ class IntegerValueParserTest {
         val parser = IntegerValueParser()
 
         @Test
-        fun `Given zero When convert to bytes Then should return single zero byte`() {
+        fun givenZeroWhenConvertToBytesThenShouldReturnSingleZeroByte() {
             val bytes = parser.valueToBytes(0)
             assertContentEquals(byteArrayOf(0x00.toByte()), bytes)
         }
 
         @Test
-        fun `Given positive integer When convert to bytes Then should return correct bytes`() {
+        fun givenPositiveIntegerWhenConvertToBytesThenShouldReturnCorrectBytes() {
             val bytes = parser.valueToBytes(65535)
             assertContentEquals(byteArrayOf(0x00.toByte(), 0xFF.toByte(), 0xFF.toByte()), bytes)
         }
 
         @Test
-        fun `Given negative integer When convert to bytes Then should return correct bytes`() {
+        fun givenNegativeIntegerWhenConvertToBytesThenShouldReturnCorrectBytes() {
             val bytes = parser.valueToBytes(-1)
             assertContentEquals(byteArrayOf(0xFF.toByte()), bytes)
         }
 
         @Test
-        fun `Given maximum positive integer When convert to bytes Then should return correct bytes`() {
+        fun givenMaximumPositiveIntegerWhenConvertToBytesThenShouldReturnCorrectBytes() {
             val bytes = parser.valueToBytes(Long.MAX_VALUE)
             assertContentEquals(
                 byteArrayOf(
@@ -126,7 +126,7 @@ class IntegerValueParserTest {
         }
 
         @Test
-        fun `Given minimum negative integer When convert to bytes Then should return correct bytes`() {
+        fun givenMinimumNegativeIntegerWhenConvertToBytesThenShouldReturnCorrectBytes() {
             val bytes = parser.valueToBytes(Long.MIN_VALUE)
             assertContentEquals(
                 byteArrayOf(
@@ -144,21 +144,21 @@ class IntegerValueParserTest {
         }
 
         @Test
-        fun `Given 128 When convert to bytes Then should include leading zero`() {
+        fun given128WhenConvertToBytesThenShouldIncludeLeadingZero() {
             // 128 = 0x80, but this would set sign bit, so must be encoded as 0x00 0x80
             val bytes = parser.valueToBytes(128)
             assertContentEquals(byteArrayOf(0x00.toByte(), 0x80.toByte()), bytes)
         }
 
         @Test
-        fun `Given 256 When convert to bytes Then should include leading zero`() {
+        fun given256WhenConvertToBytesThenShouldIncludeLeadingZero() {
             // 256 = 0x0100, sign bit is clear so this is the minimal encoding
             val bytes = parser.valueToBytes(256)
             assertContentEquals(byteArrayOf(0x01.toByte(), 0x00.toByte()), bytes)
         }
 
         @Test
-        fun `Given -129 When convert to bytes Then should return correct minimal encoding`() {
+        fun given129WhenConvertToBytesThenShouldReturnCorrectMinimalEncoding() {
             // -129 requires two bytes: 0xFF 0x7F (minimal encoding)
             val bytes = parser.valueToBytes(-129)
             assertContentEquals(byteArrayOf(0xFF.toByte(), 0x7F.toByte()), bytes)
@@ -169,7 +169,7 @@ class IntegerValueParserTest {
         val parser = IntegerValueParser()
 
         @Test
-        fun `Given value When convert to string Then should return correct string`() {
+        fun givenValueWhenConvertToStringThenShouldReturnCorrectString() {
             assertEquals("0", parser.valueToString(0))
             assertEquals("65535", parser.valueToString(65535))
             assertEquals("-1", parser.valueToString(-1))
@@ -182,7 +182,7 @@ class IntegerValueParserTest {
         val parser = IntegerValueParser()
 
         @Test
-        fun `Given positive values When round trip Then should preserve value`() {
+        fun givenPositiveValuesWhenRoundTripThenShouldPreserveValue() {
             val testValues = listOf(0L, 1L, 127L, 128L, 255L, 256L, 32767L, 32768L, 65535L, 65536L)
             for (value in testValues) {
                 val bytes = parser.valueToBytes(value)
@@ -192,7 +192,7 @@ class IntegerValueParserTest {
         }
 
         @Test
-        fun `Given negative values When round trip Then should preserve value`() {
+        fun givenNegativeValuesWhenRoundTripThenShouldPreserveValue() {
             val testValues = listOf(-1L, -127L, -128L, -129L, -255L, -256L, -32767L, -32768L, -65535L)
             for (value in testValues) {
                 val bytes = parser.valueToBytes(value)
