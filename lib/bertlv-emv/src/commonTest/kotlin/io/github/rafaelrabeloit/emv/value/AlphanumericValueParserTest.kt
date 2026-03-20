@@ -10,14 +10,14 @@ class AlphanumericValueParserTest {
 
     @Test
     fun givenValidBytesWhenParseThenShouldCorrectlyParseAlphanumericValue() {
-        val bytes = "ABC123".toByteArray()
+        val bytes = "ABC123".encodeToByteArray()
         val result = parser.bytesToValue(bytes)
         assertEquals("ABC123", result)
     }
 
     @Test
     fun givenInvalidAlphanumericValueWhenParseThenShouldThrowException() {
-        val bytes = "ABC@123".toByteArray()
+        val bytes = "ABC@123".encodeToByteArray()
         assertFailsWith<IllegalArgumentException> {
             parser.bytesToValue(bytes)
         }
@@ -34,7 +34,7 @@ class AlphanumericValueParserTest {
     fun givenValidStringWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val value = "ABC123"
         val bytes = parser.valueToBytes(value)
-        assertContentEquals("ABC123".toByteArray(), bytes)
+        assertContentEquals("ABC123".encodeToByteArray(), bytes)
     }
 
     @Test

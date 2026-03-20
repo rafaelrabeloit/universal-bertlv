@@ -10,7 +10,7 @@ class AlphanumericSpecialValueParserTest {
 
     @Test
     fun givenValidBytesWhenParseThenShouldCorrectlyParseAlphanumericSpecialValue() {
-        val bytes = "ABC=123".toByteArray()
+        val bytes = "ABC=123".encodeToByteArray()
         val result = parser.bytesToValue(bytes)
         assertEquals("ABC=123", result)
     }
@@ -34,7 +34,7 @@ class AlphanumericSpecialValueParserTest {
     fun givenValidStringWhenConvertToBytesThenShouldReturnCorrectBytes() {
         val value = "ABC=123"
         val bytes = parser.valueToBytes(value)
-        assertContentEquals("ABC=123".toByteArray(), bytes)
+        assertContentEquals("ABC=123".encodeToByteArray(), bytes)
     }
 
     @Test
