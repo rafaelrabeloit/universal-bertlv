@@ -5,6 +5,7 @@ import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 
 class UTCTimeValueParserTest {
     private val parser = UTCTimeValueParser()
@@ -149,7 +150,7 @@ class UTCTimeValueParserTest {
 
         // Should be YYMMDDHHMMSSZ format (13 characters)
         assertEquals(13, result.length)
-        assert(result.endsWith("Z")) { "Result should end with Z, but got: $result" }
+        assertTrue(result.endsWith("Z"), "Result should end with Z, but got: $result")
         assertEquals("230630235959Z", result)
     }
 }
