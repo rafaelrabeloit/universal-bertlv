@@ -25,7 +25,7 @@ dependencyResolutionManagement {
                 password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN") ?: ""
             }
         }
-        // Kotlin/JS needs to resolve Node.js distribution
+        // Kotlin/JS needs to resolve Node.js + Yarn distributions
         ivy {
             name = "NodeDistributions"
             url = uri("https://nodejs.org/dist")
@@ -34,6 +34,15 @@ dependencyResolutionManagement {
             }
             metadataSources { artifact() }
             content { includeModule("org.nodejs", "node") }
+        }
+        ivy {
+            name = "YarnDistributions"
+            url = uri("https://github.com/yarnpkg/yarn/releases/download")
+            patternLayout {
+                artifact("v[revision]/[artifact](-v[revision]).[ext]")
+            }
+            metadataSources { artifact() }
+            content { includeModule("com.yarnpkg", "yarn") }
         }
     }
 }
