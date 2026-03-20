@@ -25,6 +25,16 @@ dependencyResolutionManagement {
                 password = providers.gradleProperty("gpr.key").orNull ?: System.getenv("GITHUB_TOKEN") ?: ""
             }
         }
+        // Kotlin/JS needs to resolve Node.js distribution
+        ivy {
+            name = "NodeDistributions"
+            url = uri("https://nodejs.org/dist")
+            patternLayout {
+                artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
+            }
+            metadataSources { artifact() }
+            content { includeModule("org.nodejs", "node") }
+        }
     }
 }
 
