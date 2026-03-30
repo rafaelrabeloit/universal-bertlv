@@ -98,6 +98,13 @@ private fun tlvToJson(tlv: TLV<*>): String {
     sb.append("\"value\":\"$valueHex\",")
     sb.append("\"isConstructed\":$isConstructed,")
     sb.append("\"explanation\":\"${escapeJson(explanation)}\"")
+    if (isConstructed) {
+        val childList = tlv.value
+        if (childList is TLVList) {
+            sb.append(",\"children\":")
+            sb.append(tlvListToJson(childList))
+        }
+    }
     sb.append("}")
     return sb.toString()
 }
