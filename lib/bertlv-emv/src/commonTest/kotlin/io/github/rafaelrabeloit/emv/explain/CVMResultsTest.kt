@@ -6,83 +6,118 @@ import kotlin.test.assertFailsWith
 
 /**
  * Test suite for Cardholder Verification Method (CVM) Results explanation functionality.
- * Tests cover all bits in the 1-byte CVM Results field according to EMV specifications.
+ * Tests cover the 3-byte CVM Results field (Tag 9F34) according to EMV specifications.
+ *
+ * Byte 1: CVM Performed (method code)
+ * Byte 2: CVM Condition Code
+ * Byte 3: CVM Result
  */
 class CVMResultsTest {
 
+    // --- Byte 1: CVM Performed ---
+
     @Test
-    fun givenCvmResultsWithCvmPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x80.toByte())
+    fun givenCvmResultsWithApplySucceedingRuleWhenExplainingThenShowsCorrectBitExplanation() {
+        val cvmResults = byteArrayOf(0x40.toByte(), 0x00, 0x00)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Performed - Cardholder verification was performed")
+        assertContains(meaning, "Apply succeeding CV Rule if this CVM is unsuccessful")
     }
 
     @Test
-    fun givenCvmResultsWithCvmFailedWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x40.toByte())
+    fun givenCvmResultsWithFailOnUnsuccessfulWhenExplainingThenShowsCorrectBitExplanation() {
+        val cvmResults = byteArrayOf(0x00.toByte(), 0x00, 0x00)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Failed - Cardholder verification failed")
+        assertContains(meaning, "Fail cardholder verification if this CVM is unsuccessful")
     }
 
     @Test
-    fun givenCvmResultsWithCvmNotPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x20.toByte())
+    fun givenCvmResultsWithPlaintextPinWhenExplainingThenShowsCorrectMethod() {
+        // CVM Type = 000001 (bits 2-7) = Plaintext PIN by ICC
+        // 000001 in bits 2-7 -> byte value: 0b0_0_000001 = 0x01
+        val cvmResults = byteArrayOf(0x01.toByte(), 0x00, 0x00)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Not Performed - Cardholder verification was not performed")
+        assertContains(meaning, "Plaintext PIN verification performed by ICC")
     }
 
     @Test
-    fun givenCvmResultsWithCvmNotSupportedWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x10.toByte())
+    fun givenCvmResultsWithSignatureWhenExplainingThenShowsCorrectMethod() {
+        // CVM Type = 011110 (bits 2-7) = Signature
+        // 011110 in bits 2-7 -> 0b0_0_011110 = 0x1E
+        val cvmResults = byteArrayOf(0x1E.toByte(), 0x00, 0x00)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Not Supported - Cardholder verification is not supported")
+        assertContains(meaning, "Signature (paper)")
     }
 
     @Test
-    fun givenCvmResultsWithCvmNotRequiredWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x08.toByte())
+    fun givenCvmResultsWithNoCvmRequiredWhenExplainingThenShowsCorrectMethod() {
+        // CVM Type = 011111 (bits 2-7) = No CVM required
+        // 0b0_0_011111 = 0x1F
+        val cvmResults = byteArrayOf(0x1F.toByte(), 0x00, 0x00)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Not Required - Cardholder verification is not required")
+        assertContains(meaning, "No CVM required")
+    }
+
+    // --- Byte 2: CVM Condition ---
+
+    @Test
+    fun givenCvmResultsWithConditionAlwaysWhenExplainingThenShowsCorrectCondition() {
+        val cvmResults = byteArrayOf(0x00, 0x00, 0x00)
+        val meaning = CVMResults.explain(cvmResults, "\n").toString()
+        assertContains(meaning, "Always")
     }
 
     @Test
-    fun givenCvmResultsWithCvmNotAvailableWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x04.toByte())
+    fun givenCvmResultsWithConditionTerminalSupportsCvmWhenExplainingThenShowsCorrectCondition() {
+        val cvmResults = byteArrayOf(0x00, 0x03, 0x00)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Not Available - Cardholder verification is not available")
+        assertContains(meaning, "If terminal supports the CVM")
+    }
+
+    // --- Byte 3: CVM Result ---
+
+    @Test
+    fun givenCvmResultsWithResultUnknownWhenExplainingThenShowsCorrectResult() {
+        val cvmResults = byteArrayOf(0x00, 0x00, 0x00)
+        val meaning = CVMResults.explain(cvmResults, "\n").toString()
+        // Byte 3 has enum value 0x00 = Unknown
+        assertContains(meaning, "Byte 3 - CVM Result")
     }
 
     @Test
-    fun givenCvmResultsWithCvmNotApplicableWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x02.toByte())
+    fun givenCvmResultsWithResultSuccessfulWhenExplainingThenShowsCorrectResult() {
+        val cvmResults = byteArrayOf(0x00, 0x00, 0x02)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Not Applicable - Cardholder verification is not applicable")
+        assertContains(meaning, "Successful")
     }
 
     @Test
-    fun givenCvmResultsWithRfuBitSetWhenExplainingThenShowsCorrectBitExplanation() {
-        val cvmResults = byteArrayOf(0x01.toByte())
+    fun givenCvmResultsWithResultFailedWhenExplainingThenShowsCorrectResult() {
+        val cvmResults = byteArrayOf(0x00, 0x00, 0x01)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "RFU - Reserved for Future Use")
+        assertContains(meaning, "Failed")
     }
 
+    // --- Regression: real-world 3-byte CVM Results ---
+
     @Test
-    fun givenCvmResultsWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
-        val cvmResults = byteArrayOf(0xFF.toByte())
+    fun givenRealWorldCvmResults420300WhenExplainingThenDoesNotThrow() {
+        // This is the exact value from the production bug:
+        // Tag 9F34 with value 42 03 00
+        // Byte 1: 0x42 = 0b01000010 -> Apply succeeding rule (b7=1), CVM type=000010 (Enciphered PIN online)
+        // Byte 2: 0x03 -> Condition: If terminal supports the CVM
+        // Byte 3: 0x00 -> Result: Unknown
+        val cvmResults = byteArrayOf(0x42.toByte(), 0x03, 0x00)
         val meaning = CVMResults.explain(cvmResults, "\n").toString()
-        assertContains(meaning, "CVM Performed - Cardholder verification was performed")
-        assertContains(meaning, "CVM Failed - Cardholder verification failed")
-        assertContains(meaning, "CVM Not Performed - Cardholder verification was not performed")
-        assertContains(meaning, "CVM Not Supported - Cardholder verification is not supported")
-        assertContains(meaning, "CVM Not Required - Cardholder verification is not required")
-        assertContains(meaning, "CVM Not Available - Cardholder verification is not available")
-        assertContains(meaning, "CVM Not Applicable - Cardholder verification is not applicable")
-        assertContains(meaning, "RFU - Reserved for Future Use")
+        assertContains(meaning, "Apply succeeding CV Rule if this CVM is unsuccessful")
+        assertContains(meaning, "Enciphered PIN verified online")
+        assertContains(meaning, "If terminal supports the CVM")
     }
+
+    // --- Invalid length ---
 
     @Test
     fun givenCvmResultsWithInvalidLengthWhenExplainingThenThrowsException() {
-        val cvmResults = byteArrayOf(0x00, 0x00)
+        val cvmResults = byteArrayOf(0x00)
         assertFailsWith<IllegalArgumentException> {
             CVMResults.explain(cvmResults, "\n").toString()
         }
@@ -90,8 +125,8 @@ class CVMResultsTest {
 
     @Test
     fun givenCvmResultsWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
-        val cvmResults = byteArrayOf(0x80.toByte())
+        val cvmResults = byteArrayOf(0x42.toByte(), 0x03, 0x02)
         val meaning = CVMResults.explain(cvmResults, "|").toString()
-        assertContains(meaning, "CVM Performed - Cardholder verification was performed|")
+        assertContains(meaning, "Successful")
     }
 }

@@ -76,6 +76,16 @@ class EmvTLVTest {
             0x61.toByte(), // Tag: Application Template
             0x17.toByte(), // Length: 23 bytes
         ) + APPLICATION_LABEL_TLV + PAN_TLV
+
+        // CVM Results - Tag 0x9F34 (3 bytes, from production bug report)
+        private val CVM_RESULTS_TLV = byteArrayOf(
+            0x9F.toByte(), // Tag: CVM Results (first byte)
+            0x34.toByte(), // Tag: CVM Results (second byte)
+            0x03.toByte(), // Length: 3 bytes
+            0x42.toByte(), // Byte 1: Apply succeeding rule + Enciphered PIN online
+            0x03.toByte(), // Byte 2: If terminal supports the CVM
+            0x00.toByte(), // Byte 3: Unknown result
+        )
     }
 
     @Test
@@ -164,5 +174,26 @@ class EmvTLVTest {
         val pan = nestedTLVs[1]
         assertEquals(0x5A, pan.tag)
         assertEquals("1234567890123456", pan.value)
+    }
+
+    @Test
+    fun givenCvmResultsTagWhenParseThenShouldCorrectlyParseThreeByteValue() {
+        val parsedTLV = TLV.fromTlvBuffer(CVM_RESULTS_TLV, listOf(ASNOneSpecification, EmvSpecification))
+
+        // Verify tag
+        assertContentEquals(byteArrayOf(0x9F.toByte(), 0x34.toByte()), parsedTLV.tlvTag.bytes)
+        assertEquals(TLVTag.Classification.CONTEXT_SPECIFIC, parsedTLV.tlvTag.classification)
+        assertEquals(TLVTag.Construction.PRIMITIVE, parsedTLV.tlvTag.construction)
+        assertEquals(0x9F34, parsedTLV.tag)
+
+        // Verify value is 3 bytes (regression: was crashing with "Expected 1 bytes but got 3")
+        assertContentEquals(
+            byteArrayOf(0x42.toByte(), 0x03, 0x00),
+            parsedTLV.value as ByteArray,
+        )
+
+        // Verify explanation does not throw
+        val explanation = parsedTLV.explain("\n")
+        assertTrue(explanation.toString().isNotEmpty())
     }
 }

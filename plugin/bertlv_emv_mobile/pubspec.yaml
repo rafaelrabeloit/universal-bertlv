@@ -2,7 +2,7 @@ name: bertlv_emv_mobile
 description: >-
   Universal BERTLV-EMV — Android and iOS implementation of bertlv_emv using
   Kotlin/Native + dart:ffi.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/rafaelrabeloit/emv-tools
 
 environment:

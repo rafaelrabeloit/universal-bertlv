@@ -187,7 +187,7 @@ enum class EmvTagDescription(
         tagName = "Cardholder Verification Method Results",
         description = "Indicates the results of the last cardholder verification",
         source = Source.ICC,
-        lengthRange = 1..1,
+        lengthRange = 3..3,
         format = Format.BINARY,
     ),
 

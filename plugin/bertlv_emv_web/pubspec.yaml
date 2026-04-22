@@ -2,7 +2,7 @@ name: bertlv_emv_web
 description: >-
   Universal BERTLV-EMV — Web implementation of the bertlv_emv plugin using
   dart:js_interop.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/rafaelrabeloit/emv-tools
 
 environment:
