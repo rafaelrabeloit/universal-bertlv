@@ -41,3 +41,24 @@ jobs:
         run: ./gradlew :bertlv-emv:jsTest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check web JS artifacts are up-to-date
+        run: |
+          ./gradlew :bertlv-emv:jsBrowserProductionLibraryDistribution
+          DIST=bertlv-emv/build/dist/js/productionLibrary
+          WEB=../plugin/bertlv_emv_web/web/assets/js
+
+          for f in kotlin-kotlin-stdlib.js bitfield-parser.js emv-tools-bertlv-emv.js; do
+            if ! diff -q "$DIST/$f" "$WEB/$f" > /dev/null 2>&1; then
+              echo "::error::Stale web artifact: $f differs from freshly built JS."
+              echo "Run './gradlew :bertlv-emv:copyJsToWebPlugin' and commit the updated files."
+              STALE=1
+            fi
+          done
+
+          if [ "${STALE:-0}" = "1" ]; then
+            exit 1
+          fi
+          echo "All web JS artifacts are up-to-date."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -58,7 +58,7 @@ fun emvExplainTag(tagHex: String, valueHex: String): String {
 
 @JsExport
 fun emvVersion(): String {
-    return "0.0.1"
+    return LIB_VERSION
 }
 
 // --- Internal helpers ---

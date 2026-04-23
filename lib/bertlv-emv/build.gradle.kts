@@ -166,6 +166,51 @@ tasks.register<Copy>("copyAndroidNativeLibs") {
     )
 }
 
+// Generate Version.kt so emvVersion() stays in sync with Gradle version
+val generateVersionFile = tasks.register("generateVersionFile") {
+    val outputDir = layout.buildDirectory.dir("generated/version/kotlin")
+    val ver = version.toString()
+    outputs.dir(outputDir)
+    inputs.property("version", ver)
+    doLast {
+        val dir = outputDir.get().asFile.resolve(
+            "io/github/rafaelrabeloit/bertlv/ffi",
+        )
+        dir.mkdirs()
+        dir.resolve("Version.kt").writeText(
+            """
+            package io.github.rafaelrabeloit.bertlv.ffi
+
+            internal const val LIB_VERSION = "$ver"
+            """.trimIndent() + "\n",
+        )
+    }
+}
+
+kotlin.sourceSets.named("jsMain") {
+    kotlin.srcDir(generateVersionFile.map { it.outputs.files.singleFile })
+}
+
+// Copy JS production distribution to Flutter web plugin
+tasks.register<Copy>("copyJsToWebPlugin") {
+    description = "Copy JS production distribution to Flutter bertlv_emv_web plugin"
+    group = "distribution"
+
+    val jsDistDir = layout.buildDirectory.dir(
+        "dist/js/productionLibrary",
+    )
+    val webAssetsDir = rootProject.projectDir.resolve(
+        "../plugin/bertlv_emv_web/web/assets/js",
+    )
+
+    from(jsDistDir) {
+        include("*.js")
+    }
+    into(webAssetsDir)
+
+    dependsOn("jsBrowserProductionLibraryDistribution")
+}
+
 publishing {
     publications.withType<MavenPublication>().configureEach {
         if (name == "kotlinMultiplatform") {
