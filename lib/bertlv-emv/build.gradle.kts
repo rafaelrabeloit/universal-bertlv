@@ -208,6 +208,11 @@ tasks.register<Copy>("copyJsToWebPlugin") {
     }
     into(webAssetsDir)
 
+    // Remove stale JS files before copying fresh ones
+    doFirst {
+        webAssetsDir.listFiles()?.filter { it.extension == "js" }?.forEach { it.delete() }
+    }
+
     dependsOn("jsBrowserProductionLibraryDistribution")
 }
 

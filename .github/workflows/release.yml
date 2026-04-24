@@ -63,8 +63,8 @@ jobs:
           git add lib/bertlv-emv/build.gradle.kts \
                  plugin/bertlv_emv/pubspec.yaml \
                  plugin/bertlv_emv_web/pubspec.yaml \
-                 plugin/bertlv_emv_mobile/pubspec.yaml \
-                 plugin/bertlv_emv_web/web/assets/js/
+                 plugin/bertlv_emv_mobile/pubspec.yaml
+          git add -A plugin/bertlv_emv_web/web/assets/js/
           git commit -m "release: v${{ inputs.version }} [skip ci]"
           git push
 

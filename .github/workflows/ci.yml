@@ -50,12 +50,15 @@ jobs:
       - name: Check web JS artifacts are up-to-date
         id: staleness
         run: |
-          if git diff --quiet -- ../plugin/bertlv_emv_web/web/assets/js/; then
+          cd "$GITHUB_WORKSPACE"
+          CHANGED=$(git diff --name-only -- plugin/bertlv_emv_web/web/assets/js/)
+          UNTRACKED=$(git ls-files --others --exclude-standard -- plugin/bertlv_emv_web/web/assets/js/)
+          if [ -z "$CHANGED" ] && [ -z "$UNTRACKED" ]; then
             echo "All web JS artifacts are up-to-date."
             echo "stale=false" >> "$GITHUB_OUTPUT"
           else
             echo "::warning::Web JS artifacts were stale and have been regenerated."
-            git diff --stat -- ../plugin/bertlv_emv_web/web/assets/js/
+            git status -- plugin/bertlv_emv_web/web/assets/js/
             echo "stale=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -65,7 +68,7 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add plugin/bertlv_emv_web/web/assets/js/
+          git add -A plugin/bertlv_emv_web/web/assets/js/
           git commit -m "chore: regenerate web JS artifacts [skip ci]"
           git push
 

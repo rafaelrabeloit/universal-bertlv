@@ -32,6 +32,4 @@ flutter:
         fileName: bertlv_emv_web.dart
 
   assets:
-    - web/assets/js/kotlin-kotlin-stdlib.js
-    - web/assets/js/bitfield-parser.js
-    - web/assets/js/emv-tools-bertlv-emv.js
+    - web/assets/js/
