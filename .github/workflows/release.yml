@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g. 0.0.3)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  packages: read
+
+jobs:
+  release:
+    name: Bump, Build, Tag & Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Make gradlew executable
+        run: chmod +x lib/gradlew
+
+      - name: Bump version in build.gradle.kts
+        run: |
+          sed -i 's/^version = ".*"/version = "${{ inputs.version }}"/' \
+            lib/bertlv-emv/build.gradle.kts
+
+      - name: Bump version in pubspec.yaml files
+        run: |
+          for f in plugin/bertlv_emv/pubspec.yaml \
+                   plugin/bertlv_emv_web/pubspec.yaml \
+                   plugin/bertlv_emv_mobile/pubspec.yaml; do
+            sed -i "s/^version: .*/version: ${{ inputs.version }}/" "$f"
+          done
+
+      - name: Run tests
+        working-directory: lib
+        run: ./gradlew :bertlv-emv:jvmTest :console-emv:jvmTest :bertlv-emv:jsTest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Regenerate web JS artifacts
+        working-directory: lib
+        run: ./gradlew :bertlv-emv:copyJsToWebPlugin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit version bump and regenerated artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/bertlv-emv/build.gradle.kts \
+                 plugin/bertlv_emv/pubspec.yaml \
+                 plugin/bertlv_emv_web/pubspec.yaml \
+                 plugin/bertlv_emv_mobile/pubspec.yaml \
+                 plugin/bertlv_emv_web/web/assets/js/
+          git commit -m "release: v${{ inputs.version }} [skip ci]"
+          git push
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ inputs.version }}" \
+            --title "v${{ inputs.version }}" \
+            --generate-notes \
+            --target main

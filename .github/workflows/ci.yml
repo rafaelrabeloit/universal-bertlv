@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 permissions:
-  contents: read
+  contents: write
   packages: read
 
 jobs:
@@ -42,23 +42,35 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check web JS artifacts are up-to-date
-        run: |
-          ./gradlew :bertlv-emv:jsBrowserProductionLibraryDistribution
-          DIST=bertlv-emv/build/dist/js/productionLibrary
-          WEB=../plugin/bertlv_emv_web/web/assets/js
-
-          for f in kotlin-kotlin-stdlib.js bitfield-parser.js emv-tools-bertlv-emv.js; do
-            if ! diff -q "$DIST/$f" "$WEB/$f" > /dev/null 2>&1; then
-              echo "::error::Stale web artifact: $f differs from freshly built JS."
-              echo "Run './gradlew :bertlv-emv:copyJsToWebPlugin' and commit the updated files."
-              STALE=1
-            fi
-          done
-
-          if [ "${STALE:-0}" = "1" ]; then
-            exit 1
-          fi
-          echo "All web JS artifacts are up-to-date."
+      - name: Regenerate web JS artifacts
+        run: ./gradlew :bertlv-emv:copyJsToWebPlugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check web JS artifacts are up-to-date
+        id: staleness
+        run: |
+          if git diff --quiet -- ../plugin/bertlv_emv_web/web/assets/js/; then
+            echo "All web JS artifacts are up-to-date."
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Web JS artifacts were stale and have been regenerated."
+            git diff --stat -- ../plugin/bertlv_emv_web/web/assets/js/
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Auto-commit regenerated JS artifacts
+        if: github.event_name == 'push' && steps.staleness.outputs.stale == 'true'
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugin/bertlv_emv_web/web/assets/js/
+          git commit -m "chore: regenerate web JS artifacts [skip ci]"
+          git push
+
+      - name: Fail PR if artifacts are stale
+        if: github.event_name == 'pull_request' && steps.staleness.outputs.stale == 'true'
+        run: |
+          echo "::error::Web JS artifacts are stale. Regenerate with './gradlew :bertlv-emv:copyJsToWebPlugin' and commit, or merge to main where CI will auto-fix."
+          exit 1
