@@ -47,7 +47,7 @@ class EmvJsInterop {
     try {
       return _emvVersion();
     } catch (e) {
-      return '0.0.1-error';
+      return 'error';
     }
   }
 }
