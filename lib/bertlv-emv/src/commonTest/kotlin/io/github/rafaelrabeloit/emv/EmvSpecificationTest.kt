@@ -5,6 +5,7 @@ import io.github.rafaelrabeloit.bertlv.components.TLVTag
 import io.github.rafaelrabeloit.emv.value.AlphanumericValueParser
 import io.github.rafaelrabeloit.emv.value.BinaryValueParser
 import io.github.rafaelrabeloit.emv.value.NumericNumberValueParser
+import io.github.rafaelrabeloit.emv.value.AlphanumericSpecialValueParser
 import io.github.rafaelrabeloit.emv.value.NumericValueParser
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -106,11 +107,11 @@ class EmvSpecificationTest {
     }
 
     @Test
-    fun givenMerchantIdentifierWhenGetValueHandlerThenShouldReturnAlphanumericHandler() {
+    fun givenMerchantIdentifierWhenGetValueHandlerThenShouldReturnAlphanumericSpecialHandler() {
         val tag = TLVTag.fromTag(0x9F16)
         val handler = specification.handlerOfValue(tag)
         assertNotNull(handler)
-        assertTrue(handler.parser is AlphanumericValueParser)
+        assertTrue(handler.parser is AlphanumericSpecialValueParser)
     }
 
     @Test
