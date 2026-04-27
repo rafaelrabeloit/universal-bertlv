@@ -6,7 +6,7 @@ plugins {
     id("maven-publish")
 }
 
-version = "0.0.6"
+version = "0.0.7"
 
 kotlin {
     val xcfName = "sharedKit"

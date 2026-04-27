@@ -50,9 +50,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Regenerate web JS artifacts
+      - name: Regenerate web JS artifacts (clean build to pick up bumped version)
         working-directory: lib
-        run: ./gradlew :bertlv-emv:copyJsToWebPlugin
+        run: ./gradlew clean :bertlv-emv:copyJsToWebPlugin --no-build-cache
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
