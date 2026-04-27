@@ -77,6 +77,42 @@ class EmvTLVTest {
             0x17.toByte(), // Length: 23 bytes
         ) + APPLICATION_LABEL_TLV + PAN_TLV
 
+        // Unpredictable Number - Tag 0x9F37 (4 bytes binary, NOT BCD)
+        // Contains 0xAB and 0xEF nibbles that would fail BCD parsing
+        private val UNPREDICTABLE_NUMBER_TLV = byteArrayOf(
+            0x9F.toByte(), // Tag: Unpredictable Number (first byte)
+            0x37.toByte(), // Tag: Unpredictable Number (second byte)
+            0x04.toByte(), // Length: 4 bytes
+            0xAB.toByte(), // Value: random binary data with non-BCD nibbles
+            0xCD.toByte(),
+            0xEF.toByte(),
+            0x12.toByte(),
+        )
+
+        // ICC Dynamic Number - Tag 0x9F4C (binary, NOT BCD)
+        private val ICC_DYNAMIC_NUMBER_TLV = byteArrayOf(
+            0x9F.toByte(), // Tag: ICC Dynamic Number (first byte)
+            0x4C.toByte(), // Tag: ICC Dynamic Number (second byte)
+            0x08.toByte(), // Length: 8 bytes
+            0xFA.toByte(), // Value: random binary data with non-BCD nibbles
+            0xCE.toByte(),
+            0xB7.toByte(),
+            0x3D.toByte(),
+            0x91.toByte(),
+            0x0A.toByte(),
+            0xFF.toByte(),
+            0x48.toByte(),
+        )
+
+        // Application Version Number - Tag 0x9F08 (binary, NOT BCD)
+        private val APPLICATION_VERSION_NUMBER_TLV = byteArrayOf(
+            0x9F.toByte(), // Tag: Application Version Number (first byte)
+            0x08.toByte(), // Tag: Application Version Number (second byte)
+            0x02.toByte(), // Length: 2 bytes
+            0x00.toByte(), // Value: version 0x008C (140 decimal)
+            0x8C.toByte(),
+        )
+
         // CVM Results - Tag 0x9F34 (3 bytes, from production bug report)
         private val CVM_RESULTS_TLV = byteArrayOf(
             0x9F.toByte(), // Tag: CVM Results (first byte)
@@ -174,6 +210,54 @@ class EmvTLVTest {
         val pan = nestedTLVs[1]
         assertEquals(0x5A, pan.tag)
         assertEquals("1234567890123456", pan.value)
+    }
+
+    @Test
+    fun givenUnpredictableNumberTagWhenParseThenShouldCorrectlyParseBinaryValue() {
+        val parsedTLV = TLV.fromTlvBuffer(UNPREDICTABLE_NUMBER_TLV, listOf(ASNOneSpecification, EmvSpecification))
+
+        // Verify tag
+        assertContentEquals(byteArrayOf(0x9F.toByte(), 0x37.toByte()), parsedTLV.tlvTag.bytes)
+        assertEquals(0x9F37, parsedTLV.tag)
+
+        // Verify value is parsed as binary (not BCD) - bytes with A-F nibbles must not throw
+        assertContentEquals(
+            byteArrayOf(0xAB.toByte(), 0xCD.toByte(), 0xEF.toByte(), 0x12.toByte()),
+            parsedTLV.value as ByteArray,
+        )
+    }
+
+    @Test
+    fun givenIccDynamicNumberTagWhenParseThenShouldCorrectlyParseBinaryValue() {
+        val parsedTLV = TLV.fromTlvBuffer(ICC_DYNAMIC_NUMBER_TLV, listOf(ASNOneSpecification, EmvSpecification))
+
+        // Verify tag
+        assertContentEquals(byteArrayOf(0x9F.toByte(), 0x4C.toByte()), parsedTLV.tlvTag.bytes)
+        assertEquals(0x9F4C, parsedTLV.tag)
+
+        // Verify value is parsed as binary (not BCD)
+        assertContentEquals(
+            byteArrayOf(
+                0xFA.toByte(), 0xCE.toByte(), 0xB7.toByte(), 0x3D.toByte(),
+                0x91.toByte(), 0x0A.toByte(), 0xFF.toByte(), 0x48.toByte(),
+            ),
+            parsedTLV.value as ByteArray,
+        )
+    }
+
+    @Test
+    fun givenApplicationVersionNumberTagWhenParseThenShouldCorrectlyParseBinaryValue() {
+        val parsedTLV = TLV.fromTlvBuffer(APPLICATION_VERSION_NUMBER_TLV, listOf(ASNOneSpecification, EmvSpecification))
+
+        // Verify tag
+        assertContentEquals(byteArrayOf(0x9F.toByte(), 0x08.toByte()), parsedTLV.tlvTag.bytes)
+        assertEquals(0x9F08, parsedTLV.tag)
+
+        // Verify value is parsed as binary (not BCD) - 0x8C nibble would fail BCD
+        assertContentEquals(
+            byteArrayOf(0x00.toByte(), 0x8C.toByte()),
+            parsedTLV.value as ByteArray,
+        )
     }
 
     @Test

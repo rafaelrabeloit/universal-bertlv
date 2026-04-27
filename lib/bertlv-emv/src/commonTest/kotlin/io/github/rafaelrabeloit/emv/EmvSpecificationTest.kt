@@ -86,6 +86,34 @@ class EmvSpecificationTest {
     }
 
     @Test
+    fun givenBinaryTagsFormerlyNumericWhenGetValueHandlerThenShouldReturnBinaryValueHandler() {
+        // These tags were incorrectly classified as NUMERIC (BCD) and would fail on binary data
+        val binaryTags = listOf(0x9F37, 0x9F4C, 0x9F08) // Unpredictable Number, ICC Dynamic Number, App Version Number
+        for (tagValue in binaryTags) {
+            val tag = TLVTag.fromTag(tagValue)
+            val handler = specification.handlerOfValue(tag)
+            assertNotNull(handler)
+            assertTrue(handler.parser is BinaryValueParser, "Tag 0x${tagValue.toString(16).uppercase()} should use BinaryValueParser")
+        }
+    }
+
+    @Test
+    fun givenTerminalSerialNumberWhenGetValueHandlerThenShouldReturnAlphanumericHandler() {
+        val tag = TLVTag.fromTag(0x9F1E)
+        val handler = specification.handlerOfValue(tag)
+        assertNotNull(handler)
+        assertTrue(handler.parser is AlphanumericValueParser)
+    }
+
+    @Test
+    fun givenMerchantIdentifierWhenGetValueHandlerThenShouldReturnAlphanumericHandler() {
+        val tag = TLVTag.fromTag(0x9F16)
+        val handler = specification.handlerOfValue(tag)
+        assertNotNull(handler)
+        assertTrue(handler.parser is AlphanumericValueParser)
+    }
+
+    @Test
     fun handlerofvalueReturnsNumericnumbervalueparserForAmountTags() {
         // Test AMOUNT_AUTHORISED tag
         val amountAuthorisedTag = TLVTag.fromTag(0x9F02)
