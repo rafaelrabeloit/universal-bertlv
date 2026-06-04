@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.maven.publish)
     id("org.jetbrains.kotlinx.kover")
     id("io.gitlab.arturbosch.detekt")
     id("org.jlleitschuh.gradle.ktlint")
-    id("maven-publish")
 }
 
 version = "0.0.7"
@@ -216,13 +216,51 @@ tasks.register<Copy>("copyJsToWebPlugin") {
     dependsOn("jsBrowserProductionLibraryDistribution")
 }
 
-publishing {
-    publications.withType<MavenPublication>().configureEach {
-        if (name == "kotlinMultiplatform") {
-            artifactId = project.name
+private fun Project.signingConfigured(): Boolean =
+    listOf("signingInMemoryKey", "signing.keyId", "signing.secretKeyRingFile")
+        .any { (findProperty(it) as? String)?.isNotBlank() == true }
+
+mavenPublishing {
+    publishToMavenCentral(automaticRelease = true)
+    if (signingConfigured()) {
+        signAllPublications()
+    }
+
+    coordinates("io.github.rafaelrabeloit", "bertlv-emv", version.toString())
+
+    pom {
+        name.set("Universal BERTLV EMV")
+        description.set("Kotlin Multiplatform BER-TLV parser and EMV tag explainers")
+        url.set("https://github.com/rafaelrabeloit/universal-bertlv")
+        licenses {
+            license {
+                name.set("MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+            }
+        }
+        developers {
+            developer {
+                id.set("rafaelrabeloit")
+                name.set("Rafael")
+            }
+        }
+        scm {
+            url.set("https://github.com/rafaelrabeloit/universal-bertlv")
+            connection.set("scm:git:git://github.com/rafaelrabeloit/universal-bertlv.git")
+            developerConnection.set("scm:git:ssh://github.com/rafaelrabeloit/universal-bertlv.git")
         }
     }
+}
+
+publishing {
     repositories {
-        mavenLocal()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/rafaelrabeloit/universal-bertlv")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
