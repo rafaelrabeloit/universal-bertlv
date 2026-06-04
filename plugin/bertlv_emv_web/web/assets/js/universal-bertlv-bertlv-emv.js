@@ -9799,7 +9799,7 @@
     return tmp;
   }
   function emvVersion() {
-    return '0.0.7';
+    return '0.0.8';
   }
   function escapeJson(s) {
     return replace(replace(replace(replace(replace(s, '\\', '\\\\'), '"', '\\"'), '\n', '\\n'), '\r', '\\r'), '\t', '\\t');
