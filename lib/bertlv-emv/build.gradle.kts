@@ -6,7 +6,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
 }
 
-version = "0.0.8"
+version = "0.0.9"
 
 kotlin {
     val xcfName = "sharedKit"
