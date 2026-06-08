@@ -37,7 +37,6 @@
   var toString_0 = kotlin_kotlin.$_$.u2;
   var hashCode = kotlin_kotlin.$_$.l1;
   var equals = kotlin_kotlin.$_$.j1;
-  var toHexString = kotlin_kotlin.$_$.j2;
   var isByteArray = kotlin_kotlin.$_$.q1;
   var checkIndexOverflow = kotlin_kotlin.$_$.n;
   var RfuField = kotlin_io_github_rafaelrabeloit_universal_bitfield.$_$.b;
@@ -84,6 +83,7 @@
   var equals_0 = kotlin_kotlin.$_$.d2;
   var hexToByteArray = kotlin_kotlin.$_$.e2;
   var replace = kotlin_kotlin.$_$.h2;
+  var toHexString = kotlin_kotlin.$_$.j2;
   var isCharSequence = kotlin_kotlin.$_$.r1;
   var trim = kotlin_kotlin.$_$.n2;
   var primitiveArrayConcat = kotlin_kotlin.$_$.a;
@@ -829,7 +829,7 @@
     return bytes;
   };
   protoOf(OctetStringValueParser).ee = function (value) {
-    return toHexString(value);
+    return toHexString_0(value);
   };
   protoOf(OctetStringValueParser).ta = function (value) {
     return this.ee((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE());
