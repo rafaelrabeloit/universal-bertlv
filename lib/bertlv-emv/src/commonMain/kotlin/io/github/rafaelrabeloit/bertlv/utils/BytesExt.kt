@@ -18,6 +18,22 @@ fun Byte.matches(mask: Int) = mask.toByte().let { this.and(it) == it }
 fun Byte.bits(position: Int, length: Int): Int =
     ((this.toInt() shr (position - 1)) and ((ALL_BITS_SET shl length).inv())).toByte().toInt()
 
+/**
+ * Converts a hex string to a [ByteArray].
+ *
+ * Whitespace and other non-hex characters are ignored, so inputs like
+ * `"9F06 07 A000000001010"` are accepted.
+ *
+ * @throws IllegalArgumentException if the remaining hex digits do not form complete bytes
+ */
+fun String.hexToByteArray(): ByteArray {
+    val hex = filter { it.isDigit() || it.uppercaseChar() in 'A'..'F' }
+    require(hex.length % 2 == 0) { "Hex string must have an even number of hex digits" }
+    return hex.chunked(HEX_CHAR_IN_BYTE)
+        .map { it.toInt(HEX_RADIX).toByte() }
+        .toByteArray()
+}
+
 fun ByteArray.toHexString(): String {
     val builder = StringBuilder(size * HEX_CHAR_IN_BYTE) // Each byte becomes 2 hex chars
     for (byte in this) {

@@ -281,4 +281,33 @@ class TLVTest {
             assertContains(explanation, "Universal")
         }
     }
+
+    @Test
+    fun givenHexStringWhenParseThenShouldCorrectlyParseTlv() {
+        val parsedTLV = TLV.fromBinaryTlvBuffer("95050400000000")
+
+        assertEquals(0x95, parsedTLV.tag)
+        assertEquals(5, parsedTLV.length)
+        assertContentEquals(
+            byteArrayOf(0x04, 0x00, 0x00, 0x00, 0x00),
+            parsedTLV.value,
+        )
+    }
+
+    @Test
+    fun givenAidTlvWhenReadHexValueThenShouldReturnValueHexOnly() {
+        val tlv = TLV.fromBinaryTlvBuffer("9F06 07 A0000000031010")
+
+        assertEquals("A0000000031010", tlv.hexValue)
+        assertEquals("A0000000031010", tlv.valueString)
+    }
+
+    @Test
+    fun givenTagAndValueHexWhenCreateThenShouldCorrectlyCreateTlv() {
+        val tlv = TLV.fromTagAndBinaryValue(0x9F06, "A0000000031010")
+
+        assertEquals(0x9F06, tlv.tag)
+        assertEquals(7, tlv.length)
+        assertEquals("A0000000031010", tlv.hexValue)
+    }
 }

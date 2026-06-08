@@ -22,7 +22,7 @@ class OctetStringValueParserTest {
     @Test
     fun givenValueWhenConvertToStringThenShouldReturnHexString() {
         val value = byteArrayOf(0xDE.toByte(), 0xAD.toByte(), 0xBE.toByte(), 0xEF.toByte())
-        assertEquals("deadbeef", parser.valueToString(value))
+        assertEquals("DEADBEEF", parser.valueToString(value))
     }
 
     @Test

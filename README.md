@@ -15,6 +15,7 @@ Parse, explain, and visualize EMV BER-TLV data on any platform — Web, Android,
 Universal BERTLV provides:
 
 - **Full BER-TLV parsing** — recursive decode of constructed and primitive tags
+- **Hex string input** — parse or build TLVs directly from hex strings (whitespace is ignored)
 - **EMV tag dictionary** — all EMV 4.1 tags with human-readable names
 - **Value explainers** — bitfield, lookup, and complex explainers for 30+ EMV tags (TVR, AIP, CVM List, IACs, country/currency codes, and more)
 - **Cross-platform** — one Kotlin Multiplatform library powers every target
@@ -53,29 +54,19 @@ Add the app-facing package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  bertlv_emv: ^0.0.1
+  bertlv_emv: ^0.0.9
 ```
 
 The correct platform package (`bertlv_emv_web` or `bertlv_emv_mobile`) is selected automatically.
 
-### Kotlin / JVM (Maven)
+### Kotlin / JVM (Maven Central)
 
 ```kotlin
-// settings.gradle.kts — add the repository
-maven {
-    name = "GitHubPackages"
-    url = uri("https://maven.pkg.github.com/rafaelrabeloit/universal-bertlv")
-    credentials {
-        username = providers.gradleProperty("gpr.user").orNull
-            ?: System.getenv("GITHUB_ACTOR") ?: ""
-        password = providers.gradleProperty("gpr.key").orNull
-            ?: System.getenv("GITHUB_TOKEN") ?: ""
-    }
-}
-
 // build.gradle.kts
-implementation("io.github.rafaelrabeloit:bertlv-emv:0.1.0")
+implementation("io.github.rafaelrabeloit:bertlv-emv:0.0.9")
 ```
+
+GitHub Packages is also available for snapshot builds — see `lib/bertlv-emv/build.gradle.kts`.
 
 ## Usage
 
@@ -94,11 +85,35 @@ for (final tag in result.tags) {
 
 ### Kotlin
 
-```kotlin
-import io.github.rafaelrabeloit.bertlv.BerTlvParser
+Parse a TLV list from hex:
 
-val tlv = BerTlvParser.parse("6F1A840E315041592E5359532E4444463031A5088801025F2D02656E")
-tlv.forEach { println("${it.tag.hex}: ${it.tag.name} = ${it.hexValue}") }
+```kotlin
+import io.github.rafaelrabeloit.bertlv.TLV
+import io.github.rafaelrabeloit.bertlv.TLVList
+import io.github.rafaelrabeloit.bertlv.TlvFindMode
+import io.github.rafaelrabeloit.emv.EmvSpecification
+
+val tlvList = TLVList.fromTlvListBuffer(
+    "6F1A840E315041592E5359532E4444463031A5088801025F2D02656E",
+    listOf(EmvSpecification),
+)
+
+tlvList.tlvs.forEach { println("${it.tag.toString(16).uppercase()}: ${it.hexValue}") }
+```
+
+Parse or build a single TLV:
+
+```kotlin
+// Parse complete TLV from hex (spaces allowed)
+val aid = TLV.fromBinaryTlvBuffer("9F06 07 A0000000031010")
+println(aid.hexValue) // A0000000031010
+
+// Build from tag + value hex
+val built = TLV.fromTagAndBinaryValue(0x9F06, "A0000000031010")
+
+// Find a tag inside a TLV list
+val tvr = tlvList.find(0x95, TlvFindMode.FIRST)
+val duplicateSensitive = tlvList.find(0x95, TlvFindMode.STRICT) // throws if duplicated
 ```
 
 ## Supported Platforms

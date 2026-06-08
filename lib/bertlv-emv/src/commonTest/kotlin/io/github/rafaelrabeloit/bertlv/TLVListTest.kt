@@ -6,6 +6,7 @@ import io.github.rafaelrabeloit.bertlv.universal.UniversalTagDescription
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class TLVListTest {
 
@@ -181,5 +182,41 @@ class TLVListTest {
 
         assertEquals(0, tlvList.tlvs.size)
         assertEquals(0, tlvList.bytes.size)
+    }
+
+    @Test
+    fun givenTlvListWhenFindStrictThenShouldReturnSingleMatchOrFailOnDuplicates() {
+        val first = TLV.fromTagAndBinaryValue(0x95, byteArrayOf(0x01))
+        val duplicate = TLV.fromTagAndBinaryValue(0x95, byteArrayOf(0x02))
+        val other = TLV.fromTagAndBinaryValue(0x96, byteArrayOf(0x03))
+        val tlvList = TLVList.fromTlvs(listOf(first, duplicate, other))
+
+        assertFailsWith<IllegalStateException> {
+            tlvList.find(0x95, TlvFindMode.STRICT)
+        }
+
+        val singleMatchList = TLVList.fromTlvs(listOf(first, other))
+        assertEquals(first, singleMatchList.find(0x95, TlvFindMode.STRICT))
+        assertEquals(null, singleMatchList.find(0x97, TlvFindMode.STRICT))
+    }
+
+    @Test
+    fun givenTlvListWhenFindFirstOrLastThenShouldReturnExpectedMatch() {
+        val first = TLV.fromTagAndBinaryValue(0x95, byteArrayOf(0x01))
+        val duplicate = TLV.fromTagAndBinaryValue(0x95, byteArrayOf(0x02))
+        val tlvList = TLVList.fromTlvs(listOf(first, duplicate))
+
+        assertEquals(first, tlvList.find(0x95, TlvFindMode.FIRST))
+        assertEquals(duplicate, tlvList.find(0x95, TlvFindMode.LAST))
+        assertEquals(null, tlvList.find(0x96, TlvFindMode.FIRST))
+    }
+
+    @Test
+    fun givenHexStringWhenParseTlvListThenShouldCorrectlyParseMultipleTlvs() {
+        val parsedList = TLVList.fromTlvListBuffer("9501029603040506")
+
+        assertEquals(2, parsedList.tlvs.size)
+        assertEquals(0x95, parsedList.tlvs[0].tag)
+        assertEquals(0x96, parsedList.tlvs[1].tag)
     }
 }

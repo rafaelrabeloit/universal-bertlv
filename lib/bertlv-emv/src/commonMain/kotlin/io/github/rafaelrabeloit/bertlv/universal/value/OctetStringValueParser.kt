@@ -1,6 +1,7 @@
 package io.github.rafaelrabeloit.bertlv.universal.value
 
 import io.github.rafaelrabeloit.bertlv.components.TLVValue
+import io.github.rafaelrabeloit.bertlv.utils.toHexString
 
 /**
  * Parser for ASN.1 OCTET STRING type.
@@ -9,7 +10,6 @@ import io.github.rafaelrabeloit.bertlv.components.TLVValue
  * - No interpretation of the content is performed
  * - Used for raw binary data, encrypted data, or nested structures
  */
-@OptIn(ExperimentalStdlibApi::class)
 class OctetStringValueParser : TLVValue.ValueParser<ByteArray> {
     override fun bytesToValue(bytes: ByteArray): ByteArray = bytes
 

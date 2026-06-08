@@ -15,6 +15,8 @@ class TLVValue<V> private constructor(
     val value: V
         get() = handler.parser.bytesToValue(bytes)
 
+    fun asString(): String = handler.parser.valueToString(value)
+
     override fun explain(lineSeparator: String): Explanation {
         val explanation = Explanation(lineSeparator)
         explanation.add(Line(handler.parser.valueToString(value)))

@@ -11,6 +11,8 @@ import io.github.rafaelrabeloit.bertlv.utils.Explainable
 import io.github.rafaelrabeloit.bertlv.utils.Explanation
 import io.github.rafaelrabeloit.bertlv.utils.Line
 import io.github.rafaelrabeloit.bertlv.utils.LineSeparator
+import io.github.rafaelrabeloit.bertlv.utils.hexToByteArray
+import io.github.rafaelrabeloit.bertlv.utils.toHexString
 
 class TLV<V> private constructor(
     override val bytes: ByteArray,
@@ -21,6 +23,12 @@ class TLV<V> private constructor(
     val tag: Int get() = tlvTag.tag
     val length: Int get() = tlvLength.length
     val value: V get() = tlvValue.value
+
+    /** Raw value bytes encoded as an uppercase hex string (e.g. `"A000000001010"`). */
+    val hexValue: String get() = tlvValue.bytes.toHexString()
+
+    /** Human-readable value string produced by the tag's value parser. */
+    val valueString: String get() = tlvValue.asString()
 
     override fun explain(lineSeparator: String): Explanation {
         val explanation = Explanation(lineSeparator)
@@ -108,10 +116,21 @@ class TLV<V> private constructor(
         fun fromBinaryTlvBuffer(bytes: ByteArray): TLV<ByteArray> =
             fromTlvBuffer(bytes, ValueHandler(OctetStringValueParser()))
 
+        fun fromBinaryTlvBuffer(hex: String): TLV<ByteArray> =
+            fromBinaryTlvBuffer(hex.hexToByteArray())
+
+        fun fromTlvBuffer(
+            hex: String,
+            specifications: List<Specification> = listOf(ASNOneSpecification),
+        ): TLV<*> = fromTlvBuffer(hex.hexToByteArray(), specifications)
+
         fun fromBinaryComponents(tag: TLVTag, value: TLVValue<ByteArray>): TLV<ByteArray> =
             fromComponents(tag, value)
 
         fun fromTagAndBinaryValue(tag: Int, value: ByteArray): TLV<ByteArray> =
             fromTagAndValue(tag, value, ValueHandler(OctetStringValueParser()))
+
+        fun fromTagAndBinaryValue(tag: Int, valueHex: String): TLV<ByteArray> =
+            fromTagAndBinaryValue(tag, valueHex.hexToByteArray())
     }
 }
