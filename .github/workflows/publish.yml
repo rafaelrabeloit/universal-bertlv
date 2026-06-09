@@ -3,6 +3,11 @@ name: Publish
 on:
   release:
     types: [created]
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Release"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: read
@@ -11,6 +16,7 @@ permissions:
 jobs:
   publish-github-packages:
     name: Test & Publish (GitHub Packages)
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -43,7 +49,9 @@ jobs:
 
   publish-maven-central:
     name: Test & Publish (Maven Central)
-    if: github.event.release.prerelease == false
+    if: >-
+      (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') &&
+      (github.event_name != 'release' || github.event.release.prerelease == false)
     runs-on: macos-latest
     defaults:
       run:
