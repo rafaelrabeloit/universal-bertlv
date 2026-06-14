@@ -155,15 +155,19 @@ class TLVTag private constructor(
         private const val CONTINUATION_ROW_INDEX = 1
         private const val TYPE_ROW_INDEX = 2
 
-        fun fromTlvBuffer(bytes: ByteArray, contextualize: Contextualize = { Context() }): TLVTag {
-            val tagHeader = bytes.first()
+        fun fromTlvBuffer(
+            bytes: ByteArray,
+            offset: Int = 0,
+            contextualize: Contextualize = { Context() },
+        ): TLVTag {
+            val tagHeader = bytes[offset]
             val form = determineForm(tagHeader)
-            val tagLength = calculateTagLength(bytes, form)
-            val tagBytes = bytes.copyOfRange(0, tagLength)
+            val tagLength = calculateTagLength(bytes, offset, form)
+            val tagBytes = bytes.copyOfRange(offset, offset + tagLength)
             val tag = tagBytes.toInt()
             val classification = determineClassification(tagHeader)
             val construction = determineConstruction(tagHeader)
-            val type = determineType(bytes, tagHeader, tagLength)
+            val type = determineType(bytes, offset, tagHeader, tagLength)
             return TLVTag(tagBytes, tag, classification, construction, form, type, contextualize)
         }
 
@@ -173,18 +177,18 @@ class TLVTag private constructor(
             val classification = determineClassification(tagHeader)
             val construction = determineConstruction(tagHeader)
             val form = determineForm(tagHeader)
-            val type = determineType(bytes, tagHeader, bytes.size)
+            val type = determineType(bytes, 0, tagHeader, bytes.size)
             return TLVTag(bytes, tag, classification, construction, form, type, contextualize)
         }
 
-        private fun calculateTagLength(bytes: ByteArray, form: Form): Int {
+        private fun calculateTagLength(bytes: ByteArray, offset: Int, form: Form): Int {
             var tagLength = 1
 
             if (form == Form.LONG) {
                 tagLength++
 
-                for (n in 1..<bytes.size) {
-                    val byte = bytes[n]
+                for (n in 1 until bytes.size - offset) {
+                    val byte = bytes[offset + n]
 
                     if (byte.matches(TAG_CONTINUATION_MASK)) {
                         tagLength++
@@ -215,20 +219,21 @@ class TLVTag private constructor(
             }
         }
 
-        private fun determineType(bytes: ByteArray, tagHeader: Byte, tagLength: Int): Int {
+        private fun determineType(bytes: ByteArray, offset: Int, tagHeader: Byte, tagLength: Int): Int {
             return if (tagLength == 1) {
                 // Single byte tag - type is in bits 1-5
                 tagHeader.bits(TYPE_BITS_POSITION, TYPE_BITS_LENGTH)
             } else {
                 // Multi-byte tag - extract type from subsequent bytes, ignoring continuation bits
-                bytes.copyOfRange(1, tagLength)
-                    .fold(0) { acc, byte ->
-                        (acc shl MULTI_BYTE_TYPE_BITS_LENGTH) or
-                            byte.bits(
-                                MULTI_BYTE_TYPE_BITS_POSITION,
-                                MULTI_BYTE_TYPE_BITS_LENGTH,
-                            )
-                    }
+                var type = 0
+                for (i in 1 until tagLength) {
+                    type = (type shl MULTI_BYTE_TYPE_BITS_LENGTH) or
+                        bytes[offset + i].bits(
+                            MULTI_BYTE_TYPE_BITS_POSITION,
+                            MULTI_BYTE_TYPE_BITS_LENGTH,
+                        )
+                }
+                type
             }
         }
     }

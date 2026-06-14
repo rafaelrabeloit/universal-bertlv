@@ -1,14 +1,25 @@
 (function (factory) {
   if (typeof define === 'function' && define.amd)
-    define(['exports'], factory);
+    define(['exports', './kotlin-kotlin-stdlib.js'], factory);
   else if (typeof exports === 'object')
-    factory(module.exports);
-  else
-    globalThis['kotlinx-serialization-kotlinx-serialization-core'] = factory(typeof globalThis['kotlinx-serialization-kotlinx-serialization-core'] === 'undefined' ? {} : globalThis['kotlinx-serialization-kotlinx-serialization-core']);
-}(function (_) {
+    factory(module.exports, require('./kotlin-kotlin-stdlib.js'));
+  else {
+    if (typeof globalThis['kotlin-kotlin-stdlib'] === 'undefined') {
+      throw new Error("Error loading module 'kotlinx-serialization-kotlinx-serialization-core'. Its dependency 'kotlin-kotlin-stdlib' was not found. Please, check whether 'kotlin-kotlin-stdlib' is loaded prior to 'kotlinx-serialization-kotlinx-serialization-core'.");
+    }
+    globalThis['kotlinx-serialization-kotlinx-serialization-core'] = factory(typeof globalThis['kotlinx-serialization-kotlinx-serialization-core'] === 'undefined' ? {} : globalThis['kotlinx-serialization-kotlinx-serialization-core'], globalThis['kotlin-kotlin-stdlib']);
+  }
+}(function (_, kotlin_kotlin) {
   'use strict';
-  //region block: pre-declaration
+  //region block: imports
+  var initMetadataForClass = kotlin_kotlin.$_$.s1;
+  var VOID = kotlin_kotlin.$_$.b;
   //endregion
+  //region block: pre-declaration
+  initMetadataForClass(SerializableWith, 'SerializableWith', VOID, VOID, VOID, VOID, 0);
+  //endregion
+  function SerializableWith() {
+  }
   return _;
 }));
 

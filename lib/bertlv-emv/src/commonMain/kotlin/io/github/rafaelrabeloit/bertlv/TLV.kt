@@ -57,11 +57,12 @@ class TLV<V> private constructor(
         fun <V> fromTlvBuffer(
             bytes: ByteArray,
             handler: ValueHandler<V>,
+            offset: Int = 0,
         ): TLV<V> {
-            val tag = TLVTag.fromTlvBuffer(bytes)
-            val length = TLVLength.fromTlvBuffer(bytes, tag)
-            val value = TLVValue.fromTlvBuffer(bytes, tag, length, handler)
-            return TLV(bytes, tag, length, value)
+            val tag = TLVTag.fromTlvBuffer(bytes, offset)
+            val length = TLVLength.fromTlvBuffer(bytes, tag, offset)
+            val value = TLVValue.fromTlvBuffer(bytes, tag, length, handler, offset)
+            return TLV(assembleBytes(tag, length, value), tag, length, value)
         }
 
         fun <V> fromComponents(
@@ -90,28 +91,37 @@ class TLV<V> private constructor(
         fun fromTlvBuffer(
             bytes: ByteArray,
             specifications: List<Specification> = listOf(ASNOneSpecification),
+            offset: Int = 0,
         ): TLV<*> {
-            val tag = TLVTag.fromTlvBuffer(bytes, specifications::contextualize)
-            val length = TLVLength.fromTlvBuffer(bytes, tag)
+            val tag = TLVTag.fromTlvBuffer(bytes, offset, specifications::contextualize)
+            val length = TLVLength.fromTlvBuffer(bytes, tag, offset)
 
             val value = when {
                 tag.construction == TLVTag.Construction.CONSTRUCTED -> {
-                    TLVValue.fromTlvBuffer(bytes, tag, length, ValueHandler(ConstructedValueParser(specifications)))
+                    val handler = ValueHandler(ConstructedValueParser(specifications))
+                    TLVValue.fromTlvBuffer(bytes, tag, length, handler, offset)
                 }
 
                 else -> {
                     val specification = specifications.find { it.tagExists(tag) }
                     if (specification == null) {
-                        TLVValue.fromTlvBuffer(bytes, tag, length, ValueHandler(OctetStringValueParser()))
+                        TLVValue.fromTlvBuffer(bytes, tag, length, ValueHandler(OctetStringValueParser()), offset)
                     } else {
                         val handler = specification.handlerOfValue(tag)
-                        TLVValue.fromTlvBuffer(bytes, tag, length, handler)
+                        TLVValue.fromTlvBuffer(bytes, tag, length, handler, offset)
                     }
                 }
             }
 
-            return TLV(bytes, tag, length, value)
+            return TLV(assembleBytes(tag, length, value), tag, length, value)
         }
+
+        private fun assembleBytes(tag: TLVTag, length: TLVLength, value: TLVValue<*>): ByteArray =
+            ByteArray(tag.size + length.size + value.size).apply {
+                tag.bytes.copyInto(this, 0)
+                length.bytes.copyInto(this, tag.size)
+                value.bytes.copyInto(this, tag.size + length.size)
+            }
 
         fun fromBinaryTlvBuffer(bytes: ByteArray): TLV<ByteArray> =
             fromTlvBuffer(bytes, ValueHandler(OctetStringValueParser()))

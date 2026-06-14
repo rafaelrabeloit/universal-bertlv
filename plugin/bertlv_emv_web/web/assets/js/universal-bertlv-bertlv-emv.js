@@ -1,100 +1,124 @@
 (function (factory) {
   if (typeof define === 'function' && define.amd)
-    define(['exports', './kotlin-kotlin-stdlib.js', './universal-bitfield.js'], factory);
+    define(['exports', './kotlin-kotlin-stdlib.js', './Kotlin-DateTime-library-kotlinx-datetime.js', './universal-bitfield.js'], factory);
   else if (typeof exports === 'object')
-    factory(module.exports, require('./kotlin-kotlin-stdlib.js'), require('./universal-bitfield.js'));
+    factory(module.exports, require('./kotlin-kotlin-stdlib.js'), require('./Kotlin-DateTime-library-kotlinx-datetime.js'), require('./universal-bitfield.js'));
   else {
     if (typeof globalThis['kotlin-kotlin-stdlib'] === 'undefined') {
       throw new Error("Error loading module 'io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'. Its dependency 'kotlin-kotlin-stdlib' was not found. Please, check whether 'kotlin-kotlin-stdlib' is loaded prior to 'io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'.");
     }
+    if (typeof globalThis['Kotlin-DateTime-library-kotlinx-datetime'] === 'undefined') {
+      throw new Error("Error loading module 'io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'. Its dependency 'Kotlin-DateTime-library-kotlinx-datetime' was not found. Please, check whether 'Kotlin-DateTime-library-kotlinx-datetime' is loaded prior to 'io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'.");
+    }
     if (typeof globalThis['universal-bitfield'] === 'undefined') {
       throw new Error("Error loading module 'io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'. Its dependency 'universal-bitfield' was not found. Please, check whether 'universal-bitfield' is loaded prior to 'io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'.");
     }
-    globalThis['io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'] = factory(typeof globalThis['io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'] === 'undefined' ? {} : globalThis['io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'], globalThis['kotlin-kotlin-stdlib'], globalThis['universal-bitfield']);
+    globalThis['io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'] = factory(typeof globalThis['io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'] === 'undefined' ? {} : globalThis['io.github.rafaelrabeloit.universal-bertlv:bertlv-emv'], globalThis['kotlin-kotlin-stdlib'], globalThis['Kotlin-DateTime-library-kotlinx-datetime'], globalThis['universal-bitfield']);
   }
-}(function (_, kotlin_kotlin, kotlin_io_github_rafaelrabeloit_universal_bitfield) {
+}(function (_, kotlin_kotlin, kotlin_org_jetbrains_kotlinx_kotlinx_datetime, kotlin_io_github_rafaelrabeloit_universal_bitfield) {
   'use strict';
   //region block: imports
   var imul = Math.imul;
-  var protoOf = kotlin_kotlin.$_$.v1;
-  var THROW_CCE = kotlin_kotlin.$_$.r2;
-  var initMetadataForClass = kotlin_kotlin.$_$.m1;
-  var Exception = kotlin_kotlin.$_$.p2;
-  var Exception_init_$Init$ = kotlin_kotlin.$_$.h;
-  var captureStack = kotlin_kotlin.$_$.f1;
-  var initMetadataForCompanion = kotlin_kotlin.$_$.n1;
+  var protoOf = kotlin_kotlin.$_$.e2;
+  var THROW_CCE = kotlin_kotlin.$_$.i3;
+  var initMetadataForClass = kotlin_kotlin.$_$.s1;
+  var Exception = kotlin_kotlin.$_$.g3;
+  var Exception_init_$Init$ = kotlin_kotlin.$_$.i;
+  var captureStack = kotlin_kotlin.$_$.k1;
+  var arrayCopy = kotlin_kotlin.$_$.r;
+  var Unit_instance = kotlin_kotlin.$_$.o;
+  var listOf = kotlin_kotlin.$_$.z;
   var VOID = kotlin_kotlin.$_$.b;
+  var initMetadataForCompanion = kotlin_kotlin.$_$.t1;
   var ArrayList_init_$Create$ = kotlin_kotlin.$_$.d;
-  var copyOfRange = kotlin_kotlin.$_$.p;
-  var Unit_instance = kotlin_kotlin.$_$.m;
-  var toByte = kotlin_kotlin.$_$.w1;
-  var noWhenBranchMatchedException = kotlin_kotlin.$_$.t2;
-  var first = kotlin_kotlin.$_$.r;
-  var Enum = kotlin_kotlin.$_$.o2;
-  var enumEntries = kotlin_kotlin.$_$.d1;
-  var getStringHashCode = kotlin_kotlin.$_$.k1;
-  var toString = kotlin_kotlin.$_$.y1;
-  var toString_0 = kotlin_kotlin.$_$.u2;
-  var hashCode = kotlin_kotlin.$_$.l1;
-  var equals = kotlin_kotlin.$_$.j1;
-  var isByteArray = kotlin_kotlin.$_$.q1;
-  var checkIndexOverflow = kotlin_kotlin.$_$.n;
+  var toByte = kotlin_kotlin.$_$.f2;
+  var noWhenBranchMatchedException = kotlin_kotlin.$_$.m3;
+  var copyOfRange = kotlin_kotlin.$_$.u;
+  var Enum = kotlin_kotlin.$_$.f3;
+  var enumEntries = kotlin_kotlin.$_$.i1;
+  var getStringHashCode = kotlin_kotlin.$_$.q1;
+  var toString = kotlin_kotlin.$_$.h2;
+  var toString_0 = kotlin_kotlin.$_$.n3;
+  var hashCode = kotlin_kotlin.$_$.r1;
+  var equals = kotlin_kotlin.$_$.p1;
+  var initMetadataForObject = kotlin_kotlin.$_$.v1;
+  var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.k;
+  var _Char___init__impl__6a9atx = kotlin_kotlin.$_$.l;
+  var decodeToString = kotlin_kotlin.$_$.n2;
+  var charSequenceLength = kotlin_kotlin.$_$.n1;
+  var charSequenceGet = kotlin_kotlin.$_$.m1;
+  var isDigit = kotlin_kotlin.$_$.s2;
+  var toInt = kotlin_kotlin.$_$.z2;
+  var charArrayOf = kotlin_kotlin.$_$.l1;
+  var indexOfAny = kotlin_kotlin.$_$.r2;
+  var toDouble = kotlin_kotlin.$_$.x2;
+  var numberToInt = kotlin_kotlin.$_$.b2;
+  var contains = kotlin_kotlin.$_$.m2;
+  var endsWith = kotlin_kotlin.$_$.o2;
+  var LocalDateTime_init_$Create$ = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.a;
+  var Companion_getInstance = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.c;
+  var toInstant = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.h;
+  var Companion_getInstance_0 = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.b;
+  var minus = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.g;
+  var Instant = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.d;
+  var drop = kotlin_kotlin.$_$.v;
+  var Collection = kotlin_kotlin.$_$.p;
+  var isInterface = kotlin_kotlin.$_$.y1;
+  var Long = kotlin_kotlin.$_$.h3;
+  var toLong = kotlin_kotlin.$_$.g2;
+  var Unit = kotlin_kotlin.$_$.j3;
+  var joinToString = kotlin_kotlin.$_$.y;
+  var KtList = kotlin_kotlin.$_$.q;
+  var isByteArray = kotlin_kotlin.$_$.w1;
+  var Char = kotlin_kotlin.$_$.d3;
+  var setOf = kotlin_kotlin.$_$.c1;
+  var toString_1 = kotlin_kotlin.$_$.b3;
+  var UtcOffset = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.e;
+  var asTimeZone = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.f;
+  var checkIndexOverflow = kotlin_kotlin.$_$.s;
   var RfuField = kotlin_io_github_rafaelrabeloit_universal_bitfield.$_$.b;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.e;
-  var sorted = kotlin_kotlin.$_$.z;
-  var collectionSizeOrDefault = kotlin_kotlin.$_$.o;
+  var sorted = kotlin_kotlin.$_$.e1;
+  var collectionSizeOrDefault = kotlin_kotlin.$_$.t;
   var ArrayList_init_$Create$_0 = kotlin_kotlin.$_$.c;
-  var ensureNotNull = kotlin_kotlin.$_$.s2;
-  var initMetadataForInterface = kotlin_kotlin.$_$.o1;
+  var ensureNotNull = kotlin_kotlin.$_$.k3;
+  var initMetadataForInterface = kotlin_kotlin.$_$.u1;
   var StringBuilder_init_$Create$ = kotlin_kotlin.$_$.f;
-  var toString_1 = kotlin_kotlin.$_$.m2;
-  var _Char___init__impl__6a9atx = kotlin_kotlin.$_$.j;
-  var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.i;
-  var until = kotlin_kotlin.$_$.b2;
-  var reversed = kotlin_kotlin.$_$.w;
-  var emptyList = kotlin_kotlin.$_$.q;
-  var toMutableList = kotlin_kotlin.$_$.c1;
+  var until = kotlin_kotlin.$_$.k2;
+  var reversed = kotlin_kotlin.$_$.b1;
+  var emptyList = kotlin_kotlin.$_$.w;
+  var toMutableList = kotlin_kotlin.$_$.h1;
   var StringBuilder_init_$Create$_0 = kotlin_kotlin.$_$.g;
-  var initMetadataForObject = kotlin_kotlin.$_$.p1;
-  var joinToString = kotlin_kotlin.$_$.t;
-  var repeat = kotlin_kotlin.$_$.g2;
-  var listOf = kotlin_kotlin.$_$.v;
-  var numberRangeToNumber = kotlin_kotlin.$_$.t1;
+  var repeat = kotlin_kotlin.$_$.u2;
+  var listOf_0 = kotlin_kotlin.$_$.a1;
+  var numberRangeToNumber = kotlin_kotlin.$_$.z1;
   var bitfield = kotlin_io_github_rafaelrabeloit_universal_bitfield.$_$.a;
-  var chunked = kotlin_kotlin.$_$.c2;
-  var toInt = kotlin_kotlin.$_$.k2;
-  var Long = kotlin_kotlin.$_$.q2;
-  var toLong = kotlin_kotlin.$_$.x1;
-  var padStart = kotlin_kotlin.$_$.f2;
-  var sliceArray = kotlin_kotlin.$_$.y;
-  var joinToString_0 = kotlin_kotlin.$_$.s;
-  var takeLast = kotlin_kotlin.$_$.i2;
-  var charSequenceGet = kotlin_kotlin.$_$.g1;
-  var toString_2 = kotlin_kotlin.$_$.l;
-  var listOf_0 = kotlin_kotlin.$_$.u;
-  var compareTo = kotlin_kotlin.$_$.i1;
-  var ClosedRange = kotlin_kotlin.$_$.z1;
-  var isInterface = kotlin_kotlin.$_$.s1;
-  var contains = kotlin_kotlin.$_$.a2;
-  var Char__toInt_impl_vasixd = kotlin_kotlin.$_$.k;
-  var setOf = kotlin_kotlin.$_$.x;
-  var numberToChar = kotlin_kotlin.$_$.u1;
-  var toLong_0 = kotlin_kotlin.$_$.l2;
-  var equals_0 = kotlin_kotlin.$_$.d2;
-  var hexToByteArray = kotlin_kotlin.$_$.e2;
-  var replace = kotlin_kotlin.$_$.h2;
-  var toHexString = kotlin_kotlin.$_$.j2;
-  var isCharSequence = kotlin_kotlin.$_$.r1;
-  var trim = kotlin_kotlin.$_$.n2;
+  var chunked = kotlin_kotlin.$_$.l2;
+  var padStart = kotlin_kotlin.$_$.t2;
+  var sliceArray = kotlin_kotlin.$_$.d1;
+  var joinToString_0 = kotlin_kotlin.$_$.x;
+  var takeLast = kotlin_kotlin.$_$.w2;
+  var toString_2 = kotlin_kotlin.$_$.n;
+  var compareTo = kotlin_kotlin.$_$.o1;
+  var ClosedRange = kotlin_kotlin.$_$.i2;
+  var contains_0 = kotlin_kotlin.$_$.j2;
+  var Char__toInt_impl_vasixd = kotlin_kotlin.$_$.m;
+  var numberToChar = kotlin_kotlin.$_$.a2;
+  var toLong_0 = kotlin_kotlin.$_$.a3;
+  var equals_0 = kotlin_kotlin.$_$.p2;
+  var hexToByteArray = kotlin_kotlin.$_$.q2;
+  var replace = kotlin_kotlin.$_$.v2;
+  var toHexString = kotlin_kotlin.$_$.y2;
+  var isCharSequence = kotlin_kotlin.$_$.x1;
+  var trim = kotlin_kotlin.$_$.c3;
   var primitiveArrayConcat = kotlin_kotlin.$_$.a;
-  var charSequenceLength = kotlin_kotlin.$_$.h1;
   //endregion
   //region block: pre-declaration
   initMetadataForClass(ConstructedValueParser, 'ConstructedValueParser');
   initMetadataForClass(TagNotExistException, 'TagNotExistException', TagNotExistException, Exception);
   initMetadataForCompanion(Companion);
   function get_size() {
-    return this.vc().length;
+    return this.if().length;
   }
   initMetadataForInterface(Buffered, 'Buffered');
   initMetadataForClass(TLV, 'TLV', VOID, VOID, [Buffered]);
@@ -112,7 +136,30 @@
   initMetadataForClass(ValueHandler, 'ValueHandler');
   initMetadataForCompanion(Companion_3);
   initMetadataForClass(TLVValue, 'TLVValue', VOID, VOID, [Buffered]);
+  initMetadataForObject(ASNOneSpecification, 'ASNOneSpecification');
+  initMetadataForCompanion(Companion_4);
+  initMetadataForClass(UniversalTagDescription, 'UniversalTagDescription', VOID, Enum);
+  initMetadataForClass(BooleanValueParser, 'BooleanValueParser', BooleanValueParser);
+  initMetadataForCompanion(Companion_5);
+  initMetadataForClass(GeneralizedTimeValueParser, 'GeneralizedTimeValueParser', GeneralizedTimeValueParser);
+  initMetadataForCompanion(Companion_6);
+  initMetadataForClass(IA5StringValueParser, 'IA5StringValueParser', IA5StringValueParser);
+  initMetadataForCompanion(Companion_7);
+  initMetadataForClass(IntegerValueParser, 'IntegerValueParser', IntegerValueParser);
+  initMetadataForClass(NullValueParser, 'NullValueParser', NullValueParser);
+  initMetadataForClass(NumericStringValueParser, 'NumericStringValueParser', NumericStringValueParser);
+  initMetadataForCompanion(Companion_8);
+  initMetadataForClass(ObjectIdentifierValueParser, 'ObjectIdentifierValueParser', ObjectIdentifierValueParser);
   initMetadataForClass(OctetStringValueParser, 'OctetStringValueParser', OctetStringValueParser);
+  initMetadataForClass(PrintableStringValueParser, 'PrintableStringValueParser', PrintableStringValueParser);
+  initMetadataForCompanion(Companion_9);
+  initMetadataForClass(RealValueParser, 'RealValueParser', RealValueParser);
+  initMetadataForCompanion(Companion_10);
+  initMetadataForClass(DateTimeComponents, 'DateTimeComponents');
+  initMetadataForClass(TimezoneComponents, 'TimezoneComponents');
+  initMetadataForClass(UTCTimeValueParser, 'UTCTimeValueParser', UTCTimeValueParser);
+  initMetadataForClass(UTF8StringValueParser, 'UTF8StringValueParser', UTF8StringValueParser);
+  initMetadataForClass(VisibleStringValueParser, 'VisibleStringValueParser', VisibleStringValueParser);
   initMetadataForClass(BitFieldExplainer, 'BitFieldExplainer');
   initMetadataForClass(Explanation, 'Explanation', Explanation);
   initMetadataForClass(ExplainElement, 'ExplainElement');
@@ -121,10 +168,10 @@
   initMetadataForClass(TabGroup, 'TabGroup', VOID, ExplainElement);
   initMetadataForClass(Tab, 'Tab', VOID, ExplainElement);
   initMetadataForClass(Row, 'Row');
-  initMetadataForCompanion(Companion_4);
+  initMetadataForCompanion(Companion_11);
   initMetadataForClass(Table, 'Table', VOID, ExplainElement);
   initMetadataForObject(EmvSpecification, 'EmvSpecification');
-  initMetadataForCompanion(Companion_5);
+  initMetadataForCompanion(Companion_12);
   initMetadataForClass(EmvTagDescription, 'EmvTagDescription', VOID, Enum);
   initMetadataForClass(Format, 'Format', VOID, Enum);
   initMetadataForClass(Source, 'Source', VOID, Enum);
@@ -164,36 +211,36 @@
   initMetadataForObject(TransactionReferenceCurrencyCode, 'TransactionReferenceCurrencyCode', VOID, CurrencyCode);
   initMetadataForObject(TransactionStatusInformation, 'TransactionStatusInformation');
   initMetadataForObject(TransactionType, 'TransactionType');
-  initMetadataForCompanion(Companion_6);
-  initMetadataForCompanion(Companion_7);
-  initMetadataForCompanion(Companion_8);
+  initMetadataForCompanion(Companion_13);
+  initMetadataForCompanion(Companion_14);
+  initMetadataForCompanion(Companion_15);
   initMetadataForClass(AlphanumericSpecialValueParser, 'AlphanumericSpecialValueParser', AlphanumericSpecialValueParser);
   initMetadataForClass(AlphanumericValueParser, 'AlphanumericValueParser', AlphanumericValueParser);
   initMetadataForClass(BinaryValueParser, 'BinaryValueParser', BinaryValueParser);
-  initMetadataForCompanion(Companion_9);
+  initMetadataForCompanion(Companion_16);
   initMetadataForClass(NumericNumberValueParser, 'NumericNumberValueParser', NumericNumberValueParser);
-  initMetadataForCompanion(Companion_10);
+  initMetadataForCompanion(Companion_17);
   initMetadataForClass(NumericValueParser, 'NumericValueParser', NumericValueParser);
-  initMetadataForCompanion(Companion_11);
+  initMetadataForCompanion(Companion_18);
   initMetadataForClass(CountryCodeDescription, 'CountryCodeDescription', VOID, Enum);
-  initMetadataForCompanion(Companion_12);
+  initMetadataForCompanion(Companion_19);
   initMetadataForClass(CurrencyCodeDescription, 'CurrencyCodeDescription', VOID, Enum);
-  initMetadataForCompanion(Companion_13);
+  initMetadataForCompanion(Companion_20);
   initMetadataForClass(LanguageCodeDescription, 'LanguageCodeDescription', VOID, Enum);
-  initMetadataForCompanion(Companion_14);
+  initMetadataForCompanion(Companion_21);
   initMetadataForClass(MerchantCategoryCodeDescription, 'MerchantCategoryCodeDescription', VOID, Enum);
   //endregion
   function ConstructedValueParser(specifications) {
-    this.na_1 = specifications;
+    this.uc_1 = specifications;
   }
-  protoOf(ConstructedValueParser).oa = function (bytes) {
-    return Companion_instance_0.pa(bytes, this.na_1);
+  protoOf(ConstructedValueParser).vc = function (bytes) {
+    return Companion_instance_0.wc(bytes, this.uc_1);
   };
-  protoOf(ConstructedValueParser).qa = function (value) {
-    return toHexString_0(value.ra_1);
+  protoOf(ConstructedValueParser).xc = function (value) {
+    return toHexString_0(value.yc_1);
   };
-  protoOf(ConstructedValueParser).ta = function (value) {
-    return this.qa(value instanceof TLVList ? value : THROW_CCE());
+  protoOf(ConstructedValueParser).ad = function (value) {
+    return this.xc(value instanceof TLVList ? value : THROW_CCE());
   };
   function TagNotExistException() {
     Exception_init_$Init$(this);
@@ -204,11 +251,11 @@
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = _this__u8e3s4.m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = _this__u8e3s4.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.bertlv.contextualize.<anonymous>' call
-        if (element.ua(tlvTag)) {
+        if (element.bd(tlvTag)) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -216,8 +263,44 @@
       tmp$ret$1 = null;
     }
     var tmp0_safe_receiver = tmp$ret$1;
-    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.va(tlvTag);
+    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.cd(tlvTag);
     return tmp1_elvis_lhs == null ? new Context() : tmp1_elvis_lhs;
+  }
+  function assembleBytes($this, tag, length, value) {
+    // Inline function 'kotlin.apply' call
+    var this_0 = new Int8Array((tag.s() + length.s() | 0) + value.s() | 0);
+    // Inline function 'kotlin.contracts.contract' call
+    // Inline function 'io.github.rafaelrabeloit.bertlv.Companion.assembleBytes.<anonymous>' call
+    // Inline function 'kotlin.collections.copyInto' call
+    var this_1 = tag.dd_1;
+    var endIndex = this_1.length;
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp = this_1;
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    arrayCopy(tmp, this_0, 0, 0, endIndex);
+    // Inline function 'kotlin.collections.copyInto' call
+    var this_2 = length.kd_1;
+    var destinationOffset = tag.s();
+    var endIndex_0 = this_2.length;
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp_0 = this_2;
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    arrayCopy(tmp_0, this_0, destinationOffset, 0, endIndex_0);
+    // Inline function 'kotlin.collections.copyInto' call
+    var this_3 = value.nd_1;
+    var destinationOffset_0 = tag.s() + length.s() | 0;
+    var endIndex_1 = this_3.length;
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp_1 = this_3;
+    // Inline function 'kotlin.js.unsafeCast' call
+    // Inline function 'kotlin.js.asDynamic' call
+    arrayCopy(tmp_1, this_0, destinationOffset_0, 0, endIndex_1);
+    return this_0;
   }
   function contextualize$ref($boundThis) {
     var l = function (p0) {
@@ -228,23 +311,24 @@
   }
   function Companion() {
   }
-  protoOf(Companion).wa = function (bytes, specifications) {
+  protoOf(Companion).pd = function (bytes, specifications, offset) {
     var tmp = Companion_instance_2;
-    var tag = tmp.sb(bytes, contextualize$ref(specifications));
-    var length = Companion_instance_1.hc(bytes, tag);
+    var tag = tmp.le(bytes, offset, contextualize$ref(specifications));
+    var length = Companion_instance_1.af(bytes, tag, offset);
     var tmp_0;
-    if (tag.nc_1.equals(Construction_CONSTRUCTED_getInstance())) {
-      tmp_0 = Companion_instance_3.jc(bytes, tag, length, new ValueHandler(new ConstructedValueParser(specifications)));
+    if (tag.gd_1.equals(Construction_CONSTRUCTED_getInstance())) {
+      var handler = new ValueHandler(new ConstructedValueParser(specifications));
+      tmp_0 = Companion_instance_3.cf(bytes, tag, length, handler, offset);
     } else {
       // Inline function 'kotlin.collections.find' call
       var tmp$ret$1;
       $l$block: {
         // Inline function 'kotlin.collections.firstOrNull' call
-        var tmp0_iterator = specifications.m();
-        while (tmp0_iterator.n()) {
-          var element = tmp0_iterator.o();
+        var tmp0_iterator = specifications.p();
+        while (tmp0_iterator.q()) {
+          var element = tmp0_iterator.r();
           // Inline function 'io.github.rafaelrabeloit.bertlv.Companion.fromTlvBuffer.<anonymous>' call
-          if (element.ua(tag)) {
+          if (element.bd(tag)) {
             tmp$ret$1 = element;
             break $l$block;
           }
@@ -254,62 +338,67 @@
       var specification = tmp$ret$1;
       var tmp_1;
       if (specification == null) {
-        tmp_1 = Companion_instance_3.jc(bytes, tag, length, new ValueHandler(new OctetStringValueParser()));
+        tmp_1 = Companion_instance_3.cf(bytes, tag, length, new ValueHandler(new OctetStringValueParser()), offset);
       } else {
-        var handler = specification.ic(tag);
-        tmp_1 = Companion_instance_3.jc(bytes, tag, length, handler);
+        var handler_0 = specification.bf(tag);
+        tmp_1 = Companion_instance_3.cf(bytes, tag, length, handler_0, offset);
       }
       tmp_0 = tmp_1;
     }
     var value = tmp_0;
-    return new TLV(bytes, tag, length, value);
+    return new TLV(assembleBytes(this, tag, length, value), tag, length, value);
+  };
+  protoOf(Companion).df = function (bytes, specifications, offset, $super) {
+    specifications = specifications === VOID ? listOf(ASNOneSpecification_instance) : specifications;
+    offset = offset === VOID ? 0 : offset;
+    return $super === VOID ? this.pd(bytes, specifications, offset) : $super.pd.call(this, bytes, specifications, offset);
   };
   var Companion_instance;
-  function Companion_getInstance() {
+  function Companion_getInstance_1() {
     return Companion_instance;
   }
   function TLV(bytes, tlvTag, tlvLength, tlvValue) {
-    this.rc_1 = bytes;
-    this.sc_1 = tlvTag;
-    this.tc_1 = tlvLength;
-    this.uc_1 = tlvValue;
+    this.ef_1 = bytes;
+    this.ff_1 = tlvTag;
+    this.gf_1 = tlvLength;
+    this.hf_1 = tlvValue;
   }
-  protoOf(TLV).vc = function () {
-    return this.rc_1;
+  protoOf(TLV).if = function () {
+    return this.ef_1;
   };
   protoOf(TLV).a = function () {
-    return this.tc_1.yc_1;
+    return this.gf_1.md_1;
   };
-  protoOf(TLV).d1 = function () {
-    return this.uc_1.d1();
+  protoOf(TLV).q1 = function () {
+    return this.hf_1.q1();
   };
   function Companion_0() {
   }
-  protoOf(Companion_0).pa = function (bytes, specifications) {
+  protoOf(Companion_0).wc = function (bytes, specifications) {
     // Inline function 'kotlin.collections.mutableListOf' call
     var result = ArrayList_init_$Create$();
     var offset = 0;
     while (offset < bytes.length) {
-      var tlv = Companion_instance.wa(copyOfRange(bytes, offset, bytes.length), specifications);
+      var tlv = Companion_instance.pd(bytes, specifications, offset);
       result.k(tlv);
-      offset = offset + ((tlv.sc_1.p() + tlv.tc_1.p() | 0) + tlv.uc_1.p() | 0) | 0;
+      offset = offset + ((tlv.ff_1.s() + tlv.gf_1.s() | 0) + tlv.hf_1.s() | 0) | 0;
     }
     return new TLVList(bytes, result);
   };
   var Companion_instance_0;
-  function Companion_getInstance_0() {
+  function Companion_getInstance_2() {
     return Companion_instance_0;
   }
   function TLVList(bytes, tlvs) {
-    this.ra_1 = bytes;
-    this.sa_1 = tlvs;
+    this.yc_1 = bytes;
+    this.zc_1 = tlvs;
   }
-  protoOf(TLVList).vc = function () {
-    return this.ra_1;
+  protoOf(TLVList).if = function () {
+    return this.yc_1;
   };
   function createLengthBytes($this, length, form) {
     var tmp;
-    switch (form.j1_1) {
+    switch (form.w1_1) {
       case 0:
         // Inline function 'kotlin.byteArrayOf' call
 
@@ -349,20 +438,17 @@
     }
     return count;
   }
-  function extractNoTagBytes($this, bytes, tag) {
-    return copyOfRange(bytes, tag.p(), bytes.length);
+  function determineForm($this, lengthByte) {
+    return matches(lengthByte, 128) ? Form_LONG_getInstance() : Form_SHORT_getInstance();
   }
-  function determineForm($this, noTagBytes) {
-    return matches(first(noTagBytes), 128) ? Form_LONG_getInstance() : Form_SHORT_getInstance();
-  }
-  function calculateLengthSize($this, form, noTagBytes) {
+  function calculateLengthSize($this, form, bytes, lengthOffset) {
     var tmp;
-    switch (form.j1_1) {
+    switch (form.w1_1) {
       case 0:
         tmp = 1;
         break;
       case 1:
-        var subsequentBytes = first(noTagBytes) & 127;
+        var subsequentBytes = bytes[lengthOffset] & 127;
         tmp = subsequentBytes + 1 | 0;
         break;
       default:
@@ -371,19 +457,17 @@
     }
     return tmp;
   }
-  function extractLengthBytes($this, noTagBytes, lengthSize) {
-    return copyOfRange(noTagBytes, 0, lengthSize);
-  }
-  function calculateLength($this, bytes, tag, form, lengthSize) {
+  function calculateLength($this, bytes, offset, tag, form, lengthSize) {
+    var lengthOffset = offset + tag.s() | 0;
     var tmp;
-    switch (form.j1_1) {
+    switch (form.w1_1) {
       case 0:
-        tmp = bytes[tag.p()] & 127;
+        tmp = bytes[lengthOffset] & 127;
         break;
       case 1:
         var result = 0;
-        var inductionVariable = tag.p() + 1 | 0;
-        var last = tag.p() + lengthSize | 0;
+        var inductionVariable = lengthOffset + 1 | 0;
+        var last = lengthOffset + lengthSize | 0;
         if (inductionVariable < last)
           do {
             var i = inductionVariable;
@@ -410,42 +494,42 @@
     Form_LONG_instance = new Form('LONG', 1, 'Long Form', 'Length value requires multiple bytes to represent');
   }
   function Companion_1() {
-    this.tb_1 = 0;
-    this.ub_1 = 0;
-    this.vb_1 = 1;
-    this.wb_1 = 1;
-    this.xb_1 = 8;
-    this.yb_1 = 0;
-    this.zb_1 = 8;
-    this.ac_1 = 0;
-    this.bc_1 = 1;
-    this.cc_1 = 3;
-    this.dc_1 = 2;
-    this.ec_1 = 1;
-    this.fc_1 = 2;
-    this.gc_1 = 1;
+    this.me_1 = 0;
+    this.ne_1 = 0;
+    this.oe_1 = 1;
+    this.pe_1 = 1;
+    this.qe_1 = 8;
+    this.re_1 = 0;
+    this.se_1 = 8;
+    this.te_1 = 0;
+    this.ue_1 = 1;
+    this.ve_1 = 3;
+    this.we_1 = 2;
+    this.xe_1 = 1;
+    this.ye_1 = 2;
+    this.ze_1 = 1;
   }
-  protoOf(Companion_1).hc = function (bytes, tag) {
-    var noTagBytes = extractNoTagBytes(this, bytes, tag);
-    var form = determineForm(this, noTagBytes);
-    var lengthSize = calculateLengthSize(this, form, noTagBytes);
-    var lengthBytes = extractLengthBytes(this, noTagBytes, lengthSize);
-    var length = calculateLength(this, bytes, tag, form, lengthSize);
+  protoOf(Companion_1).af = function (bytes, tag, offset) {
+    var lengthOffset = offset + tag.s() | 0;
+    var form = determineForm(this, bytes[lengthOffset]);
+    var lengthSize = calculateLengthSize(this, form, bytes, lengthOffset);
+    var lengthBytes = copyOfRange(bytes, lengthOffset, lengthOffset + lengthSize | 0);
+    var length = calculateLength(this, bytes, offset, tag, form, lengthSize);
     return new TLVLength(lengthBytes, form, length);
   };
-  protoOf(Companion_1).bd = function (length) {
+  protoOf(Companion_1).jf = function (length) {
     var form = determineFormFromLength(this, length);
     var bytes = createLengthBytes(this, length, form);
     return new TLVLength(bytes, form, length);
   };
   var Companion_instance_1;
-  function Companion_getInstance_1() {
+  function Companion_getInstance_3() {
     return Companion_instance_1;
   }
   function Form(name, ordinal, info, description) {
     Enum.call(this, name, ordinal);
-    this.ed_1 = info;
-    this.fd_1 = description;
+    this.mf_1 = info;
+    this.nf_1 = description;
   }
   function Form_SHORT_getInstance() {
     Form_initEntries();
@@ -456,24 +540,24 @@
     return Form_LONG_instance;
   }
   function TLVLength(bytes, form, length) {
-    this.wc_1 = bytes;
-    this.xc_1 = form;
-    this.yc_1 = length;
+    this.kd_1 = bytes;
+    this.ld_1 = form;
+    this.md_1 = length;
   }
-  protoOf(TLVLength).vc = function () {
-    return this.wc_1;
+  protoOf(TLVLength).if = function () {
+    return this.kd_1;
   };
-  function calculateTagLength($this, bytes, form) {
+  function calculateTagLength($this, bytes, offset, form) {
     var tagLength = 1;
     if (form.equals(Form_LONG_getInstance_0())) {
       tagLength = tagLength + 1 | 0;
       var inductionVariable = 1;
-      var last = bytes.length;
+      var last = bytes.length - offset | 0;
       if (inductionVariable < last)
         $l$loop: do {
           var n = inductionVariable;
           inductionVariable = inductionVariable + 1 | 0;
-          var byte = bytes[n];
+          var byte = bytes[offset + n | 0];
           if (matches(byte, 128)) {
             tagLength = tagLength + 1 | 0;
           } else {
@@ -489,11 +573,11 @@
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = get_entries().m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = get_entries().p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.bertlv.components.Companion.determineClassification.<anonymous>' call
-        if (classBits === element.id_1) {
+        if (classBits === element.qf_1) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -508,11 +592,11 @@
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = get_entries_0().m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = get_entries_0().p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.bertlv.components.Companion.determineConstruction.<anonymous>' call
-        if (constructionBit === element.nd_1) {
+        if (constructionBit === element.vf_1) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -531,23 +615,21 @@
     }
     return tmp;
   }
-  function determineType($this, bytes, tagHeader, tagLength) {
+  function determineType($this, bytes, offset, tagHeader, tagLength) {
     var tmp;
     if (tagLength === 1) {
       tmp = bits(tagHeader, 1, 5);
     } else {
-      // Inline function 'kotlin.collections.fold' call
-      var accumulator = 0;
-      var indexedObject = copyOfRange(bytes, 1, tagLength);
-      var inductionVariable = 0;
-      var last = indexedObject.length;
-      while (inductionVariable < last) {
-        var element = indexedObject[inductionVariable];
-        inductionVariable = inductionVariable + 1 | 0;
-        // Inline function 'io.github.rafaelrabeloit.bertlv.components.Companion.determineType.<anonymous>' call
-        accumulator = accumulator << 7 | bits(element, 1, 7);
-      }
-      tmp = accumulator;
+      var type = 0;
+      var inductionVariable = 1;
+      if (inductionVariable < tagLength)
+        do {
+          var i = inductionVariable;
+          inductionVariable = inductionVariable + 1 | 0;
+          type = type << 7 | bits(bytes[offset + i | 0], 1, 7);
+        }
+         while (inductionVariable < tagLength);
+      tmp = type;
     }
     return tmp;
   }
@@ -609,40 +691,41 @@
     Form_LONG_instance_0 = new Form_0('LONG', 1, 'Long Form', "Tag's 'type' is too large for the 5-bit tag field, it has to be encoded in further octets");
   }
   function Companion_2() {
-    this.xa_1 = 0;
-    this.ya_1 = 0;
-    this.za_1 = 2;
-    this.ab_1 = 2;
-    this.bb_1 = 3;
-    this.cb_1 = 3;
-    this.db_1 = 8;
-    this.eb_1 = 0;
-    this.fb_1 = 1;
-    this.gb_1 = 7;
-    this.hb_1 = 1;
-    this.ib_1 = 1;
-    this.jb_1 = 8;
-    this.kb_1 = 4;
-    this.lb_1 = 3;
-    this.mb_1 = 1;
-    this.nb_1 = 1;
-    this.ob_1 = 2;
-    this.pb_1 = 3;
-    this.qb_1 = 1;
-    this.rb_1 = 2;
+    this.qd_1 = 0;
+    this.rd_1 = 0;
+    this.sd_1 = 2;
+    this.td_1 = 2;
+    this.ud_1 = 3;
+    this.vd_1 = 3;
+    this.wd_1 = 8;
+    this.xd_1 = 0;
+    this.yd_1 = 1;
+    this.zd_1 = 7;
+    this.ae_1 = 1;
+    this.be_1 = 1;
+    this.ce_1 = 8;
+    this.de_1 = 4;
+    this.ee_1 = 3;
+    this.fe_1 = 1;
+    this.ge_1 = 1;
+    this.he_1 = 2;
+    this.ie_1 = 3;
+    this.je_1 = 1;
+    this.ke_1 = 2;
   }
-  protoOf(Companion_2).sb = function (bytes, contextualize) {
-    var tagHeader = first(bytes);
+  protoOf(Companion_2).le = function (bytes, offset, contextualize) {
+    var tagHeader = bytes[offset];
     var form = determineForm_0(this, tagHeader);
-    var tagLength = calculateTagLength(this, bytes, form);
-    var tagBytes = copyOfRange(bytes, 0, tagLength);
+    var tagLength = calculateTagLength(this, bytes, offset, form);
+    var tagBytes = copyOfRange(bytes, offset, offset + tagLength | 0);
     var tag = toInt_0(tagBytes);
     var classification = determineClassification(this, tagHeader);
     var construction = determineConstruction(this, tagHeader);
-    var type = determineType(this, bytes, tagHeader, tagLength);
+    var type = determineType(this, bytes, offset, tagHeader, tagLength);
     return new TLVTag(tagBytes, tag, classification, construction, form, type, contextualize);
   };
-  protoOf(Companion_2).qd = function (bytes, contextualize, $super) {
+  protoOf(Companion_2).yf = function (bytes, offset, contextualize, $super) {
+    offset = offset === VOID ? 0 : offset;
     var tmp;
     if (contextualize === VOID) {
       tmp = TLVTag$Companion$fromTlvBuffer$lambda;
@@ -650,41 +733,41 @@
       tmp = contextualize;
     }
     contextualize = tmp;
-    return $super === VOID ? this.sb(bytes, contextualize) : $super.sb.call(this, bytes, contextualize);
+    return $super === VOID ? this.le(bytes, offset, contextualize) : $super.le.call(this, bytes, offset, contextualize);
   };
   var Companion_instance_2;
-  function Companion_getInstance_2() {
+  function Companion_getInstance_4() {
     return Companion_instance_2;
   }
   function Classification(name, ordinal, value, info, description) {
     Enum.call(this, name, ordinal);
-    this.id_1 = value;
-    this.jd_1 = info;
-    this.kd_1 = description;
+    this.qf_1 = value;
+    this.rf_1 = info;
+    this.sf_1 = description;
   }
   function Construction(name, ordinal, value, info, description) {
     Enum.call(this, name, ordinal);
-    this.nd_1 = value;
-    this.od_1 = info;
-    this.pd_1 = description;
+    this.vf_1 = value;
+    this.wf_1 = info;
+    this.xf_1 = description;
   }
   function Form_0(name, ordinal, info, description) {
     Enum.call(this, name, ordinal);
-    this.td_1 = info;
-    this.ud_1 = description;
+    this.bg_1 = info;
+    this.cg_1 = description;
   }
   function Context(info, description) {
     info = info === VOID ? null : info;
     description = description === VOID ? 'Unknown tag' : description;
-    this.vd_1 = info;
-    this.wd_1 = description;
+    this.dg_1 = info;
+    this.eg_1 = description;
   }
   protoOf(Context).toString = function () {
-    return 'Context(info=' + this.vd_1 + ', description=' + this.wd_1 + ')';
+    return 'Context(info=' + this.dg_1 + ', description=' + this.eg_1 + ')';
   };
   protoOf(Context).hashCode = function () {
-    var result = this.vd_1 == null ? 0 : getStringHashCode(this.vd_1);
-    result = imul(result, 31) + getStringHashCode(this.wd_1) | 0;
+    var result = this.dg_1 == null ? 0 : getStringHashCode(this.dg_1);
+    result = imul(result, 31) + getStringHashCode(this.eg_1) | 0;
     return result;
   };
   protoOf(Context).equals = function (other) {
@@ -693,9 +776,9 @@
     if (!(other instanceof Context))
       return false;
     var tmp0_other_with_cast = other instanceof Context ? other : THROW_CCE();
-    if (!(this.vd_1 == tmp0_other_with_cast.vd_1))
+    if (!(this.dg_1 == tmp0_other_with_cast.dg_1))
       return false;
-    if (!(this.wd_1 === tmp0_other_with_cast.wd_1))
+    if (!(this.eg_1 === tmp0_other_with_cast.eg_1))
       return false;
     return true;
   };
@@ -746,28 +829,28 @@
       tmp = contextualize;
     }
     contextualize = tmp;
-    this.kc_1 = bytes;
-    this.lc_1 = tag;
-    this.mc_1 = classification;
-    this.nc_1 = construction;
-    this.oc_1 = form;
-    this.pc_1 = type;
-    this.qc_1 = contextualize;
+    this.dd_1 = bytes;
+    this.ed_1 = tag;
+    this.fd_1 = classification;
+    this.gd_1 = construction;
+    this.hd_1 = form;
+    this.id_1 = type;
+    this.jd_1 = contextualize;
   }
-  protoOf(TLVTag).vc = function () {
-    return this.kc_1;
+  protoOf(TLVTag).if = function () {
+    return this.dd_1;
   };
   function ValueHandler(parser, explainer) {
     explainer = explainer === VOID ? null : explainer;
-    this.xd_1 = parser;
-    this.yd_1 = explainer;
+    this.fg_1 = parser;
+    this.gg_1 = explainer;
   }
   protoOf(ValueHandler).toString = function () {
-    return 'ValueHandler(parser=' + toString(this.xd_1) + ', explainer=' + toString_0(this.yd_1) + ')';
+    return 'ValueHandler(parser=' + toString(this.fg_1) + ', explainer=' + toString_0(this.gg_1) + ')';
   };
   protoOf(ValueHandler).hashCode = function () {
-    var result = hashCode(this.xd_1);
-    result = imul(result, 31) + (this.yd_1 == null ? 0 : hashCode(this.yd_1)) | 0;
+    var result = hashCode(this.fg_1);
+    result = imul(result, 31) + (this.gg_1 == null ? 0 : hashCode(this.gg_1)) | 0;
     return result;
   };
   protoOf(ValueHandler).equals = function (other) {
@@ -776,99 +859,1422 @@
     if (!(other instanceof ValueHandler))
       return false;
     var tmp0_other_with_cast = other instanceof ValueHandler ? other : THROW_CCE();
-    if (!equals(this.xd_1, tmp0_other_with_cast.xd_1))
+    if (!equals(this.fg_1, tmp0_other_with_cast.fg_1))
       return false;
-    if (!equals(this.yd_1, tmp0_other_with_cast.yd_1))
+    if (!equals(this.gg_1, tmp0_other_with_cast.gg_1))
       return false;
     return true;
   };
   function Companion_3() {
   }
-  protoOf(Companion_3).jc = function (bytes, tag, length, handler) {
-    var valueStart = tag.p() + length.p() | 0;
-    var valueBytes = copyOfRange(bytes, valueStart, valueStart + length.yc_1 | 0);
+  protoOf(Companion_3).cf = function (bytes, tag, length, handler, offset) {
+    var valueStart = (offset + tag.s() | 0) + length.s() | 0;
+    var valueBytes = copyOfRange(bytes, valueStart, valueStart + length.md_1 | 0);
     return new TLVValue(valueBytes, handler);
   };
   var Companion_instance_3;
-  function Companion_getInstance_3() {
+  function Companion_getInstance_5() {
     return Companion_instance_3;
   }
   function TLVValue(bytes, handler) {
-    this.zc_1 = bytes;
-    this.ad_1 = handler;
+    this.nd_1 = bytes;
+    this.od_1 = handler;
   }
-  protoOf(TLVValue).vc = function () {
-    return this.zc_1;
+  protoOf(TLVValue).if = function () {
+    return this.nd_1;
   };
-  protoOf(TLVValue).d1 = function () {
-    return this.ad_1.xd_1.oa(this.zc_1);
+  protoOf(TLVValue).q1 = function () {
+    return this.od_1.fg_1.vc(this.nd_1);
   };
-  protoOf(TLVValue).zd = function (lineSeparator) {
+  protoOf(TLVValue).hg = function (lineSeparator) {
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(this.ad_1.xd_1.ta(this.d1())));
-    var tmp0_safe_receiver = this.ad_1.yd_1;
-    var tmp1_safe_receiver = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.de(this.d1(), lineSeparator);
+    explanation.kg(new Line(this.od_1.fg_1.ad(this.q1())));
+    var tmp0_safe_receiver = this.od_1.gg_1;
+    var tmp1_safe_receiver = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.lg(this.q1(), lineSeparator);
     if (tmp1_safe_receiver == null)
       null;
     else {
       // Inline function 'kotlin.let' call
       // Inline function 'kotlin.contracts.contract' call
-      explanation.ce(LineSeparator_getInstance());
-      explanation.ce(LineSeparator_getInstance());
-      var _iterator__ex2g4s = tmp1_safe_receiver.m();
-      while (_iterator__ex2g4s.n()) {
-        var element = _iterator__ex2g4s.o();
-        explanation.ce(element);
+      explanation.kg(LineSeparator_getInstance());
+      explanation.kg(LineSeparator_getInstance());
+      var _iterator__ex2g4s = tmp1_safe_receiver.p();
+      while (_iterator__ex2g4s.q()) {
+        var element = _iterator__ex2g4s.r();
+        explanation.kg(element);
       }
     }
     return explanation;
   };
+  function createParserForTag($this, tagDescription) {
+    switch (tagDescription.w1_1) {
+      case 1:
+        return new BooleanValueParser();
+      case 2:
+        return new IntegerValueParser();
+      case 5:
+        return new NullValueParser();
+      case 6:
+        return new ObjectIdentifierValueParser();
+      case 9:
+        return new RealValueParser();
+      case 12:
+        return new UTF8StringValueParser();
+      case 18:
+        return new NumericStringValueParser();
+      case 19:
+        return new PrintableStringValueParser();
+      case 22:
+        return new IA5StringValueParser();
+      case 23:
+        return new UTCTimeValueParser();
+      case 24:
+        return new GeneralizedTimeValueParser();
+      case 26:
+        return new VisibleStringValueParser();
+      case 4:
+        return new OctetStringValueParser();
+      default:
+        return new OctetStringValueParser();
+    }
+  }
+  function ASNOneSpecification() {
+  }
+  protoOf(ASNOneSpecification).bd = function (tlvTag) {
+    if (!tlvTag.fd_1.equals(Classification_UNIVERSAL_getInstance())) {
+      return false;
+    }
+    return !(Companion_instance_4.mg(tlvTag.id_1) == null);
+  };
+  protoOf(ASNOneSpecification).cd = function (tlvTag) {
+    if (!tlvTag.fd_1.equals(Classification_UNIVERSAL_getInstance())) {
+      throw new TagNotExistException();
+    }
+    var tagDescription = Companion_instance_4.mg(tlvTag.id_1);
+    var tmp;
+    if (tagDescription == null) {
+      tmp = null;
+    } else {
+      // Inline function 'kotlin.let' call
+      // Inline function 'kotlin.contracts.contract' call
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.ASNOneSpecification.contextForTag.<anonymous>' call
+      tmp = new Context(tagDescription.qg_1, tagDescription.rg_1);
+    }
+    var tmp1_elvis_lhs = tmp;
+    var tmp_0;
+    if (tmp1_elvis_lhs == null) {
+      throw new TagNotExistException();
+    } else {
+      tmp_0 = tmp1_elvis_lhs;
+    }
+    return tmp_0;
+  };
+  protoOf(ASNOneSpecification).bf = function (tlvTag) {
+    if (!tlvTag.fd_1.equals(Classification_UNIVERSAL_getInstance())) {
+      throw new TagNotExistException();
+    }
+    var tmp0_elvis_lhs = Companion_instance_4.mg(tlvTag.id_1);
+    var tmp;
+    if (tmp0_elvis_lhs == null) {
+      throw new TagNotExistException();
+    } else {
+      tmp = tmp0_elvis_lhs;
+    }
+    var tagDescription = tmp;
+    var parser = createParserForTag(this, tagDescription);
+    return new ValueHandler(parser);
+  };
+  var ASNOneSpecification_instance;
+  function ASNOneSpecification_getInstance() {
+    return ASNOneSpecification_instance;
+  }
+  var UniversalTagDescription_EOC_instance;
+  var UniversalTagDescription_BOOLEAN_instance;
+  var UniversalTagDescription_INTEGER_instance;
+  var UniversalTagDescription_BIT_STRING_instance;
+  var UniversalTagDescription_OCTET_STRING_instance;
+  var UniversalTagDescription_NULL_instance;
+  var UniversalTagDescription_OBJECT_IDENTIFIER_instance;
+  var UniversalTagDescription_OBJECT_DESCRIPTOR_instance;
+  var UniversalTagDescription_EXTERNAL_instance;
+  var UniversalTagDescription_REAL_instance;
+  var UniversalTagDescription_ENUMERATED_instance;
+  var UniversalTagDescription_EMBEDDED_PDV_instance;
+  var UniversalTagDescription_UTF8_STRING_instance;
+  var UniversalTagDescription_RELATIVE_OID_instance;
+  var UniversalTagDescription_TIME_instance;
+  var UniversalTagDescription_DATE_O_instance;
+  var UniversalTagDescription_SEQUENCE_instance;
+  var UniversalTagDescription_SET_instance;
+  var UniversalTagDescription_NUMERIC_STRING_instance;
+  var UniversalTagDescription_PRINTABLE_STRING_instance;
+  var UniversalTagDescription_T61_STRING_instance;
+  var UniversalTagDescription_VIDEOTEX_STRING_instance;
+  var UniversalTagDescription_IA5_STRING_instance;
+  var UniversalTagDescription_UTC_TIME_instance;
+  var UniversalTagDescription_GENERALIZED_TIME_instance;
+  var UniversalTagDescription_GRAPHIC_STRING_instance;
+  var UniversalTagDescription_VISIBLE_STRING_instance;
+  var UniversalTagDescription_GENERAL_STRING_instance;
+  var UniversalTagDescription_UNIVERSAL_STRING_instance;
+  var UniversalTagDescription_CHARACTER_STRING_instance;
+  var UniversalTagDescription_BMP_STRING_instance;
+  var UniversalTagDescription_DATE_instance;
+  var UniversalTagDescription_TIME_OF_DAY_instance;
+  var UniversalTagDescription_DATE_TIME_instance;
+  var UniversalTagDescription_DURATION_instance;
+  function Companion_4() {
+  }
+  protoOf(Companion_4).mg = function (type) {
+    // Inline function 'kotlin.collections.find' call
+    var this_0 = get_entries_1();
+    var tmp$ret$1;
+    $l$block: {
+      // Inline function 'kotlin.collections.firstOrNull' call
+      var tmp0_iterator = this_0.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.Companion.findByType.<anonymous>' call
+        if (element.pg_1 === type) {
+          tmp$ret$1 = element;
+          break $l$block;
+        }
+      }
+      tmp$ret$1 = null;
+    }
+    return tmp$ret$1;
+  };
+  var Companion_instance_4;
+  function Companion_getInstance_6() {
+    return Companion_instance_4;
+  }
+  function values_1() {
+    return [UniversalTagDescription_EOC_getInstance(), UniversalTagDescription_BOOLEAN_getInstance(), UniversalTagDescription_INTEGER_getInstance(), UniversalTagDescription_BIT_STRING_getInstance(), UniversalTagDescription_OCTET_STRING_getInstance(), UniversalTagDescription_NULL_getInstance(), UniversalTagDescription_OBJECT_IDENTIFIER_getInstance(), UniversalTagDescription_OBJECT_DESCRIPTOR_getInstance(), UniversalTagDescription_EXTERNAL_getInstance(), UniversalTagDescription_REAL_getInstance(), UniversalTagDescription_ENUMERATED_getInstance(), UniversalTagDescription_EMBEDDED_PDV_getInstance(), UniversalTagDescription_UTF8_STRING_getInstance(), UniversalTagDescription_RELATIVE_OID_getInstance(), UniversalTagDescription_TIME_getInstance(), UniversalTagDescription_DATE_O_getInstance(), UniversalTagDescription_SEQUENCE_getInstance(), UniversalTagDescription_SET_getInstance(), UniversalTagDescription_NUMERIC_STRING_getInstance(), UniversalTagDescription_PRINTABLE_STRING_getInstance(), UniversalTagDescription_T61_STRING_getInstance(), UniversalTagDescription_VIDEOTEX_STRING_getInstance(), UniversalTagDescription_IA5_STRING_getInstance(), UniversalTagDescription_UTC_TIME_getInstance(), UniversalTagDescription_GENERALIZED_TIME_getInstance(), UniversalTagDescription_GRAPHIC_STRING_getInstance(), UniversalTagDescription_VISIBLE_STRING_getInstance(), UniversalTagDescription_GENERAL_STRING_getInstance(), UniversalTagDescription_UNIVERSAL_STRING_getInstance(), UniversalTagDescription_CHARACTER_STRING_getInstance(), UniversalTagDescription_BMP_STRING_getInstance(), UniversalTagDescription_DATE_getInstance(), UniversalTagDescription_TIME_OF_DAY_getInstance(), UniversalTagDescription_DATE_TIME_getInstance(), UniversalTagDescription_DURATION_getInstance()];
+  }
+  function get_entries_1() {
+    if ($ENTRIES_1 == null)
+      $ENTRIES_1 = enumEntries(values_1());
+    return $ENTRIES_1;
+  }
+  var UniversalTagDescription_entriesInitialized;
+  function UniversalTagDescription_initEntries() {
+    if (UniversalTagDescription_entriesInitialized)
+      return Unit_instance;
+    UniversalTagDescription_entriesInitialized = true;
+    UniversalTagDescription_EOC_instance = new UniversalTagDescription('EOC', 0, 0, 'End of Content', 'Marks the end of content in a constructed type', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_BOOLEAN_instance = new UniversalTagDescription('BOOLEAN', 1, 1, 'Boolean', 'Boolean value (true/false)', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_INTEGER_instance = new UniversalTagDescription('INTEGER', 2, 2, 'Integer', 'Signed integer value', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_BIT_STRING_instance = new UniversalTagDescription('BIT_STRING', 3, 3, 'Bit String', 'String of bits', Construction_BOTH_getInstance());
+    UniversalTagDescription_OCTET_STRING_instance = new UniversalTagDescription('OCTET_STRING', 4, 4, 'Octet String', 'String of octets (bytes)', Construction_BOTH_getInstance());
+    UniversalTagDescription_NULL_instance = new UniversalTagDescription('NULL', 5, 5, 'Null', 'Null value', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_OBJECT_IDENTIFIER_instance = new UniversalTagDescription('OBJECT_IDENTIFIER', 6, 6, 'Object Identifier', 'Unique identifier for an object', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_OBJECT_DESCRIPTOR_instance = new UniversalTagDescription('OBJECT_DESCRIPTOR', 7, 7, 'Object Descriptor', 'Human-readable description of an object', Construction_BOTH_getInstance());
+    UniversalTagDescription_EXTERNAL_instance = new UniversalTagDescription('EXTERNAL', 8, 8, 'External', 'External type definition', Construction_CONSTRUCTED_getInstance());
+    UniversalTagDescription_REAL_instance = new UniversalTagDescription('REAL', 9, 9, 'Real', 'Real number value', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_ENUMERATED_instance = new UniversalTagDescription('ENUMERATED', 10, 10, 'Enumerated', 'Enumerated value from a set', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_EMBEDDED_PDV_instance = new UniversalTagDescription('EMBEDDED_PDV', 11, 11, 'Embedded PDV', 'Embedded Presentation Data Value', Construction_CONSTRUCTED_getInstance());
+    UniversalTagDescription_UTF8_STRING_instance = new UniversalTagDescription('UTF8_STRING', 12, 12, 'UTF8 String', 'UTF-8 encoded character string', Construction_BOTH_getInstance());
+    UniversalTagDescription_RELATIVE_OID_instance = new UniversalTagDescription('RELATIVE_OID', 13, 13, 'Relative OID', 'Relative object identifier', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_TIME_instance = new UniversalTagDescription('TIME', 14, 14, 'Time', 'Time value', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_DATE_O_instance = new UniversalTagDescription('DATE_O', 15, 15, 'Date O', 'Date value in O format', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_SEQUENCE_instance = new UniversalTagDescription('SEQUENCE', 16, 16, 'Sequence', 'Ordered collection of elements', Construction_CONSTRUCTED_getInstance());
+    UniversalTagDescription_SET_instance = new UniversalTagDescription('SET', 17, 17, 'Set', 'Unordered collection of elements', Construction_CONSTRUCTED_getInstance());
+    UniversalTagDescription_NUMERIC_STRING_instance = new UniversalTagDescription('NUMERIC_STRING', 18, 18, 'Numeric String', 'String of numeric characters', Construction_BOTH_getInstance());
+    UniversalTagDescription_PRINTABLE_STRING_instance = new UniversalTagDescription('PRINTABLE_STRING', 19, 19, 'Printable String', 'String of printable characters', Construction_BOTH_getInstance());
+    UniversalTagDescription_T61_STRING_instance = new UniversalTagDescription('T61_STRING', 20, 20, 'T61 String', 'T.61 (Teletex) character string', Construction_BOTH_getInstance());
+    UniversalTagDescription_VIDEOTEX_STRING_instance = new UniversalTagDescription('VIDEOTEX_STRING', 21, 21, 'Videotex String', 'Videotex character string', Construction_BOTH_getInstance());
+    UniversalTagDescription_IA5_STRING_instance = new UniversalTagDescription('IA5_STRING', 22, 22, 'IA5 String', 'International Alphabet 5 (ASCII) string', Construction_BOTH_getInstance());
+    UniversalTagDescription_UTC_TIME_instance = new UniversalTagDescription('UTC_TIME', 23, 23, 'UTC Time', 'Coordinated Universal Time', Construction_BOTH_getInstance());
+    UniversalTagDescription_GENERALIZED_TIME_instance = new UniversalTagDescription('GENERALIZED_TIME', 24, 24, 'Generalized Time', 'Generalized time format', Construction_BOTH_getInstance());
+    UniversalTagDescription_GRAPHIC_STRING_instance = new UniversalTagDescription('GRAPHIC_STRING', 25, 25, 'Graphic String', 'String of graphic characters', Construction_BOTH_getInstance());
+    UniversalTagDescription_VISIBLE_STRING_instance = new UniversalTagDescription('VISIBLE_STRING', 26, 26, 'Visible String', 'String of visible characters', Construction_BOTH_getInstance());
+    UniversalTagDescription_GENERAL_STRING_instance = new UniversalTagDescription('GENERAL_STRING', 27, 27, 'General String', 'General character string', Construction_BOTH_getInstance());
+    UniversalTagDescription_UNIVERSAL_STRING_instance = new UniversalTagDescription('UNIVERSAL_STRING', 28, 28, 'Universal String', 'Universal character string (UCS-4)', Construction_BOTH_getInstance());
+    UniversalTagDescription_CHARACTER_STRING_instance = new UniversalTagDescription('CHARACTER_STRING', 29, 29, 'Character String', 'Character string with specified character set', Construction_BOTH_getInstance());
+    UniversalTagDescription_BMP_STRING_instance = new UniversalTagDescription('BMP_STRING', 30, 30, 'BMP String', 'Basic Multilingual Plane string (UCS-2)', Construction_BOTH_getInstance());
+    UniversalTagDescription_DATE_instance = new UniversalTagDescription('DATE', 31, 31, 'Date', 'Calendar date', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_TIME_OF_DAY_instance = new UniversalTagDescription('TIME_OF_DAY', 32, 32, 'Time of Day', 'Time of day', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_DATE_TIME_instance = new UniversalTagDescription('DATE_TIME', 33, 33, 'Date Time', 'Date and time', Construction_PRIMITIVE_getInstance());
+    UniversalTagDescription_DURATION_instance = new UniversalTagDescription('DURATION', 34, 34, 'Duration', 'Time duration', Construction_PRIMITIVE_getInstance());
+  }
+  var $ENTRIES_1;
+  function UniversalTagDescription(name, ordinal, type, info, description, construction) {
+    Enum.call(this, name, ordinal);
+    this.pg_1 = type;
+    this.qg_1 = info;
+    this.rg_1 = description;
+    this.sg_1 = construction;
+  }
+  function UniversalTagDescription_EOC_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_EOC_instance;
+  }
+  function UniversalTagDescription_BOOLEAN_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_BOOLEAN_instance;
+  }
+  function UniversalTagDescription_INTEGER_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_INTEGER_instance;
+  }
+  function UniversalTagDescription_BIT_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_BIT_STRING_instance;
+  }
+  function UniversalTagDescription_OCTET_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_OCTET_STRING_instance;
+  }
+  function UniversalTagDescription_NULL_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_NULL_instance;
+  }
+  function UniversalTagDescription_OBJECT_IDENTIFIER_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_OBJECT_IDENTIFIER_instance;
+  }
+  function UniversalTagDescription_OBJECT_DESCRIPTOR_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_OBJECT_DESCRIPTOR_instance;
+  }
+  function UniversalTagDescription_EXTERNAL_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_EXTERNAL_instance;
+  }
+  function UniversalTagDescription_REAL_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_REAL_instance;
+  }
+  function UniversalTagDescription_ENUMERATED_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_ENUMERATED_instance;
+  }
+  function UniversalTagDescription_EMBEDDED_PDV_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_EMBEDDED_PDV_instance;
+  }
+  function UniversalTagDescription_UTF8_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_UTF8_STRING_instance;
+  }
+  function UniversalTagDescription_RELATIVE_OID_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_RELATIVE_OID_instance;
+  }
+  function UniversalTagDescription_TIME_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_TIME_instance;
+  }
+  function UniversalTagDescription_DATE_O_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_DATE_O_instance;
+  }
+  function UniversalTagDescription_SEQUENCE_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_SEQUENCE_instance;
+  }
+  function UniversalTagDescription_SET_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_SET_instance;
+  }
+  function UniversalTagDescription_NUMERIC_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_NUMERIC_STRING_instance;
+  }
+  function UniversalTagDescription_PRINTABLE_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_PRINTABLE_STRING_instance;
+  }
+  function UniversalTagDescription_T61_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_T61_STRING_instance;
+  }
+  function UniversalTagDescription_VIDEOTEX_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_VIDEOTEX_STRING_instance;
+  }
+  function UniversalTagDescription_IA5_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_IA5_STRING_instance;
+  }
+  function UniversalTagDescription_UTC_TIME_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_UTC_TIME_instance;
+  }
+  function UniversalTagDescription_GENERALIZED_TIME_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_GENERALIZED_TIME_instance;
+  }
+  function UniversalTagDescription_GRAPHIC_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_GRAPHIC_STRING_instance;
+  }
+  function UniversalTagDescription_VISIBLE_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_VISIBLE_STRING_instance;
+  }
+  function UniversalTagDescription_GENERAL_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_GENERAL_STRING_instance;
+  }
+  function UniversalTagDescription_UNIVERSAL_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_UNIVERSAL_STRING_instance;
+  }
+  function UniversalTagDescription_CHARACTER_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_CHARACTER_STRING_instance;
+  }
+  function UniversalTagDescription_BMP_STRING_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_BMP_STRING_instance;
+  }
+  function UniversalTagDescription_DATE_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_DATE_instance;
+  }
+  function UniversalTagDescription_TIME_OF_DAY_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_TIME_OF_DAY_instance;
+  }
+  function UniversalTagDescription_DATE_TIME_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_DATE_TIME_instance;
+  }
+  function UniversalTagDescription_DURATION_getInstance() {
+    UniversalTagDescription_initEntries();
+    return UniversalTagDescription_DURATION_instance;
+  }
+  function BooleanValueParser() {
+  }
+  protoOf(BooleanValueParser).vc = function (bytes) {
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(bytes.length === 1)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.BooleanValueParser.bytesToValue.<anonymous>' call
+      var message = 'Boolean value must be exactly one byte';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    return !(bytes[0] === 0);
+  };
+  protoOf(BooleanValueParser).tg = function (value) {
+    return value.toString();
+  };
+  protoOf(BooleanValueParser).ad = function (value) {
+    return this.tg((!(value == null) ? typeof value === 'boolean' : false) ? value : THROW_CCE());
+  };
+  function Companion_5() {
+    Companion_instance_5 = this;
+    this.ug_1 = 0;
+    this.vg_1 = 4;
+    this.wg_1 = 4;
+    this.xg_1 = 6;
+    this.yg_1 = 6;
+    this.zg_1 = 8;
+    this.ah_1 = 8;
+    this.bh_1 = 10;
+    this.ch_1 = 10;
+    this.dh_1 = 12;
+    this.eh_1 = 12;
+    this.fh_1 = 14;
+    this.gh_1 = 15;
+    this.hh_1 = 15;
+    this.ih_1 = 3;
+    this.jh_1 = 3600;
+    this.kh_1 = 60;
+    this.lh_1 = 1000;
+    this.mh_1 = 1000000;
+    this.nh_1 = _Char___init__impl__6a9atx(46);
+    this.oh_1 = _Char___init__impl__6a9atx(90);
+    this.ph_1 = _Char___init__impl__6a9atx(43);
+    this.qh_1 = _Char___init__impl__6a9atx(45);
+    this.rh_1 = 1;
+    this.sh_1 = 3;
+    this.th_1 = 3;
+    this.uh_1 = 5;
+  }
+  var Companion_instance_5;
+  function Companion_getInstance_7() {
+    if (Companion_instance_5 == null)
+      new Companion_5();
+    return Companion_instance_5;
+  }
+  function GeneralizedTimeValueParser() {
+    Companion_getInstance_7();
+  }
+  protoOf(GeneralizedTimeValueParser).vc = function (bytes) {
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.collections.isNotEmpty' call
+    // Inline function 'kotlin.collections.isEmpty' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!(bytes.length === 0)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.GeneralizedTimeValueParser.bytesToValue.<anonymous>' call
+      var message = 'GeneralizedTime value cannot be empty';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    var str = decodeToString(bytes);
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(str.length >= 15)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.GeneralizedTimeValueParser.bytesToValue.<anonymous>' call
+      var message_0 = 'GeneralizedTime must be at least 15 characters';
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+    // Inline function 'kotlin.require' call
+    var tmp$ret$5;
+    $l$block: {
+      // Inline function 'kotlin.text.all' call
+      var inductionVariable = 0;
+      while (inductionVariable < charSequenceLength(str)) {
+        var element = charSequenceGet(str, inductionVariable);
+        inductionVariable = inductionVariable + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.GeneralizedTimeValueParser.bytesToValue.<anonymous>' call
+        if (!(isDigit(element) || element === _Char___init__impl__6a9atx(46) || element === _Char___init__impl__6a9atx(43) || element === _Char___init__impl__6a9atx(45) || element === _Char___init__impl__6a9atx(90))) {
+          tmp$ret$5 = false;
+          break $l$block;
+        }
+      }
+      tmp$ret$5 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$5) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.GeneralizedTimeValueParser.bytesToValue.<anonymous>' call
+      var message_1 = 'Invalid GeneralizedTime format';
+      throw IllegalArgumentException_init_$Create$(toString(message_1));
+    }
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$8 = str.substring(0, 4);
+    var year = toInt(tmp$ret$8);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$10 = str.substring(4, 6);
+    var month = toInt(tmp$ret$10);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$12 = str.substring(6, 8);
+    var day = toInt(tmp$ret$12);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$14 = str.substring(8, 10);
+    var hour = toInt(tmp$ret$14);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$16 = str.substring(10, 12);
+    var minute = toInt(tmp$ret$16);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$18 = str.substring(12, 14);
+    var second = toInt(tmp$ret$18);
+    var fraction = 0;
+    var offsetSeconds = 0;
+    var endIndex = 14;
+    if (str.length > 14 && charSequenceGet(str, 14) === _Char___init__impl__6a9atx(46)) {
+      // Inline function 'kotlin.let' call
+      // Inline function 'kotlin.charArrayOf' call
+      var tmp$ret$19 = charArrayOf([_Char___init__impl__6a9atx(90), _Char___init__impl__6a9atx(43), _Char___init__impl__6a9atx(45)]);
+      // Inline function 'kotlin.contracts.contract' call
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.GeneralizedTimeValueParser.bytesToValue.<anonymous>' call
+      var it = indexOfAny(str, tmp$ret$19, 15);
+      var fracEnd = it === -1 ? str.length : it;
+      // Inline function 'kotlin.text.substring' call
+      // Inline function 'kotlin.js.asDynamic' call
+      var fracStr = str.substring(15, fracEnd);
+      fraction = numberToInt(toDouble('0.' + fracStr) * 1000);
+      endIndex = fracEnd;
+    } else {
+      endIndex = 14;
+    }
+    if (!endsWith(str, 'Z'))
+      if (contains(str, '+', false) || contains(str, '-', false)) {
+        // Inline function 'kotlin.charArrayOf' call
+        var tmp$ret$24 = charArrayOf([_Char___init__impl__6a9atx(43), _Char___init__impl__6a9atx(45)]);
+        var signIdx = indexOfAny(str, tmp$ret$24, endIndex);
+        if (!(signIdx === -1)) {
+          var sign = charSequenceGet(str, signIdx) === _Char___init__impl__6a9atx(43) ? 1 : -1;
+          // Inline function 'kotlin.text.substring' call
+          var startIndex = signIdx + 1 | 0;
+          var endIndex_0 = signIdx + 3 | 0;
+          // Inline function 'kotlin.js.asDynamic' call
+          var tmp$ret$26 = str.substring(startIndex, endIndex_0);
+          var hours = toInt(tmp$ret$26);
+          // Inline function 'kotlin.text.substring' call
+          var startIndex_0 = signIdx + 3 | 0;
+          var endIndex_1 = signIdx + 5 | 0;
+          // Inline function 'kotlin.js.asDynamic' call
+          var tmp$ret$28 = str.substring(startIndex_0, endIndex_1);
+          var minutes = toInt(tmp$ret$28);
+          offsetSeconds = imul(sign, imul(hours, 3600) + imul(minutes, 60) | 0);
+        }
+      }
+    var local = LocalDateTime_init_$Create$(year, month, day, hour, minute, second, imul(fraction, 1000000));
+    var instant = toInstant(local, Companion_getInstance().ka_1);
+    return minus(instant, offsetSeconds, Companion_getInstance_0().m9_1);
+  };
+  protoOf(GeneralizedTimeValueParser).vh = function (value) {
+    return value.toString();
+  };
+  protoOf(GeneralizedTimeValueParser).ad = function (value) {
+    return this.vh(value instanceof Instant ? value : THROW_CCE());
+  };
+  function Companion_6() {
+    this.wh_1 = 127;
+  }
+  var Companion_instance_6;
+  function Companion_getInstance_8() {
+    return Companion_instance_6;
+  }
+  function IA5StringValueParser() {
+  }
+  protoOf(IA5StringValueParser).vc = function (bytes) {
+    // Inline function 'kotlin.require' call
+    var tmp$ret$1;
+    $l$block: {
+      // Inline function 'kotlin.collections.all' call
+      var inductionVariable = 0;
+      var last = bytes.length;
+      while (inductionVariable < last) {
+        var element = bytes[inductionVariable];
+        inductionVariable = inductionVariable + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.IA5StringValueParser.bytesToValue.<anonymous>' call
+        if (!((element & 255) <= 127)) {
+          tmp$ret$1 = false;
+          break $l$block;
+        }
+      }
+      tmp$ret$1 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$1) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.IA5StringValueParser.bytesToValue.<anonymous>' call
+      var message = 'IA5String can only contain ASCII characters (0-127)';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    return decodeToString(bytes);
+  };
+  protoOf(IA5StringValueParser).xh = function (value) {
+    return value;
+  };
+  protoOf(IA5StringValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+  };
+  function Companion_7() {
+    this.yh_1 = 128;
+    this.zh_1 = -1;
+    this.ai_1 = 8;
+    this.bi_1 = 2;
+  }
+  var Companion_instance_7;
+  function Companion_getInstance_9() {
+    return Companion_instance_7;
+  }
+  function IntegerValueParser() {
+  }
+  protoOf(IntegerValueParser).vc = function (bytes) {
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.collections.isNotEmpty' call
+    // Inline function 'kotlin.collections.isEmpty' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!(bytes.length === 0)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.IntegerValueParser.bytesToValue.<anonymous>' call
+      var message = 'Integer value cannot be empty';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    if (bytes.length >= 2) {
+      var firstByte = bytes[0] & 255;
+      var secondByte = bytes[1] & 128;
+      // Inline function 'kotlin.require' call
+      // Inline function 'kotlin.contracts.contract' call
+      if (!!(firstByte === 0 && secondByte === 0)) {
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.IntegerValueParser.bytesToValue.<anonymous>' call
+        var message_0 = 'Invalid ASN.1 INTEGER encoding: unnecessary leading zero bytes';
+        throw IllegalArgumentException_init_$Create$(toString(message_0));
+      }
+      // Inline function 'kotlin.require' call
+      // Inline function 'kotlin.contracts.contract' call
+      if (!!(firstByte === 255 && secondByte === 128)) {
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.IntegerValueParser.bytesToValue.<anonymous>' call
+        var message_1 = 'Invalid ASN.1 INTEGER encoding: unnecessary leading 0xFF bytes';
+        throw IllegalArgumentException_init_$Create$(toString(message_1));
+      }
+    }
+    var tmp;
+    if (bytes.length === 8 && bytes[0] === -128) {
+      var tmp$ret$5;
+      $l$block_0: {
+        // Inline function 'kotlin.collections.all' call
+        var this_0 = drop(bytes, 1);
+        var tmp_0;
+        if (isInterface(this_0, Collection)) {
+          tmp_0 = this_0.h();
+        } else {
+          tmp_0 = false;
+        }
+        if (tmp_0) {
+          tmp$ret$5 = true;
+          break $l$block_0;
+        }
+        var tmp0_iterator = this_0.p();
+        while (tmp0_iterator.q()) {
+          var element = tmp0_iterator.r();
+          // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.IntegerValueParser.bytesToValue.<anonymous>' call
+          if (!(element === 0)) {
+            tmp$ret$5 = false;
+            break $l$block_0;
+          }
+        }
+        tmp$ret$5 = true;
+      }
+      tmp = tmp$ret$5;
+    } else {
+      tmp = false;
+    }
+    if (tmp) {
+      return new Long(0, -2147483648);
+    }
+    var result = new Long(0, 0);
+    var inductionVariable = 0;
+    var last = bytes.length;
+    while (inductionVariable < last) {
+      var byte = bytes[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      result = result.j2(8).n2(toLong(byte & 255));
+    }
+    if (!((bytes[0] & 128) === 0)) {
+      result = result.n2((new Long(-1, -1)).j2(imul(bytes.length, 8)));
+    }
+    return result;
+  };
+  protoOf(IntegerValueParser).ci = function (value) {
+    return value.toString();
+  };
+  protoOf(IntegerValueParser).ad = function (value) {
+    return this.ci(value instanceof Long ? value : THROW_CCE());
+  };
+  function NullValueParser() {
+  }
+  protoOf(NullValueParser).di = function (bytes) {
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.collections.isEmpty' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(bytes.length === 0)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.NullValueParser.bytesToValue.<anonymous>' call
+      var message = 'NULL value must be empty';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    return Unit_instance;
+  };
+  protoOf(NullValueParser).vc = function (bytes) {
+    this.di(bytes);
+    return Unit_instance;
+  };
+  protoOf(NullValueParser).ei = function (value) {
+    return 'NULL';
+  };
+  protoOf(NullValueParser).ad = function (value) {
+    return this.ei(value instanceof Unit ? value : THROW_CCE());
+  };
+  function NumericStringValueParser() {
+  }
+  protoOf(NumericStringValueParser).vc = function (bytes) {
+    var result = decodeToString(bytes);
+    // Inline function 'kotlin.require' call
+    var tmp$ret$1;
+    $l$block: {
+      // Inline function 'kotlin.text.all' call
+      var inductionVariable = 0;
+      while (inductionVariable < charSequenceLength(result)) {
+        var element = charSequenceGet(result, inductionVariable);
+        inductionVariable = inductionVariable + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.NumericStringValueParser.bytesToValue.<anonymous>' call
+        if (!(isDigit(element) || element === _Char___init__impl__6a9atx(32))) {
+          tmp$ret$1 = false;
+          break $l$block;
+        }
+      }
+      tmp$ret$1 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$1) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.NumericStringValueParser.bytesToValue.<anonymous>' call
+      var message = 'NumericString can only contain digits and spaces';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    return result;
+  };
+  protoOf(NumericStringValueParser).xh = function (value) {
+    return value;
+  };
+  protoOf(NumericStringValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+  };
+  function Companion_8() {
+    this.fi_1 = 3;
+    this.gi_1 = 40;
+    this.hi_1 = 128;
+    this.ii_1 = 127;
+    this.ji_1 = 7;
+  }
+  var Companion_instance_8;
+  function Companion_getInstance_10() {
+    return Companion_instance_8;
+  }
+  function ObjectIdentifierValueParser() {
+  }
+  protoOf(ObjectIdentifierValueParser).vc = function (bytes) {
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.collections.isNotEmpty' call
+    // Inline function 'kotlin.collections.isEmpty' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!(bytes.length === 0)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.ObjectIdentifierValueParser.bytesToValue.<anonymous>' call
+      var message = 'ObjectIdentifier value cannot be empty';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.collections.mutableListOf' call
+    var result = ArrayList_init_$Create$();
+    var currentValue = 0;
+    var firstByte = true;
+    var inductionVariable = 0;
+    var last = bytes.length;
+    while (inductionVariable < last) {
+      var byte = bytes[inductionVariable];
+      inductionVariable = inductionVariable + 1 | 0;
+      var b = byte & 255;
+      if (firstByte) {
+        result.k(b / 40 | 0);
+        result.k(b % 40 | 0);
+        firstByte = false;
+      } else {
+        if ((b & 128) === 0) {
+          currentValue = currentValue << 7 | b;
+          result.k(currentValue);
+          currentValue = 0;
+        } else {
+          currentValue = currentValue << 7 | b & 127;
+        }
+      }
+    }
+    return result;
+  };
+  protoOf(ObjectIdentifierValueParser).ki = function (value) {
+    return joinToString(value, '.');
+  };
+  protoOf(ObjectIdentifierValueParser).ad = function (value) {
+    return this.ki((!(value == null) ? isInterface(value, KtList) : false) ? value : THROW_CCE());
+  };
   function OctetStringValueParser() {
   }
-  protoOf(OctetStringValueParser).oa = function (bytes) {
+  protoOf(OctetStringValueParser).vc = function (bytes) {
     return bytes;
   };
-  protoOf(OctetStringValueParser).ee = function (value) {
+  protoOf(OctetStringValueParser).li = function (value) {
     return toHexString_0(value);
   };
-  protoOf(OctetStringValueParser).ta = function (value) {
-    return this.ee((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE());
+  protoOf(OctetStringValueParser).ad = function (value) {
+    return this.li((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE());
+  };
+  function PrintableStringValueParser() {
+    this.mi_1 = setOf([new Char(_Char___init__impl__6a9atx(65)), new Char(_Char___init__impl__6a9atx(66)), new Char(_Char___init__impl__6a9atx(67)), new Char(_Char___init__impl__6a9atx(68)), new Char(_Char___init__impl__6a9atx(69)), new Char(_Char___init__impl__6a9atx(70)), new Char(_Char___init__impl__6a9atx(71)), new Char(_Char___init__impl__6a9atx(72)), new Char(_Char___init__impl__6a9atx(73)), new Char(_Char___init__impl__6a9atx(74)), new Char(_Char___init__impl__6a9atx(75)), new Char(_Char___init__impl__6a9atx(76)), new Char(_Char___init__impl__6a9atx(77)), new Char(_Char___init__impl__6a9atx(78)), new Char(_Char___init__impl__6a9atx(79)), new Char(_Char___init__impl__6a9atx(80)), new Char(_Char___init__impl__6a9atx(81)), new Char(_Char___init__impl__6a9atx(82)), new Char(_Char___init__impl__6a9atx(83)), new Char(_Char___init__impl__6a9atx(84)), new Char(_Char___init__impl__6a9atx(85)), new Char(_Char___init__impl__6a9atx(86)), new Char(_Char___init__impl__6a9atx(87)), new Char(_Char___init__impl__6a9atx(88)), new Char(_Char___init__impl__6a9atx(89)), new Char(_Char___init__impl__6a9atx(90)), new Char(_Char___init__impl__6a9atx(97)), new Char(_Char___init__impl__6a9atx(98)), new Char(_Char___init__impl__6a9atx(99)), new Char(_Char___init__impl__6a9atx(100)), new Char(_Char___init__impl__6a9atx(101)), new Char(_Char___init__impl__6a9atx(102)), new Char(_Char___init__impl__6a9atx(103)), new Char(_Char___init__impl__6a9atx(104)), new Char(_Char___init__impl__6a9atx(105)), new Char(_Char___init__impl__6a9atx(106)), new Char(_Char___init__impl__6a9atx(107)), new Char(_Char___init__impl__6a9atx(108)), new Char(_Char___init__impl__6a9atx(109)), new Char(_Char___init__impl__6a9atx(110)), new Char(_Char___init__impl__6a9atx(111)), new Char(_Char___init__impl__6a9atx(112)), new Char(_Char___init__impl__6a9atx(113)), new Char(_Char___init__impl__6a9atx(114)), new Char(_Char___init__impl__6a9atx(115)), new Char(_Char___init__impl__6a9atx(116)), new Char(_Char___init__impl__6a9atx(117)), new Char(_Char___init__impl__6a9atx(118)), new Char(_Char___init__impl__6a9atx(119)), new Char(_Char___init__impl__6a9atx(120)), new Char(_Char___init__impl__6a9atx(121)), new Char(_Char___init__impl__6a9atx(122)), new Char(_Char___init__impl__6a9atx(48)), new Char(_Char___init__impl__6a9atx(49)), new Char(_Char___init__impl__6a9atx(50)), new Char(_Char___init__impl__6a9atx(51)), new Char(_Char___init__impl__6a9atx(52)), new Char(_Char___init__impl__6a9atx(53)), new Char(_Char___init__impl__6a9atx(54)), new Char(_Char___init__impl__6a9atx(55)), new Char(_Char___init__impl__6a9atx(56)), new Char(_Char___init__impl__6a9atx(57)), new Char(_Char___init__impl__6a9atx(32)), new Char(_Char___init__impl__6a9atx(39)), new Char(_Char___init__impl__6a9atx(40)), new Char(_Char___init__impl__6a9atx(41)), new Char(_Char___init__impl__6a9atx(43)), new Char(_Char___init__impl__6a9atx(44)), new Char(_Char___init__impl__6a9atx(45)), new Char(_Char___init__impl__6a9atx(46)), new Char(_Char___init__impl__6a9atx(47)), new Char(_Char___init__impl__6a9atx(58)), new Char(_Char___init__impl__6a9atx(61)), new Char(_Char___init__impl__6a9atx(63))]);
+  }
+  protoOf(PrintableStringValueParser).vc = function (bytes) {
+    var result = decodeToString(bytes);
+    // Inline function 'kotlin.require' call
+    var tmp$ret$1;
+    $l$block: {
+      // Inline function 'kotlin.text.all' call
+      var inductionVariable = 0;
+      while (inductionVariable < charSequenceLength(result)) {
+        var element = charSequenceGet(result, inductionVariable);
+        inductionVariable = inductionVariable + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.PrintableStringValueParser.bytesToValue.<anonymous>' call
+        if (!this.mi_1.n1(new Char(element))) {
+          tmp$ret$1 = false;
+          break $l$block;
+        }
+      }
+      tmp$ret$1 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$1) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.PrintableStringValueParser.bytesToValue.<anonymous>' call
+      var message = "PrintableString can only contain ASN.1 PrintableString characters (A-Z, a-z, 0-9, space, ', (, ), +, ,, -, ., /, :, =, ?)";
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    return result;
+  };
+  protoOf(PrintableStringValueParser).xh = function (value) {
+    return value;
+  };
+  protoOf(PrintableStringValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+  };
+  function Companion_9() {
+    this.ni_1 = 64;
+    this.oi_1 = 65;
+    this.pi_1 = 66;
+    this.qi_1 = 128;
+    this.ri_1 = 144;
+    this.si_1 = 192;
+    this.ti_1 = 4;
+    this.ui_1 = 0;
+    this.vi_1 = 1;
+    this.wi_1 = 2;
+    this.xi_1 = 3;
+    this.yi_1 = 2.0;
+    this.zi_1 = 8.0;
+    this.aj_1 = 2;
+    this.bj_1 = 1;
+    this.cj_1 = 1.0;
+  }
+  var Companion_instance_9;
+  function Companion_getInstance_11() {
+    return Companion_instance_9;
+  }
+  function power($this, base, exponent) {
+    var tmp;
+    switch (exponent) {
+      case 0:
+        tmp = 1.0;
+        break;
+      case 1:
+        tmp = base;
+        break;
+      default:
+        var tempResult = 1.0;
+        var exp = exponent;
+        var currentBase = base;
+        while (exp > 0) {
+          if ((exp % 2 | 0) === 1) {
+            tempResult = tempResult * currentBase;
+          }
+          currentBase = currentBase * currentBase;
+          exp = exp / 2 | 0;
+        }
+
+        tmp = tempResult;
+        break;
+    }
+    var result = tmp;
+    return result;
+  }
+  function RealValueParser() {
+  }
+  protoOf(RealValueParser).vc = function (bytes) {
+    // Inline function 'kotlin.collections.isEmpty' call
+    if (bytes.length === 0) {
+      return 0.0;
+    }
+    var firstByte = bytes[0] & 255;
+    var tmp;
+    switch (firstByte) {
+      case 64:
+        tmp = Infinity;
+        break;
+      case 65:
+        tmp = -Infinity;
+        break;
+      case 66:
+        tmp = NaN;
+        break;
+      case 128:
+        // Inline function 'kotlin.require' call
+
+        // Inline function 'kotlin.contracts.contract' call
+
+        if (!(bytes.length === 4)) {
+          // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.RealValueParser.bytesToValue.<anonymous>' call
+          var message = 'Invalid encoding';
+          throw IllegalArgumentException_init_$Create$(toString(message));
+        }
+
+        var exponent = bytes[1];
+        var mantissa = (bytes[2] & 255) << 8 | bytes[3] & 255;
+        tmp = mantissa * power(this, 2.0, exponent);
+        break;
+      case 144:
+        // Inline function 'kotlin.require' call
+
+        // Inline function 'kotlin.contracts.contract' call
+
+        if (!(bytes.length === 4)) {
+          // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.RealValueParser.bytesToValue.<anonymous>' call
+          var message_0 = 'Invalid encoding';
+          throw IllegalArgumentException_init_$Create$(toString(message_0));
+        }
+
+        var exponent_0 = bytes[1];
+        var mantissa_0 = (bytes[2] & 255) << 8 | bytes[3] & 255;
+        tmp = mantissa_0 * power(this, 8.0, exponent_0);
+        break;
+      case 192:
+        // Inline function 'kotlin.require' call
+
+        // Inline function 'kotlin.contracts.contract' call
+
+        if (!(bytes.length === 4)) {
+          // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.RealValueParser.bytesToValue.<anonymous>' call
+          var message_1 = 'Invalid encoding';
+          throw IllegalArgumentException_init_$Create$(toString(message_1));
+        }
+
+        var exponent_1 = bytes[1];
+        var mantissa_1 = (bytes[2] & 255) << 8 | bytes[3] & 255;
+        var result = mantissa_1 * power(this, 2.0, exponent_1);
+        tmp = -result;
+        break;
+      default:
+        throw IllegalArgumentException_init_$Create$('Unsupported REAL encoding: 0x' + toString_1(firstByte, 16));
+    }
+    return tmp;
+  };
+  protoOf(RealValueParser).dj = function (value) {
+    return value.toString();
+  };
+  protoOf(RealValueParser).ad = function (value) {
+    return this.dj((!(value == null) ? typeof value === 'number' : false) ? value : THROW_CCE());
+  };
+  function Companion_10() {
+    Companion_instance_10 = this;
+    this.ej_1 = 0;
+    this.fj_1 = 2;
+    this.gj_1 = 2;
+    this.hj_1 = 4;
+    this.ij_1 = 4;
+    this.jj_1 = 6;
+    this.kj_1 = 6;
+    this.lj_1 = 8;
+    this.mj_1 = 8;
+    this.nj_1 = 10;
+    this.oj_1 = 10;
+    this.pj_1 = 12;
+    this.qj_1 = 12;
+    this.rj_1 = 13;
+    this.sj_1 = 17;
+    this.tj_1 = 4;
+    this.uj_1 = 0;
+    this.vj_1 = 1;
+    this.wj_1 = 3;
+    this.xj_1 = 3;
+    this.yj_1 = 5;
+    this.zj_1 = 1;
+    this.ak_1 = 12;
+    this.bk_1 = 1;
+    this.ck_1 = 31;
+    this.dk_1 = 0;
+    this.ek_1 = 23;
+    this.fk_1 = 0;
+    this.gk_1 = 59;
+    this.hk_1 = 0;
+    this.ik_1 = 59;
+    this.jk_1 = 50;
+    this.kk_1 = 2000;
+    this.lk_1 = 1900;
+    this.mk_1 = 100;
+    this.nk_1 = 3600;
+    this.ok_1 = 60;
+    this.pk_1 = _Char___init__impl__6a9atx(90);
+    this.qk_1 = _Char___init__impl__6a9atx(43);
+    this.rk_1 = _Char___init__impl__6a9atx(45);
+  }
+  var Companion_instance_10;
+  function Companion_getInstance_12() {
+    if (Companion_instance_10 == null)
+      new Companion_10();
+    return Companion_instance_10;
+  }
+  function validateFormat($this, str) {
+    if (endsWith(str, 'Z')) {
+      validateUtcFormat($this, str);
+    } else {
+      validateOffsetFormat($this, str);
+    }
+  }
+  function validateUtcFormat($this, str) {
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(str.length === 13)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateUtcFormat.<anonymous>' call
+      var message = 'UTCTime with Z must be exactly 13 characters (YYMMDDHHMMSSZ), ' + ('got ' + str.length);
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    var tmp$ret$4;
+    $l$block: {
+      // Inline function 'kotlin.text.all' call
+      // Inline function 'kotlin.text.substring' call
+      // Inline function 'kotlin.js.asDynamic' call
+      var indexedObject = str.substring(0, 12);
+      var inductionVariable = 0;
+      while (inductionVariable < charSequenceLength(indexedObject)) {
+        var element = charSequenceGet(indexedObject, inductionVariable);
+        inductionVariable = inductionVariable + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateUtcFormat.<anonymous>' call
+        if (!isDigit(element)) {
+          tmp$ret$4 = false;
+          break $l$block;
+        }
+      }
+      tmp$ret$4 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$4) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateUtcFormat.<anonymous>' call
+      var message_0 = 'UTCTime date/time part must contain only digits';
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+  }
+  function validateOffsetFormat($this, str) {
+    // Inline function 'kotlin.charArrayOf' call
+    var tmp$ret$0 = charArrayOf([_Char___init__impl__6a9atx(43), _Char___init__impl__6a9atx(45)]);
+    var tzIndex = indexOfAny(str, tmp$ret$0, 12);
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(tzIndex === 12)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateOffsetFormat.<anonymous>' call
+      var message = 'UTCTime timezone offset must start at position 12 (after YYMMDDHHMMSS)';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(str.length === 17)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateOffsetFormat.<anonymous>' call
+      var message_0 = 'UTCTime with timezone offset must be exactly 17 characters (YYMMDDHHMMSS\xB1HHMM), ' + ('got ' + str.length);
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+    // Inline function 'kotlin.require' call
+    var tmp$ret$6;
+    $l$block: {
+      // Inline function 'kotlin.text.all' call
+      // Inline function 'kotlin.text.substring' call
+      // Inline function 'kotlin.js.asDynamic' call
+      var indexedObject = str.substring(0, 12);
+      var inductionVariable = 0;
+      while (inductionVariable < charSequenceLength(indexedObject)) {
+        var element = charSequenceGet(indexedObject, inductionVariable);
+        inductionVariable = inductionVariable + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateOffsetFormat.<anonymous>' call
+        if (!isDigit(element)) {
+          tmp$ret$6 = false;
+          break $l$block;
+        }
+      }
+      tmp$ret$6 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$6) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateOffsetFormat.<anonymous>' call
+      var message_1 = 'UTCTime date/time part must contain only digits';
+      throw IllegalArgumentException_init_$Create$(toString(message_1));
+    }
+    // Inline function 'kotlin.require' call
+    var tmp$ret$11;
+    $l$block_0: {
+      // Inline function 'kotlin.text.all' call
+      // Inline function 'kotlin.text.substring' call
+      // Inline function 'kotlin.js.asDynamic' call
+      var indexedObject_0 = str.substring(13, 17);
+      var inductionVariable_0 = 0;
+      while (inductionVariable_0 < charSequenceLength(indexedObject_0)) {
+        var element_0 = charSequenceGet(indexedObject_0, inductionVariable_0);
+        inductionVariable_0 = inductionVariable_0 + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateOffsetFormat.<anonymous>' call
+        if (!isDigit(element_0)) {
+          tmp$ret$11 = false;
+          break $l$block_0;
+        }
+      }
+      tmp$ret$11 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$11) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateOffsetFormat.<anonymous>' call
+      var message_2 = 'UTCTime timezone offset (HHMM) must contain only digits';
+      throw IllegalArgumentException_init_$Create$(toString(message_2));
+    }
+  }
+  function parseDateTime($this, str) {
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$1 = str.substring(0, 2);
+    var year = toInt(tmp$ret$1);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$3 = str.substring(2, 4);
+    var month = toInt(tmp$ret$3);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$5 = str.substring(4, 6);
+    var day = toInt(tmp$ret$5);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$7 = str.substring(6, 8);
+    var hour = toInt(tmp$ret$7);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$9 = str.substring(8, 10);
+    var minute = toInt(tmp$ret$9);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$11 = str.substring(10, 12);
+    var second = toInt(tmp$ret$11);
+    return new DateTimeComponents(year, month, day, hour, minute, second);
+  }
+  function validateRanges($this, dateTime) {
+    // Inline function 'kotlin.require' call
+    var containsArg = dateTime.tk_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(1 <= containsArg ? containsArg <= 12 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateRanges.<anonymous>' call
+      var message = 'Invalid month: ' + dateTime.tk_1;
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    var containsArg_0 = dateTime.uk_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(1 <= containsArg_0 ? containsArg_0 <= 31 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateRanges.<anonymous>' call
+      var message_0 = 'Invalid day: ' + dateTime.uk_1;
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+    // Inline function 'kotlin.require' call
+    var containsArg_1 = dateTime.vk_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(0 <= containsArg_1 ? containsArg_1 <= 23 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateRanges.<anonymous>' call
+      var message_1 = 'Invalid hour: ' + dateTime.vk_1;
+      throw IllegalArgumentException_init_$Create$(toString(message_1));
+    }
+    // Inline function 'kotlin.require' call
+    var containsArg_2 = dateTime.wk_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(0 <= containsArg_2 ? containsArg_2 <= 59 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateRanges.<anonymous>' call
+      var message_2 = 'Invalid minute: ' + dateTime.wk_1;
+      throw IllegalArgumentException_init_$Create$(toString(message_2));
+    }
+    // Inline function 'kotlin.require' call
+    var containsArg_3 = dateTime.xk_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(0 <= containsArg_3 ? containsArg_3 <= 59 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateRanges.<anonymous>' call
+      var message_3 = 'Invalid second: ' + dateTime.xk_1;
+      throw IllegalArgumentException_init_$Create$(toString(message_3));
+    }
+  }
+  function handleTwoDigitYear($this, year) {
+    return year < 50 ? 2000 + year | 0 : 1900 + year | 0;
+  }
+  function handleTimezone($this, str, localDateTime) {
+    var tmp;
+    if (endsWith(str, 'Z')) {
+      tmp = toInstant(localDateTime, Companion_getInstance().ka_1);
+    } else {
+      var timezone = parseTimezone($this, str);
+      validateTimezoneRanges($this, timezone.zk_1, timezone.al_1);
+      var offsetSeconds = imul(timezone.yk_1, imul(timezone.zk_1, 3600) + imul(timezone.al_1, 60) | 0);
+      var utcOffset = UtcOffset(VOID, VOID, offsetSeconds);
+      tmp = toInstant(localDateTime, asTimeZone(utcOffset));
+    }
+    return tmp;
+  }
+  function parseTimezone($this, str) {
+    var tzSign = charSequenceGet(str, 12) === _Char___init__impl__6a9atx(43) ? 1 : -1;
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$1 = str.substring(13, 15);
+    var tzHours = toInt(tmp$ret$1);
+    // Inline function 'kotlin.text.substring' call
+    // Inline function 'kotlin.js.asDynamic' call
+    var tmp$ret$3 = str.substring(15, 17);
+    var tzMinutes = toInt(tmp$ret$3);
+    return new TimezoneComponents(tzSign, tzHours, tzMinutes);
+  }
+  function validateTimezoneRanges($this, hours, minutes) {
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(0 <= hours ? hours <= 23 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateTimezoneRanges.<anonymous>' call
+      var message = 'Invalid timezone hours: ' + hours;
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(0 <= minutes ? minutes <= 59 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.UTCTimeValueParser.validateTimezoneRanges.<anonymous>' call
+      var message_0 = 'Invalid timezone minutes: ' + minutes;
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+  }
+  function DateTimeComponents(year, month, day, hour, minute, second) {
+    this.sk_1 = year;
+    this.tk_1 = month;
+    this.uk_1 = day;
+    this.vk_1 = hour;
+    this.wk_1 = minute;
+    this.xk_1 = second;
+  }
+  protoOf(DateTimeComponents).toString = function () {
+    return 'DateTimeComponents(year=' + this.sk_1 + ', month=' + this.tk_1 + ', day=' + this.uk_1 + ', hour=' + this.vk_1 + ', minute=' + this.wk_1 + ', second=' + this.xk_1 + ')';
+  };
+  protoOf(DateTimeComponents).hashCode = function () {
+    var result = this.sk_1;
+    result = imul(result, 31) + this.tk_1 | 0;
+    result = imul(result, 31) + this.uk_1 | 0;
+    result = imul(result, 31) + this.vk_1 | 0;
+    result = imul(result, 31) + this.wk_1 | 0;
+    result = imul(result, 31) + this.xk_1 | 0;
+    return result;
+  };
+  protoOf(DateTimeComponents).equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof DateTimeComponents))
+      return false;
+    var tmp0_other_with_cast = other instanceof DateTimeComponents ? other : THROW_CCE();
+    if (!(this.sk_1 === tmp0_other_with_cast.sk_1))
+      return false;
+    if (!(this.tk_1 === tmp0_other_with_cast.tk_1))
+      return false;
+    if (!(this.uk_1 === tmp0_other_with_cast.uk_1))
+      return false;
+    if (!(this.vk_1 === tmp0_other_with_cast.vk_1))
+      return false;
+    if (!(this.wk_1 === tmp0_other_with_cast.wk_1))
+      return false;
+    if (!(this.xk_1 === tmp0_other_with_cast.xk_1))
+      return false;
+    return true;
+  };
+  function TimezoneComponents(sign, hours, minutes) {
+    this.yk_1 = sign;
+    this.zk_1 = hours;
+    this.al_1 = minutes;
+  }
+  protoOf(TimezoneComponents).toString = function () {
+    return 'TimezoneComponents(sign=' + this.yk_1 + ', hours=' + this.zk_1 + ', minutes=' + this.al_1 + ')';
+  };
+  protoOf(TimezoneComponents).hashCode = function () {
+    var result = this.yk_1;
+    result = imul(result, 31) + this.zk_1 | 0;
+    result = imul(result, 31) + this.al_1 | 0;
+    return result;
+  };
+  protoOf(TimezoneComponents).equals = function (other) {
+    if (this === other)
+      return true;
+    if (!(other instanceof TimezoneComponents))
+      return false;
+    var tmp0_other_with_cast = other instanceof TimezoneComponents ? other : THROW_CCE();
+    if (!(this.yk_1 === tmp0_other_with_cast.yk_1))
+      return false;
+    if (!(this.zk_1 === tmp0_other_with_cast.zk_1))
+      return false;
+    if (!(this.al_1 === tmp0_other_with_cast.al_1))
+      return false;
+    return true;
+  };
+  function UTCTimeValueParser() {
+    Companion_getInstance_12();
+  }
+  protoOf(UTCTimeValueParser).vc = function (bytes) {
+    var str = decodeToString(bytes);
+    validateFormat(this, str);
+    var dateTime = parseDateTime(this, str);
+    validateRanges(this, dateTime);
+    var fullYear = handleTwoDigitYear(this, dateTime.sk_1);
+    var localDateTime = LocalDateTime_init_$Create$(fullYear, dateTime.tk_1, dateTime.uk_1, dateTime.vk_1, dateTime.wk_1, dateTime.xk_1);
+    return handleTimezone(this, str, localDateTime);
+  };
+  protoOf(UTCTimeValueParser).vh = function (value) {
+    return value.toString();
+  };
+  protoOf(UTCTimeValueParser).ad = function (value) {
+    return this.vh(value instanceof Instant ? value : THROW_CCE());
+  };
+  function UTF8StringValueParser() {
+  }
+  protoOf(UTF8StringValueParser).vc = function (bytes) {
+    return decodeToString(bytes);
+  };
+  protoOf(UTF8StringValueParser).xh = function (value) {
+    return value;
+  };
+  protoOf(UTF8StringValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+  };
+  function isVisibleChar($this, c) {
+    return _Char___init__impl__6a9atx(32) <= c ? c <= _Char___init__impl__6a9atx(126) : false;
+  }
+  function VisibleStringValueParser() {
+  }
+  protoOf(VisibleStringValueParser).vc = function (bytes) {
+    var result = decodeToString(bytes);
+    // Inline function 'kotlin.require' call
+    var tmp$ret$1;
+    $l$block: {
+      // Inline function 'kotlin.text.all' call
+      var inductionVariable = 0;
+      while (inductionVariable < charSequenceLength(result)) {
+        var element = charSequenceGet(result, inductionVariable);
+        inductionVariable = inductionVariable + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.VisibleStringValueParser.bytesToValue.<anonymous>' call
+        if (!isVisibleChar(this, element)) {
+          tmp$ret$1 = false;
+          break $l$block;
+        }
+      }
+      tmp$ret$1 = true;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp$ret$1) {
+      // Inline function 'io.github.rafaelrabeloit.bertlv.universal.value.VisibleStringValueParser.bytesToValue.<anonymous>' call
+      var message = 'VisibleString can only contain visible ASCII characters (0x20-0x7E)';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    return result;
+  };
+  protoOf(VisibleStringValueParser).xh = function (value) {
+    return value;
+  };
+  protoOf(VisibleStringValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   function createTab($this, byteIndex, entries, byte) {
     var bits = toBitStrings(byte);
-    var table = Companion_instance_4.fe(entries.p() + 1 | 0);
+    var table = Companion_instance_11.bl(entries.s() + 1 | 0);
     // Inline function 'kotlin.collections.forEachIndexed' call
     var index = 0;
-    var tmp0_iterator = entries.m();
-    while (tmp0_iterator.n()) {
-      var item = tmp0_iterator.o();
+    var tmp0_iterator = entries.p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.BitFieldExplainer.createTab.<anonymous>' call
       var tmp1 = index;
       index = tmp1 + 1 | 0;
       var index_0 = checkIndexOverflow(tmp1);
-      var def = item.l9_1;
+      var def = item.sb_1;
       var tmp = index_0 + 1 | 0;
-      var tmp_0 = def.f9();
-      var tmp_1 = def.g9() + 1 | 0;
+      var tmp_0 = def.mb();
+      var tmp_1 = def.nb() + 1 | 0;
       var tmp_2;
-      var tmp_3 = item.l9_1;
+      var tmp_3 = item.sb_1;
       if (tmp_3 instanceof RfuField) {
         tmp_2 = 'RFU - Reserved for Future Use';
       } else {
-        tmp_2 = item.n9_1;
+        tmp_2 = item.ub_1;
       }
-      table.je(tmp, bits, tmp_0, tmp_1, tmp_2);
+      table.fl(tmp, bits, tmp_0, tmp_1, tmp_2);
     }
     // Inline function 'kotlin.collections.find' call
-    var this_0 = $this.ke_1.y8_1;
+    var this_0 = $this.gl_1.fb_1;
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator_0 = this_0.m();
-      while (tmp0_iterator_0.n()) {
-        var element = tmp0_iterator_0.o();
+      var tmp0_iterator_0 = this_0.p();
+      while (tmp0_iterator_0.q()) {
+        var element = tmp0_iterator_0.r();
         // Inline function 'io.github.rafaelrabeloit.bertlv.utils.BitFieldExplainer.createTab.<anonymous>' call
-        if (element.z8_1 === byteIndex) {
+        if (element.gb_1 === byteIndex) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -876,32 +2282,32 @@
       tmp$ret$1 = null;
     }
     var tmp0_safe_receiver = tmp$ret$1;
-    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.a9_1;
+    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.hb_1;
     var byteLabel = tmp1_elvis_lhs == null ? 'Byte ' + byteIndex : tmp1_elvis_lhs;
     return new Tab(byteLabel, table);
   }
   function BitFieldExplainer(schema) {
-    this.ke_1 = schema;
+    this.gl_1 = schema;
   }
-  protoOf(BitFieldExplainer).le = function (value, lineSeparator) {
-    var result = this.ke_1.c9(value);
+  protoOf(BitFieldExplainer).hl = function (value, lineSeparator) {
+    var result = this.gl_1.jb(value);
     var explanation = new Explanation(lineSeparator);
     // Inline function 'kotlin.collections.groupBy' call
     // Inline function 'kotlin.collections.groupByTo' call
-    var this_0 = result.j9_1;
+    var this_0 = result.qb_1;
     var destination = LinkedHashMap_init_$Create$();
-    var tmp0_iterator = this_0.m();
-    while (tmp0_iterator.n()) {
-      var element = tmp0_iterator.o();
+    var tmp0_iterator = this_0.p();
+    while (tmp0_iterator.q()) {
+      var element = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.BitFieldExplainer.explain.<anonymous>' call
-      var key = element.k9_1;
+      var key = element.rb_1;
       // Inline function 'kotlin.collections.getOrPut' call
-      var value_0 = destination.f1(key);
+      var value_0 = destination.s1(key);
       var tmp;
       if (value_0 == null) {
         // Inline function 'kotlin.collections.groupByTo.<anonymous>' call
         var answer = ArrayList_init_$Create$();
-        destination.y2(key, answer);
+        destination.o3(key, answer);
         tmp = answer;
       } else {
         tmp = value_0;
@@ -911,22 +2317,22 @@
     }
     var grouped = destination;
     // Inline function 'kotlin.collections.map' call
-    var this_1 = sorted(grouped.g1());
+    var this_1 = sorted(grouped.t1());
     // Inline function 'kotlin.collections.mapTo' call
     var destination_0 = ArrayList_init_$Create$_0(collectionSizeOrDefault(this_1, 10));
-    var tmp0_iterator_0 = this_1.m();
-    while (tmp0_iterator_0.n()) {
-      var item = tmp0_iterator_0.o();
+    var tmp0_iterator_0 = this_1.p();
+    while (tmp0_iterator_0.q()) {
+      var item = tmp0_iterator_0.r();
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.BitFieldExplainer.explain.<anonymous>' call
-      var tmp$ret$5 = createTab(this, item, ensureNotNull(grouped.f1(item)), value[item - 1 | 0]);
+      var tmp$ret$5 = createTab(this, item, ensureNotNull(grouped.s1(item)), value[item - 1 | 0]);
       destination_0.k(tmp$ret$5);
     }
     var tabs = destination_0;
-    explanation.ce(new TabGroup(tabs));
+    explanation.kg(new TabGroup(tabs));
     return explanation;
   };
-  protoOf(BitFieldExplainer).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(BitFieldExplainer).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   function Buffered() {
   }
@@ -953,9 +2359,9 @@
       // Inline function 'kotlin.js.asDynamic' call
       var hexString = toString_1(hex, 16).toUpperCase();
       if (hexString.length === 1) {
-        builder.m5(_Char___init__impl__6a9atx(48));
+        builder.c6(_Char___init__impl__6a9atx(48));
       }
-      builder.l5(hexString);
+      builder.b6(hexString);
     }
     return builder.toString();
   }
@@ -999,8 +2405,8 @@
     var this_0 = until(0, 8);
     // Inline function 'kotlin.collections.mapTo' call
     var destination = ArrayList_init_$Create$_0(collectionSizeOrDefault(this_0, 10));
-    var inductionVariable = this_0.w6_1;
-    var last = this_0.x6_1;
+    var inductionVariable = this_0.m7_1;
+    var last = this_0.n7_1;
     if (inductionVariable <= last)
       do {
         var item = inductionVariable;
@@ -1039,7 +2445,7 @@
       do {
         var i = inductionVariable_0;
         inductionVariable_0 = inductionVariable_0 + 1 | 0;
-        cells.f2(i, bits.q(i) + ' ');
+        cells.v2(i, bits.t(i) + ' ');
       }
        while (inductionVariable_0 < end);
     // Inline function 'kotlin.collections.plusAssign' call
@@ -1050,38 +2456,38 @@
   function Explanation(lineSeparator, elements) {
     lineSeparator = lineSeparator === VOID ? '\n' : lineSeparator;
     elements = elements === VOID ? emptyList() : elements;
-    this.ae_1 = lineSeparator;
-    this.be_1 = toMutableList(elements);
+    this.ig_1 = lineSeparator;
+    this.jg_1 = toMutableList(elements);
   }
-  protoOf(Explanation).ce = function (element) {
-    this.be_1.k(element);
+  protoOf(Explanation).kg = function (element) {
+    this.jg_1.k(element);
   };
-  protoOf(Explanation).m = function () {
-    return this.be_1.m();
+  protoOf(Explanation).p = function () {
+    return this.jg_1.p();
   };
   protoOf(Explanation).toString = function () {
     var builder = StringBuilder_init_$Create$_0();
-    var _iterator__ex2g4s = this.be_1.m();
-    while (_iterator__ex2g4s.n()) {
-      var element = _iterator__ex2g4s.o();
-      builder.l5(element.me(this.ae_1));
+    var _iterator__ex2g4s = this.jg_1.p();
+    while (_iterator__ex2g4s.q()) {
+      var element = _iterator__ex2g4s.r();
+      builder.b6(element.il(this.ig_1));
     }
     return builder.toString();
   };
   function ExplainElement() {
   }
   protoOf(ExplainElement).toString = function () {
-    return this.me('\n');
+    return this.il('\n');
   };
   function Line(text) {
     ExplainElement.call(this);
-    this.ne_1 = text;
+    this.jl_1 = text;
   }
-  protoOf(Line).me = function (lineSeparator) {
-    return this.ne_1;
+  protoOf(Line).il = function (lineSeparator) {
+    return this.jl_1;
   };
   protoOf(Line).hashCode = function () {
-    return getStringHashCode(this.ne_1);
+    return getStringHashCode(this.jl_1);
   };
   protoOf(Line).equals = function (other) {
     if (this === other)
@@ -1089,7 +2495,7 @@
     if (!(other instanceof Line))
       return false;
     var tmp0_other_with_cast = other instanceof Line ? other : THROW_CCE();
-    if (!(this.ne_1 === tmp0_other_with_cast.ne_1))
+    if (!(this.jl_1 === tmp0_other_with_cast.jl_1))
       return false;
     return true;
   };
@@ -1097,7 +2503,7 @@
     LineSeparator_instance = this;
     ExplainElement.call(this);
   }
-  protoOf(LineSeparator).me = function (lineSeparator) {
+  protoOf(LineSeparator).il = function (lineSeparator) {
     return lineSeparator;
   };
   var LineSeparator_instance;
@@ -1108,27 +2514,27 @@
   }
   function TabGroup(tabs) {
     ExplainElement.call(this);
-    this.oe_1 = tabs;
+    this.kl_1 = tabs;
   }
-  protoOf(TabGroup).me = function (lineSeparator) {
+  protoOf(TabGroup).il = function (lineSeparator) {
     var builder = StringBuilder_init_$Create$_0();
     // Inline function 'kotlin.collections.forEachIndexed' call
     var index = 0;
-    var tmp0_iterator = this.oe_1.m();
-    while (tmp0_iterator.n()) {
-      var item = tmp0_iterator.o();
+    var tmp0_iterator = this.kl_1.p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.TabGroup.toString.<anonymous>' call
       var tmp1 = index;
       index = tmp1 + 1 | 0;
       if (checkIndexOverflow(tmp1) > 0) {
-        builder.l5(lineSeparator);
+        builder.b6(lineSeparator);
       }
-      builder.l5(item.me(lineSeparator));
+      builder.b6(item.il(lineSeparator));
     }
     return builder.toString();
   };
   protoOf(TabGroup).hashCode = function () {
-    return hashCode(this.oe_1);
+    return hashCode(this.kl_1);
   };
   protoOf(TabGroup).equals = function (other) {
     if (this === other)
@@ -1136,25 +2542,25 @@
     if (!(other instanceof TabGroup))
       return false;
     var tmp0_other_with_cast = other instanceof TabGroup ? other : THROW_CCE();
-    if (!equals(this.oe_1, tmp0_other_with_cast.oe_1))
+    if (!equals(this.kl_1, tmp0_other_with_cast.kl_1))
       return false;
     return true;
   };
   function Tab(title, content) {
     ExplainElement.call(this);
-    this.pe_1 = title;
-    this.qe_1 = content;
+    this.ll_1 = title;
+    this.ml_1 = content;
   }
-  protoOf(Tab).me = function (lineSeparator) {
+  protoOf(Tab).il = function (lineSeparator) {
     var builder = StringBuilder_init_$Create$_0();
-    builder.l5(this.pe_1);
-    builder.l5(lineSeparator);
-    builder.l5(this.qe_1.me(lineSeparator));
+    builder.b6(this.ll_1);
+    builder.b6(lineSeparator);
+    builder.b6(this.ml_1.il(lineSeparator));
     return builder.toString();
   };
   protoOf(Tab).hashCode = function () {
-    var result = getStringHashCode(this.pe_1);
-    result = imul(result, 31) + hashCode(this.qe_1) | 0;
+    var result = getStringHashCode(this.ll_1);
+    result = imul(result, 31) + hashCode(this.ml_1) | 0;
     return result;
   };
   protoOf(Tab).equals = function (other) {
@@ -1163,20 +2569,20 @@
     if (!(other instanceof Tab))
       return false;
     var tmp0_other_with_cast = other instanceof Tab ? other : THROW_CCE();
-    if (!(this.pe_1 === tmp0_other_with_cast.pe_1))
+    if (!(this.ll_1 === tmp0_other_with_cast.ll_1))
       return false;
-    if (!equals(this.qe_1, tmp0_other_with_cast.qe_1))
+    if (!equals(this.ml_1, tmp0_other_with_cast.ml_1))
       return false;
     return true;
   };
   function Row(cells) {
-    this.re_1 = cells;
+    this.nl_1 = cells;
   }
   protoOf(Row).toString = function () {
-    return 'Row(cells=' + toString(this.re_1) + ')';
+    return 'Row(cells=' + toString(this.nl_1) + ')';
   };
   protoOf(Row).hashCode = function () {
-    return hashCode(this.re_1);
+    return hashCode(this.nl_1);
   };
   protoOf(Row).equals = function (other) {
     if (this === other)
@@ -1184,42 +2590,42 @@
     if (!(other instanceof Row))
       return false;
     var tmp0_other_with_cast = other instanceof Row ? other : THROW_CCE();
-    if (!equals(this.re_1, tmp0_other_with_cast.re_1))
+    if (!equals(this.nl_1, tmp0_other_with_cast.nl_1))
       return false;
     return true;
   };
-  function Companion_4() {
+  function Companion_11() {
   }
-  protoOf(Companion_4).fe = function (rows) {
+  protoOf(Companion_11).bl = function (rows) {
     var table = new Table(rows, 9);
-    table.se();
+    table.ol();
     return table;
   };
-  var Companion_instance_4;
-  function Companion_getInstance_4() {
-    return Companion_instance_4;
+  var Companion_instance_11;
+  function Companion_getInstance_13() {
+    return Companion_instance_11;
   }
   function Table(rows, columns) {
     ExplainElement.call(this);
-    this.ge_1 = rows;
-    this.he_1 = columns;
+    this.cl_1 = rows;
+    this.dl_1 = columns;
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.contracts.contract' call
-    if (!(this.ge_1 >= 2)) {
+    if (!(this.cl_1 >= 2)) {
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.Table.<anonymous>' call
       var message = 'Table must have at least 2 rows';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.contracts.contract' call
-    if (!(this.he_1 > 0)) {
+    if (!(this.dl_1 > 0)) {
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.Table.<anonymous>' call
       var message_0 = 'Table must have at least one column';
       throw IllegalArgumentException_init_$Create$(toString(message_0));
     }
     var tmp = this;
     // Inline function 'kotlin.collections.MutableList' call
-    var size = this.ge_1;
+    var size = this.cl_1;
     var list = ArrayList_init_$Create$_0(size);
     // Inline function 'kotlin.repeat' call
     // Inline function 'kotlin.contracts.contract' call
@@ -1231,7 +2637,7 @@
         // Inline function 'kotlin.collections.MutableList.<anonymous>' call
         // Inline function 'io.github.rafaelrabeloit.bertlv.utils.Table.data.<anonymous>' call
         // Inline function 'kotlin.collections.MutableList' call
-        var size_0 = this.he_1;
+        var size_0 = this.dl_1;
         var list_0 = ArrayList_init_$Create$_0(size_0);
         // Inline function 'kotlin.repeat' call
         // Inline function 'kotlin.contracts.contract' call
@@ -1249,59 +2655,59 @@
         list.k(tmp$ret$4);
       }
        while (inductionVariable < size);
-    tmp.ie_1 = list;
+    tmp.el_1 = list;
   }
-  protoOf(Table).te = function () {
-    return this.ie_1.q(0);
+  protoOf(Table).pl = function () {
+    return this.el_1.t(0);
   };
-  protoOf(Table).ue = function (row, column, value) {
-    this.ie_1.q(row).re_1.f2(column, value);
+  protoOf(Table).ql = function (row, column, value) {
+    this.el_1.t(row).nl_1.v2(column, value);
   };
-  protoOf(Table).se = function () {
+  protoOf(Table).ol = function () {
     // Inline function 'kotlin.collections.forEachIndexed' call
     var index = 0;
-    var tmp0_iterator = get_BIT_HEADER_CELLS().m();
-    while (tmp0_iterator.n()) {
-      var item = tmp0_iterator.o();
+    var tmp0_iterator = get_BIT_HEADER_CELLS().p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.Table.setBitHeaders.<anonymous>' call
       var tmp1 = index;
       index = tmp1 + 1 | 0;
       var i = checkIndexOverflow(tmp1);
-      this.te().re_1.f2(i, item);
+      this.pl().nl_1.v2(i, item);
     }
   };
-  protoOf(Table).je = function (rowIndex, bits, start, end, meaning) {
+  protoOf(Table).fl = function (rowIndex, bits, start, end, meaning) {
     var rowData = createBitRow(bits, start, end, meaning);
     // Inline function 'kotlin.collections.forEachIndexed' call
     var index = 0;
-    var tmp0_iterator = rowData.m();
-    while (tmp0_iterator.n()) {
-      var item = tmp0_iterator.o();
+    var tmp0_iterator = rowData.p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.bertlv.utils.Table.setBitRow.<anonymous>' call
       var tmp1 = index;
       index = tmp1 + 1 | 0;
       var index_0 = checkIndexOverflow(tmp1);
-      this.ue(rowIndex, index_0, item);
+      this.ql(rowIndex, index_0, item);
     }
   };
-  protoOf(Table).m = function () {
-    return this.ie_1.m();
+  protoOf(Table).p = function () {
+    return this.el_1.p();
   };
-  protoOf(Table).me = function (lineSeparator) {
+  protoOf(Table).il = function (lineSeparator) {
     var builder = StringBuilder_init_$Create$_0();
-    var headerString = joinToString(this.te().re_1, ' | ');
-    builder.l5('| ').l5(headerString).l5(lineSeparator);
+    var headerString = joinToString(this.pl().nl_1, ' | ');
+    builder.b6('| ').b6(headerString).b6(lineSeparator);
     var headerLength = 2 + headerString.length | 0;
-    builder.l5(repeat('=', headerLength)).l5(lineSeparator);
+    builder.b6(repeat('=', headerLength)).b6(lineSeparator);
     var inductionVariable = 1;
-    var last = this.ie_1.p();
+    var last = this.el_1.s();
     if (inductionVariable < last)
       do {
         var i = inductionVariable;
         inductionVariable = inductionVariable + 1 | 0;
-        var row = this.ie_1.q(i);
-        var rowString = joinToString(row.re_1, ' | ');
-        builder.l5('| ').l5(rowString).l5(lineSeparator);
+        var row = this.el_1.t(i);
+        var rowString = joinToString(row.nl_1, ' | ');
+        builder.b6('| ').b6(rowString).b6(lineSeparator);
       }
        while (inductionVariable < last);
     return builder.toString();
@@ -1310,15 +2716,15 @@
   function _init_properties_Explanation_kt__cua9yf() {
     if (!properties_initialized_Explanation_kt_y3wdl) {
       properties_initialized_Explanation_kt_y3wdl = true;
-      BIT_HEADER_CELLS = listOf(['b8', 'b7', 'b6', 'b5', 'b4', 'b3', 'b2', 'b1', '  Meaning']);
+      BIT_HEADER_CELLS = listOf_0(['b8', 'b7', 'b6', 'b5', 'b4', 'b3', 'b2', 'b1', '  Meaning']);
     }
   }
   function getTagDescription($this, tlvTag) {
-    return Companion_instance_5.ve(tlvTag.lc_1);
+    return Companion_instance_12.rl(tlvTag.ed_1);
   }
   function createParserForFormat($this, format) {
     var tmp;
-    switch (format.j1_1) {
+    switch (format.w1_1) {
       case 0:
         tmp = new NumericValueParser();
         break;
@@ -1341,7 +2747,7 @@
     return tmp;
   }
   function createValueHandler($this, tagDescription, defaultParser) {
-    switch (tagDescription.j1_1) {
+    switch (tagDescription.w1_1) {
       case 19:
         return new ValueHandler(new BinaryValueParser(), TVR_getInstance());
       case 23:
@@ -1414,10 +2820,10 @@
   }
   function EmvSpecification() {
   }
-  protoOf(EmvSpecification).ua = function (tlvTag) {
+  protoOf(EmvSpecification).bd = function (tlvTag) {
     return !(getTagDescription(this, tlvTag) == null);
   };
-  protoOf(EmvSpecification).va = function (tlvTag) {
+  protoOf(EmvSpecification).cd = function (tlvTag) {
     var tmp0_elvis_lhs = getTagDescription(this, tlvTag);
     var tmp;
     if (tmp0_elvis_lhs == null) {
@@ -1426,9 +2832,9 @@
       tmp = tmp0_elvis_lhs;
     }
     var tagDescription = tmp;
-    return new Context(tagDescription.ze_1, tagDescription.af_1);
+    return new Context(tagDescription.vl_1, tagDescription.wl_1);
   };
-  protoOf(EmvSpecification).ic = function (tlvTag) {
+  protoOf(EmvSpecification).bf = function (tlvTag) {
     var tmp0_elvis_lhs = getTagDescription(this, tlvTag);
     var tmp;
     if (tmp0_elvis_lhs == null) {
@@ -1437,7 +2843,7 @@
       tmp = tmp0_elvis_lhs;
     }
     var tagDescription = tmp;
-    var parser = createParserForFormat(this, tagDescription.df_1);
+    var parser = createParserForFormat(this, tagDescription.zl_1);
     return createValueHandler(this, tagDescription, parser);
   };
   var EmvSpecification_instance;
@@ -1573,11 +2979,11 @@
   var EmvTagDescription_STATIC_DATA_AUTHENTICATION_TAG_LIST_instance;
   var EmvTagDescription_LOG_ENTRY_instance;
   var EmvTagDescription_FCI_PROPRIETARY_TEMPLATE_instance;
-  function Companion_5() {
+  function Companion_12() {
   }
-  protoOf(Companion_5).ve = function (tag) {
+  protoOf(Companion_12).rl = function (tag) {
     // Inline function 'kotlin.collections.find' call
-    var this_0 = values_1();
+    var this_0 = values_2();
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
@@ -1587,7 +2993,7 @@
         var element = this_0[inductionVariable];
         inductionVariable = inductionVariable + 1 | 0;
         // Inline function 'io.github.rafaelrabeloit.emv.Companion.findByTag.<anonymous>' call
-        if (element.ye_1 === tag) {
+        if (element.ul_1 === tag) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -1596,11 +3002,11 @@
     }
     return tmp$ret$1;
   };
-  var Companion_instance_5;
-  function Companion_getInstance_5() {
-    return Companion_instance_5;
+  var Companion_instance_12;
+  function Companion_getInstance_14() {
+    return Companion_instance_12;
   }
-  function values_1() {
+  function values_2() {
     return [EmvTagDescription_APPLICATION_IDENTIFIER_getInstance(), EmvTagDescription_APPLICATION_LABEL_getInstance(), EmvTagDescription_APPLICATION_PREFERRED_NAME_getInstance(), EmvTagDescription_APPLICATION_PRIORITY_INDICATOR_getInstance(), EmvTagDescription_PAN_getInstance(), EmvTagDescription_PAN_SEQUENCE_NUMBER_getInstance(), EmvTagDescription_CARD_EXPIRY_DATE_getInstance(), EmvTagDescription_CARDHOLDER_NAME_getInstance(), EmvTagDescription_AMOUNT_AUTHORISED_getInstance(), EmvTagDescription_AMOUNT_OTHER_getInstance(), EmvTagDescription_TERMINAL_COUNTRY_CODE_getInstance(), EmvTagDescription_TRANSACTION_CURRENCY_CODE_getInstance(), EmvTagDescription_TRANSACTION_DATE_getInstance(), EmvTagDescription_TRANSACTION_TYPE_getInstance(), EmvTagDescription_TRANSACTION_REFERENCE_CURRENCY_CODE_getInstance(), EmvTagDescription_APPLICATION_CRYPTOGRAM_getInstance(), EmvTagDescription_CVM_LIST_getInstance(), EmvTagDescription_CRYPTOGRAM_INFORMATION_DATA_getInstance(), EmvTagDescription_ISSUER_APPLICATION_DATA_getInstance(), EmvTagDescription_TERMINAL_VERIFICATION_RESULTS_getInstance(), EmvTagDescription_CARDHOLDER_VERIFICATION_METHOD_RESULTS_getInstance(), EmvTagDescription_TERMINAL_TYPE_getInstance(), EmvTagDescription_FORM_FACTOR_getInstance(), EmvTagDescription_TERMINAL_CAPABILITIES_getInstance(), EmvTagDescription_ADDITIONAL_TERMINAL_CAPABILITIES_getInstance(), EmvTagDescription_APPLICATION_INTERCHANGE_PROFILE_getInstance(), EmvTagDescription_TRANSACTION_STATUS_INFORMATION_getInstance(), EmvTagDescription_CARD_TRANSACTION_QUALIFIERS_getInstance(), EmvTagDescription_APPLICATION_FILE_LOCATOR_getInstance(), EmvTagDescription_PROCESSING_OPTIONS_DATA_OBJECT_LIST_getInstance(), EmvTagDescription_APPLICATION_TRANSACTION_COUNTER_getInstance(), EmvTagDescription_APPLICATION_TEMPLATE_getInstance(), EmvTagDescription_APPLICATION_USAGE_CONTROL_getInstance(), EmvTagDescription_APPLICATION_VERSION_NUMBER_getInstance(), EmvTagDescription_APPLICATION_EFFECTIVE_DATE_getInstance(), EmvTagDescription_APPLICATION_DISCRETIONARY_DATA_getInstance(), EmvTagDescription_APPLICATION_LIFE_CYCLE_DATA_getInstance(), EmvTagDescription_APPLICATION_CURRENCY_CODE_getInstance(), EmvTagDescription_APPLICATION_CURRENCY_EXPONENT_getInstance(), EmvTagDescription_APPLICATION_REFERENCE_CURRENCY_getInstance(), EmvTagDescription_APPLICATION_REFERENCE_CURRENCY_EXPONENT_getInstance(), EmvTagDescription_APPLICATION_PREFERRED_NAME_EXTENDED_getInstance(), EmvTagDescription_LOWER_CONSECUTIVE_OFFLINE_LIMIT_getInstance(), EmvTagDescription_LANGUAGE_PREFERENCE_getInstance(), EmvTagDescription_TRACK_2_EQUIVALENT_DATA_getInstance(), EmvTagDescription_TRACK_1_DISCRETIONARY_DATA_getInstance(), EmvTagDescription_TRACK_2_DISCRETIONARY_DATA_getInstance(), EmvTagDescription_TRACK_1_DATA_getInstance(), EmvTagDescription_TRACK_3_DATA_getInstance(), EmvTagDescription_CARDHOLDER_NAME_EXTENDED_getInstance(), EmvTagDescription_AMOUNT_REFERENCE_CURRENCY_getInstance(), EmvTagDescription_TRANSACTION_CURRENCY_EXPONENT_getInstance(), EmvTagDescription_TRANSACTION_TIME_getInstance(), EmvTagDescription_TRANSACTION_CATEGORY_CODE_getInstance(), EmvTagDescription_MERCHANT_NAME_AND_LOCATION_getInstance(), EmvTagDescription_UNPREDICTABLE_NUMBER_getInstance(), EmvTagDescription_ISSUER_AUTHENTICATION_DATA_getInstance(), EmvTagDescription_SIGNED_DYNAMIC_APPLICATION_DATA_getInstance(), EmvTagDescription_ICC_DYNAMIC_NUMBER_getInstance(), EmvTagDescription_TERMINAL_IDENTIFICATION_getInstance(), EmvTagDescription_TERMINAL_SERIAL_NUMBER_getInstance(), EmvTagDescription_TERMINAL_TRANSACTION_QUALIFIERS_getInstance(), EmvTagDescription_MERCHANT_CATEGORY_CODE_getInstance(), EmvTagDescription_MERCHANT_CITY_getInstance(), EmvTagDescription_MERCHANT_POSTAL_CODE_getInstance(), EmvTagDescription_MERCHANT_IDENTIFIER_getInstance(), EmvTagDescription_ISSUER_COUNTRY_CODE_getInstance(), EmvTagDescription_ISSUER_COUNTRY_CODE_ALPHA2_getInstance(), EmvTagDescription_ISSUER_COUNTRY_CODE_ALPHA3_getInstance(), EmvTagDescription_ISSUER_ACTION_CODE_DENIAL_getInstance(), EmvTagDescription_ISSUER_ACTION_CODE_ONLINE_getInstance(), EmvTagDescription_ISSUER_ACTION_CODE_DEFAULT_getInstance(), EmvTagDescription_ISSUER_SCRIPT_TEMPLATE_getInstance(), EmvTagDescription_ISSUER_SCRIPT_RESULTS_getInstance(), EmvTagDescription_RESPONSE_MESSAGE_TEMPLATE_FORMAT_1_getInstance(), EmvTagDescription_RESPONSE_MESSAGE_TEMPLATE_FORMAT_2_getInstance(), EmvTagDescription_FCI_ISSUER_DISCRETIONARY_DATA_getInstance(), EmvTagDescription_ISSUER_IDENTIFICATION_NUMBER_getInstance(), EmvTagDescription_SERVICE_CODE_getInstance(), EmvTagDescription_ISSUER_URL_getInstance(), EmvTagDescription_INTERNATIONAL_BANK_ACCOUNT_NUMBER_getInstance(), EmvTagDescription_BANK_IDENTIFIER_CODE_getInstance(), EmvTagDescription_FCI_TEMPLATE_getInstance(), EmvTagDescription_EMV_PROPRIETARY_TEMPLATE_getInstance(), EmvTagDescription_ISSUER_SCRIPT_TEMPLATE_1_getInstance(), EmvTagDescription_DIRECTORY_DISCRETIONARY_TEMPLATE_getInstance(), EmvTagDescription_AMOUNT_AUTHORISED_BINARY_getInstance(), EmvTagDescription_COMMAND_TEMPLATE_getInstance(), EmvTagDescription_DEDICATED_FILE_NAME_getInstance(), EmvTagDescription_ISSUER_SCRIPT_COMMAND_getInstance(), EmvTagDescription_SHORT_FILE_IDENTIFIER_getInstance(), EmvTagDescription_AUTHORISATION_CODE_getInstance(), EmvTagDescription_AUTHORISATION_RESPONSE_CODE_getInstance(), EmvTagDescription_CDOL1_getInstance(), EmvTagDescription_CDOL2_getInstance(), EmvTagDescription_CA_PUBLIC_KEY_INDEX_ICC_getInstance(), EmvTagDescription_ISSUER_PUBLIC_KEY_CERTIFICATE_getInstance(), EmvTagDescription_ISSUER_PUBLIC_KEY_REMAINDER_getInstance(), EmvTagDescription_SIGNED_STATIC_APPLICATION_DATA_getInstance(), EmvTagDescription_TDOL_getInstance(), EmvTagDescription_TC_HASH_VALUE_getInstance(), EmvTagDescription_TRANSACTION_PIN_DATA_getInstance(), EmvTagDescription_DDF_NAME_getInstance(), EmvTagDescription_ACQUIRER_IDENTIFIER_getInstance(), EmvTagDescription_AMOUNT_OTHER_BINARY_getInstance(), EmvTagDescription_AID_TERMINAL_getInstance(), EmvTagDescription_APPLICATION_VERSION_NUMBER_TERMINAL_getInstance(), EmvTagDescription_ISSUER_CODE_TABLE_INDEX_getInstance(), EmvTagDescription_PIN_TRY_COUNTER_getInstance(), EmvTagDescription_ISSUER_SCRIPT_IDENTIFIER_getInstance(), EmvTagDescription_TERMINAL_FLOOR_LIMIT_getInstance(), EmvTagDescription_TERMINAL_RISK_MANAGEMENT_DATA_getInstance(), EmvTagDescription_CA_PUBLIC_KEY_INDEX_TERMINAL_getInstance(), EmvTagDescription_UPPER_CONSECUTIVE_OFFLINE_LIMIT_getInstance(), EmvTagDescription_ICC_PIN_ENCIPHERMENT_PUBLIC_KEY_CERTIFICATE_getInstance(), EmvTagDescription_ICC_PIN_ENCIPHERMENT_PUBLIC_KEY_EXPONENT_getInstance(), EmvTagDescription_ICC_PIN_ENCIPHERMENT_PUBLIC_KEY_REMAINDER_getInstance(), EmvTagDescription_ISSUER_PUBLIC_KEY_EXPONENT_getInstance(), EmvTagDescription_POS_ENTRY_MODE_getInstance(), EmvTagDescription_TRANSACTION_REFERENCE_CURRENCY_EXPONENT_getInstance(), EmvTagDescription_TRANSACTION_SEQUENCE_COUNTER_getInstance(), EmvTagDescription_DATA_AUTHENTICATION_CODE_getInstance(), EmvTagDescription_ICC_PUBLIC_KEY_CERTIFICATE_getInstance(), EmvTagDescription_ICC_PUBLIC_KEY_EXPONENT_getInstance(), EmvTagDescription_ICC_PUBLIC_KEY_REMAINDER_getInstance(), EmvTagDescription_DDOL_getInstance(), EmvTagDescription_STATIC_DATA_AUTHENTICATION_TAG_LIST_getInstance(), EmvTagDescription_LOG_ENTRY_getInstance(), EmvTagDescription_FCI_PROPRIETARY_TEMPLATE_getInstance()];
   }
   var EmvTagDescription_entriesInitialized;
@@ -1740,12 +3146,12 @@
   }
   function EmvTagDescription(name, ordinal, tag, tagName, description, source, lengthRange, format) {
     Enum.call(this, name, ordinal);
-    this.ye_1 = tag;
-    this.ze_1 = tagName;
-    this.af_1 = description;
-    this.bf_1 = source;
-    this.cf_1 = lengthRange;
-    this.df_1 = format;
+    this.ul_1 = tag;
+    this.vl_1 = tagName;
+    this.wl_1 = description;
+    this.xl_1 = source;
+    this.yl_1 = lengthRange;
+    this.zl_1 = format;
   }
   function EmvTagDescription_APPLICATION_IDENTIFIER_getInstance() {
     EmvTagDescription_initEntries();
@@ -2330,69 +3736,69 @@
     return Source_ISSUER_instance;
   }
   function AdditionalTerminalCapabilities$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - Transaction Type Capability', AdditionalTerminalCapabilities$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - Transaction Type Capability (continued)', AdditionalTerminalCapabilities$schema$lambda$lambda_0);
-    $this$bitfield.s9(3, 'Byte 3 - Terminal Data Input Capability', AdditionalTerminalCapabilities$schema$lambda$lambda_1);
-    $this$bitfield.s9(4, 'Byte 4 - Terminal Data Output Capability', AdditionalTerminalCapabilities$schema$lambda$lambda_2);
-    $this$bitfield.s9(5, 'Byte 5 - Terminal Data Output Capability (continued)', AdditionalTerminalCapabilities$schema$lambda$lambda_3);
+    $this$bitfield.zb(1, 'Byte 1 - Transaction Type Capability', AdditionalTerminalCapabilities$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - Transaction Type Capability (continued)', AdditionalTerminalCapabilities$schema$lambda$lambda_0);
+    $this$bitfield.zb(3, 'Byte 3 - Terminal Data Input Capability', AdditionalTerminalCapabilities$schema$lambda$lambda_1);
+    $this$bitfield.zb(4, 'Byte 4 - Terminal Data Output Capability', AdditionalTerminalCapabilities$schema$lambda$lambda_2);
+    $this$bitfield.zb(5, 'Byte 5 - Terminal Data Output Capability (continued)', AdditionalTerminalCapabilities$schema$lambda$lambda_3);
     return Unit_instance;
   }
   function AdditionalTerminalCapabilities$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'Cash - Cash transactions supported');
-    $this$byte.w9(1, 'Goods - Goods transactions supported');
-    $this$byte.w9(2, 'Services - Services transactions supported');
-    $this$byte.w9(3, 'Cashback - Cashback transactions supported');
-    $this$byte.w9(4, 'Inquiry - Inquiry supported');
-    $this$byte.w9(5, 'Transfer - Transfer supported');
-    $this$byte.w9(6, 'Payment - Payment supported');
-    $this$byte.w9(7, 'Administrative - Administrative transactions supported');
+    $this$byte.dc(0, 'Cash - Cash transactions supported');
+    $this$byte.dc(1, 'Goods - Goods transactions supported');
+    $this$byte.dc(2, 'Services - Services transactions supported');
+    $this$byte.dc(3, 'Cashback - Cashback transactions supported');
+    $this$byte.dc(4, 'Inquiry - Inquiry supported');
+    $this$byte.dc(5, 'Transfer - Transfer supported');
+    $this$byte.dc(6, 'Payment - Payment supported');
+    $this$byte.dc(7, 'Administrative - Administrative transactions supported');
     return Unit_instance;
   }
   function AdditionalTerminalCapabilities$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'Cash Deposit - Cash deposit supported');
-    $this$byte.ja(numberRangeToNumber(1, 7));
+    $this$byte.dc(0, 'Cash Deposit - Cash deposit supported');
+    $this$byte.qc(numberRangeToNumber(1, 7));
     return Unit_instance;
   }
   function AdditionalTerminalCapabilities$schema$lambda$lambda_1($this$byte) {
-    $this$byte.w9(0, 'Numeric Keys - Numeric keys supported');
-    $this$byte.w9(1, 'Alphabetic and Special Characters Keys - Alphabetic and special characters keys supported');
-    $this$byte.w9(2, 'Command Keys - Command keys supported');
-    $this$byte.w9(3, 'Function Keys - Function keys supported');
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.dc(0, 'Numeric Keys - Numeric keys supported');
+    $this$byte.dc(1, 'Alphabetic and Special Characters Keys - Alphabetic and special characters keys supported');
+    $this$byte.dc(2, 'Command Keys - Command keys supported');
+    $this$byte.dc(3, 'Function Keys - Function keys supported');
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function AdditionalTerminalCapabilities$schema$lambda$lambda_2($this$byte) {
-    $this$byte.w9(0, 'Print, Attendant - Print capability, attendant');
-    $this$byte.w9(1, 'Print, Cardholder - Print capability, cardholder');
-    $this$byte.w9(2, 'Display, Attendant - Display capability, attendant');
-    $this$byte.w9(3, 'Display, Cardholder - Display capability, cardholder');
-    $this$byte.ja(numberRangeToNumber(4, 5));
-    $this$byte.w9(6, 'Code Table 10 - Code table 10 supported');
-    $this$byte.w9(7, 'Code Table 9 - Code table 9 supported');
+    $this$byte.dc(0, 'Print, Attendant - Print capability, attendant');
+    $this$byte.dc(1, 'Print, Cardholder - Print capability, cardholder');
+    $this$byte.dc(2, 'Display, Attendant - Display capability, attendant');
+    $this$byte.dc(3, 'Display, Cardholder - Display capability, cardholder');
+    $this$byte.qc(numberRangeToNumber(4, 5));
+    $this$byte.dc(6, 'Code Table 10 - Code table 10 supported');
+    $this$byte.dc(7, 'Code Table 9 - Code table 9 supported');
     return Unit_instance;
   }
   function AdditionalTerminalCapabilities$schema$lambda$lambda_3($this$byte) {
-    $this$byte.w9(0, 'Code Table 8 - Code table 8 supported');
-    $this$byte.w9(1, 'Code Table 7 - Code table 7 supported');
-    $this$byte.w9(2, 'Code Table 6 - Code table 6 supported');
-    $this$byte.w9(3, 'Code Table 5 - Code table 5 supported');
-    $this$byte.w9(4, 'Code Table 4 - Code table 4 supported');
-    $this$byte.w9(5, 'Code Table 3 - Code table 3 supported');
-    $this$byte.w9(6, 'Code Table 2 - Code table 2 supported');
-    $this$byte.w9(7, 'Code Table 1 - Code table 1 supported');
+    $this$byte.dc(0, 'Code Table 8 - Code table 8 supported');
+    $this$byte.dc(1, 'Code Table 7 - Code table 7 supported');
+    $this$byte.dc(2, 'Code Table 6 - Code table 6 supported');
+    $this$byte.dc(3, 'Code Table 5 - Code table 5 supported');
+    $this$byte.dc(4, 'Code Table 4 - Code table 4 supported');
+    $this$byte.dc(5, 'Code Table 3 - Code table 3 supported');
+    $this$byte.dc(6, 'Code Table 2 - Code table 2 supported');
+    $this$byte.dc(7, 'Code Table 1 - Code table 1 supported');
     return Unit_instance;
   }
   function AdditionalTerminalCapabilities() {
     AdditionalTerminalCapabilities_instance = this;
     var tmp = this;
-    tmp.ef_1 = bitfield('Additional Terminal Capabilities', 5, AdditionalTerminalCapabilities$schema$lambda);
-    this.ff_1 = new BitFieldExplainer(this.ef_1);
+    tmp.am_1 = bitfield('Additional Terminal Capabilities', 5, AdditionalTerminalCapabilities$schema$lambda);
+    this.bm_1 = new BitFieldExplainer(this.am_1);
   }
-  protoOf(AdditionalTerminalCapabilities).le = function (value, lineSeparator) {
-    return this.ff_1.le(value, lineSeparator);
+  protoOf(AdditionalTerminalCapabilities).hl = function (value, lineSeparator) {
+    return this.bm_1.hl(value, lineSeparator);
   };
-  protoOf(AdditionalTerminalCapabilities).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(AdditionalTerminalCapabilities).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var AdditionalTerminalCapabilities_instance;
   function AdditionalTerminalCapabilities_getInstance() {
@@ -2411,38 +3817,38 @@
     return ApplicationCurrencyCode_instance;
   }
   function ApplicationInterchangeProfile$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1', ApplicationInterchangeProfile$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2', ApplicationInterchangeProfile$schema$lambda$lambda_0);
+    $this$bitfield.zb(1, 'Byte 1', ApplicationInterchangeProfile$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2', ApplicationInterchangeProfile$schema$lambda$lambda_0);
     return Unit_instance;
   }
   function ApplicationInterchangeProfile$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'CDA Supported - Card supports Combined Dynamic Data Authentication and Application Cryptogram Generation');
-    $this$byte.w9(1, 'DDA Supported - Card supports Dynamic Data Authentication');
-    $this$byte.w9(2, 'SDA Supported - Card supports Static Data Authentication');
-    $this$byte.w9(3, 'Cardholder Verification is supported');
-    $this$byte.w9(4, 'Terminal Risk Management is to be performed');
-    $this$byte.w9(5, 'Issuer Authentication is supported');
-    $this$byte.w9(6, 'On-device Cardholder Verification is supported');
-    $this$byte.ia(7);
+    $this$byte.dc(0, 'CDA Supported - Card supports Combined Dynamic Data Authentication and Application Cryptogram Generation');
+    $this$byte.dc(1, 'DDA Supported - Card supports Dynamic Data Authentication');
+    $this$byte.dc(2, 'SDA Supported - Card supports Static Data Authentication');
+    $this$byte.dc(3, 'Cardholder Verification is supported');
+    $this$byte.dc(4, 'Terminal Risk Management is to be performed');
+    $this$byte.dc(5, 'Issuer Authentication is supported');
+    $this$byte.dc(6, 'On-device Cardholder Verification is supported');
+    $this$byte.pc(7);
     return Unit_instance;
   }
   function ApplicationInterchangeProfile$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'EMV Mode supported');
-    $this$byte.w9(1, 'Contactless EMV Mode supported');
-    $this$byte.ja(numberRangeToNumber(2, 7));
+    $this$byte.dc(0, 'EMV Mode supported');
+    $this$byte.dc(1, 'Contactless EMV Mode supported');
+    $this$byte.qc(numberRangeToNumber(2, 7));
     return Unit_instance;
   }
   function ApplicationInterchangeProfile() {
     ApplicationInterchangeProfile_instance = this;
     var tmp = this;
-    tmp.if_1 = bitfield('Application Interchange Profile', 2, ApplicationInterchangeProfile$schema$lambda);
-    this.jf_1 = new BitFieldExplainer(this.if_1);
+    tmp.em_1 = bitfield('Application Interchange Profile', 2, ApplicationInterchangeProfile$schema$lambda);
+    this.fm_1 = new BitFieldExplainer(this.em_1);
   }
-  protoOf(ApplicationInterchangeProfile).le = function (value, lineSeparator) {
-    return this.jf_1.le(value, lineSeparator);
+  protoOf(ApplicationInterchangeProfile).hl = function (value, lineSeparator) {
+    return this.fm_1.hl(value, lineSeparator);
   };
-  protoOf(ApplicationInterchangeProfile).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(ApplicationInterchangeProfile).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var ApplicationInterchangeProfile_instance;
   function ApplicationInterchangeProfile_getInstance() {
@@ -2451,28 +3857,28 @@
     return ApplicationInterchangeProfile_instance;
   }
   function ApplicationLifeCycleData$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1', ApplicationLifeCycleData$schema$lambda$lambda);
+    $this$bitfield.zb(1, 'Byte 1', ApplicationLifeCycleData$schema$lambda$lambda);
     return Unit_instance;
   }
   function ApplicationLifeCycleData$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'Application Not Yet Active - Application is not yet active');
-    $this$byte.w9(1, 'Application Active - Application is active');
-    $this$byte.w9(2, 'Application Suspended - Application is suspended');
-    $this$byte.w9(3, 'Application Terminated - Application is terminated');
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.dc(0, 'Application Not Yet Active - Application is not yet active');
+    $this$byte.dc(1, 'Application Active - Application is active');
+    $this$byte.dc(2, 'Application Suspended - Application is suspended');
+    $this$byte.dc(3, 'Application Terminated - Application is terminated');
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function ApplicationLifeCycleData() {
     ApplicationLifeCycleData_instance = this;
     var tmp = this;
-    tmp.kf_1 = bitfield('Application Life Cycle Data', 1, ApplicationLifeCycleData$schema$lambda);
-    this.lf_1 = new BitFieldExplainer(this.kf_1);
+    tmp.gm_1 = bitfield('Application Life Cycle Data', 1, ApplicationLifeCycleData$schema$lambda);
+    this.hm_1 = new BitFieldExplainer(this.gm_1);
   }
-  protoOf(ApplicationLifeCycleData).le = function (value, lineSeparator) {
-    return this.lf_1.le(value, lineSeparator);
+  protoOf(ApplicationLifeCycleData).hl = function (value, lineSeparator) {
+    return this.hm_1.hl(value, lineSeparator);
   };
-  protoOf(ApplicationLifeCycleData).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(ApplicationLifeCycleData).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var ApplicationLifeCycleData_instance;
   function ApplicationLifeCycleData_getInstance() {
@@ -2481,25 +3887,25 @@
     return ApplicationLifeCycleData_instance;
   }
   function ApplicationPriorityIndicator$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1', ApplicationPriorityIndicator$schema$lambda$lambda);
+    $this$bitfield.zb(1, 'Byte 1', ApplicationPriorityIndicator$schema$lambda$lambda);
     return Unit_instance;
   }
   function ApplicationPriorityIndicator$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'Priority - Application has priority');
-    $this$byte.ja(numberRangeToNumber(1, 7));
+    $this$byte.dc(0, 'Priority - Application has priority');
+    $this$byte.qc(numberRangeToNumber(1, 7));
     return Unit_instance;
   }
   function ApplicationPriorityIndicator() {
     ApplicationPriorityIndicator_instance = this;
     var tmp = this;
-    tmp.mf_1 = bitfield('Application Priority Indicator', 1, ApplicationPriorityIndicator$schema$lambda);
-    this.nf_1 = new BitFieldExplainer(this.mf_1);
+    tmp.im_1 = bitfield('Application Priority Indicator', 1, ApplicationPriorityIndicator$schema$lambda);
+    this.jm_1 = new BitFieldExplainer(this.im_1);
   }
-  protoOf(ApplicationPriorityIndicator).le = function (value, lineSeparator) {
-    return this.nf_1.le(value, lineSeparator);
+  protoOf(ApplicationPriorityIndicator).hl = function (value, lineSeparator) {
+    return this.jm_1.hl(value, lineSeparator);
   };
-  protoOf(ApplicationPriorityIndicator).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(ApplicationPriorityIndicator).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var ApplicationPriorityIndicator_instance;
   function ApplicationPriorityIndicator_getInstance() {
@@ -2508,11 +3914,11 @@
     return ApplicationPriorityIndicator_instance;
   }
   function ApplicationReferenceCurrency() {
-    this.of_1 = 3;
-    this.pf_1 = 12;
-    this.qf_1 = 3;
+    this.km_1 = 3;
+    this.lm_1 = 12;
+    this.mm_1 = 3;
   }
-  protoOf(ApplicationReferenceCurrency).rf = function (value, lineSeparator) {
+  protoOf(ApplicationReferenceCurrency).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     var containsArg = value.length;
     // Inline function 'kotlin.contracts.contract' call
@@ -2531,62 +3937,62 @@
     var explanation = new Explanation(lineSeparator);
     // Inline function 'kotlin.collections.forEachIndexed' call
     var index = 0;
-    var tmp0_iterator = chunked(value, 3).m();
-    while (tmp0_iterator.n()) {
-      var item = tmp0_iterator.o();
+    var tmp0_iterator = chunked(value, 3).p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.emv.explain.ApplicationReferenceCurrency.explain.<anonymous>' call
       var tmp1 = index;
       index = tmp1 + 1 | 0;
       if (checkIndexOverflow(tmp1) > 0) {
-        explanation.ce(LineSeparator_getInstance());
+        explanation.kg(LineSeparator_getInstance());
       }
-      var tmp0_safe_receiver = Companion_instance_12.sf(toInt(item));
-      var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.wf_1;
+      var tmp0_safe_receiver = Companion_instance_19.om(toInt(item));
+      var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.sm_1;
       var description = tmp1_elvis_lhs == null ? 'Unknown Currency Code' : tmp1_elvis_lhs;
-      explanation.ce(new Line(description));
+      explanation.kg(new Line(description));
     }
     return explanation;
   };
-  protoOf(ApplicationReferenceCurrency).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(ApplicationReferenceCurrency).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
   var ApplicationReferenceCurrency_instance;
   function ApplicationReferenceCurrency_getInstance() {
     return ApplicationReferenceCurrency_instance;
   }
   function ApplicationUsageControl$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - Transaction Types', ApplicationUsageControl$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - Additional Transaction Types', ApplicationUsageControl$schema$lambda$lambda_0);
+    $this$bitfield.zb(1, 'Byte 1 - Transaction Types', ApplicationUsageControl$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - Additional Transaction Types', ApplicationUsageControl$schema$lambda$lambda_0);
     return Unit_instance;
   }
   function ApplicationUsageControl$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'Domestic Cash Transactions - Domestic cash transactions are allowed');
-    $this$byte.w9(1, 'International Cash Transactions - International cash transactions are allowed');
-    $this$byte.w9(2, 'Domestic Goods - Domestic goods purchases are allowed');
-    $this$byte.w9(3, 'International Goods - International goods purchases are allowed');
-    $this$byte.w9(4, 'Domestic Services - Domestic services purchases are allowed');
-    $this$byte.w9(5, 'International Services - International services purchases are allowed');
-    $this$byte.w9(6, 'Domestic ATM - Domestic ATM transactions are allowed');
-    $this$byte.w9(7, 'International ATM - International ATM transactions are allowed');
+    $this$byte.dc(0, 'Domestic Cash Transactions - Domestic cash transactions are allowed');
+    $this$byte.dc(1, 'International Cash Transactions - International cash transactions are allowed');
+    $this$byte.dc(2, 'Domestic Goods - Domestic goods purchases are allowed');
+    $this$byte.dc(3, 'International Goods - International goods purchases are allowed');
+    $this$byte.dc(4, 'Domestic Services - Domestic services purchases are allowed');
+    $this$byte.dc(5, 'International Services - International services purchases are allowed');
+    $this$byte.dc(6, 'Domestic ATM - Domestic ATM transactions are allowed');
+    $this$byte.dc(7, 'International ATM - International ATM transactions are allowed');
     return Unit_instance;
   }
   function ApplicationUsageControl$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'Domestic Cashback - Domestic cashback transactions are allowed');
-    $this$byte.w9(1, 'International Cashback - International cashback transactions are allowed');
-    $this$byte.ja(numberRangeToNumber(2, 7));
+    $this$byte.dc(0, 'Domestic Cashback - Domestic cashback transactions are allowed');
+    $this$byte.dc(1, 'International Cashback - International cashback transactions are allowed');
+    $this$byte.qc(numberRangeToNumber(2, 7));
     return Unit_instance;
   }
   function ApplicationUsageControl() {
     ApplicationUsageControl_instance = this;
     var tmp = this;
-    tmp.xf_1 = bitfield('Application Usage Control', 2, ApplicationUsageControl$schema$lambda);
-    this.yf_1 = new BitFieldExplainer(this.xf_1);
+    tmp.tm_1 = bitfield('Application Usage Control', 2, ApplicationUsageControl$schema$lambda);
+    this.um_1 = new BitFieldExplainer(this.tm_1);
   }
-  protoOf(ApplicationUsageControl).le = function (value, lineSeparator) {
-    return this.yf_1.le(value, lineSeparator);
+  protoOf(ApplicationUsageControl).hl = function (value, lineSeparator) {
+    return this.um_1.hl(value, lineSeparator);
   };
-  protoOf(ApplicationUsageControl).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(ApplicationUsageControl).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var ApplicationUsageControl_instance;
   function ApplicationUsageControl_getInstance() {
@@ -2596,7 +4002,7 @@
   }
   function AuthorisationResponseCode() {
   }
-  protoOf(AuthorisationResponseCode).rf = function (value, lineSeparator) {
+  protoOf(AuthorisationResponseCode).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.contracts.contract' call
     if (!(value.length === 2)) {
@@ -2605,13 +4011,13 @@
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(this.zf(value)));
+    explanation.kg(new Line(this.vm(value)));
     return explanation;
   };
-  protoOf(AuthorisationResponseCode).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(AuthorisationResponseCode).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
-  protoOf(AuthorisationResponseCode).zf = function (value) {
+  protoOf(AuthorisationResponseCode).vm = function (value) {
     // Inline function 'kotlin.text.uppercase' call
     // Inline function 'kotlin.js.asDynamic' call
     switch (value.toUpperCase()) {
@@ -2730,74 +4136,74 @@
     return AuthorisationResponseCode_instance;
   }
   function CVMResults$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - CVM Performed', CVMResults$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - CVM Condition', CVMResults$schema$lambda$lambda_0);
-    $this$bitfield.s9(3, 'Byte 3 - CVM Result', CVMResults$schema$lambda$lambda_1);
+    $this$bitfield.zb(1, 'Byte 1 - CVM Performed', CVMResults$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - CVM Condition', CVMResults$schema$lambda$lambda_0);
+    $this$bitfield.zb(3, 'Byte 3 - CVM Result', CVMResults$schema$lambda$lambda_1);
     return Unit_instance;
   }
   function CVMResults$schema$lambda$lambda($this$byte) {
-    $this$byte.ja(numberRangeToNumber(0, 0));
-    $this$byte.da(1, 'Apply Succeeding CV Rule', CVMResults$schema$lambda$lambda$lambda);
+    $this$byte.qc(numberRangeToNumber(0, 0));
+    $this$byte.kc(1, 'Apply Succeeding CV Rule', CVMResults$schema$lambda$lambda$lambda);
     var tmp = numberRangeToNumber(2, 7);
-    $this$byte.ea(tmp, 'CVM Type', CVMResults$schema$lambda$lambda$lambda_0);
+    $this$byte.lc(tmp, 'CVM Type', CVMResults$schema$lambda$lambda$lambda_0);
     return Unit_instance;
   }
   function CVMResults$schema$lambda$lambda$lambda($this$bit) {
-    $this$bit.la('Apply succeeding CV Rule if this CVM is unsuccessful');
-    $this$bit.ma('Fail cardholder verification if this CVM is unsuccessful');
+    $this$bit.sc('Apply succeeding CV Rule if this CVM is unsuccessful');
+    $this$bit.tc('Fail cardholder verification if this CVM is unsuccessful');
     return Unit_instance;
   }
   function CVMResults$schema$lambda$lambda$lambda_0($this$enum) {
-    $this$enum.ka(0, 'Fail CVM processing');
-    $this$enum.ka(1, 'Plaintext PIN verification performed by ICC');
-    $this$enum.ka(2, 'Enciphered PIN verified online');
-    $this$enum.ka(3, 'Plaintext PIN verification performed by ICC and signature (paper)');
-    $this$enum.ka(4, 'Enciphered PIN verification performed by ICC');
-    $this$enum.ka(5, 'Enciphered PIN verification performed by ICC and signature (paper)');
-    $this$enum.ka(30, 'Signature (paper)');
-    $this$enum.ka(31, 'No CVM required');
+    $this$enum.rc(0, 'Fail CVM processing');
+    $this$enum.rc(1, 'Plaintext PIN verification performed by ICC');
+    $this$enum.rc(2, 'Enciphered PIN verified online');
+    $this$enum.rc(3, 'Plaintext PIN verification performed by ICC and signature (paper)');
+    $this$enum.rc(4, 'Enciphered PIN verification performed by ICC');
+    $this$enum.rc(5, 'Enciphered PIN verification performed by ICC and signature (paper)');
+    $this$enum.rc(30, 'Signature (paper)');
+    $this$enum.rc(31, 'No CVM required');
     return Unit_instance;
   }
   function CVMResults$schema$lambda$lambda_0($this$byte) {
     var tmp = numberRangeToNumber(0, 7);
-    $this$byte.ea(tmp, 'Condition Code', CVMResults$schema$lambda$lambda$lambda_1);
+    $this$byte.lc(tmp, 'Condition Code', CVMResults$schema$lambda$lambda$lambda_1);
     return Unit_instance;
   }
   function CVMResults$schema$lambda$lambda$lambda_1($this$enum) {
-    $this$enum.ka(0, 'Always');
-    $this$enum.ka(1, 'If unattended cash');
-    $this$enum.ka(2, 'If not unattended cash and not manual cash and not purchase with cashback');
-    $this$enum.ka(3, 'If terminal supports the CVM');
-    $this$enum.ka(4, 'If manual cash');
-    $this$enum.ka(5, 'If purchase with cashback');
-    $this$enum.ka(6, 'If transaction is in the application currency and is under X value');
-    $this$enum.ka(7, 'If transaction is in the application currency and is over X value');
-    $this$enum.ka(8, 'If transaction is in the application currency and is under Y value');
-    $this$enum.ka(9, 'If transaction is in the application currency and is over Y value');
+    $this$enum.rc(0, 'Always');
+    $this$enum.rc(1, 'If unattended cash');
+    $this$enum.rc(2, 'If not unattended cash and not manual cash and not purchase with cashback');
+    $this$enum.rc(3, 'If terminal supports the CVM');
+    $this$enum.rc(4, 'If manual cash');
+    $this$enum.rc(5, 'If purchase with cashback');
+    $this$enum.rc(6, 'If transaction is in the application currency and is under X value');
+    $this$enum.rc(7, 'If transaction is in the application currency and is over X value');
+    $this$enum.rc(8, 'If transaction is in the application currency and is under Y value');
+    $this$enum.rc(9, 'If transaction is in the application currency and is over Y value');
     return Unit_instance;
   }
   function CVMResults$schema$lambda$lambda_1($this$byte) {
     var tmp = numberRangeToNumber(0, 7);
-    $this$byte.ea(tmp, 'Result', CVMResults$schema$lambda$lambda$lambda_2);
+    $this$byte.lc(tmp, 'Result', CVMResults$schema$lambda$lambda$lambda_2);
     return Unit_instance;
   }
   function CVMResults$schema$lambda$lambda$lambda_2($this$enum) {
-    $this$enum.ka(0, 'Unknown');
-    $this$enum.ka(1, 'Failed');
-    $this$enum.ka(2, 'Successful');
+    $this$enum.rc(0, 'Unknown');
+    $this$enum.rc(1, 'Failed');
+    $this$enum.rc(2, 'Successful');
     return Unit_instance;
   }
   function CVMResults() {
     CVMResults_instance = this;
     var tmp = this;
-    tmp.ag_1 = bitfield('CVM Results', 3, CVMResults$schema$lambda);
-    this.bg_1 = new BitFieldExplainer(this.ag_1);
+    tmp.wm_1 = bitfield('CVM Results', 3, CVMResults$schema$lambda);
+    this.xm_1 = new BitFieldExplainer(this.wm_1);
   }
-  protoOf(CVMResults).le = function (value, lineSeparator) {
-    return this.bg_1.le(value, lineSeparator);
+  protoOf(CVMResults).hl = function (value, lineSeparator) {
+    return this.xm_1.hl(value, lineSeparator);
   };
-  protoOf(CVMResults).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(CVMResults).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var CVMResults_instance;
   function CVMResults_getInstance() {
@@ -2806,37 +4212,37 @@
     return CVMResults_instance;
   }
   function CardTransactionQualifiers$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - Contactless Support', CardTransactionQualifiers$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - Additional Qualifiers', CardTransactionQualifiers$schema$lambda$lambda_0);
+    $this$bitfield.zb(1, 'Byte 1 - Contactless Support', CardTransactionQualifiers$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - Additional Qualifiers', CardTransactionQualifiers$schema$lambda$lambda_0);
     return Unit_instance;
   }
   function CardTransactionQualifiers$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'Online Cryptogram Required - Online cryptogram required');
-    $this$byte.w9(1, 'CVM Required - CVM required');
-    $this$byte.w9(2, 'Contact Chip - (Contact Chip) Offline PIN Required');
-    $this$byte.ja(numberRangeToNumber(3, 6));
-    $this$byte.w9(7, 'Go Online If Offline Data Authentication Fails And Reader Is Online Capable');
+    $this$byte.dc(0, 'Online Cryptogram Required - Online cryptogram required');
+    $this$byte.dc(1, 'CVM Required - CVM required');
+    $this$byte.dc(2, 'Contact Chip - (Contact Chip) Offline PIN Required');
+    $this$byte.qc(numberRangeToNumber(3, 6));
+    $this$byte.dc(7, 'Go Online If Offline Data Authentication Fails And Reader Is Online Capable');
     return Unit_instance;
   }
   function CardTransactionQualifiers$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'Online PIN Required - Online PIN required');
-    $this$byte.w9(1, 'Signature Required - Signature required');
-    $this$byte.w9(2, 'Issuer Update Processing Supported - Issuer update processing supported');
-    $this$byte.w9(3, 'Consumer Device CVM Performed - Consumer device CVM performed');
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.dc(0, 'Online PIN Required - Online PIN required');
+    $this$byte.dc(1, 'Signature Required - Signature required');
+    $this$byte.dc(2, 'Issuer Update Processing Supported - Issuer update processing supported');
+    $this$byte.dc(3, 'Consumer Device CVM Performed - Consumer device CVM performed');
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function CardTransactionQualifiers() {
     CardTransactionQualifiers_instance = this;
     var tmp = this;
-    tmp.cg_1 = bitfield('Card Transaction Qualifiers', 2, CardTransactionQualifiers$schema$lambda);
-    this.dg_1 = new BitFieldExplainer(this.cg_1);
+    tmp.ym_1 = bitfield('Card Transaction Qualifiers', 2, CardTransactionQualifiers$schema$lambda);
+    this.zm_1 = new BitFieldExplainer(this.ym_1);
   }
-  protoOf(CardTransactionQualifiers).le = function (value, lineSeparator) {
-    return this.dg_1.le(value, lineSeparator);
+  protoOf(CardTransactionQualifiers).hl = function (value, lineSeparator) {
+    return this.zm_1.hl(value, lineSeparator);
   };
-  protoOf(CardTransactionQualifiers).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(CardTransactionQualifiers).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var CardTransactionQualifiers_instance;
   function CardTransactionQualifiers_getInstance() {
@@ -2845,54 +4251,54 @@
     return CardTransactionQualifiers_instance;
   }
   function CryptogramInformationData$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1', CryptogramInformationData$schema$lambda$lambda);
+    $this$bitfield.zb(1, 'Byte 1', CryptogramInformationData$schema$lambda$lambda);
     return Unit_instance;
   }
   function CryptogramInformationData$schema$lambda$lambda($this$byte) {
     var tmp = numberRangeToNumber(0, 1);
-    $this$byte.ea(tmp, 'Cryptogram Type', CryptogramInformationData$schema$lambda$lambda$lambda);
-    $this$byte.ja(numberRangeToNumber(2, 3));
-    $this$byte.da(4, 'Issuer Application Data (IAD)', CryptogramInformationData$schema$lambda$lambda$lambda_0);
-    $this$byte.da(5, 'Application Transaction Counter (ATC)', CryptogramInformationData$schema$lambda$lambda$lambda_1);
+    $this$byte.lc(tmp, 'Cryptogram Type', CryptogramInformationData$schema$lambda$lambda$lambda);
+    $this$byte.qc(numberRangeToNumber(2, 3));
+    $this$byte.kc(4, 'Issuer Application Data (IAD)', CryptogramInformationData$schema$lambda$lambda$lambda_0);
+    $this$byte.kc(5, 'Application Transaction Counter (ATC)', CryptogramInformationData$schema$lambda$lambda$lambda_1);
     var tmp_0 = numberRangeToNumber(6, 7);
-    $this$byte.ea(tmp_0, 'Cryptogram Type', CryptogramInformationData$schema$lambda$lambda$lambda_2);
+    $this$byte.lc(tmp_0, 'Cryptogram Type', CryptogramInformationData$schema$lambda$lambda$lambda_2);
     return Unit_instance;
   }
   function CryptogramInformationData$schema$lambda$lambda$lambda($this$enum) {
-    $this$enum.ka(0, 'Application Authentication Cryptogram (AAC)');
-    $this$enum.ka(1, 'Authorization Request Cryptogram (ARQC)');
-    $this$enum.ka(2, 'Transaction Certificate (TC)');
-    $this$enum.ka(3, 'Reserved for Future Use');
+    $this$enum.rc(0, 'Application Authentication Cryptogram (AAC)');
+    $this$enum.rc(1, 'Authorization Request Cryptogram (ARQC)');
+    $this$enum.rc(2, 'Transaction Certificate (TC)');
+    $this$enum.rc(3, 'Reserved for Future Use');
     return Unit_instance;
   }
   function CryptogramInformationData$schema$lambda$lambda$lambda_0($this$bit) {
-    $this$bit.la('Issuer Application Data (IAD) - IAD provided');
-    $this$bit.ma('Issuer Application Data (IAD) - IAD not provided');
+    $this$bit.sc('Issuer Application Data (IAD) - IAD provided');
+    $this$bit.tc('Issuer Application Data (IAD) - IAD not provided');
     return Unit_instance;
   }
   function CryptogramInformationData$schema$lambda$lambda$lambda_1($this$bit) {
-    $this$bit.la('Application Transaction Counter (ATC) - ATC provided');
-    $this$bit.ma('Application Transaction Counter (ATC) - ATC not provided');
+    $this$bit.sc('Application Transaction Counter (ATC) - ATC provided');
+    $this$bit.tc('Application Transaction Counter (ATC) - ATC not provided');
     return Unit_instance;
   }
   function CryptogramInformationData$schema$lambda$lambda$lambda_2($this$enum) {
-    $this$enum.ka(0, 'Application Authentication Cryptogram (AAC)');
-    $this$enum.ka(1, 'Authorization Request Cryptogram (ARQC)');
-    $this$enum.ka(2, 'Transaction Certificate (TC)');
-    $this$enum.ka(3, 'Reserved for Future Use');
+    $this$enum.rc(0, 'Application Authentication Cryptogram (AAC)');
+    $this$enum.rc(1, 'Authorization Request Cryptogram (ARQC)');
+    $this$enum.rc(2, 'Transaction Certificate (TC)');
+    $this$enum.rc(3, 'Reserved for Future Use');
     return Unit_instance;
   }
   function CryptogramInformationData() {
     CryptogramInformationData_instance = this;
     var tmp = this;
-    tmp.eg_1 = bitfield('Cryptogram Information Data', 1, CryptogramInformationData$schema$lambda);
-    this.fg_1 = new BitFieldExplainer(this.eg_1);
+    tmp.an_1 = bitfield('Cryptogram Information Data', 1, CryptogramInformationData$schema$lambda);
+    this.bn_1 = new BitFieldExplainer(this.an_1);
   }
-  protoOf(CryptogramInformationData).le = function (value, lineSeparator) {
-    return this.fg_1.le(value, lineSeparator);
+  protoOf(CryptogramInformationData).hl = function (value, lineSeparator) {
+    return this.bn_1.hl(value, lineSeparator);
   };
-  protoOf(CryptogramInformationData).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(CryptogramInformationData).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var CryptogramInformationData_instance;
   function CryptogramInformationData_getInstance() {
@@ -2907,17 +4313,17 @@
       do {
         var i = inductionVariable;
         inductionVariable = inductionVariable + 1 | 0;
-        amount = amount.v1(8).x1(toLong(data[offset + i | 0] & 255));
+        amount = amount.j2(8).n2(toLong(data[offset + i | 0] & 255));
       }
        while (inductionVariable < 4);
     return amount;
   }
   function CvmList() {
-    this.gg_1 = 8;
-    this.hg_1 = 2;
-    this.ig_1 = 64;
+    this.cn_1 = 8;
+    this.dn_1 = 2;
+    this.en_1 = 64;
   }
-  protoOf(CvmList).le = function (value, lineSeparator) {
+  protoOf(CvmList).hl = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.contracts.contract' call
     if (!(value.length >= 8)) {
@@ -2935,12 +4341,12 @@
     var explanation = new Explanation(lineSeparator);
     var amountX = extractAmount(this, value, 0);
     var amountY = extractAmount(this, value, 4);
-    explanation.ce(new Line('Amount X: ' + amountX.toString()));
-    explanation.ce(new Line('Amount Y: ' + amountY.toString()));
+    explanation.kg(new Line('Amount X: ' + amountX.toString()));
+    explanation.kg(new Line('Amount Y: ' + amountY.toString()));
     var ruleCount = (value.length - 8 | 0) / 2 | 0;
     if (ruleCount === 0) {
-      explanation.ce(LineSeparator_getInstance());
-      explanation.ce(new Line('No CVM rules defined'));
+      explanation.kg(LineSeparator_getInstance());
+      explanation.kg(new Line('No CVM rules defined'));
       return explanation;
     }
     var inductionVariable = 0;
@@ -2948,29 +4354,29 @@
       do {
         var i = inductionVariable;
         inductionVariable = inductionVariable + 1 | 0;
-        explanation.ce(LineSeparator_getInstance());
+        explanation.kg(LineSeparator_getInstance());
         var offset = 8 + imul(i, 2) | 0;
         var cvmByte = value[offset] & 255;
         var conditionByte = value[offset + 1 | 0] & 255;
         var ruleNumber = i + 1 | 0;
-        explanation.ce(new Line('Rule ' + ruleNumber + ':'));
+        explanation.kg(new Line('Rule ' + ruleNumber + ':'));
         var applyNext = !((cvmByte & 64) === 0);
         var cvmCode = cvmByte & 63;
-        explanation.ce(new Line('  CVM: ' + this.jg(cvmCode)));
+        explanation.kg(new Line('  CVM: ' + this.fn(cvmCode)));
         if (applyNext) {
-          explanation.ce(new Line('  Apply succeeding CV Rule if this CVM is unsuccessful'));
+          explanation.kg(new Line('  Apply succeeding CV Rule if this CVM is unsuccessful'));
         } else {
-          explanation.ce(new Line('  Fail cardholder verification if this CVM is unsuccessful'));
+          explanation.kg(new Line('  Fail cardholder verification if this CVM is unsuccessful'));
         }
-        explanation.ce(new Line('  Condition: ' + this.kg(conditionByte)));
+        explanation.kg(new Line('  Condition: ' + this.gn(conditionByte)));
       }
        while (inductionVariable < ruleCount);
     return explanation;
   };
-  protoOf(CvmList).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(CvmList).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
-  protoOf(CvmList).jg = function (code) {
+  protoOf(CvmList).fn = function (code) {
     var tmp;
     if (code === 0) {
       tmp = 'Fail CVM processing';
@@ -3003,7 +4409,7 @@
     }
     return tmp;
   };
-  protoOf(CvmList).kg = function (condition) {
+  protoOf(CvmList).gn = function (condition) {
     var tmp;
     if (condition === 0) {
       tmp = 'Always';
@@ -3041,69 +4447,69 @@
     return CvmList_instance;
   }
   function FormFactor$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - Consumer Payment Device Form Factor', FormFactor$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - Consumer Payment Device Features', FormFactor$schema$lambda$lambda_0);
-    $this$bitfield.s9(3, 'Byte 3 - Contactless Transaction Technology', FormFactor$schema$lambda$lambda_1);
-    $this$bitfield.s9(4, 'Byte 4 - Payment Transaction Technology', FormFactor$schema$lambda$lambda_2);
+    $this$bitfield.zb(1, 'Byte 1 - Consumer Payment Device Form Factor', FormFactor$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - Consumer Payment Device Features', FormFactor$schema$lambda$lambda_0);
+    $this$bitfield.zb(3, 'Byte 3 - Contactless Transaction Technology', FormFactor$schema$lambda$lambda_1);
+    $this$bitfield.zb(4, 'Byte 4 - Payment Transaction Technology', FormFactor$schema$lambda$lambda_2);
     return Unit_instance;
   }
   function FormFactor$schema$lambda$lambda($this$byte) {
     var tmp = numberRangeToNumber(0, 3);
-    $this$byte.ea(tmp, 'Consumer Payment Device Form Factor', FormFactor$schema$lambda$lambda$lambda);
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.lc(tmp, 'Consumer Payment Device Form Factor', FormFactor$schema$lambda$lambda$lambda);
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function FormFactor$schema$lambda$lambda$lambda($this$enum) {
-    $this$enum.ka(0, 'Not Specified');
-    $this$enum.ka(1, 'Standard Card');
-    $this$enum.ka(2, 'Mini-Card');
-    $this$enum.ka(3, 'Non-Card Form Factor');
-    $this$enum.ka(4, 'Consumer Mobile Phone');
-    $this$enum.ka(5, 'Wristband');
+    $this$enum.rc(0, 'Not Specified');
+    $this$enum.rc(1, 'Standard Card');
+    $this$enum.rc(2, 'Mini-Card');
+    $this$enum.rc(3, 'Non-Card Form Factor');
+    $this$enum.rc(4, 'Consumer Mobile Phone');
+    $this$enum.rc(5, 'Wristband');
     return Unit_instance;
   }
   function FormFactor$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'Passcode Capable - Passcode capable');
-    $this$byte.w9(1, 'Signature Panel - Has signature panel');
-    $this$byte.w9(2, 'Hologram - Has hologram');
-    $this$byte.w9(3, 'CVV2 - CVV2 present');
-    $this$byte.w9(4, 'Two-Way Messaging - Supports two-way messaging');
-    $this$byte.w9(5, 'Cloud-Based Payment - Cloud-based payment credentials');
-    $this$byte.ja(numberRangeToNumber(6, 7));
+    $this$byte.dc(0, 'Passcode Capable - Passcode capable');
+    $this$byte.dc(1, 'Signature Panel - Has signature panel');
+    $this$byte.dc(2, 'Hologram - Has hologram');
+    $this$byte.dc(3, 'CVV2 - CVV2 present');
+    $this$byte.dc(4, 'Two-Way Messaging - Supports two-way messaging');
+    $this$byte.dc(5, 'Cloud-Based Payment - Cloud-based payment credentials');
+    $this$byte.qc(numberRangeToNumber(6, 7));
     return Unit_instance;
   }
   function FormFactor$schema$lambda$lambda_1($this$byte) {
     var tmp = numberRangeToNumber(0, 3);
-    $this$byte.ea(tmp, 'Contactless Interface Type', FormFactor$schema$lambda$lambda$lambda_0);
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.lc(tmp, 'Contactless Interface Type', FormFactor$schema$lambda$lambda$lambda_0);
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function FormFactor$schema$lambda$lambda$lambda_0($this$enum) {
-    $this$enum.ka(0, 'Not Specified');
-    $this$enum.ka(1, 'Type A');
-    $this$enum.ka(2, 'Type B');
-    $this$enum.ka(3, 'Type B (MSD)');
-    $this$enum.ka(4, 'Type A and B');
+    $this$enum.rc(0, 'Not Specified');
+    $this$enum.rc(1, 'Type A');
+    $this$enum.rc(2, 'Type B');
+    $this$enum.rc(3, 'Type B (MSD)');
+    $this$enum.rc(4, 'Type A and B');
     return Unit_instance;
   }
   function FormFactor$schema$lambda$lambda_2($this$byte) {
-    $this$byte.w9(0, 'Contact - Contact transaction capability');
-    $this$byte.w9(1, 'Contactless EMV - Contactless EMV mode supported');
-    $this$byte.w9(2, 'Contactless MSD - Contactless MSD mode supported');
-    $this$byte.ja(numberRangeToNumber(3, 7));
+    $this$byte.dc(0, 'Contact - Contact transaction capability');
+    $this$byte.dc(1, 'Contactless EMV - Contactless EMV mode supported');
+    $this$byte.dc(2, 'Contactless MSD - Contactless MSD mode supported');
+    $this$byte.qc(numberRangeToNumber(3, 7));
     return Unit_instance;
   }
   function FormFactor() {
     FormFactor_instance = this;
     var tmp = this;
-    tmp.lg_1 = bitfield('Form Factor Indicator', 4, FormFactor$schema$lambda);
-    this.mg_1 = new BitFieldExplainer(this.lg_1);
+    tmp.hn_1 = bitfield('Form Factor Indicator', 4, FormFactor$schema$lambda);
+    this.in_1 = new BitFieldExplainer(this.hn_1);
   }
-  protoOf(FormFactor).le = function (value, lineSeparator) {
-    return this.mg_1.le(value, lineSeparator);
+  protoOf(FormFactor).hl = function (value, lineSeparator) {
+    return this.in_1.hl(value, lineSeparator);
   };
-  protoOf(FormFactor).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(FormFactor).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var FormFactor_instance;
   function FormFactor_getInstance() {
@@ -3156,11 +4562,11 @@
   function explainVisaIad($this, value, explanation) {
     var dki = value[0] & 255;
     var cvn = value[1] & 255;
-    explanation.ce(new Line('Format: Visa IAD'));
-    explanation.ce(new Line('Derivation Key Index (DKI): ' + ('0x' + toHexByte(dki, $this))));
-    explanation.ce(new Line('Cryptogram Version Number (CVN): ' + $this.rg(cvn)));
-    explanation.ce(LineSeparator_getInstance());
-    explanation.ce(new Line('Card Verification Results (CVR):'));
+    explanation.kg(new Line('Format: Visa IAD'));
+    explanation.kg(new Line('Derivation Key Index (DKI): ' + ('0x' + toHexByte(dki, $this))));
+    explanation.kg(new Line('Cryptogram Version Number (CVN): ' + $this.nn(cvn)));
+    explanation.kg(LineSeparator_getInstance());
+    explanation.kg(new Line('Card Verification Results (CVR):'));
     switch (cvn) {
       case 10:
         explainCvn10Cvr($this, value, explanation);
@@ -3173,9 +4579,9 @@
     var cvrSize = cvn === 10 ? 4 : 6;
     var iddOffset = 2 + cvrSize | 0;
     if (iddOffset < value.length) {
-      explanation.ce(LineSeparator_getInstance());
+      explanation.kg(LineSeparator_getInstance());
       var idd = sliceArray(value, until(iddOffset, value.length));
-      explanation.ce(new Line('Issuer Discretionary Data: ' + toHexString_1(idd, $this)));
+      explanation.kg(new Line('Issuer Discretionary Data: ' + toHexString_1(idd, $this)));
     }
   }
   function explainCvn10Cvr($this, value, explanation) {
@@ -3185,7 +4591,7 @@
     explainCvrByte2($this, b2, explanation);
     explainCvn10Byte3($this, value[4] & 255, explanation);
     var b4 = value[5] & 255;
-    explanation.ce(new Line('  CVR Byte 4: 0x' + toHexByte(b4, $this)));
+    explanation.kg(new Line('  CVR Byte 4: 0x' + toHexByte(b4, $this)));
   }
   function explainCvn17Cvr($this, value, explanation) {
     var b1 = value[2] & 255;
@@ -3199,15 +4605,15 @@
         var i = inductionVariable;
         inductionVariable = inductionVariable + 1 | 0;
         var b = value[i + 1 | 0] & 255;
-        explanation.ce(new Line('  CVR Byte ' + i + ': 0x' + toHexByte(b, $this)));
+        explanation.kg(new Line('  CVR Byte ' + i + ': 0x' + toHexByte(b, $this)));
       }
        while (inductionVariable <= 6);
   }
   function explainCvrByte1($this, b1, explanation) {
     var acType2nd = b1 >> 6 & 3;
-    explanation.ce(new Line('  AC Returned in 2nd Generate AC: ' + $this.sg(acType2nd)));
+    explanation.kg(new Line('  AC Returned in 2nd Generate AC: ' + $this.on(acType2nd)));
     var acType1st = b1 >> 4 & 3;
-    explanation.ce(new Line('  AC Returned in 1st Generate AC: ' + $this.sg(acType1st)));
+    explanation.kg(new Line('  AC Returned in 1st Generate AC: ' + $this.on(acType1st)));
     addFlag($this, explanation, b1, 8, 'Offline PIN Verification Performed');
     addFlag($this, explanation, b1, 4, 'Offline PIN Verification Not Performed');
     addFlag($this, explanation, b1, 2, 'Unable to Go Online');
@@ -3215,7 +4621,7 @@
   }
   function explainCvrByte2($this, b2, explanation) {
     var pinTryCounter = b2 >> 4 & 15;
-    explanation.ce(new Line('  PIN Try Counter: ' + pinTryCounter));
+    explanation.kg(new Line('  PIN Try Counter: ' + pinTryCounter));
     addFlag($this, explanation, b2, 8, 'Offline PIN Verification Successful');
     addFlag($this, explanation, b2, 4, 'Last Online ATC Register Mismatch');
     addFlag($this, explanation, b2, 2, 'Lower Consecutive Offline Limit Exceeded');
@@ -3236,7 +4642,7 @@
   }
   function addFlag($this, explanation, byte, mask, label) {
     var value = !((byte & mask) === 0) ? 'Yes' : 'No';
-    explanation.ce(new Line('  ' + label + ': ' + value));
+    explanation.kg(new Line('  ' + label + ': ' + value));
   }
   function toHexByte(_this__u8e3s4, $this) {
     // Inline function 'kotlin.text.uppercase' call
@@ -3252,11 +4658,11 @@
     return padStart(toString_1(it & 255, 16), 2, _Char___init__impl__6a9atx(48)).toUpperCase();
   }
   function IssuerApplicationData() {
-    this.og_1 = 6;
-    this.pg_1 = 4;
-    this.qg_1 = 6;
+    this.kn_1 = 6;
+    this.ln_1 = 4;
+    this.mn_1 = 6;
   }
-  protoOf(IssuerApplicationData).le = function (value, lineSeparator) {
+  protoOf(IssuerApplicationData).hl = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.collections.isNotEmpty' call
     // Inline function 'kotlin.collections.isEmpty' call
@@ -3270,14 +4676,14 @@
     if (value.length >= 6 && isVisaIad(this, value)) {
       explainVisaIad(this, value, explanation);
     } else {
-      explanation.ce(new Line('Raw Data: ' + toHexString_1(value, this)));
+      explanation.kg(new Line('Raw Data: ' + toHexString_1(value, this)));
     }
     return explanation;
   };
-  protoOf(IssuerApplicationData).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(IssuerApplicationData).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
-  protoOf(IssuerApplicationData).sg = function (acType) {
+  protoOf(IssuerApplicationData).on = function (acType) {
     switch (acType) {
       case 0:
         return 'AAC (Transaction Declined)';
@@ -3291,7 +4697,7 @@
         return 'Unknown';
     }
   };
-  protoOf(IssuerApplicationData).rg = function (cvn) {
+  protoOf(IssuerApplicationData).nn = function (cvn) {
     switch (cvn) {
       case 10:
         return 'CVN 10 (0x0A)';
@@ -3319,25 +4725,25 @@
   }
   function IssuerCountryCodeAlpha2() {
   }
-  protoOf(IssuerCountryCodeAlpha2).rf = function (value, lineSeparator) {
+  protoOf(IssuerCountryCodeAlpha2).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     var tmp = value.length;
-    var tmp0_safe_receiver = EmvTagDescription_ISSUER_COUNTRY_CODE_ALPHA2_getInstance().cf_1;
+    var tmp0_safe_receiver = EmvTagDescription_ISSUER_COUNTRY_CODE_ALPHA2_getInstance().yl_1;
     // Inline function 'kotlin.contracts.contract' call
-    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.w6_1))) {
+    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.m7_1))) {
       // Inline function 'io.github.rafaelrabeloit.emv.explain.IssuerCountryCodeAlpha2.explain.<anonymous>' call
       var message = 'Must be a valid country code in alpha2';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    var tmp1_safe_receiver = Companion_instance_11.ug(value);
-    var tmp2_elvis_lhs = tmp1_safe_receiver == null ? null : tmp1_safe_receiver.yg_1;
+    var tmp1_safe_receiver = Companion_instance_18.qn(value);
+    var tmp2_elvis_lhs = tmp1_safe_receiver == null ? null : tmp1_safe_receiver.un_1;
     var description = tmp2_elvis_lhs == null ? 'Unknown Country Code' : tmp2_elvis_lhs;
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(description));
+    explanation.kg(new Line(description));
     return explanation;
   };
-  protoOf(IssuerCountryCodeAlpha2).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(IssuerCountryCodeAlpha2).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
   var IssuerCountryCodeAlpha2_instance;
   function IssuerCountryCodeAlpha2_getInstance() {
@@ -3345,37 +4751,37 @@
   }
   function IssuerCountryCodeAlpha3() {
   }
-  protoOf(IssuerCountryCodeAlpha3).rf = function (value, lineSeparator) {
+  protoOf(IssuerCountryCodeAlpha3).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     var tmp = value.length;
-    var tmp0_safe_receiver = EmvTagDescription_ISSUER_COUNTRY_CODE_ALPHA3_getInstance().cf_1;
+    var tmp0_safe_receiver = EmvTagDescription_ISSUER_COUNTRY_CODE_ALPHA3_getInstance().yl_1;
     // Inline function 'kotlin.contracts.contract' call
-    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.w6_1))) {
+    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.m7_1))) {
       // Inline function 'io.github.rafaelrabeloit.emv.explain.IssuerCountryCodeAlpha3.explain.<anonymous>' call
       var message = 'Must be a valid country code in alpha3';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    var tmp1_safe_receiver = Companion_instance_11.bh(value);
-    var tmp2_elvis_lhs = tmp1_safe_receiver == null ? null : tmp1_safe_receiver.yg_1;
+    var tmp1_safe_receiver = Companion_instance_18.xn(value);
+    var tmp2_elvis_lhs = tmp1_safe_receiver == null ? null : tmp1_safe_receiver.un_1;
     var description = tmp2_elvis_lhs == null ? 'Unknown Country Code' : tmp2_elvis_lhs;
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(description));
+    explanation.kg(new Line(description));
     return explanation;
   };
-  protoOf(IssuerCountryCodeAlpha3).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(IssuerCountryCodeAlpha3).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
   var IssuerCountryCodeAlpha3_instance;
   function IssuerCountryCodeAlpha3_getInstance() {
     return IssuerCountryCodeAlpha3_instance;
   }
   function LanguagePreference() {
-    this.ch_1 = 2;
-    this.dh_1 = 8;
-    this.eh_1 = 2;
-    this.fh_1 = 2;
+    this.yn_1 = 2;
+    this.zn_1 = 8;
+    this.ao_1 = 2;
+    this.bo_1 = 2;
   }
-  protoOf(LanguagePreference).rf = function (value, lineSeparator) {
+  protoOf(LanguagePreference).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     var containsArg = value.length;
     // Inline function 'kotlin.contracts.contract' call
@@ -3394,24 +4800,24 @@
     var explanation = new Explanation(lineSeparator);
     // Inline function 'kotlin.collections.forEachIndexed' call
     var index = 0;
-    var tmp0_iterator = chunked(value, 2).m();
-    while (tmp0_iterator.n()) {
-      var item = tmp0_iterator.o();
+    var tmp0_iterator = chunked(value, 2).p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.emv.explain.LanguagePreference.explain.<anonymous>' call
       var tmp1 = index;
       index = tmp1 + 1 | 0;
       if (checkIndexOverflow(tmp1) > 0) {
-        explanation.ce(LineSeparator_getInstance());
+        explanation.kg(LineSeparator_getInstance());
       }
-      var tmp0_safe_receiver = Companion_instance_13.gh(item);
-      var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.kh_1;
+      var tmp0_safe_receiver = Companion_instance_20.co(item);
+      var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.go_1;
       var description = tmp1_elvis_lhs == null ? 'Unknown Language Code' : tmp1_elvis_lhs;
-      explanation.ce(new Line(description));
+      explanation.kg(new Line(description));
     }
     return explanation;
   };
-  protoOf(LanguagePreference).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(LanguagePreference).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
   var LanguagePreference_instance;
   function LanguagePreference_getInstance() {
@@ -3419,15 +4825,15 @@
   }
   function MerchantCategoryCode() {
   }
-  protoOf(MerchantCategoryCode).hf = function (value, lineSeparator) {
-    var tmp0_elvis_lhs = Companion_instance_14.sf(value.v());
+  protoOf(MerchantCategoryCode).dm = function (value, lineSeparator) {
+    var tmp0_elvis_lhs = Companion_instance_21.om(value.z());
     var tmp;
     if (tmp0_elvis_lhs == null) {
       // Inline function 'kotlin.apply' call
       var this_0 = new Explanation(lineSeparator);
       // Inline function 'kotlin.contracts.contract' call
       // Inline function 'io.github.rafaelrabeloit.emv.explain.MerchantCategoryCode.explain.<anonymous>' call
-      this_0.ce(new Line('Unknown Merchant Category Code'));
+      this_0.kg(new Line('Unknown Merchant Category Code'));
       return this_0;
     } else {
       tmp = tmp0_elvis_lhs;
@@ -3437,13 +4843,13 @@
     // Inline function 'kotlin.apply' call
     // Inline function 'kotlin.contracts.contract' call
     // Inline function 'io.github.rafaelrabeloit.emv.explain.MerchantCategoryCode.explain.<anonymous>' call
-    explanation.ce(new Line('Description: ' + mccDescription.oh_1));
-    explanation.ce(LineSeparator_getInstance());
-    explanation.ce(new Line('Category: ' + mccDescription.ph_1));
+    explanation.kg(new Line('Description: ' + mccDescription.ko_1));
+    explanation.kg(LineSeparator_getInstance());
+    explanation.kg(new Line('Category: ' + mccDescription.lo_1));
     return explanation;
   };
-  protoOf(MerchantCategoryCode).de = function (value, lineSeparator) {
-    return this.hf(value instanceof Long ? value : THROW_CCE(), lineSeparator);
+  protoOf(MerchantCategoryCode).lg = function (value, lineSeparator) {
+    return this.dm(value instanceof Long ? value : THROW_CCE(), lineSeparator);
   };
   var MerchantCategoryCode_instance;
   function MerchantCategoryCode_getInstance() {
@@ -3451,7 +4857,7 @@
   }
   function PosEntryMode() {
   }
-  protoOf(PosEntryMode).rf = function (value, lineSeparator) {
+  protoOf(PosEntryMode).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.contracts.contract' call
     if (!(value.length === 2)) {
@@ -3460,13 +4866,13 @@
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(this.zf(value)));
+    explanation.kg(new Line(this.vm(value)));
     return explanation;
   };
-  protoOf(PosEntryMode).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(PosEntryMode).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
-  protoOf(PosEntryMode).zf = function (value) {
+  protoOf(PosEntryMode).vm = function (value) {
     // Inline function 'kotlin.text.uppercase' call
     // Inline function 'kotlin.js.asDynamic' call
     switch (value.toUpperCase()) {
@@ -3515,10 +4921,10 @@
     return PosEntryMode_instance;
   }
   function ServiceCode() {
-    this.qh_1 = 3;
-    this.rh_1 = 4;
+    this.mo_1 = 3;
+    this.no_1 = 4;
   }
-  protoOf(ServiceCode).rf = function (value, lineSeparator) {
+  protoOf(ServiceCode).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     var containsArg = value.length;
     // Inline function 'kotlin.contracts.contract' call
@@ -3529,21 +4935,21 @@
     }
     var digits = takeLast(value, 3);
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line('Digit 1 (Interchange): ' + this.sh(charSequenceGet(digits, 0))));
-    explanation.ce(new Line('Digit 2 (Authorization): ' + this.th(charSequenceGet(digits, 1))));
-    explanation.ce(new Line('Digit 3 (Services/PIN): ' + this.uh(charSequenceGet(digits, 2))));
+    explanation.kg(new Line('Digit 1 (Interchange): ' + this.oo(charSequenceGet(digits, 0))));
+    explanation.kg(new Line('Digit 2 (Authorization): ' + this.po(charSequenceGet(digits, 1))));
+    explanation.kg(new Line('Digit 3 (Services/PIN): ' + this.qo(charSequenceGet(digits, 2))));
     return explanation;
   };
-  protoOf(ServiceCode).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(ServiceCode).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
-  protoOf(ServiceCode).sh = function (digit) {
+  protoOf(ServiceCode).oo = function (digit) {
     return digit === _Char___init__impl__6a9atx(49) ? 'International interchange OK' : digit === _Char___init__impl__6a9atx(50) ? 'International interchange, use IC (chip) where feasible' : digit === _Char___init__impl__6a9atx(53) ? 'National interchange only except under bilateral agreement' : digit === _Char___init__impl__6a9atx(54) ? 'National interchange only except under bilateral agreement, use IC (chip) where feasible' : digit === _Char___init__impl__6a9atx(55) ? 'No interchange except under bilateral agreement (closed loop)' : digit === _Char___init__impl__6a9atx(57) ? 'Test' : 'Reserved (' + toString_2(digit) + ')';
   };
-  protoOf(ServiceCode).th = function (digit) {
+  protoOf(ServiceCode).po = function (digit) {
     return digit === _Char___init__impl__6a9atx(48) ? 'Normal' : digit === _Char___init__impl__6a9atx(50) ? 'Contact issuer via online means' : digit === _Char___init__impl__6a9atx(52) ? 'Contact issuer via online means except under bilateral agreement' : 'Reserved (' + toString_2(digit) + ')';
   };
-  protoOf(ServiceCode).uh = function (digit) {
+  protoOf(ServiceCode).qo = function (digit) {
     return digit === _Char___init__impl__6a9atx(48) ? 'No restrictions, PIN required' : digit === _Char___init__impl__6a9atx(49) ? 'No restrictions' : digit === _Char___init__impl__6a9atx(50) ? 'Goods and services only (no cash)' : digit === _Char___init__impl__6a9atx(51) ? 'ATM only, PIN required' : digit === _Char___init__impl__6a9atx(52) ? 'Cash only' : digit === _Char___init__impl__6a9atx(53) ? 'Goods and services only (no cash), PIN required' : digit === _Char___init__impl__6a9atx(54) ? 'No restrictions, use PIN where feasible' : digit === _Char___init__impl__6a9atx(55) ? 'Goods and services only (no cash), use PIN where feasible' : 'Reserved (' + toString_2(digit) + ')';
   };
   var ServiceCode_instance;
@@ -3561,43 +4967,43 @@
     return TVR_instance;
   }
   function TerminalCapabilities$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - Card Data Input Capability', TerminalCapabilities$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - CVM Capability', TerminalCapabilities$schema$lambda$lambda_0);
-    $this$bitfield.s9(3, 'Byte 3 - Security Capability', TerminalCapabilities$schema$lambda$lambda_1);
+    $this$bitfield.zb(1, 'Byte 1 - Card Data Input Capability', TerminalCapabilities$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - CVM Capability', TerminalCapabilities$schema$lambda$lambda_0);
+    $this$bitfield.zb(3, 'Byte 3 - Security Capability', TerminalCapabilities$schema$lambda$lambda_1);
     return Unit_instance;
   }
   function TerminalCapabilities$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'Manual Key Entry - Terminal can accept manual key entry');
-    $this$byte.w9(1, 'Magnetic Stripe - Terminal can read magnetic stripe');
-    $this$byte.w9(2, 'ICC - Terminal can read ICC');
-    $this$byte.ja(numberRangeToNumber(3, 7));
+    $this$byte.dc(0, 'Manual Key Entry - Terminal can accept manual key entry');
+    $this$byte.dc(1, 'Magnetic Stripe - Terminal can read magnetic stripe');
+    $this$byte.dc(2, 'ICC - Terminal can read ICC');
+    $this$byte.qc(numberRangeToNumber(3, 7));
     return Unit_instance;
   }
   function TerminalCapabilities$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'Plaintext PIN for ICC Verification - Terminal can accept plaintext PIN for ICC verification');
-    $this$byte.w9(1, 'Enciphered PIN for Online Verification - Terminal can accept enciphered PIN for online verification');
-    $this$byte.w9(2, 'Signature - Terminal can accept signature');
-    $this$byte.ja(numberRangeToNumber(3, 7));
+    $this$byte.dc(0, 'Plaintext PIN for ICC Verification - Terminal can accept plaintext PIN for ICC verification');
+    $this$byte.dc(1, 'Enciphered PIN for Online Verification - Terminal can accept enciphered PIN for online verification');
+    $this$byte.dc(2, 'Signature - Terminal can accept signature');
+    $this$byte.qc(numberRangeToNumber(3, 7));
     return Unit_instance;
   }
   function TerminalCapabilities$schema$lambda$lambda_1($this$byte) {
-    $this$byte.w9(0, 'SDA - Terminal can perform Static Data Authentication');
-    $this$byte.w9(1, 'DDA - Terminal can perform Dynamic Data Authentication');
-    $this$byte.w9(2, 'CDA - Terminal can perform Combined DDA/AC Generation');
-    $this$byte.ja(numberRangeToNumber(3, 7));
+    $this$byte.dc(0, 'SDA - Terminal can perform Static Data Authentication');
+    $this$byte.dc(1, 'DDA - Terminal can perform Dynamic Data Authentication');
+    $this$byte.dc(2, 'CDA - Terminal can perform Combined DDA/AC Generation');
+    $this$byte.qc(numberRangeToNumber(3, 7));
     return Unit_instance;
   }
   function TerminalCapabilities() {
     TerminalCapabilities_instance = this;
     var tmp = this;
-    tmp.vh_1 = bitfield('Terminal Capabilities', 3, TerminalCapabilities$schema$lambda);
-    this.wh_1 = new BitFieldExplainer(this.vh_1);
+    tmp.ro_1 = bitfield('Terminal Capabilities', 3, TerminalCapabilities$schema$lambda);
+    this.so_1 = new BitFieldExplainer(this.ro_1);
   }
-  protoOf(TerminalCapabilities).le = function (value, lineSeparator) {
-    return this.wh_1.le(value, lineSeparator);
+  protoOf(TerminalCapabilities).hl = function (value, lineSeparator) {
+    return this.so_1.hl(value, lineSeparator);
   };
-  protoOf(TerminalCapabilities).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(TerminalCapabilities).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var TerminalCapabilities_instance;
   function TerminalCapabilities_getInstance() {
@@ -3616,53 +5022,53 @@
     return TerminalCountryCode_instance;
   }
   function TerminalTransactionQualifiers$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - Contactless EMV Mode Support', TerminalTransactionQualifiers$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - Cardholder Verification and Online Capabilities', TerminalTransactionQualifiers$schema$lambda$lambda_0);
-    $this$bitfield.s9(3, 'Byte 3 - Transaction Qualifiers', TerminalTransactionQualifiers$schema$lambda$lambda_1);
-    $this$bitfield.s9(4, 'Byte 4 - Contactless Transaction Limitations', TerminalTransactionQualifiers$schema$lambda$lambda_2);
+    $this$bitfield.zb(1, 'Byte 1 - Contactless EMV Mode Support', TerminalTransactionQualifiers$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - Cardholder Verification and Online Capabilities', TerminalTransactionQualifiers$schema$lambda$lambda_0);
+    $this$bitfield.zb(3, 'Byte 3 - Transaction Qualifiers', TerminalTransactionQualifiers$schema$lambda$lambda_1);
+    $this$bitfield.zb(4, 'Byte 4 - Contactless Transaction Limitations', TerminalTransactionQualifiers$schema$lambda$lambda_2);
     return Unit_instance;
   }
   function TerminalTransactionQualifiers$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'EMV Mode Supported');
-    $this$byte.w9(1, 'Magstripe Mode Supported');
-    $this$byte.w9(2, 'ODA for EMV Mode Supported');
-    $this$byte.w9(3, 'CDA Supported');
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.dc(0, 'EMV Mode Supported');
+    $this$byte.dc(1, 'Magstripe Mode Supported');
+    $this$byte.dc(2, 'ODA for EMV Mode Supported');
+    $this$byte.dc(3, 'CDA Supported');
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function TerminalTransactionQualifiers$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'Reader Supports Online PIN');
-    $this$byte.w9(1, 'Reader Supports Signature');
-    $this$byte.w9(2, 'Reader Supports Consumer Device CVM');
-    $this$byte.w9(3, 'Reader Supports Contact Chip');
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.dc(0, 'Reader Supports Online PIN');
+    $this$byte.dc(1, 'Reader Supports Signature');
+    $this$byte.dc(2, 'Reader Supports Consumer Device CVM');
+    $this$byte.dc(3, 'Reader Supports Contact Chip');
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function TerminalTransactionQualifiers$schema$lambda$lambda_1($this$byte) {
-    $this$byte.w9(0, 'Reader is Offline Only');
-    $this$byte.w9(1, 'Online Cryptogram Required');
-    $this$byte.w9(2, 'Receipt Required');
-    $this$byte.w9(3, 'CVM Required');
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.dc(0, 'Reader is Offline Only');
+    $this$byte.dc(1, 'Online Cryptogram Required');
+    $this$byte.dc(2, 'Receipt Required');
+    $this$byte.dc(3, 'CVM Required');
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function TerminalTransactionQualifiers$schema$lambda$lambda_2($this$byte) {
-    $this$byte.w9(0, 'No Contactless EMV Transaction Supported');
-    $this$byte.w9(1, 'No Contactless Magstripe Transaction Supported');
-    $this$byte.ja(numberRangeToNumber(2, 7));
+    $this$byte.dc(0, 'No Contactless EMV Transaction Supported');
+    $this$byte.dc(1, 'No Contactless Magstripe Transaction Supported');
+    $this$byte.qc(numberRangeToNumber(2, 7));
     return Unit_instance;
   }
   function TerminalTransactionQualifiers() {
     TerminalTransactionQualifiers_instance = this;
     var tmp = this;
-    tmp.xh_1 = bitfield('Terminal Transaction Qualifiers', 4, TerminalTransactionQualifiers$schema$lambda);
-    this.yh_1 = new BitFieldExplainer(this.xh_1);
+    tmp.to_1 = bitfield('Terminal Transaction Qualifiers', 4, TerminalTransactionQualifiers$schema$lambda);
+    this.uo_1 = new BitFieldExplainer(this.to_1);
   }
-  protoOf(TerminalTransactionQualifiers).le = function (value, lineSeparator) {
-    return this.yh_1.le(value, lineSeparator);
+  protoOf(TerminalTransactionQualifiers).hl = function (value, lineSeparator) {
+    return this.uo_1.hl(value, lineSeparator);
   };
-  protoOf(TerminalTransactionQualifiers).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(TerminalTransactionQualifiers).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var TerminalTransactionQualifiers_instance;
   function TerminalTransactionQualifiers_getInstance() {
@@ -3672,60 +5078,60 @@
   }
   function createByteTab($this, byte) {
     var bits = toBitStrings(byte);
-    var mainTable = Companion_instance_4.fe(9);
+    var mainTable = Companion_instance_11.bl(9);
     // Inline function 'kotlin.apply' call
     // Inline function 'kotlin.contracts.contract' call
     // Inline function 'io.github.rafaelrabeloit.emv.explain.TerminalType.createByteTab.<anonymous>' call
-    mainTable.je(1, bits, 0, 1, 'Attended - Terminal is attended by a merchant');
-    mainTable.je(2, bits, 1, 2, 'Unattended - Terminal is unattended');
-    mainTable.je(3, bits, 2, 3, 'Electronic Cash Register - Terminal is an electronic cash register');
-    mainTable.je(4, bits, 3, 4, 'POS Terminal - Terminal is a point of sale terminal');
-    mainTable.je(5, bits, 4, 5, 'Mobile - Terminal is mobile');
-    mainTable.je(6, bits, 5, 6, 'Internet - Terminal is internet-based');
-    mainTable.je(7, bits, 6, 7, 'RFU - Reserved for Future Use');
-    mainTable.je(8, bits, 7, 8, 'RFU - Reserved for Future Use');
+    mainTable.fl(1, bits, 0, 1, 'Attended - Terminal is attended by a merchant');
+    mainTable.fl(2, bits, 1, 2, 'Unattended - Terminal is unattended');
+    mainTable.fl(3, bits, 2, 3, 'Electronic Cash Register - Terminal is an electronic cash register');
+    mainTable.fl(4, bits, 3, 4, 'POS Terminal - Terminal is a point of sale terminal');
+    mainTable.fl(5, bits, 4, 5, 'Mobile - Terminal is mobile');
+    mainTable.fl(6, bits, 5, 6, 'Internet - Terminal is internet-based');
+    mainTable.fl(7, bits, 6, 7, 'RFU - Reserved for Future Use');
+    mainTable.fl(8, bits, 7, 8, 'RFU - Reserved for Future Use');
     return new Tab('Byte 1 - Terminal Environment', mainTable);
   }
   function TerminalType() {
-    this.zh_1 = 0;
-    this.ai_1 = 0;
-    this.bi_1 = 1;
-    this.ci_1 = 2;
-    this.di_1 = 3;
-    this.ei_1 = 4;
-    this.fi_1 = 5;
-    this.gi_1 = 6;
-    this.hi_1 = 7;
-    this.ii_1 = 7;
-    this.ji_1 = 8;
-    this.ki_1 = 9;
-    this.li_1 = 1;
-    this.mi_1 = 2;
-    this.ni_1 = 3;
-    this.oi_1 = 4;
-    this.pi_1 = 5;
-    this.qi_1 = 6;
-    this.ri_1 = 7;
-    this.si_1 = 8;
+    this.vo_1 = 0;
+    this.wo_1 = 0;
+    this.xo_1 = 1;
+    this.yo_1 = 2;
+    this.zo_1 = 3;
+    this.ap_1 = 4;
+    this.bp_1 = 5;
+    this.cp_1 = 6;
+    this.dp_1 = 7;
+    this.ep_1 = 7;
+    this.fp_1 = 8;
+    this.gp_1 = 9;
+    this.hp_1 = 1;
+    this.ip_1 = 2;
+    this.jp_1 = 3;
+    this.kp_1 = 4;
+    this.lp_1 = 5;
+    this.mp_1 = 6;
+    this.np_1 = 7;
+    this.op_1 = 8;
   }
-  protoOf(TerminalType).le = function (value, lineSeparator) {
+  protoOf(TerminalType).hl = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     var tmp = value.length;
-    var tmp0_safe_receiver = EmvTagDescription_TERMINAL_TYPE_getInstance().cf_1;
+    var tmp0_safe_receiver = EmvTagDescription_TERMINAL_TYPE_getInstance().yl_1;
     // Inline function 'kotlin.contracts.contract' call
-    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.w6_1))) {
+    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.m7_1))) {
       // Inline function 'io.github.rafaelrabeloit.emv.explain.TerminalType.explain.<anonymous>' call
-      var tmp0_safe_receiver_0 = EmvTagDescription_TERMINAL_TYPE_getInstance().cf_1;
-      var message = 'Terminal Type must be exactly ' + (tmp0_safe_receiver_0 == null ? null : tmp0_safe_receiver_0.w6_1) + ' bytes long';
+      var tmp0_safe_receiver_0 = EmvTagDescription_TERMINAL_TYPE_getInstance().yl_1;
+      var message = 'Terminal Type must be exactly ' + (tmp0_safe_receiver_0 == null ? null : tmp0_safe_receiver_0.m7_1) + ' bytes long';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
     var explanation = new Explanation(lineSeparator);
     var tab = createByteTab(this, value[0]);
-    explanation.ce(new TabGroup(listOf_0(tab)));
+    explanation.kg(new TabGroup(listOf(tab)));
     return explanation;
   };
-  protoOf(TerminalType).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(TerminalType).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var TerminalType_instance;
   function TerminalType_getInstance() {
@@ -3752,39 +5158,39 @@
     return TransactionReferenceCurrencyCode_instance;
   }
   function TransactionStatusInformation$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1', TransactionStatusInformation$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2', TransactionStatusInformation$schema$lambda$lambda_0);
+    $this$bitfield.zb(1, 'Byte 1', TransactionStatusInformation$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2', TransactionStatusInformation$schema$lambda$lambda_0);
     return Unit_instance;
   }
   function TransactionStatusInformation$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'Offline Data Authentication Performed - Offline data authentication was performed');
-    $this$byte.w9(1, 'Offline Data Authentication Failed - Offline data authentication failed');
-    $this$byte.w9(2, 'SDA Performed - Static Data Authentication was performed');
-    $this$byte.w9(3, 'DDA Performed - Dynamic Data Authentication was performed');
-    $this$byte.w9(4, 'CDA Performed - Combined DDA/AC was performed');
-    $this$byte.w9(5, 'Cardholder Verification Performed - Cardholder verification was performed');
-    $this$byte.w9(6, 'Cardholder Verification Failed - Cardholder verification failed');
-    $this$byte.w9(7, 'Cardholder Verification Not Performed - Cardholder verification was not performed');
+    $this$byte.dc(0, 'Offline Data Authentication Performed - Offline data authentication was performed');
+    $this$byte.dc(1, 'Offline Data Authentication Failed - Offline data authentication failed');
+    $this$byte.dc(2, 'SDA Performed - Static Data Authentication was performed');
+    $this$byte.dc(3, 'DDA Performed - Dynamic Data Authentication was performed');
+    $this$byte.dc(4, 'CDA Performed - Combined DDA/AC was performed');
+    $this$byte.dc(5, 'Cardholder Verification Performed - Cardholder verification was performed');
+    $this$byte.dc(6, 'Cardholder Verification Failed - Cardholder verification failed');
+    $this$byte.dc(7, 'Cardholder Verification Not Performed - Cardholder verification was not performed');
     return Unit_instance;
   }
   function TransactionStatusInformation$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'Issuer Authentication Performed - Issuer authentication was performed');
-    $this$byte.w9(1, 'Issuer Authentication Failed - Issuer authentication failed');
-    $this$byte.w9(2, 'Issuer Authentication Not Performed - Issuer authentication was not performed');
-    $this$byte.ja(numberRangeToNumber(3, 7));
+    $this$byte.dc(0, 'Issuer Authentication Performed - Issuer authentication was performed');
+    $this$byte.dc(1, 'Issuer Authentication Failed - Issuer authentication failed');
+    $this$byte.dc(2, 'Issuer Authentication Not Performed - Issuer authentication was not performed');
+    $this$byte.qc(numberRangeToNumber(3, 7));
     return Unit_instance;
   }
   function TransactionStatusInformation() {
     TransactionStatusInformation_instance = this;
     var tmp = this;
-    tmp.ti_1 = bitfield('Transaction Status Information', 2, TransactionStatusInformation$schema$lambda);
-    this.ui_1 = new BitFieldExplainer(this.ti_1);
+    tmp.pp_1 = bitfield('Transaction Status Information', 2, TransactionStatusInformation$schema$lambda);
+    this.qp_1 = new BitFieldExplainer(this.pp_1);
   }
-  protoOf(TransactionStatusInformation).le = function (value, lineSeparator) {
-    return this.ui_1.le(value, lineSeparator);
+  protoOf(TransactionStatusInformation).hl = function (value, lineSeparator) {
+    return this.qp_1.hl(value, lineSeparator);
   };
-  protoOf(TransactionStatusInformation).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(TransactionStatusInformation).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
   var TransactionStatusInformation_instance;
   function TransactionStatusInformation_getInstance() {
@@ -3793,27 +5199,27 @@
     return TransactionStatusInformation_instance;
   }
   function TransactionType() {
-    this.vi_1 = '00';
-    this.wi_1 = '01';
-    this.xi_1 = '02';
-    this.yi_1 = '03';
-    this.zi_1 = '04';
-    this.aj_1 = '05';
-    this.bj_1 = '06';
-    this.cj_1 = '07';
-    this.dj_1 = '08';
-    this.ej_1 = '09';
-    this.fj_1 = '0A';
-    this.gj_1 = '0B';
-    this.hj_1 = '0C';
-    this.ij_1 = '0D';
-    this.jj_1 = '0E';
-    this.kj_1 = '0F';
-    this.lj_1 = '10';
-    this.mj_1 = '11';
-    this.nj_1 = '1F';
+    this.rp_1 = '00';
+    this.sp_1 = '01';
+    this.tp_1 = '02';
+    this.up_1 = '03';
+    this.vp_1 = '04';
+    this.wp_1 = '05';
+    this.xp_1 = '06';
+    this.yp_1 = '07';
+    this.zp_1 = '08';
+    this.aq_1 = '09';
+    this.bq_1 = '0A';
+    this.cq_1 = '0B';
+    this.dq_1 = '0C';
+    this.eq_1 = '0D';
+    this.fq_1 = '0E';
+    this.gq_1 = '0F';
+    this.hq_1 = '10';
+    this.iq_1 = '11';
+    this.jq_1 = '1F';
   }
-  protoOf(TransactionType).rf = function (value, lineSeparator) {
+  protoOf(TransactionType).nm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.contracts.contract' call
     if (!(value.length === 2)) {
@@ -3822,13 +5228,13 @@
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(this.zf(value)));
+    explanation.kg(new Line(this.vm(value)));
     return explanation;
   };
-  protoOf(TransactionType).de = function (value, lineSeparator) {
-    return this.rf((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(TransactionType).lg = function (value, lineSeparator) {
+    return this.nm((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE(), lineSeparator);
   };
-  protoOf(TransactionType).zf = function (value) {
+  protoOf(TransactionType).vm = function (value) {
     // Inline function 'kotlin.text.uppercase' call
     // Inline function 'kotlin.js.asDynamic' call
     var tmp0_subject = value.toUpperCase();
@@ -3839,155 +5245,155 @@
     return TransactionType_instance;
   }
   function ActionCode$Companion$schema$lambda($this$bitfield) {
-    $this$bitfield.s9(1, 'Byte 1 - Offline Data Authentication', ActionCode$Companion$schema$lambda$lambda);
-    $this$bitfield.s9(2, 'Byte 2 - Cardholder Verification', ActionCode$Companion$schema$lambda$lambda_0);
-    $this$bitfield.s9(3, 'Byte 3 - Transaction Results', ActionCode$Companion$schema$lambda$lambda_1);
-    $this$bitfield.s9(4, 'Byte 4 - Terminal Risk Management', ActionCode$Companion$schema$lambda$lambda_2);
-    $this$bitfield.s9(5, 'Byte 5 - Issuer Discretionary', ActionCode$Companion$schema$lambda$lambda_3);
+    $this$bitfield.zb(1, 'Byte 1 - Offline Data Authentication', ActionCode$Companion$schema$lambda$lambda);
+    $this$bitfield.zb(2, 'Byte 2 - Cardholder Verification', ActionCode$Companion$schema$lambda$lambda_0);
+    $this$bitfield.zb(3, 'Byte 3 - Transaction Results', ActionCode$Companion$schema$lambda$lambda_1);
+    $this$bitfield.zb(4, 'Byte 4 - Terminal Risk Management', ActionCode$Companion$schema$lambda$lambda_2);
+    $this$bitfield.zb(5, 'Byte 5 - Issuer Discretionary', ActionCode$Companion$schema$lambda$lambda_3);
     return Unit_instance;
   }
   function ActionCode$Companion$schema$lambda$lambda($this$byte) {
-    $this$byte.w9(0, 'SDA Failed - Static Data Authentication failed');
-    $this$byte.w9(1, 'ICC Data Missing - ICC data required for offline processing is missing');
-    $this$byte.w9(2, "Card Appears on Terminal Exception File - Card is in the terminal's exception file");
-    $this$byte.w9(3, 'DDA Failed - Dynamic Data Authentication failed');
-    $this$byte.w9(4, 'CDA Failed - Combined DDA/AC Generation failed');
-    $this$byte.w9(5, 'SDA Selected - Static Data Authentication was selected');
-    $this$byte.ja(numberRangeToNumber(6, 7));
+    $this$byte.dc(0, 'SDA Failed - Static Data Authentication failed');
+    $this$byte.dc(1, 'ICC Data Missing - ICC data required for offline processing is missing');
+    $this$byte.dc(2, "Card Appears on Terminal Exception File - Card is in the terminal's exception file");
+    $this$byte.dc(3, 'DDA Failed - Dynamic Data Authentication failed');
+    $this$byte.dc(4, 'CDA Failed - Combined DDA/AC Generation failed');
+    $this$byte.dc(5, 'SDA Selected - Static Data Authentication was selected');
+    $this$byte.qc(numberRangeToNumber(6, 7));
     return Unit_instance;
   }
   function ActionCode$Companion$schema$lambda$lambda_0($this$byte) {
-    $this$byte.w9(0, 'ICC and Terminal Have Different Application Versions');
-    $this$byte.w9(1, 'Expired Application - Application has expired');
-    $this$byte.w9(2, 'Application Not Yet Effective - Application is not yet effective');
-    $this$byte.w9(3, 'Requested Service Not Allowed for Card Product');
-    $this$byte.w9(4, 'New Card - Card is new');
-    $this$byte.w9(5, 'CVM Not Successful - Cardholder Verification Method was not successful');
-    $this$byte.w9(6, 'Unrecognized CVM - Cardholder Verification Method is not recognized');
-    $this$byte.w9(7, 'PIN Entry Required and PIN Pad Not Present or Not Working');
+    $this$byte.dc(0, 'ICC and Terminal Have Different Application Versions');
+    $this$byte.dc(1, 'Expired Application - Application has expired');
+    $this$byte.dc(2, 'Application Not Yet Effective - Application is not yet effective');
+    $this$byte.dc(3, 'Requested Service Not Allowed for Card Product');
+    $this$byte.dc(4, 'New Card - Card is new');
+    $this$byte.dc(5, 'CVM Not Successful - Cardholder Verification Method was not successful');
+    $this$byte.dc(6, 'Unrecognized CVM - Cardholder Verification Method is not recognized');
+    $this$byte.dc(7, 'PIN Entry Required and PIN Pad Not Present or Not Working');
     return Unit_instance;
   }
   function ActionCode$Companion$schema$lambda$lambda_1($this$byte) {
-    $this$byte.w9(0, 'Transaction Exceeds Floor Limit');
-    $this$byte.w9(1, 'Lower Consecutive Offline Limit Exceeded');
-    $this$byte.w9(2, 'Upper Consecutive Offline Limit Exceeded');
-    $this$byte.w9(3, 'Transaction Selected Randomly for Online Processing');
-    $this$byte.w9(4, 'Merchant Forced Transaction Online');
-    $this$byte.ja(numberRangeToNumber(5, 7));
+    $this$byte.dc(0, 'Transaction Exceeds Floor Limit');
+    $this$byte.dc(1, 'Lower Consecutive Offline Limit Exceeded');
+    $this$byte.dc(2, 'Upper Consecutive Offline Limit Exceeded');
+    $this$byte.dc(3, 'Transaction Selected Randomly for Online Processing');
+    $this$byte.dc(4, 'Merchant Forced Transaction Online');
+    $this$byte.qc(numberRangeToNumber(5, 7));
     return Unit_instance;
   }
   function ActionCode$Companion$schema$lambda$lambda_2($this$byte) {
-    $this$byte.w9(0, 'Default TDOL Used - Default Transaction Certificate Data Object List was used');
-    $this$byte.w9(1, 'Issuer Authentication Failed');
-    $this$byte.w9(2, 'Script Processing Failed Before Final GENERATE AC');
-    $this$byte.w9(3, 'Script Processing Failed After Final GENERATE AC');
-    $this$byte.ja(numberRangeToNumber(4, 7));
+    $this$byte.dc(0, 'Default TDOL Used - Default Transaction Certificate Data Object List was used');
+    $this$byte.dc(1, 'Issuer Authentication Failed');
+    $this$byte.dc(2, 'Script Processing Failed Before Final GENERATE AC');
+    $this$byte.dc(3, 'Script Processing Failed After Final GENERATE AC');
+    $this$byte.qc(numberRangeToNumber(4, 7));
     return Unit_instance;
   }
   function ActionCode$Companion$schema$lambda$lambda_3($this$byte) {
-    $this$byte.w9(0, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
-    $this$byte.w9(1, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
-    $this$byte.w9(2, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
-    $this$byte.w9(3, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
-    $this$byte.w9(4, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
-    $this$byte.w9(5, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
-    $this$byte.w9(6, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
-    $this$byte.w9(7, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(0, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(1, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(2, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(3, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(4, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(5, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(6, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
+    $this$byte.dc(7, 'Issuer Discretionary - All bits in this byte are reserved for issuer use');
     return Unit_instance;
   }
-  function Companion_6() {
-    Companion_instance_6 = this;
+  function Companion_13() {
+    Companion_instance_13 = this;
     var tmp = this;
-    tmp.oj_1 = bitfield('Action Code', 5, ActionCode$Companion$schema$lambda);
-    this.pj_1 = new BitFieldExplainer(this.oj_1);
+    tmp.kq_1 = bitfield('Action Code', 5, ActionCode$Companion$schema$lambda);
+    this.lq_1 = new BitFieldExplainer(this.kq_1);
   }
-  var Companion_instance_6;
-  function Companion_getInstance_6() {
-    if (Companion_instance_6 == null)
-      new Companion_6();
-    return Companion_instance_6;
+  var Companion_instance_13;
+  function Companion_getInstance_15() {
+    if (Companion_instance_13 == null)
+      new Companion_13();
+    return Companion_instance_13;
   }
   function ActionCode(tagDescription) {
-    Companion_getInstance_6();
-    this.ng_1 = tagDescription;
+    Companion_getInstance_15();
+    this.jn_1 = tagDescription;
   }
-  protoOf(ActionCode).le = function (value, lineSeparator) {
+  protoOf(ActionCode).hl = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     var tmp = value.length;
-    var tmp0_safe_receiver = this.ng_1.cf_1;
+    var tmp0_safe_receiver = this.jn_1.yl_1;
     // Inline function 'kotlin.contracts.contract' call
-    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.w6_1))) {
+    if (!(tmp === (tmp0_safe_receiver == null ? null : tmp0_safe_receiver.m7_1))) {
       // Inline function 'io.github.rafaelrabeloit.emv.explain.templates.ActionCode.explain.<anonymous>' call
-      var tmp0_safe_receiver_0 = this.ng_1.cf_1;
-      var message = this.ng_1.ze_1 + ' must be exactly ' + (tmp0_safe_receiver_0 == null ? null : tmp0_safe_receiver_0.w6_1) + ' bytes long';
+      var tmp0_safe_receiver_0 = this.jn_1.yl_1;
+      var message = this.jn_1.vl_1 + ' must be exactly ' + (tmp0_safe_receiver_0 == null ? null : tmp0_safe_receiver_0.m7_1) + ' bytes long';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    return Companion_getInstance_6().pj_1.le(value, lineSeparator);
+    return Companion_getInstance_15().lq_1.hl(value, lineSeparator);
   };
-  protoOf(ActionCode).de = function (value, lineSeparator) {
-    return this.le((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
+  protoOf(ActionCode).lg = function (value, lineSeparator) {
+    return this.hl((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE(), lineSeparator);
   };
-  function Companion_7() {
-    this.qj_1 = 0;
-    this.rj_1 = 999;
+  function Companion_14() {
+    this.mq_1 = 0;
+    this.nq_1 = 999;
   }
-  var Companion_instance_7;
-  function Companion_getInstance_7() {
-    return Companion_instance_7;
+  var Companion_instance_14;
+  function Companion_getInstance_16() {
+    return Companion_instance_14;
   }
   function CountryCode(tagDescription) {
-    this.tg_1 = tagDescription;
+    this.pn_1 = tagDescription;
   }
-  protoOf(CountryCode).hf = function (value, lineSeparator) {
+  protoOf(CountryCode).dm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.ranges.contains' call
     var this_0 = numberRangeToNumber(0, 999);
     // Inline function 'kotlin.contracts.contract' call
-    if (!contains(isInterface(this_0, ClosedRange) ? this_0 : THROW_CCE(), value)) {
+    if (!contains_0(isInterface(this_0, ClosedRange) ? this_0 : THROW_CCE(), value)) {
       // Inline function 'io.github.rafaelrabeloit.emv.explain.templates.CountryCode.explain.<anonymous>' call
-      var message = this.tg_1.ze_1 + ' must be a valid country code between 0 and 999';
+      var message = this.pn_1.vl_1 + ' must be a valid country code between 0 and 999';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    var tmp0_safe_receiver = Companion_instance_11.sj(value.v());
-    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.yg_1;
+    var tmp0_safe_receiver = Companion_instance_18.oq(value.z());
+    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.un_1;
     var description = tmp1_elvis_lhs == null ? 'Unknown Country Code' : tmp1_elvis_lhs;
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(description));
+    explanation.kg(new Line(description));
     return explanation;
   };
-  protoOf(CountryCode).de = function (value, lineSeparator) {
-    return this.hf(value instanceof Long ? value : THROW_CCE(), lineSeparator);
+  protoOf(CountryCode).lg = function (value, lineSeparator) {
+    return this.dm(value instanceof Long ? value : THROW_CCE(), lineSeparator);
   };
-  function Companion_8() {
-    this.tj_1 = 0;
-    this.uj_1 = 999;
+  function Companion_15() {
+    this.pq_1 = 0;
+    this.qq_1 = 999;
   }
-  var Companion_instance_8;
-  function Companion_getInstance_8() {
-    return Companion_instance_8;
+  var Companion_instance_15;
+  function Companion_getInstance_17() {
+    return Companion_instance_15;
   }
   function CurrencyCode(tagDescription) {
-    this.gf_1 = tagDescription;
+    this.cm_1 = tagDescription;
   }
-  protoOf(CurrencyCode).hf = function (value, lineSeparator) {
+  protoOf(CurrencyCode).dm = function (value, lineSeparator) {
     // Inline function 'kotlin.require' call
     // Inline function 'kotlin.ranges.contains' call
     var this_0 = numberRangeToNumber(0, 999);
     // Inline function 'kotlin.contracts.contract' call
-    if (!contains(isInterface(this_0, ClosedRange) ? this_0 : THROW_CCE(), value)) {
+    if (!contains_0(isInterface(this_0, ClosedRange) ? this_0 : THROW_CCE(), value)) {
       // Inline function 'io.github.rafaelrabeloit.emv.explain.templates.CurrencyCode.explain.<anonymous>' call
-      var message = this.gf_1.ze_1 + ' must be a valid currency code between 0 and 999';
+      var message = this.cm_1.vl_1 + ' must be a valid currency code between 0 and 999';
       throw IllegalArgumentException_init_$Create$(toString(message));
     }
-    var tmp0_safe_receiver = Companion_instance_12.sf(value.v());
-    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.wf_1;
+    var tmp0_safe_receiver = Companion_instance_19.om(value.z());
+    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver.sm_1;
     var description = tmp1_elvis_lhs == null ? 'Unknown Currency Code' : tmp1_elvis_lhs;
     var explanation = new Explanation(lineSeparator);
-    explanation.ce(new Line(description));
+    explanation.kg(new Line(description));
     return explanation;
   };
-  protoOf(CurrencyCode).de = function (value, lineSeparator) {
-    return this.hf(value instanceof Long ? value : THROW_CCE(), lineSeparator);
+  protoOf(CurrencyCode).lg = function (value, lineSeparator) {
+    return this.dm(value instanceof Long ? value : THROW_CCE(), lineSeparator);
   };
   function isValidAlphanumericSpecial($this, char) {
     var tmp;
@@ -4075,7 +5481,7 @@
       // Inline function 'kotlin.code' call
       var this_17 = _Char___init__impl__6a9atx(63);
       var tmp$ret$17 = Char__toInt_impl_vasixd(this_17);
-      tmp = setOf([tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp$ret$17]).a1(char);
+      tmp = setOf([tmp_5, tmp_6, tmp_7, tmp_8, tmp_9, tmp_10, tmp_11, tmp_12, tmp_13, tmp_14, tmp_15, tmp$ret$17]).n1(char);
     }
     return tmp;
   }
@@ -4094,14 +5500,14 @@
   }
   function AlphanumericSpecialValueParser() {
   }
-  protoOf(AlphanumericSpecialValueParser).oa = function (bytes) {
+  protoOf(AlphanumericSpecialValueParser).vc = function (bytes) {
     return joinToString_0(bytes, '', VOID, VOID, VOID, VOID, AlphanumericSpecialValueParser$bytesToValue$lambda(this));
   };
-  protoOf(AlphanumericSpecialValueParser).vj = function (value) {
+  protoOf(AlphanumericSpecialValueParser).xh = function (value) {
     return value;
   };
-  protoOf(AlphanumericSpecialValueParser).ta = function (value) {
-    return this.vj((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+  protoOf(AlphanumericSpecialValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   function isValidAlphanumeric($this, char) {
     var tmp;
@@ -4174,37 +5580,37 @@
   }
   function AlphanumericValueParser() {
   }
-  protoOf(AlphanumericValueParser).oa = function (bytes) {
+  protoOf(AlphanumericValueParser).vc = function (bytes) {
     return joinToString_0(bytes, '', VOID, VOID, VOID, VOID, AlphanumericValueParser$bytesToValue$lambda(this));
   };
-  protoOf(AlphanumericValueParser).vj = function (value) {
+  protoOf(AlphanumericValueParser).xh = function (value) {
     return value;
   };
-  protoOf(AlphanumericValueParser).ta = function (value) {
-    return this.vj((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+  protoOf(AlphanumericValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   function BinaryValueParser() {
   }
-  protoOf(BinaryValueParser).oa = function (bytes) {
+  protoOf(BinaryValueParser).vc = function (bytes) {
     // Inline function 'kotlin.collections.copyOf' call
     // Inline function 'kotlin.js.asDynamic' call
     return bytes.slice();
   };
-  protoOf(BinaryValueParser).ee = function (value) {
+  protoOf(BinaryValueParser).li = function (value) {
     return toHexString_0(value);
   };
-  protoOf(BinaryValueParser).ta = function (value) {
-    return this.ee((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE());
+  protoOf(BinaryValueParser).ad = function (value) {
+    return this.li((!(value == null) ? isByteArray(value) : false) ? value : THROW_CCE());
   };
-  function Companion_9() {
-    this.wj_1 = 240;
-    this.xj_1 = 15;
-    this.yj_1 = 4;
-    this.zj_1 = 9;
+  function Companion_16() {
+    this.rq_1 = 240;
+    this.sq_1 = 15;
+    this.tq_1 = 4;
+    this.uq_1 = 9;
   }
-  var Companion_instance_9;
-  function Companion_getInstance_9() {
-    return Companion_instance_9;
+  var Companion_instance_16;
+  function Companion_getInstance_18() {
+    return Companion_instance_16;
   }
   function NumericNumberValueParser$bytesToValue$lambda(byte) {
     var highNibble = (byte & 240) >> 4;
@@ -4220,24 +5626,24 @@
   }
   function NumericNumberValueParser() {
   }
-  protoOf(NumericNumberValueParser).oa = function (bytes) {
+  protoOf(NumericNumberValueParser).vc = function (bytes) {
     return toLong_0(joinToString_0(bytes, '', VOID, VOID, VOID, VOID, NumericNumberValueParser$bytesToValue$lambda));
   };
-  protoOf(NumericNumberValueParser).ak = function (value) {
+  protoOf(NumericNumberValueParser).ci = function (value) {
     return value.toString();
   };
-  protoOf(NumericNumberValueParser).ta = function (value) {
-    return this.ak(value instanceof Long ? value : THROW_CCE());
+  protoOf(NumericNumberValueParser).ad = function (value) {
+    return this.ci(value instanceof Long ? value : THROW_CCE());
   };
-  function Companion_10() {
-    this.bk_1 = 240;
-    this.ck_1 = 15;
-    this.dk_1 = 4;
-    this.ek_1 = 9;
+  function Companion_17() {
+    this.vq_1 = 240;
+    this.wq_1 = 15;
+    this.xq_1 = 4;
+    this.yq_1 = 9;
   }
-  var Companion_instance_10;
-  function Companion_getInstance_10() {
-    return Companion_instance_10;
+  var Companion_instance_17;
+  function Companion_getInstance_19() {
+    return Companion_instance_17;
   }
   function NumericValueParser$bytesToValue$lambda(byte) {
     var highNibble = (byte & 240) >> 4;
@@ -4253,14 +5659,14 @@
   }
   function NumericValueParser() {
   }
-  protoOf(NumericValueParser).oa = function (bytes) {
+  protoOf(NumericValueParser).vc = function (bytes) {
     return joinToString_0(bytes, '', VOID, VOID, VOID, VOID, NumericValueParser$bytesToValue$lambda);
   };
-  protoOf(NumericValueParser).vj = function (value) {
+  protoOf(NumericValueParser).xh = function (value) {
     return value;
   };
-  protoOf(NumericValueParser).ta = function (value) {
-    return this.vj((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
+  protoOf(NumericValueParser).ad = function (value) {
+    return this.xh((!(value == null) ? typeof value === 'string' : false) ? value : THROW_CCE());
   };
   var CountryCodeDescription_AX_instance;
   var CountryCodeDescription_AF_instance;
@@ -4496,19 +5902,19 @@
   var CountryCodeDescription_YE_instance;
   var CountryCodeDescription_ZM_instance;
   var CountryCodeDescription_ZW_instance;
-  function Companion_11() {
+  function Companion_18() {
   }
-  protoOf(Companion_11).sj = function (code) {
+  protoOf(Companion_18).oq = function (code) {
     // Inline function 'kotlin.collections.find' call
-    var this_0 = get_entries_1();
+    var this_0 = get_entries_2();
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = this_0.m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = this_0.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.iso.Companion.fromNumericCode.<anonymous>' call
-        if (element.xg_1 === code) {
+        if (element.tn_1 === code) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -4517,17 +5923,17 @@
     }
     return tmp$ret$1;
   };
-  protoOf(Companion_11).ug = function (code) {
+  protoOf(Companion_18).qn = function (code) {
     // Inline function 'kotlin.collections.find' call
-    var this_0 = get_entries_1();
+    var this_0 = get_entries_2();
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = this_0.m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = this_0.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.iso.Companion.fromAlpha2Code.<anonymous>' call
-        if (equals_0(element.zg_1, code, true)) {
+        if (equals_0(element.vn_1, code, true)) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -4536,17 +5942,17 @@
     }
     return tmp$ret$1;
   };
-  protoOf(Companion_11).bh = function (code) {
+  protoOf(Companion_18).xn = function (code) {
     // Inline function 'kotlin.collections.find' call
-    var this_0 = get_entries_1();
+    var this_0 = get_entries_2();
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = this_0.m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = this_0.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.iso.Companion.fromAlpha3Code.<anonymous>' call
-        if (equals_0(element.ah_1, code, true)) {
+        if (equals_0(element.wn_1, code, true)) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -4555,17 +5961,17 @@
     }
     return tmp$ret$1;
   };
-  var Companion_instance_11;
-  function Companion_getInstance_11() {
-    return Companion_instance_11;
+  var Companion_instance_18;
+  function Companion_getInstance_20() {
+    return Companion_instance_18;
   }
-  function values_2() {
+  function values_3() {
     return [CountryCodeDescription_AX_getInstance(), CountryCodeDescription_AF_getInstance(), CountryCodeDescription_AL_getInstance(), CountryCodeDescription_DZ_getInstance(), CountryCodeDescription_AS_getInstance(), CountryCodeDescription_AD_getInstance(), CountryCodeDescription_AO_getInstance(), CountryCodeDescription_AI_getInstance(), CountryCodeDescription_AQ_getInstance(), CountryCodeDescription_AG_getInstance(), CountryCodeDescription_AR_getInstance(), CountryCodeDescription_AM_getInstance(), CountryCodeDescription_AW_getInstance(), CountryCodeDescription_AU_getInstance(), CountryCodeDescription_AT_getInstance(), CountryCodeDescription_AZ_getInstance(), CountryCodeDescription_BS_getInstance(), CountryCodeDescription_BH_getInstance(), CountryCodeDescription_BD_getInstance(), CountryCodeDescription_BB_getInstance(), CountryCodeDescription_BY_getInstance(), CountryCodeDescription_BE_getInstance(), CountryCodeDescription_BZ_getInstance(), CountryCodeDescription_BJ_getInstance(), CountryCodeDescription_BM_getInstance(), CountryCodeDescription_BT_getInstance(), CountryCodeDescription_BO_getInstance(), CountryCodeDescription_BA_getInstance(), CountryCodeDescription_BW_getInstance(), CountryCodeDescription_BV_getInstance(), CountryCodeDescription_BR_getInstance(), CountryCodeDescription_IO_getInstance(), CountryCodeDescription_BN_getInstance(), CountryCodeDescription_BG_getInstance(), CountryCodeDescription_BF_getInstance(), CountryCodeDescription_BI_getInstance(), CountryCodeDescription_KH_getInstance(), CountryCodeDescription_CM_getInstance(), CountryCodeDescription_CA_getInstance(), CountryCodeDescription_CV_getInstance(), CountryCodeDescription_KY_getInstance(), CountryCodeDescription_CF_getInstance(), CountryCodeDescription_TD_getInstance(), CountryCodeDescription_CL_getInstance(), CountryCodeDescription_CN_getInstance(), CountryCodeDescription_CX_getInstance(), CountryCodeDescription_CC_getInstance(), CountryCodeDescription_CO_getInstance(), CountryCodeDescription_KM_getInstance(), CountryCodeDescription_CK_getInstance(), CountryCodeDescription_CR_getInstance(), CountryCodeDescription_CI_getInstance(), CountryCodeDescription_CU_getInstance(), CountryCodeDescription_CY_getInstance(), CountryCodeDescription_CZ_getInstance(), CountryCodeDescription_DK_getInstance(), CountryCodeDescription_DJ_getInstance(), CountryCodeDescription_DM_getInstance(), CountryCodeDescription_DO_getInstance(), CountryCodeDescription_EC_getInstance(), CountryCodeDescription_EG_getInstance(), CountryCodeDescription_SV_getInstance(), CountryCodeDescription_GQ_getInstance(), CountryCodeDescription_ER_getInstance(), CountryCodeDescription_EE_getInstance(), CountryCodeDescription_ET_getInstance(), CountryCodeDescription_FK_getInstance(), CountryCodeDescription_FO_getInstance(), CountryCodeDescription_FJ_getInstance(), CountryCodeDescription_FI_getInstance(), CountryCodeDescription_FR_getInstance(), CountryCodeDescription_GF_getInstance(), CountryCodeDescription_PF_getInstance(), CountryCodeDescription_TF_getInstance(), CountryCodeDescription_GA_getInstance(), CountryCodeDescription_GM_getInstance(), CountryCodeDescription_GE_getInstance(), CountryCodeDescription_DE_getInstance(), CountryCodeDescription_GH_getInstance(), CountryCodeDescription_GI_getInstance(), CountryCodeDescription_GR_getInstance(), CountryCodeDescription_GL_getInstance(), CountryCodeDescription_GD_getInstance(), CountryCodeDescription_GP_getInstance(), CountryCodeDescription_GU_getInstance(), CountryCodeDescription_GT_getInstance(), CountryCodeDescription_GN_getInstance(), CountryCodeDescription_GW_getInstance(), CountryCodeDescription_GY_getInstance(), CountryCodeDescription_HT_getInstance(), CountryCodeDescription_HM_getInstance(), CountryCodeDescription_HN_getInstance(), CountryCodeDescription_HK_getInstance(), CountryCodeDescription_HU_getInstance(), CountryCodeDescription_IS_getInstance(), CountryCodeDescription_IN_getInstance(), CountryCodeDescription_ID_getInstance(), CountryCodeDescription_IR_getInstance(), CountryCodeDescription_IQ_getInstance(), CountryCodeDescription_IE_getInstance(), CountryCodeDescription_IT_getInstance(), CountryCodeDescription_JM_getInstance(), CountryCodeDescription_JP_getInstance(), CountryCodeDescription_JO_getInstance(), CountryCodeDescription_KZ_getInstance(), CountryCodeDescription_KE_getInstance(), CountryCodeDescription_KI_getInstance(), CountryCodeDescription_KP_getInstance(), CountryCodeDescription_KR_getInstance(), CountryCodeDescription_KW_getInstance(), CountryCodeDescription_KG_getInstance(), CountryCodeDescription_LA_getInstance(), CountryCodeDescription_LV_getInstance(), CountryCodeDescription_LB_getInstance(), CountryCodeDescription_LS_getInstance(), CountryCodeDescription_LR_getInstance(), CountryCodeDescription_LY_getInstance(), CountryCodeDescription_LI_getInstance(), CountryCodeDescription_LT_getInstance(), CountryCodeDescription_LU_getInstance(), CountryCodeDescription_MO_getInstance(), CountryCodeDescription_MK_getInstance(), CountryCodeDescription_MG_getInstance(), CountryCodeDescription_MW_getInstance(), CountryCodeDescription_MY_getInstance(), CountryCodeDescription_MV_getInstance(), CountryCodeDescription_ML_getInstance(), CountryCodeDescription_MT_getInstance(), CountryCodeDescription_MH_getInstance(), CountryCodeDescription_MQ_getInstance(), CountryCodeDescription_MR_getInstance(), CountryCodeDescription_MU_getInstance(), CountryCodeDescription_YT_getInstance(), CountryCodeDescription_MX_getInstance(), CountryCodeDescription_FM_getInstance(), CountryCodeDescription_MD_getInstance(), CountryCodeDescription_MC_getInstance(), CountryCodeDescription_MN_getInstance(), CountryCodeDescription_MS_getInstance(), CountryCodeDescription_MA_getInstance(), CountryCodeDescription_MZ_getInstance(), CountryCodeDescription_MM_getInstance(), CountryCodeDescription_NA_getInstance(), CountryCodeDescription_NR_getInstance(), CountryCodeDescription_NP_getInstance(), CountryCodeDescription_NL_getInstance(), CountryCodeDescription_AN_getInstance(), CountryCodeDescription_NC_getInstance(), CountryCodeDescription_NZ_getInstance(), CountryCodeDescription_NI_getInstance(), CountryCodeDescription_NE_getInstance(), CountryCodeDescription_NG_getInstance(), CountryCodeDescription_NU_getInstance(), CountryCodeDescription_NF_getInstance(), CountryCodeDescription_MP_getInstance(), CountryCodeDescription_NO_getInstance(), CountryCodeDescription_OM_getInstance(), CountryCodeDescription_PK_getInstance(), CountryCodeDescription_PW_getInstance(), CountryCodeDescription_PA_getInstance(), CountryCodeDescription_PG_getInstance(), CountryCodeDescription_PY_getInstance(), CountryCodeDescription_PE_getInstance(), CountryCodeDescription_PH_getInstance(), CountryCodeDescription_PN_getInstance(), CountryCodeDescription_PL_getInstance(), CountryCodeDescription_PT_getInstance(), CountryCodeDescription_PR_getInstance(), CountryCodeDescription_QA_getInstance(), CountryCodeDescription_RE_getInstance(), CountryCodeDescription_RO_getInstance(), CountryCodeDescription_RU_getInstance(), CountryCodeDescription_RW_getInstance(), CountryCodeDescription_SH_getInstance(), CountryCodeDescription_KN_getInstance(), CountryCodeDescription_LC_getInstance(), CountryCodeDescription_PM_getInstance(), CountryCodeDescription_VC_getInstance(), CountryCodeDescription_WS_getInstance(), CountryCodeDescription_SM_getInstance(), CountryCodeDescription_ST_getInstance(), CountryCodeDescription_SA_getInstance(), CountryCodeDescription_SN_getInstance(), CountryCodeDescription_CS_getInstance(), CountryCodeDescription_SC_getInstance(), CountryCodeDescription_SL_getInstance(), CountryCodeDescription_SG_getInstance(), CountryCodeDescription_SK_getInstance(), CountryCodeDescription_SI_getInstance(), CountryCodeDescription_SB_getInstance(), CountryCodeDescription_SO_getInstance(), CountryCodeDescription_ZA_getInstance(), CountryCodeDescription_GS_getInstance(), CountryCodeDescription_ES_getInstance(), CountryCodeDescription_LK_getInstance(), CountryCodeDescription_SD_getInstance(), CountryCodeDescription_SR_getInstance(), CountryCodeDescription_SJ_getInstance(), CountryCodeDescription_SZ_getInstance(), CountryCodeDescription_SE_getInstance(), CountryCodeDescription_CH_getInstance(), CountryCodeDescription_SY_getInstance(), CountryCodeDescription_TW_getInstance(), CountryCodeDescription_TJ_getInstance(), CountryCodeDescription_TZ_getInstance(), CountryCodeDescription_TH_getInstance(), CountryCodeDescription_TL_getInstance(), CountryCodeDescription_TG_getInstance(), CountryCodeDescription_TK_getInstance(), CountryCodeDescription_TO_getInstance(), CountryCodeDescription_TT_getInstance(), CountryCodeDescription_TN_getInstance(), CountryCodeDescription_TR_getInstance(), CountryCodeDescription_TM_getInstance(), CountryCodeDescription_TC_getInstance(), CountryCodeDescription_TV_getInstance(), CountryCodeDescription_UA_getInstance(), CountryCodeDescription_AE_getInstance(), CountryCodeDescription_GB_getInstance(), CountryCodeDescription_US_getInstance(), CountryCodeDescription_UM_getInstance(), CountryCodeDescription_UY_getInstance(), CountryCodeDescription_UZ_getInstance(), CountryCodeDescription_VU_getInstance(), CountryCodeDescription_VA_getInstance(), CountryCodeDescription_VE_getInstance(), CountryCodeDescription_VN_getInstance(), CountryCodeDescription_VG_getInstance(), CountryCodeDescription_VI_getInstance(), CountryCodeDescription_WF_getInstance(), CountryCodeDescription_EH_getInstance(), CountryCodeDescription_YE_getInstance(), CountryCodeDescription_ZM_getInstance(), CountryCodeDescription_ZW_getInstance()];
   }
-  function get_entries_1() {
-    if ($ENTRIES_1 == null)
-      $ENTRIES_1 = enumEntries(values_2());
-    return $ENTRIES_1;
+  function get_entries_2() {
+    if ($ENTRIES_2 == null)
+      $ENTRIES_2 = enumEntries(values_3());
+    return $ENTRIES_2;
   }
   var CountryCodeDescription_entriesInitialized;
   function CountryCodeDescription_initEntries() {
@@ -4807,13 +6213,13 @@
     CountryCodeDescription_ZM_instance = new CountryCodeDescription('ZM', 232, 894, 'Zambia', 'ZM', 'ZMB');
     CountryCodeDescription_ZW_instance = new CountryCodeDescription('ZW', 233, 716, 'Zimbabwe', 'ZW', 'ZWE');
   }
-  var $ENTRIES_1;
+  var $ENTRIES_2;
   function CountryCodeDescription(name, ordinal, numericCode, description, alpha2Code, alpha3Code) {
     Enum.call(this, name, ordinal);
-    this.xg_1 = numericCode;
-    this.yg_1 = description;
-    this.zg_1 = alpha2Code;
-    this.ah_1 = alpha3Code;
+    this.tn_1 = numericCode;
+    this.un_1 = description;
+    this.vn_1 = alpha2Code;
+    this.wn_1 = alpha3Code;
   }
   function CountryCodeDescription_AX_getInstance() {
     CountryCodeDescription_initEntries();
@@ -5921,19 +7327,19 @@
   var CurrencyCodeDescription_ZAR_instance;
   var CurrencyCodeDescription_ZMW_instance;
   var CurrencyCodeDescription_ZWL_instance;
-  function Companion_12() {
+  function Companion_19() {
   }
-  protoOf(Companion_12).sf = function (code) {
+  protoOf(Companion_19).om = function (code) {
     // Inline function 'kotlin.collections.find' call
-    var this_0 = get_entries_2();
+    var this_0 = get_entries_3();
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = this_0.m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = this_0.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.iso.Companion.fromCode.<anonymous>' call
-        if (element.vf_1 === code) {
+        if (element.rm_1 === code) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -5942,17 +7348,17 @@
     }
     return tmp$ret$1;
   };
-  var Companion_instance_12;
-  function Companion_getInstance_12() {
-    return Companion_instance_12;
+  var Companion_instance_19;
+  function Companion_getInstance_21() {
+    return Companion_instance_19;
   }
-  function values_3() {
+  function values_4() {
     return [CurrencyCodeDescription_AED_getInstance(), CurrencyCodeDescription_AFN_getInstance(), CurrencyCodeDescription_ALL_getInstance(), CurrencyCodeDescription_AMD_getInstance(), CurrencyCodeDescription_ANG_getInstance(), CurrencyCodeDescription_AOA_getInstance(), CurrencyCodeDescription_ARS_getInstance(), CurrencyCodeDescription_AUD_getInstance(), CurrencyCodeDescription_AWG_getInstance(), CurrencyCodeDescription_AZN_getInstance(), CurrencyCodeDescription_BAM_getInstance(), CurrencyCodeDescription_BBD_getInstance(), CurrencyCodeDescription_BDT_getInstance(), CurrencyCodeDescription_BGN_getInstance(), CurrencyCodeDescription_BHD_getInstance(), CurrencyCodeDescription_BIF_getInstance(), CurrencyCodeDescription_BMD_getInstance(), CurrencyCodeDescription_BND_getInstance(), CurrencyCodeDescription_BOB_getInstance(), CurrencyCodeDescription_BRL_getInstance(), CurrencyCodeDescription_BSD_getInstance(), CurrencyCodeDescription_BTN_getInstance(), CurrencyCodeDescription_BWP_getInstance(), CurrencyCodeDescription_BYN_getInstance(), CurrencyCodeDescription_BZD_getInstance(), CurrencyCodeDescription_CAD_getInstance(), CurrencyCodeDescription_CDF_getInstance(), CurrencyCodeDescription_CHF_getInstance(), CurrencyCodeDescription_CLP_getInstance(), CurrencyCodeDescription_CNY_getInstance(), CurrencyCodeDescription_COP_getInstance(), CurrencyCodeDescription_CRC_getInstance(), CurrencyCodeDescription_CUC_getInstance(), CurrencyCodeDescription_CUP_getInstance(), CurrencyCodeDescription_CVE_getInstance(), CurrencyCodeDescription_CZK_getInstance(), CurrencyCodeDescription_DJF_getInstance(), CurrencyCodeDescription_DKK_getInstance(), CurrencyCodeDescription_DOP_getInstance(), CurrencyCodeDescription_DZD_getInstance(), CurrencyCodeDescription_EGP_getInstance(), CurrencyCodeDescription_ERN_getInstance(), CurrencyCodeDescription_ETB_getInstance(), CurrencyCodeDescription_EUR_getInstance(), CurrencyCodeDescription_FJD_getInstance(), CurrencyCodeDescription_FKP_getInstance(), CurrencyCodeDescription_GBP_getInstance(), CurrencyCodeDescription_GEL_getInstance(), CurrencyCodeDescription_GHS_getInstance(), CurrencyCodeDescription_GIP_getInstance(), CurrencyCodeDescription_GMD_getInstance(), CurrencyCodeDescription_GNF_getInstance(), CurrencyCodeDescription_GTQ_getInstance(), CurrencyCodeDescription_GYD_getInstance(), CurrencyCodeDescription_HKD_getInstance(), CurrencyCodeDescription_HNL_getInstance(), CurrencyCodeDescription_HRK_getInstance(), CurrencyCodeDescription_HTG_getInstance(), CurrencyCodeDescription_HUF_getInstance(), CurrencyCodeDescription_IDR_getInstance(), CurrencyCodeDescription_ILS_getInstance(), CurrencyCodeDescription_INR_getInstance(), CurrencyCodeDescription_IQD_getInstance(), CurrencyCodeDescription_IRR_getInstance(), CurrencyCodeDescription_ISK_getInstance(), CurrencyCodeDescription_JMD_getInstance(), CurrencyCodeDescription_JOD_getInstance(), CurrencyCodeDescription_JPY_getInstance(), CurrencyCodeDescription_KES_getInstance(), CurrencyCodeDescription_KGS_getInstance(), CurrencyCodeDescription_KHR_getInstance(), CurrencyCodeDescription_KMF_getInstance(), CurrencyCodeDescription_KPW_getInstance(), CurrencyCodeDescription_KRW_getInstance(), CurrencyCodeDescription_KWD_getInstance(), CurrencyCodeDescription_KYD_getInstance(), CurrencyCodeDescription_KZT_getInstance(), CurrencyCodeDescription_LAK_getInstance(), CurrencyCodeDescription_LBP_getInstance(), CurrencyCodeDescription_LKR_getInstance(), CurrencyCodeDescription_LRD_getInstance(), CurrencyCodeDescription_LSL_getInstance(), CurrencyCodeDescription_LYD_getInstance(), CurrencyCodeDescription_MAD_getInstance(), CurrencyCodeDescription_MDL_getInstance(), CurrencyCodeDescription_MGA_getInstance(), CurrencyCodeDescription_MKD_getInstance(), CurrencyCodeDescription_MMK_getInstance(), CurrencyCodeDescription_MNT_getInstance(), CurrencyCodeDescription_MOP_getInstance(), CurrencyCodeDescription_MRO_getInstance(), CurrencyCodeDescription_MUR_getInstance(), CurrencyCodeDescription_MVR_getInstance(), CurrencyCodeDescription_MWK_getInstance(), CurrencyCodeDescription_MXN_getInstance(), CurrencyCodeDescription_MYR_getInstance(), CurrencyCodeDescription_MZN_getInstance(), CurrencyCodeDescription_NAD_getInstance(), CurrencyCodeDescription_NGN_getInstance(), CurrencyCodeDescription_NIO_getInstance(), CurrencyCodeDescription_NOK_getInstance(), CurrencyCodeDescription_NPR_getInstance(), CurrencyCodeDescription_NZD_getInstance(), CurrencyCodeDescription_OMR_getInstance(), CurrencyCodeDescription_PAB_getInstance(), CurrencyCodeDescription_PEN_getInstance(), CurrencyCodeDescription_PGK_getInstance(), CurrencyCodeDescription_PHP_getInstance(), CurrencyCodeDescription_PKR_getInstance(), CurrencyCodeDescription_PLN_getInstance(), CurrencyCodeDescription_PYG_getInstance(), CurrencyCodeDescription_QAR_getInstance(), CurrencyCodeDescription_RON_getInstance(), CurrencyCodeDescription_RSD_getInstance(), CurrencyCodeDescription_RUB_getInstance(), CurrencyCodeDescription_RWF_getInstance(), CurrencyCodeDescription_SAR_getInstance(), CurrencyCodeDescription_SBD_getInstance(), CurrencyCodeDescription_SCR_getInstance(), CurrencyCodeDescription_SDG_getInstance(), CurrencyCodeDescription_SEK_getInstance(), CurrencyCodeDescription_SGD_getInstance(), CurrencyCodeDescription_SHP_getInstance(), CurrencyCodeDescription_SLL_getInstance(), CurrencyCodeDescription_SOS_getInstance(), CurrencyCodeDescription_SRD_getInstance(), CurrencyCodeDescription_SSP_getInstance(), CurrencyCodeDescription_STD_getInstance(), CurrencyCodeDescription_SVC_getInstance(), CurrencyCodeDescription_SYP_getInstance(), CurrencyCodeDescription_SZL_getInstance(), CurrencyCodeDescription_THB_getInstance(), CurrencyCodeDescription_TJS_getInstance(), CurrencyCodeDescription_TMT_getInstance(), CurrencyCodeDescription_TND_getInstance(), CurrencyCodeDescription_TOP_getInstance(), CurrencyCodeDescription_TRY_getInstance(), CurrencyCodeDescription_TTD_getInstance(), CurrencyCodeDescription_TWD_getInstance(), CurrencyCodeDescription_TZS_getInstance(), CurrencyCodeDescription_UAH_getInstance(), CurrencyCodeDescription_UGX_getInstance(), CurrencyCodeDescription_USD_getInstance(), CurrencyCodeDescription_UYU_getInstance(), CurrencyCodeDescription_UZS_getInstance(), CurrencyCodeDescription_VEF_getInstance(), CurrencyCodeDescription_VND_getInstance(), CurrencyCodeDescription_VUV_getInstance(), CurrencyCodeDescription_WST_getInstance(), CurrencyCodeDescription_XAF_getInstance(), CurrencyCodeDescription_XAG_getInstance(), CurrencyCodeDescription_XAU_getInstance(), CurrencyCodeDescription_XBA_getInstance(), CurrencyCodeDescription_XBB_getInstance(), CurrencyCodeDescription_XBC_getInstance(), CurrencyCodeDescription_XBD_getInstance(), CurrencyCodeDescription_XCD_getInstance(), CurrencyCodeDescription_XDR_getInstance(), CurrencyCodeDescription_XOF_getInstance(), CurrencyCodeDescription_XPD_getInstance(), CurrencyCodeDescription_XPF_getInstance(), CurrencyCodeDescription_XPT_getInstance(), CurrencyCodeDescription_XSU_getInstance(), CurrencyCodeDescription_XTS_getInstance(), CurrencyCodeDescription_XUA_getInstance(), CurrencyCodeDescription_XXX_getInstance(), CurrencyCodeDescription_YER_getInstance(), CurrencyCodeDescription_ZAR_getInstance(), CurrencyCodeDescription_ZMW_getInstance(), CurrencyCodeDescription_ZWL_getInstance()];
   }
-  function get_entries_2() {
-    if ($ENTRIES_2 == null)
-      $ENTRIES_2 = enumEntries(values_3());
-    return $ENTRIES_2;
+  function get_entries_3() {
+    if ($ENTRIES_3 == null)
+      $ENTRIES_3 = enumEntries(values_4());
+    return $ENTRIES_3;
   }
   var CurrencyCodeDescription_entriesInitialized;
   function CurrencyCodeDescription_initEntries() {
@@ -6130,11 +7536,11 @@
     CurrencyCodeDescription_ZMW_instance = new CurrencyCodeDescription('ZMW', 168, 967, 'Zambian Kwacha');
     CurrencyCodeDescription_ZWL_instance = new CurrencyCodeDescription('ZWL', 169, 932, 'Zimbabwe Dollar');
   }
-  var $ENTRIES_2;
+  var $ENTRIES_3;
   function CurrencyCodeDescription(name, ordinal, code, description) {
     Enum.call(this, name, ordinal);
-    this.vf_1 = code;
-    this.wf_1 = description;
+    this.rm_1 = code;
+    this.sm_1 = description;
   }
   function CurrencyCodeDescription_AED_getInstance() {
     CurrencyCodeDescription_initEntries();
@@ -7000,19 +8406,19 @@
   var LanguageCodeDescription_ZHA_instance;
   var LanguageCodeDescription_ZHO_instance;
   var LanguageCodeDescription_ZUL_instance;
-  function Companion_13() {
+  function Companion_20() {
   }
-  protoOf(Companion_13).gh = function (code) {
+  protoOf(Companion_20).co = function (code) {
     // Inline function 'kotlin.collections.find' call
-    var this_0 = get_entries_3();
+    var this_0 = get_entries_4();
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = this_0.m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = this_0.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.iso.Companion.fromCode.<anonymous>' call
-        if (equals_0(element.jh_1, code, true)) {
+        if (equals_0(element.fo_1, code, true)) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -7021,17 +8427,17 @@
     }
     return tmp$ret$1;
   };
-  var Companion_instance_13;
-  function Companion_getInstance_13() {
-    return Companion_instance_13;
+  var Companion_instance_20;
+  function Companion_getInstance_22() {
+    return Companion_instance_20;
   }
-  function values_4() {
+  function values_5() {
     return [LanguageCodeDescription_AAR_getInstance(), LanguageCodeDescription_ABK_getInstance(), LanguageCodeDescription_AFR_getInstance(), LanguageCodeDescription_AKA_getInstance(), LanguageCodeDescription_AMH_getInstance(), LanguageCodeDescription_ARA_getInstance(), LanguageCodeDescription_ARG_getInstance(), LanguageCodeDescription_ASM_getInstance(), LanguageCodeDescription_AVA_getInstance(), LanguageCodeDescription_AVE_getInstance(), LanguageCodeDescription_AYM_getInstance(), LanguageCodeDescription_AZE_getInstance(), LanguageCodeDescription_BAK_getInstance(), LanguageCodeDescription_BAM_getInstance(), LanguageCodeDescription_BEL_getInstance(), LanguageCodeDescription_BEN_getInstance(), LanguageCodeDescription_BIS_getInstance(), LanguageCodeDescription_BOD_getInstance(), LanguageCodeDescription_BOS_getInstance(), LanguageCodeDescription_BRE_getInstance(), LanguageCodeDescription_BUL_getInstance(), LanguageCodeDescription_CAT_getInstance(), LanguageCodeDescription_CES_getInstance(), LanguageCodeDescription_CHA_getInstance(), LanguageCodeDescription_CHE_getInstance(), LanguageCodeDescription_CHU_getInstance(), LanguageCodeDescription_CHV_getInstance(), LanguageCodeDescription_COR_getInstance(), LanguageCodeDescription_COS_getInstance(), LanguageCodeDescription_CRE_getInstance(), LanguageCodeDescription_CYM_getInstance(), LanguageCodeDescription_DAN_getInstance(), LanguageCodeDescription_DEU_getInstance(), LanguageCodeDescription_DIV_getInstance(), LanguageCodeDescription_DZO_getInstance(), LanguageCodeDescription_ELL_getInstance(), LanguageCodeDescription_ENG_getInstance(), LanguageCodeDescription_EPO_getInstance(), LanguageCodeDescription_EST_getInstance(), LanguageCodeDescription_EUS_getInstance(), LanguageCodeDescription_EWE_getInstance(), LanguageCodeDescription_FAO_getInstance(), LanguageCodeDescription_FAS_getInstance(), LanguageCodeDescription_FIJ_getInstance(), LanguageCodeDescription_FIN_getInstance(), LanguageCodeDescription_FRA_getInstance(), LanguageCodeDescription_FRY_getInstance(), LanguageCodeDescription_FUL_getInstance(), LanguageCodeDescription_GLA_getInstance(), LanguageCodeDescription_GLE_getInstance(), LanguageCodeDescription_GLG_getInstance(), LanguageCodeDescription_GLV_getInstance(), LanguageCodeDescription_GRN_getInstance(), LanguageCodeDescription_GUJ_getInstance(), LanguageCodeDescription_HAT_getInstance(), LanguageCodeDescription_HAU_getInstance(), LanguageCodeDescription_HBS_getInstance(), LanguageCodeDescription_HEB_getInstance(), LanguageCodeDescription_HER_getInstance(), LanguageCodeDescription_HIN_getInstance(), LanguageCodeDescription_HMO_getInstance(), LanguageCodeDescription_HRV_getInstance(), LanguageCodeDescription_HUN_getInstance(), LanguageCodeDescription_HYE_getInstance(), LanguageCodeDescription_IBO_getInstance(), LanguageCodeDescription_IDO_getInstance(), LanguageCodeDescription_III_getInstance(), LanguageCodeDescription_IKU_getInstance(), LanguageCodeDescription_ILE_getInstance(), LanguageCodeDescription_INA_getInstance(), LanguageCodeDescription_IND_getInstance(), LanguageCodeDescription_IPK_getInstance(), LanguageCodeDescription_ISL_getInstance(), LanguageCodeDescription_ITA_getInstance(), LanguageCodeDescription_JAV_getInstance(), LanguageCodeDescription_JPN_getInstance(), LanguageCodeDescription_KAL_getInstance(), LanguageCodeDescription_KAN_getInstance(), LanguageCodeDescription_KAS_getInstance(), LanguageCodeDescription_KAT_getInstance(), LanguageCodeDescription_KAU_getInstance(), LanguageCodeDescription_KAZ_getInstance(), LanguageCodeDescription_KHM_getInstance(), LanguageCodeDescription_KIK_getInstance(), LanguageCodeDescription_KIN_getInstance(), LanguageCodeDescription_KIR_getInstance(), LanguageCodeDescription_KOM_getInstance(), LanguageCodeDescription_KON_getInstance(), LanguageCodeDescription_KOR_getInstance(), LanguageCodeDescription_KUA_getInstance(), LanguageCodeDescription_KUR_getInstance(), LanguageCodeDescription_LAO_getInstance(), LanguageCodeDescription_LAT_getInstance(), LanguageCodeDescription_LAV_getInstance(), LanguageCodeDescription_LIM_getInstance(), LanguageCodeDescription_LIN_getInstance(), LanguageCodeDescription_LIT_getInstance(), LanguageCodeDescription_LTZ_getInstance(), LanguageCodeDescription_LUB_getInstance(), LanguageCodeDescription_LUG_getInstance(), LanguageCodeDescription_MAH_getInstance(), LanguageCodeDescription_MAL_getInstance(), LanguageCodeDescription_MAR_getInstance(), LanguageCodeDescription_MKD_getInstance(), LanguageCodeDescription_MLG_getInstance(), LanguageCodeDescription_MLT_getInstance(), LanguageCodeDescription_MON_getInstance(), LanguageCodeDescription_MRI_getInstance(), LanguageCodeDescription_MSA_getInstance(), LanguageCodeDescription_MYA_getInstance(), LanguageCodeDescription_NAU_getInstance(), LanguageCodeDescription_NAV_getInstance(), LanguageCodeDescription_NBL_getInstance(), LanguageCodeDescription_NDE_getInstance(), LanguageCodeDescription_NDO_getInstance(), LanguageCodeDescription_NEP_getInstance(), LanguageCodeDescription_NLD_getInstance(), LanguageCodeDescription_NNO_getInstance(), LanguageCodeDescription_NOB_getInstance(), LanguageCodeDescription_NOR_getInstance(), LanguageCodeDescription_NYA_getInstance(), LanguageCodeDescription_OCI_getInstance(), LanguageCodeDescription_OJI_getInstance(), LanguageCodeDescription_ORI_getInstance(), LanguageCodeDescription_ORM_getInstance(), LanguageCodeDescription_OSS_getInstance(), LanguageCodeDescription_PAN_getInstance(), LanguageCodeDescription_PLI_getInstance(), LanguageCodeDescription_POL_getInstance(), LanguageCodeDescription_POR_getInstance(), LanguageCodeDescription_PUS_getInstance(), LanguageCodeDescription_QUE_getInstance(), LanguageCodeDescription_ROH_getInstance(), LanguageCodeDescription_RON_getInstance(), LanguageCodeDescription_RUN_getInstance(), LanguageCodeDescription_RUS_getInstance(), LanguageCodeDescription_SAG_getInstance(), LanguageCodeDescription_SAN_getInstance(), LanguageCodeDescription_SIN_getInstance(), LanguageCodeDescription_SLK_getInstance(), LanguageCodeDescription_SLV_getInstance(), LanguageCodeDescription_SME_getInstance(), LanguageCodeDescription_SMO_getInstance(), LanguageCodeDescription_SNA_getInstance(), LanguageCodeDescription_SND_getInstance(), LanguageCodeDescription_SOM_getInstance(), LanguageCodeDescription_SOT_getInstance(), LanguageCodeDescription_SPA_getInstance(), LanguageCodeDescription_SQI_getInstance(), LanguageCodeDescription_SRD_getInstance(), LanguageCodeDescription_SRP_getInstance(), LanguageCodeDescription_SSW_getInstance(), LanguageCodeDescription_SUN_getInstance(), LanguageCodeDescription_SWA_getInstance(), LanguageCodeDescription_SWE_getInstance(), LanguageCodeDescription_TAH_getInstance(), LanguageCodeDescription_TAM_getInstance(), LanguageCodeDescription_TAT_getInstance(), LanguageCodeDescription_TEL_getInstance(), LanguageCodeDescription_TGK_getInstance(), LanguageCodeDescription_TGL_getInstance(), LanguageCodeDescription_THA_getInstance(), LanguageCodeDescription_TIR_getInstance(), LanguageCodeDescription_TON_getInstance(), LanguageCodeDescription_TSN_getInstance(), LanguageCodeDescription_TSO_getInstance(), LanguageCodeDescription_TUK_getInstance(), LanguageCodeDescription_TUR_getInstance(), LanguageCodeDescription_TWI_getInstance(), LanguageCodeDescription_UIG_getInstance(), LanguageCodeDescription_UKR_getInstance(), LanguageCodeDescription_URD_getInstance(), LanguageCodeDescription_UZB_getInstance(), LanguageCodeDescription_VEN_getInstance(), LanguageCodeDescription_VIE_getInstance(), LanguageCodeDescription_VOL_getInstance(), LanguageCodeDescription_WLN_getInstance(), LanguageCodeDescription_WOL_getInstance(), LanguageCodeDescription_XHO_getInstance(), LanguageCodeDescription_YID_getInstance(), LanguageCodeDescription_YOR_getInstance(), LanguageCodeDescription_ZHA_getInstance(), LanguageCodeDescription_ZHO_getInstance(), LanguageCodeDescription_ZUL_getInstance()];
   }
-  function get_entries_3() {
-    if ($ENTRIES_3 == null)
-      $ENTRIES_3 = enumEntries(values_4());
-    return $ENTRIES_3;
+  function get_entries_4() {
+    if ($ENTRIES_4 == null)
+      $ENTRIES_4 = enumEntries(values_5());
+    return $ENTRIES_4;
   }
   var LanguageCodeDescription_entriesInitialized;
   function LanguageCodeDescription_initEntries() {
@@ -7223,11 +8629,11 @@
     LanguageCodeDescription_ZHO_instance = new LanguageCodeDescription('ZHO', 182, 'zh', 'Chinese');
     LanguageCodeDescription_ZUL_instance = new LanguageCodeDescription('ZUL', 183, 'zu', 'Zulu');
   }
-  var $ENTRIES_3;
+  var $ENTRIES_4;
   function LanguageCodeDescription(name, ordinal, code, description) {
     Enum.call(this, name, ordinal);
-    this.jh_1 = code;
-    this.kh_1 = description;
+    this.fo_1 = code;
+    this.go_1 = description;
   }
   function LanguageCodeDescription_AAR_getInstance() {
     LanguageCodeDescription_initEntries();
@@ -8253,19 +9659,19 @@
   var MerchantCategoryCodeDescription_MCC9311_instance;
   var MerchantCategoryCodeDescription_MCC9399_instance;
   var MerchantCategoryCodeDescription_MCC9402_instance;
-  function Companion_14() {
+  function Companion_21() {
   }
-  protoOf(Companion_14).sf = function (code) {
+  protoOf(Companion_21).om = function (code) {
     // Inline function 'kotlin.collections.find' call
-    var this_0 = get_entries_4();
+    var this_0 = get_entries_5();
     var tmp$ret$1;
     $l$block: {
       // Inline function 'kotlin.collections.firstOrNull' call
-      var tmp0_iterator = this_0.m();
-      while (tmp0_iterator.n()) {
-        var element = tmp0_iterator.o();
+      var tmp0_iterator = this_0.p();
+      while (tmp0_iterator.q()) {
+        var element = tmp0_iterator.r();
         // Inline function 'io.github.rafaelrabeloit.iso.Companion.fromCode.<anonymous>' call
-        if (element.nh_1 === code) {
+        if (element.jo_1 === code) {
           tmp$ret$1 = element;
           break $l$block;
         }
@@ -8274,17 +9680,17 @@
     }
     return tmp$ret$1;
   };
-  var Companion_instance_14;
-  function Companion_getInstance_14() {
-    return Companion_instance_14;
+  var Companion_instance_21;
+  function Companion_getInstance_23() {
+    return Companion_instance_21;
   }
-  function values_5() {
+  function values_6() {
     return [MerchantCategoryCodeDescription_MCC0742_getInstance(), MerchantCategoryCodeDescription_MCC0743_getInstance(), MerchantCategoryCodeDescription_MCC0744_getInstance(), MerchantCategoryCodeDescription_MCC0763_getInstance(), MerchantCategoryCodeDescription_MCC0780_getInstance(), MerchantCategoryCodeDescription_MCC1520_getInstance(), MerchantCategoryCodeDescription_MCC1711_getInstance(), MerchantCategoryCodeDescription_MCC1731_getInstance(), MerchantCategoryCodeDescription_MCC1740_getInstance(), MerchantCategoryCodeDescription_MCC1750_getInstance(), MerchantCategoryCodeDescription_MCC1761_getInstance(), MerchantCategoryCodeDescription_MCC1771_getInstance(), MerchantCategoryCodeDescription_MCC1799_getInstance(), MerchantCategoryCodeDescription_MCC2741_getInstance(), MerchantCategoryCodeDescription_MCC2791_getInstance(), MerchantCategoryCodeDescription_MCC2842_getInstance(), MerchantCategoryCodeDescription_MCC4011_getInstance(), MerchantCategoryCodeDescription_MCC4111_getInstance(), MerchantCategoryCodeDescription_MCC4112_getInstance(), MerchantCategoryCodeDescription_MCC4119_getInstance(), MerchantCategoryCodeDescription_MCC4121_getInstance(), MerchantCategoryCodeDescription_MCC4131_getInstance(), MerchantCategoryCodeDescription_MCC4214_getInstance(), MerchantCategoryCodeDescription_MCC4215_getInstance(), MerchantCategoryCodeDescription_MCC4225_getInstance(), MerchantCategoryCodeDescription_MCC4411_getInstance(), MerchantCategoryCodeDescription_MCC4457_getInstance(), MerchantCategoryCodeDescription_MCC4468_getInstance(), MerchantCategoryCodeDescription_MCC4511_getInstance(), MerchantCategoryCodeDescription_MCC4582_getInstance(), MerchantCategoryCodeDescription_MCC4722_getInstance(), MerchantCategoryCodeDescription_MCC4784_getInstance(), MerchantCategoryCodeDescription_MCC4789_getInstance(), MerchantCategoryCodeDescription_MCC4812_getInstance(), MerchantCategoryCodeDescription_MCC4814_getInstance(), MerchantCategoryCodeDescription_MCC4815_getInstance(), MerchantCategoryCodeDescription_MCC4816_getInstance(), MerchantCategoryCodeDescription_MCC4821_getInstance(), MerchantCategoryCodeDescription_MCC4829_getInstance(), MerchantCategoryCodeDescription_MCC4899_getInstance(), MerchantCategoryCodeDescription_MCC4900_getInstance(), MerchantCategoryCodeDescription_MCC5013_getInstance(), MerchantCategoryCodeDescription_MCC5021_getInstance(), MerchantCategoryCodeDescription_MCC5039_getInstance(), MerchantCategoryCodeDescription_MCC5044_getInstance(), MerchantCategoryCodeDescription_MCC5045_getInstance(), MerchantCategoryCodeDescription_MCC5046_getInstance(), MerchantCategoryCodeDescription_MCC5047_getInstance(), MerchantCategoryCodeDescription_MCC5051_getInstance(), MerchantCategoryCodeDescription_MCC5065_getInstance(), MerchantCategoryCodeDescription_MCC5072_getInstance(), MerchantCategoryCodeDescription_MCC5074_getInstance(), MerchantCategoryCodeDescription_MCC5085_getInstance(), MerchantCategoryCodeDescription_MCC5094_getInstance(), MerchantCategoryCodeDescription_MCC5099_getInstance(), MerchantCategoryCodeDescription_MCC5111_getInstance(), MerchantCategoryCodeDescription_MCC5122_getInstance(), MerchantCategoryCodeDescription_MCC5131_getInstance(), MerchantCategoryCodeDescription_MCC5137_getInstance(), MerchantCategoryCodeDescription_MCC5139_getInstance(), MerchantCategoryCodeDescription_MCC5169_getInstance(), MerchantCategoryCodeDescription_MCC5172_getInstance(), MerchantCategoryCodeDescription_MCC5192_getInstance(), MerchantCategoryCodeDescription_MCC5193_getInstance(), MerchantCategoryCodeDescription_MCC5198_getInstance(), MerchantCategoryCodeDescription_MCC5199_getInstance(), MerchantCategoryCodeDescription_MCC5200_getInstance(), MerchantCategoryCodeDescription_MCC5211_getInstance(), MerchantCategoryCodeDescription_MCC5231_getInstance(), MerchantCategoryCodeDescription_MCC5251_getInstance(), MerchantCategoryCodeDescription_MCC5261_getInstance(), MerchantCategoryCodeDescription_MCC5271_getInstance(), MerchantCategoryCodeDescription_MCC5300_getInstance(), MerchantCategoryCodeDescription_MCC5309_getInstance(), MerchantCategoryCodeDescription_MCC5310_getInstance(), MerchantCategoryCodeDescription_MCC5311_getInstance(), MerchantCategoryCodeDescription_MCC5331_getInstance(), MerchantCategoryCodeDescription_MCC5399_getInstance(), MerchantCategoryCodeDescription_MCC5411_getInstance(), MerchantCategoryCodeDescription_MCC5422_getInstance(), MerchantCategoryCodeDescription_MCC5441_getInstance(), MerchantCategoryCodeDescription_MCC5451_getInstance(), MerchantCategoryCodeDescription_MCC5462_getInstance(), MerchantCategoryCodeDescription_MCC5499_getInstance(), MerchantCategoryCodeDescription_MCC5511_getInstance(), MerchantCategoryCodeDescription_MCC5521_getInstance(), MerchantCategoryCodeDescription_MCC5531_getInstance(), MerchantCategoryCodeDescription_MCC5532_getInstance(), MerchantCategoryCodeDescription_MCC5533_getInstance(), MerchantCategoryCodeDescription_MCC5541_getInstance(), MerchantCategoryCodeDescription_MCC5542_getInstance(), MerchantCategoryCodeDescription_MCC5551_getInstance(), MerchantCategoryCodeDescription_MCC5561_getInstance(), MerchantCategoryCodeDescription_MCC5571_getInstance(), MerchantCategoryCodeDescription_MCC5592_getInstance(), MerchantCategoryCodeDescription_MCC5598_getInstance(), MerchantCategoryCodeDescription_MCC5599_getInstance(), MerchantCategoryCodeDescription_MCC5611_getInstance(), MerchantCategoryCodeDescription_MCC5621_getInstance(), MerchantCategoryCodeDescription_MCC5631_getInstance(), MerchantCategoryCodeDescription_MCC5641_getInstance(), MerchantCategoryCodeDescription_MCC5651_getInstance(), MerchantCategoryCodeDescription_MCC5655_getInstance(), MerchantCategoryCodeDescription_MCC5661_getInstance(), MerchantCategoryCodeDescription_MCC5681_getInstance(), MerchantCategoryCodeDescription_MCC5691_getInstance(), MerchantCategoryCodeDescription_MCC5697_getInstance(), MerchantCategoryCodeDescription_MCC5698_getInstance(), MerchantCategoryCodeDescription_MCC5699_getInstance(), MerchantCategoryCodeDescription_MCC5712_getInstance(), MerchantCategoryCodeDescription_MCC5713_getInstance(), MerchantCategoryCodeDescription_MCC5714_getInstance(), MerchantCategoryCodeDescription_MCC5715_getInstance(), MerchantCategoryCodeDescription_MCC5718_getInstance(), MerchantCategoryCodeDescription_MCC5719_getInstance(), MerchantCategoryCodeDescription_MCC5722_getInstance(), MerchantCategoryCodeDescription_MCC5732_getInstance(), MerchantCategoryCodeDescription_MCC5733_getInstance(), MerchantCategoryCodeDescription_MCC5734_getInstance(), MerchantCategoryCodeDescription_MCC5735_getInstance(), MerchantCategoryCodeDescription_MCC5811_getInstance(), MerchantCategoryCodeDescription_MCC5812_getInstance(), MerchantCategoryCodeDescription_MCC5813_getInstance(), MerchantCategoryCodeDescription_MCC5814_getInstance(), MerchantCategoryCodeDescription_MCC5815_getInstance(), MerchantCategoryCodeDescription_MCC5816_getInstance(), MerchantCategoryCodeDescription_MCC5817_getInstance(), MerchantCategoryCodeDescription_MCC5818_getInstance(), MerchantCategoryCodeDescription_MCC5912_getInstance(), MerchantCategoryCodeDescription_MCC5921_getInstance(), MerchantCategoryCodeDescription_MCC5931_getInstance(), MerchantCategoryCodeDescription_MCC5932_getInstance(), MerchantCategoryCodeDescription_MCC5933_getInstance(), MerchantCategoryCodeDescription_MCC5935_getInstance(), MerchantCategoryCodeDescription_MCC5937_getInstance(), MerchantCategoryCodeDescription_MCC5940_getInstance(), MerchantCategoryCodeDescription_MCC5941_getInstance(), MerchantCategoryCodeDescription_MCC5942_getInstance(), MerchantCategoryCodeDescription_MCC5943_getInstance(), MerchantCategoryCodeDescription_MCC5944_getInstance(), MerchantCategoryCodeDescription_MCC5945_getInstance(), MerchantCategoryCodeDescription_MCC5946_getInstance(), MerchantCategoryCodeDescription_MCC5947_getInstance(), MerchantCategoryCodeDescription_MCC5948_getInstance(), MerchantCategoryCodeDescription_MCC5949_getInstance(), MerchantCategoryCodeDescription_MCC5950_getInstance(), MerchantCategoryCodeDescription_MCC5960_getInstance(), MerchantCategoryCodeDescription_MCC5962_getInstance(), MerchantCategoryCodeDescription_MCC5963_getInstance(), MerchantCategoryCodeDescription_MCC5964_getInstance(), MerchantCategoryCodeDescription_MCC5965_getInstance(), MerchantCategoryCodeDescription_MCC5966_getInstance(), MerchantCategoryCodeDescription_MCC5967_getInstance(), MerchantCategoryCodeDescription_MCC5968_getInstance(), MerchantCategoryCodeDescription_MCC5969_getInstance(), MerchantCategoryCodeDescription_MCC5970_getInstance(), MerchantCategoryCodeDescription_MCC5971_getInstance(), MerchantCategoryCodeDescription_MCC5972_getInstance(), MerchantCategoryCodeDescription_MCC5973_getInstance(), MerchantCategoryCodeDescription_MCC5975_getInstance(), MerchantCategoryCodeDescription_MCC5976_getInstance(), MerchantCategoryCodeDescription_MCC5977_getInstance(), MerchantCategoryCodeDescription_MCC5978_getInstance(), MerchantCategoryCodeDescription_MCC5983_getInstance(), MerchantCategoryCodeDescription_MCC5992_getInstance(), MerchantCategoryCodeDescription_MCC5993_getInstance(), MerchantCategoryCodeDescription_MCC5994_getInstance(), MerchantCategoryCodeDescription_MCC5995_getInstance(), MerchantCategoryCodeDescription_MCC5996_getInstance(), MerchantCategoryCodeDescription_MCC5997_getInstance(), MerchantCategoryCodeDescription_MCC5998_getInstance(), MerchantCategoryCodeDescription_MCC5999_getInstance(), MerchantCategoryCodeDescription_MCC6010_getInstance(), MerchantCategoryCodeDescription_MCC6011_getInstance(), MerchantCategoryCodeDescription_MCC6012_getInstance(), MerchantCategoryCodeDescription_MCC6051_getInstance(), MerchantCategoryCodeDescription_MCC6211_getInstance(), MerchantCategoryCodeDescription_MCC6300_getInstance(), MerchantCategoryCodeDescription_MCC7011_getInstance(), MerchantCategoryCodeDescription_MCC7012_getInstance(), MerchantCategoryCodeDescription_MCC7032_getInstance(), MerchantCategoryCodeDescription_MCC7033_getInstance(), MerchantCategoryCodeDescription_MCC7210_getInstance(), MerchantCategoryCodeDescription_MCC7211_getInstance(), MerchantCategoryCodeDescription_MCC7216_getInstance(), MerchantCategoryCodeDescription_MCC7217_getInstance(), MerchantCategoryCodeDescription_MCC7221_getInstance(), MerchantCategoryCodeDescription_MCC7230_getInstance(), MerchantCategoryCodeDescription_MCC7251_getInstance(), MerchantCategoryCodeDescription_MCC7261_getInstance(), MerchantCategoryCodeDescription_MCC7273_getInstance(), MerchantCategoryCodeDescription_MCC7276_getInstance(), MerchantCategoryCodeDescription_MCC7277_getInstance(), MerchantCategoryCodeDescription_MCC7278_getInstance(), MerchantCategoryCodeDescription_MCC7296_getInstance(), MerchantCategoryCodeDescription_MCC7297_getInstance(), MerchantCategoryCodeDescription_MCC7298_getInstance(), MerchantCategoryCodeDescription_MCC7299_getInstance(), MerchantCategoryCodeDescription_MCC7311_getInstance(), MerchantCategoryCodeDescription_MCC7321_getInstance(), MerchantCategoryCodeDescription_MCC7322_getInstance(), MerchantCategoryCodeDescription_MCC7333_getInstance(), MerchantCategoryCodeDescription_MCC7338_getInstance(), MerchantCategoryCodeDescription_MCC7339_getInstance(), MerchantCategoryCodeDescription_MCC7342_getInstance(), MerchantCategoryCodeDescription_MCC7349_getInstance(), MerchantCategoryCodeDescription_MCC7361_getInstance(), MerchantCategoryCodeDescription_MCC7372_getInstance(), MerchantCategoryCodeDescription_MCC7375_getInstance(), MerchantCategoryCodeDescription_MCC7379_getInstance(), MerchantCategoryCodeDescription_MCC7392_getInstance(), MerchantCategoryCodeDescription_MCC7393_getInstance(), MerchantCategoryCodeDescription_MCC7394_getInstance(), MerchantCategoryCodeDescription_MCC7395_getInstance(), MerchantCategoryCodeDescription_MCC7399_getInstance(), MerchantCategoryCodeDescription_MCC7512_getInstance(), MerchantCategoryCodeDescription_MCC7513_getInstance(), MerchantCategoryCodeDescription_MCC7519_getInstance(), MerchantCategoryCodeDescription_MCC7523_getInstance(), MerchantCategoryCodeDescription_MCC7531_getInstance(), MerchantCategoryCodeDescription_MCC7534_getInstance(), MerchantCategoryCodeDescription_MCC7535_getInstance(), MerchantCategoryCodeDescription_MCC7538_getInstance(), MerchantCategoryCodeDescription_MCC7542_getInstance(), MerchantCategoryCodeDescription_MCC7549_getInstance(), MerchantCategoryCodeDescription_MCC7622_getInstance(), MerchantCategoryCodeDescription_MCC7623_getInstance(), MerchantCategoryCodeDescription_MCC7629_getInstance(), MerchantCategoryCodeDescription_MCC7631_getInstance(), MerchantCategoryCodeDescription_MCC7641_getInstance(), MerchantCategoryCodeDescription_MCC7692_getInstance(), MerchantCategoryCodeDescription_MCC7699_getInstance(), MerchantCategoryCodeDescription_MCC7800_getInstance(), MerchantCategoryCodeDescription_MCC7801_getInstance(), MerchantCategoryCodeDescription_MCC7802_getInstance(), MerchantCategoryCodeDescription_MCC7829_getInstance(), MerchantCategoryCodeDescription_MCC7832_getInstance(), MerchantCategoryCodeDescription_MCC7841_getInstance(), MerchantCategoryCodeDescription_MCC7911_getInstance(), MerchantCategoryCodeDescription_MCC7922_getInstance(), MerchantCategoryCodeDescription_MCC7929_getInstance(), MerchantCategoryCodeDescription_MCC7932_getInstance(), MerchantCategoryCodeDescription_MCC7933_getInstance(), MerchantCategoryCodeDescription_MCC7941_getInstance(), MerchantCategoryCodeDescription_MCC7991_getInstance(), MerchantCategoryCodeDescription_MCC7992_getInstance(), MerchantCategoryCodeDescription_MCC7993_getInstance(), MerchantCategoryCodeDescription_MCC7994_getInstance(), MerchantCategoryCodeDescription_MCC7995_getInstance(), MerchantCategoryCodeDescription_MCC7996_getInstance(), MerchantCategoryCodeDescription_MCC7997_getInstance(), MerchantCategoryCodeDescription_MCC7998_getInstance(), MerchantCategoryCodeDescription_MCC7999_getInstance(), MerchantCategoryCodeDescription_MCC8011_getInstance(), MerchantCategoryCodeDescription_MCC8021_getInstance(), MerchantCategoryCodeDescription_MCC8031_getInstance(), MerchantCategoryCodeDescription_MCC8041_getInstance(), MerchantCategoryCodeDescription_MCC8042_getInstance(), MerchantCategoryCodeDescription_MCC8043_getInstance(), MerchantCategoryCodeDescription_MCC8049_getInstance(), MerchantCategoryCodeDescription_MCC8050_getInstance(), MerchantCategoryCodeDescription_MCC8062_getInstance(), MerchantCategoryCodeDescription_MCC8071_getInstance(), MerchantCategoryCodeDescription_MCC8099_getInstance(), MerchantCategoryCodeDescription_MCC8111_getInstance(), MerchantCategoryCodeDescription_MCC8211_getInstance(), MerchantCategoryCodeDescription_MCC8220_getInstance(), MerchantCategoryCodeDescription_MCC8241_getInstance(), MerchantCategoryCodeDescription_MCC8244_getInstance(), MerchantCategoryCodeDescription_MCC8249_getInstance(), MerchantCategoryCodeDescription_MCC8299_getInstance(), MerchantCategoryCodeDescription_MCC8351_getInstance(), MerchantCategoryCodeDescription_MCC8398_getInstance(), MerchantCategoryCodeDescription_MCC8641_getInstance(), MerchantCategoryCodeDescription_MCC8651_getInstance(), MerchantCategoryCodeDescription_MCC8661_getInstance(), MerchantCategoryCodeDescription_MCC8675_getInstance(), MerchantCategoryCodeDescription_MCC8699_getInstance(), MerchantCategoryCodeDescription_MCC8734_getInstance(), MerchantCategoryCodeDescription_MCC8911_getInstance(), MerchantCategoryCodeDescription_MCC8931_getInstance(), MerchantCategoryCodeDescription_MCC8999_getInstance(), MerchantCategoryCodeDescription_MCC9211_getInstance(), MerchantCategoryCodeDescription_MCC9222_getInstance(), MerchantCategoryCodeDescription_MCC9223_getInstance(), MerchantCategoryCodeDescription_MCC9311_getInstance(), MerchantCategoryCodeDescription_MCC9399_getInstance(), MerchantCategoryCodeDescription_MCC9402_getInstance()];
   }
-  function get_entries_4() {
-    if ($ENTRIES_4 == null)
-      $ENTRIES_4 = enumEntries(values_5());
-    return $ENTRIES_4;
+  function get_entries_5() {
+    if ($ENTRIES_5 == null)
+      $ENTRIES_5 = enumEntries(values_6());
+    return $ENTRIES_5;
   }
   var MerchantCategoryCodeDescription_entriesInitialized;
   function MerchantCategoryCodeDescription_initEntries() {
@@ -8580,12 +9986,12 @@
     MerchantCategoryCodeDescription_MCC9399_instance = new MerchantCategoryCodeDescription('MCC9399', 286, 9399, 'Government services \u2014 not elsewhere classified', 'Government services');
     MerchantCategoryCodeDescription_MCC9402_instance = new MerchantCategoryCodeDescription('MCC9402', 287, 9402, 'Postal services \u2014 government only', 'Government services');
   }
-  var $ENTRIES_4;
+  var $ENTRIES_5;
   function MerchantCategoryCodeDescription(name, ordinal, code, description, category) {
     Enum.call(this, name, ordinal);
-    this.nh_1 = code;
-    this.oh_1 = description;
-    this.ph_1 = category;
+    this.jo_1 = code;
+    this.ko_1 = description;
+    this.lo_1 = category;
   }
   function MerchantCategoryCodeDescription_MCC0742_getInstance() {
     MerchantCategoryCodeDescription_initEntries();
@@ -9743,7 +11149,7 @@
     var tmp;
     try {
       var bytes = hexToByteArray(hex);
-      var tlvList = Companion_instance_0.pa(bytes, listOf_0(EmvSpecification_instance));
+      var tlvList = Companion_instance_0.wc(bytes, listOf(EmvSpecification_instance));
       tmp = tlvListToJson(tlvList);
     } catch ($p) {
       var tmp_0;
@@ -9762,26 +11168,26 @@
     var tmp;
     try {
       var tagBytes = hexToByteArray(tagHex);
-      var tlvTag = Companion_instance_2.qd(tagBytes);
+      var tlvTag = Companion_instance_2.yf(tagBytes);
       var tmp_0;
-      if (!EmvSpecification_instance.ua(tlvTag)) {
+      if (!EmvSpecification_instance.bd(tlvTag)) {
         tmp_0 = '{"error":"Unknown tag: ' + tagHex + '"}';
       } else {
-        var context = EmvSpecification_instance.va(tlvTag);
-        var tmp0_elvis_lhs = context.vd_1;
+        var context = EmvSpecification_instance.cd(tlvTag);
+        var tmp0_elvis_lhs = context.dg_1;
         var name = escapeJson(tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs);
-        var desc = escapeJson(context.wd_1);
+        var desc = escapeJson(context.eg_1);
         var explanation = buildExplanation(tlvTag, hexToByteArray(valueHex));
         var sb = StringBuilder_init_$Create$_0();
-        sb.l5('{');
-        sb.l5('"tag":"' + tagHex + '",');
-        sb.l5('"name":"' + name + '",');
-        sb.l5('"description":"' + desc + '"');
+        sb.b6('{');
+        sb.b6('"tag":"' + tagHex + '",');
+        sb.b6('"name":"' + name + '",');
+        sb.b6('"description":"' + desc + '"');
         if (!(explanation == null)) {
-          sb.l5(',"explanation":');
-          sb.l5('"' + escapeJson(explanation) + '"');
+          sb.b6(',"explanation":');
+          sb.b6('"' + escapeJson(explanation) + '"');
         }
-        sb.l5('}');
+        sb.b6('}');
         tmp_0 = sb.toString();
       }
       tmp = tmp_0;
@@ -9806,64 +11212,64 @@
   }
   function tlvListToJson(tlvList) {
     var sb = StringBuilder_init_$Create$_0();
-    sb.l5('[');
+    sb.b6('[');
     // Inline function 'kotlin.collections.forEachIndexed' call
     var index = 0;
-    var tmp0_iterator = tlvList.sa_1.m();
-    while (tmp0_iterator.n()) {
-      var item = tmp0_iterator.o();
+    var tmp0_iterator = tlvList.zc_1.p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
       // Inline function 'io.github.rafaelrabeloit.bertlv.ffi.tlvListToJson.<anonymous>' call
       var tmp1 = index;
       index = tmp1 + 1 | 0;
       if (checkIndexOverflow(tmp1) > 0) {
-        sb.l5(',');
+        sb.b6(',');
       }
-      sb.l5(tlvToJson(item));
+      sb.b6(tlvToJson(item));
     }
-    sb.l5(']');
+    sb.b6(']');
     return sb.toString();
   }
   function tlvToJson(tlv) {
     var sb = StringBuilder_init_$Create$_0();
-    var tagHex = toHexString(tlv.sc_1.kc_1);
-    var valueHex = toHexString(tlv.uc_1.zc_1);
-    var context = tlv.sc_1.qc_1(tlv.sc_1);
-    var isConstructed = tlv.sc_1.nc_1.equals(Construction_CONSTRUCTED_getInstance());
+    var tagHex = toHexString(tlv.ff_1.dd_1);
+    var valueHex = toHexString(tlv.hf_1.nd_1);
+    var context = tlv.ff_1.jd_1(tlv.ff_1);
+    var isConstructed = tlv.ff_1.gd_1.equals(Construction_CONSTRUCTED_getInstance());
     // Inline function 'kotlin.text.trim' call
-    var this_0 = tlv.uc_1.zd('\n').toString();
+    var this_0 = tlv.hf_1.hg('\n').toString();
     var explanation = toString(trim(isCharSequence(this_0) ? this_0 : THROW_CCE()));
-    sb.l5('{');
-    sb.l5('"tag":"' + tagHex + '",');
-    var tmp0_elvis_lhs = context.vd_1;
-    sb.l5('"tagName":"' + escapeJson(tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs) + '",');
-    sb.l5('"description":"' + escapeJson(context.wd_1) + '",');
-    sb.l5('"length":' + tlv.a() + ',');
-    sb.l5('"value":"' + valueHex + '",');
-    sb.l5('"isConstructed":' + isConstructed + ',');
-    sb.l5('"explanation":"' + escapeJson(explanation) + '"');
+    sb.b6('{');
+    sb.b6('"tag":"' + tagHex + '",');
+    var tmp0_elvis_lhs = context.dg_1;
+    sb.b6('"tagName":"' + escapeJson(tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs) + '",');
+    sb.b6('"description":"' + escapeJson(context.eg_1) + '",');
+    sb.b6('"length":' + tlv.a() + ',');
+    sb.b6('"value":"' + valueHex + '",');
+    sb.b6('"isConstructed":' + isConstructed + ',');
+    sb.b6('"explanation":"' + escapeJson(explanation) + '"');
     if (isConstructed) {
-      var childList = tlv.d1();
+      var childList = tlv.q1();
       if (childList instanceof TLVList) {
-        sb.l5(',"children":');
-        sb.l5(tlvListToJson(childList));
+        sb.b6(',"children":');
+        sb.b6(tlvListToJson(childList));
       }
     }
-    sb.l5('}');
+    sb.b6('}');
     return sb.toString();
   }
   function buildExplanation(tag, valueBytes) {
     var tmp;
     try {
-      var length = Companion_instance_1.bd(valueBytes.length);
+      var length = Companion_instance_1.jf(valueBytes.length);
       // Inline function 'kotlin.collections.plus' call
       // Inline function 'kotlin.collections.plus' call
-      var this_0 = tag.kc_1;
-      var elements = length.wc_1;
+      var this_0 = tag.dd_1;
+      var elements = length.kd_1;
       var this_1 = primitiveArrayConcat([this_0, elements]);
       var tlvBytes = primitiveArrayConcat([this_1, valueBytes]);
-      var tlv = Companion_instance.wa(tlvBytes, listOf_0(EmvSpecification_instance));
+      var tlv = Companion_instance.df(tlvBytes, listOf(EmvSpecification_instance));
       // Inline function 'kotlin.text.trim' call
-      var this_2 = tlv.uc_1.zd('\n').toString();
+      var this_2 = tlv.hf_1.hg('\n').toString();
       var explanation = toString(trim(isCharSequence(this_2) ? this_2 : THROW_CCE()));
       // Inline function 'kotlin.text.ifEmpty' call
       // Inline function 'kotlin.contracts.contract' call
@@ -9889,9 +11295,9 @@
     return tmp;
   }
   //region block: post-declaration
-  protoOf(TLVLength).p = get_size;
-  protoOf(TLVTag).p = get_size;
-  protoOf(TLVValue).p = get_size;
+  protoOf(TLVLength).s = get_size;
+  protoOf(TLVTag).s = get_size;
+  protoOf(TLVValue).s = get_size;
   //endregion
   //region block: init
   Companion_instance = new Companion();
@@ -9899,9 +11305,15 @@
   Companion_instance_1 = new Companion_1();
   Companion_instance_2 = new Companion_2();
   Companion_instance_3 = new Companion_3();
+  ASNOneSpecification_instance = new ASNOneSpecification();
   Companion_instance_4 = new Companion_4();
+  Companion_instance_6 = new Companion_6();
+  Companion_instance_7 = new Companion_7();
+  Companion_instance_8 = new Companion_8();
+  Companion_instance_9 = new Companion_9();
+  Companion_instance_11 = new Companion_11();
   EmvSpecification_instance = new EmvSpecification();
-  Companion_instance_5 = new Companion_5();
+  Companion_instance_12 = new Companion_12();
   ApplicationReferenceCurrency_instance = new ApplicationReferenceCurrency();
   AuthorisationResponseCode_instance = new AuthorisationResponseCode();
   CvmList_instance = new CvmList();
@@ -9914,14 +11326,14 @@
   ServiceCode_instance = new ServiceCode();
   TerminalType_instance = new TerminalType();
   TransactionType_instance = new TransactionType();
-  Companion_instance_7 = new Companion_7();
-  Companion_instance_8 = new Companion_8();
-  Companion_instance_9 = new Companion_9();
-  Companion_instance_10 = new Companion_10();
-  Companion_instance_11 = new Companion_11();
-  Companion_instance_12 = new Companion_12();
-  Companion_instance_13 = new Companion_13();
   Companion_instance_14 = new Companion_14();
+  Companion_instance_15 = new Companion_15();
+  Companion_instance_16 = new Companion_16();
+  Companion_instance_17 = new Companion_17();
+  Companion_instance_18 = new Companion_18();
+  Companion_instance_19 = new Companion_19();
+  Companion_instance_20 = new Companion_20();
+  Companion_instance_21 = new Companion_21();
   //endregion
   //region block: exports
   function $jsExportAll$(_) {

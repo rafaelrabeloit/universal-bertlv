@@ -45,7 +45,7 @@ class TLVList private constructor(
             var offset = 0
 
             while (offset < bytes.size) {
-                val tlv = TLV.fromTlvBuffer(bytes.copyOfRange(offset, bytes.size), specifications)
+                val tlv = TLV.fromTlvBuffer(bytes, specifications, offset)
                 result.add(tlv)
                 offset += tlv.tlvTag.size + tlv.tlvLength.size + tlv.tlvValue.size
             }

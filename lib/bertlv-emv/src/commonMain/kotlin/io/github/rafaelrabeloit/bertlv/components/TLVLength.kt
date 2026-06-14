@@ -104,12 +104,12 @@ class TLVLength private constructor(
         private const val LENGTH_ROW_INDEX = 2
         private const val VALUE_ROW_INDEX = 1
 
-        fun fromTlvBuffer(bytes: ByteArray, tag: TLVTag): TLVLength {
-            val noTagBytes = extractNoTagBytes(bytes, tag)
-            val form = determineForm(noTagBytes)
-            val lengthSize = calculateLengthSize(form, noTagBytes)
-            val lengthBytes = extractLengthBytes(noTagBytes, lengthSize)
-            val length = calculateLength(bytes, tag, form, lengthSize)
+        fun fromTlvBuffer(bytes: ByteArray, tag: TLVTag, offset: Int = 0): TLVLength {
+            val lengthOffset = offset + tag.size
+            val form = determineForm(bytes[lengthOffset])
+            val lengthSize = calculateLengthSize(form, bytes, lengthOffset)
+            val lengthBytes = bytes.copyOfRange(lengthOffset, lengthOffset + lengthSize)
+            val length = calculateLength(bytes, offset, tag, form, lengthSize)
 
             return TLVLength(lengthBytes, form, length)
         }
@@ -152,34 +152,27 @@ class TLVLength private constructor(
             return count
         }
 
-        private fun extractNoTagBytes(bytes: ByteArray, tag: TLVTag): ByteArray {
-            return bytes.copyOfRange(tag.size, bytes.size)
+        private fun determineForm(lengthByte: Byte): Form {
+            return if (lengthByte.matches(LENGTH_LONG_MASK)) Form.LONG else Form.SHORT
         }
 
-        private fun determineForm(noTagBytes: ByteArray): Form {
-            return if (noTagBytes.first().matches(LENGTH_LONG_MASK)) Form.LONG else Form.SHORT
-        }
-
-        private fun calculateLengthSize(form: Form, noTagBytes: ByteArray): Int {
+        private fun calculateLengthSize(form: Form, bytes: ByteArray, lengthOffset: Int): Int {
             return when (form) {
                 Form.SHORT -> 1
                 Form.LONG -> {
-                    val subsequentBytes = noTagBytes.first().toInt() and LENGTH_SHORT_MASK
+                    val subsequentBytes = bytes[lengthOffset].toInt() and LENGTH_SHORT_MASK
                     subsequentBytes + 1
                 }
             }
         }
 
-        private fun extractLengthBytes(noTagBytes: ByteArray, lengthSize: Int): ByteArray {
-            return noTagBytes.copyOfRange(0, lengthSize)
-        }
-
-        private fun calculateLength(bytes: ByteArray, tag: TLVTag, form: Form, lengthSize: Int): Int {
+        private fun calculateLength(bytes: ByteArray, offset: Int, tag: TLVTag, form: Form, lengthSize: Int): Int {
+            val lengthOffset = offset + tag.size
             return when (form) {
-                Form.SHORT -> bytes[tag.size].toInt() and LENGTH_SHORT_MASK
+                Form.SHORT -> bytes[lengthOffset].toInt() and LENGTH_SHORT_MASK
                 Form.LONG -> {
                     var result = 0
-                    for (i in (tag.size + 1) until (tag.size + lengthSize)) {
+                    for (i in (lengthOffset + 1) until (lengthOffset + lengthSize)) {
                         result = (result shl BITS_IN_BYTE) or (bytes[i].toInt() and BYTE_MASK)
                     }
                     result

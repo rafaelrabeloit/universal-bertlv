@@ -59,8 +59,9 @@ class TLVValue<V> private constructor(
             tag: TLVTag,
             length: TLVLength,
             handler: ValueHandler<V>,
+            offset: Int = 0,
         ): TLVValue<V> {
-            val valueStart = tag.size + length.size
+            val valueStart = offset + tag.size + length.size
             val valueBytes = bytes.copyOfRange(valueStart, valueStart + length.length)
             return TLVValue(
                 bytes = valueBytes,

@@ -219,4 +219,28 @@ class TLVListTest {
         assertEquals(0x95, parsedList.tlvs[0].tag)
         assertEquals(0x96, parsedList.tlvs[1].tag)
     }
+
+    @Test
+    fun givenAValidTlvListWhenParseThenEachTlvBytesShouldMatchExactEncodedSize() {
+        val tlvList = byteArrayOf(
+            0x95.toByte(),
+            0x02.toByte(),
+            0x01.toByte(),
+            0x02.toByte(),
+            0x96.toByte(),
+            0x03.toByte(),
+            0x03.toByte(),
+            0x04.toByte(),
+            0x05.toByte(),
+        )
+
+        val parsedList = TLVList.fromTlvListBuffer(tlvList)
+
+        for (tlv in parsedList.tlvs) {
+            assertEquals(
+                tlv.tlvTag.size + tlv.tlvLength.size + tlv.tlvValue.size,
+                tlv.bytes.size,
+            )
+        }
+    }
 }
