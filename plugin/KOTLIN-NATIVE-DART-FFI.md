@@ -150,10 +150,10 @@ cd lib && ./gradlew linkReleaseSharedAndroidNativeArm64
 
 # 2. Copy .so to Flutter plugin
 cp build/bin/androidNativeArm64/releaseShared/libbertlv_emv.so \
-   ../plugin/bertlv-emv/android/src/main/jniLibs/arm64-v8a/
+   ../plugin/bertlv_emv_mobile/android/src/main/jniLibs/arm64-v8a/
 
 # 3. Generate Dart FFI bindings from C header
-cd ../plugin/bertlv-emv && dart run ffigen --config ffigen.yaml
+cd ../plugin/bertlv_emv_mobile && dart run ffigen --config ffigen.yaml
 
 # 4. Build Flutter app
 flutter build apk

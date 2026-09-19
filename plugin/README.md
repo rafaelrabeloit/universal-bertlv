@@ -12,6 +12,9 @@ Part of the [Universal BERTLV](../README.md) project — a cross-platform BER-TL
 | [`bertlv_emv_web`](bertlv_emv_web/) | Web implementation (`dart:js_interop`) |
 | [`bertlv_emv_mobile`](bertlv_emv_mobile/) | Android & iOS implementation (`dart:ffi` + Kotlin/Native) |
 
-## Publishing
+## Distribution
 
-All three packages are published to [pub.dev](https://pub.dev).
+The Flutter packages are currently distributed from tagged Git source, not
+pub.dev. See the root README for verified dependency declarations. A future
+pub.dev release must publish the app-facing package and both platform packages
+from the same version tag.

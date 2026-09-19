@@ -16,7 +16,11 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  bertlv_emv_web: ^0.0.1
+  bertlv_emv_web:
+    git:
+      url: https://github.com/rafaelrabeloit/universal-bertlv.git
+      ref: v0.0.10
+      path: plugin/bertlv_emv_web
 ```
 
 ### Basic usage
@@ -54,9 +58,12 @@ Make sure your `web/index.html` loads the EMV modules before Flutter:
 
 ```html
 <!-- Load Universal BERTLV-EMV JavaScript modules BEFORE Flutter -->
-<script src="packages/bertlv_emv_web/web/assets/js/kotlin-kotlin-stdlib.js"></script>
-<script src="packages/bertlv_emv_web/web/assets/js/bitfield-parser.js"></script>
-<script src="packages/bertlv_emv_web/web/assets/js/emv-tools-bertlv-emv.js"></script>
+<script src="assets/packages/bertlv_emv_web/web/assets/js/kotlin-kotlin-stdlib.js"></script>
+<script src="assets/packages/bertlv_emv_web/web/assets/js/kotlin_org_jetbrains_kotlin_kotlin_dom_api_compat.js"></script>
+<script src="assets/packages/bertlv_emv_web/web/assets/js/kotlinx-serialization-kotlinx-serialization-core.js"></script>
+<script src="assets/packages/bertlv_emv_web/web/assets/js/Kotlin-DateTime-library-kotlinx-datetime.js"></script>
+<script src="assets/packages/bertlv_emv_web/web/assets/js/universal-bitfield.js"></script>
+<script src="assets/packages/bertlv_emv_web/web/assets/js/universal-bertlv-bertlv-emv.js"></script>
 
 <!-- Then load Flutter -->
 <script src="main.dart.js" type="application/javascript"></script>

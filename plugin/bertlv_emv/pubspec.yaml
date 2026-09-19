@@ -4,7 +4,7 @@ description: >-
   explanation. Delegates to platform-specific implementations (mobile via
   dart:ffi, web via dart:js_interop).
 version: 0.0.10
-homepage: https://github.com/rafaelrabeloit/emv-tools
+homepage: https://github.com/rafaelrabeloit/universal-bertlv
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

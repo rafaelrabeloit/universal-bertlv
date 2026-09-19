@@ -6,11 +6,14 @@ Part of the [Universal BERTLV](../README.md) project — a cross-platform BER-TL
 
 ## Published
 
-Published on GitHub Packages:
+Published on Maven Central and GitHub Packages:
 
 ```
-io.github.rafaelrabeloit:bertlv-emv:0.1.0
+io.github.rafaelrabeloit:bertlv-emv:0.0.10
 ```
+
+For Maven Central, add the dependency directly. GitHub Packages remains
+available for repository-local snapshots.
 
 Add the GitHub Packages Maven repository to your `settings.gradle.kts`:
 
@@ -30,7 +33,7 @@ maven {
 Then add the dependency:
 
 ```kotlin
-implementation("io.github.rafaelrabeloit:bertlv-emv:0.1.0")
+implementation("io.github.rafaelrabeloit:bertlv-emv:0.0.10")
 ```
 
 ## Dependencies

@@ -48,22 +48,32 @@ Universal BERTLV provides:
 
 ## Installation
 
-### Flutter (pub.dev)
+### Flutter (tagged Git source)
 
-Add the app-facing package to your `pubspec.yaml`:
+The Flutter packages are not yet published to pub.dev. Consume a tagged source
+release and declare the app-facing package plus the required platform package:
 
 ```yaml
 dependencies:
-  bertlv_emv: ^0.0.9
+  bertlv_emv:
+    git:
+      url: https://github.com/rafaelrabeloit/universal-bertlv.git
+      ref: v0.0.10
+      path: plugin/bertlv_emv
+  bertlv_emv_web:
+    git:
+      url: https://github.com/rafaelrabeloit/universal-bertlv.git
+      ref: v0.0.10
+      path: plugin/bertlv_emv_web
 ```
 
-The correct platform package (`bertlv_emv_web` or `bertlv_emv_mobile`) is selected automatically.
+For Android/iOS, replace `bertlv_emv_web` with `bertlv_emv_mobile`.
 
 ### Kotlin / JVM (Maven Central)
 
 ```kotlin
 // build.gradle.kts
-implementation("io.github.rafaelrabeloit:bertlv-emv:0.0.9")
+implementation("io.github.rafaelrabeloit:bertlv-emv:0.0.10")
 ```
 
 GitHub Packages is also available for snapshot builds — see `lib/bertlv-emv/build.gradle.kts`.

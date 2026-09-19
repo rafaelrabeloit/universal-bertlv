@@ -143,7 +143,7 @@ tasks.register<Copy>("copyAndroidNativeLibs") {
     group = "distribution"
 
     val pluginJniLibs = rootProject.projectDir.resolve(
-        "../plugin/bertlv-emv/android/src/main/jniLibs",
+        "../plugin/bertlv_emv_mobile/android/src/main/jniLibs",
     )
     val buildBin = layout.buildDirectory.dir("bin").get().asFile
 

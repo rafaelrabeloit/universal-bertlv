@@ -3,7 +3,7 @@ description: >-
   Universal BERTLV-EMV — Android and iOS implementation of bertlv_emv using
   Kotlin/Native + dart:ffi.
 version: 0.0.10
-homepage: https://github.com/rafaelrabeloit/emv-tools
+homepage: https://github.com/rafaelrabeloit/universal-bertlv
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
