@@ -21,14 +21,16 @@ jobs:
     environment: pub.dev
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
 
       - name: Derive release version
         run: echo "VERSION=${{ inputs.version || github.ref_name }}" | sed 's/^VERSION=v/VERSION=/' >> "$GITHUB_ENV"
 
       - name: Publish app-facing package
         working-directory: plugin/universal_bertlv
-        run: dart pub publish --force
+        run: flutter pub publish --force
 
       - name: Publish web implementation
         run: |
@@ -36,7 +38,7 @@ jobs:
           cp -a plugin/universal_bertlv_web/. "$stage"
           perl -0pi -e 's#universal_bertlv:\n    path: \../universal_bertlv#universal_bertlv: ^$ENV{VERSION}#' "$stage/pubspec.yaml"
           cd "$stage"
-          dart pub publish --force
+          flutter pub publish --force
 
       - name: Publish mobile implementation
         run: |
@@ -44,4 +46,4 @@ jobs:
           cp -a plugin/universal_bertlv_mobile/. "$stage"
           perl -0pi -e 's#universal_bertlv:\n    path: \../universal_bertlv#universal_bertlv: ^$ENV{VERSION}#' "$stage/pubspec.yaml"
           cd "$stage"
-          dart pub publish --force
+          flutter pub publish --force
