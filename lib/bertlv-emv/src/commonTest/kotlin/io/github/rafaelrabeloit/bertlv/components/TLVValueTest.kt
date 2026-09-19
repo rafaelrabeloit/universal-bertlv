@@ -8,10 +8,22 @@ import io.github.rafaelrabeloit.bertlv.utils.LineSeparator
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class TLVValueTest {
 
     class ValueParseTests {
+        @Test
+        fun givenValueShorterThanDeclaredLengthWhenParseThenShouldRejectTruncatedInput() {
+            val bytes = byteArrayOf(0x04.toByte(), 0x02.toByte(), 0x01.toByte())
+            val tag = TLVTag.fromTlvBuffer(bytes)
+            val length = TLVLength.fromTlvBuffer(bytes, tag)
+
+            assertFailsWith<IllegalArgumentException> {
+                TLVValue.fromBinaryTlvBuffer(bytes, tag, length)
+            }
+        }
+
         @Test
         fun givenAValidTlvWhenParseValueThenShouldCorrectlyExtractValueFrom1ByteTag() {
             val oneByteTagTlv = byteArrayOf(

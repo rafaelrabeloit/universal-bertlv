@@ -3,10 +3,41 @@ package io.github.rafaelrabeloit.bertlv.components
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class TLVLengthTest {
 
     class LengthParseTests {
+        @Test
+        fun givenMissingLengthWhenParseThenShouldRejectTruncatedInput() {
+            val bytes = byteArrayOf(0x04.toByte())
+            val tag = TLVTag.fromTlvBuffer(bytes)
+
+            assertFailsWith<IllegalArgumentException> {
+                TLVLength.fromTlvBuffer(bytes, tag)
+            }
+        }
+
+        @Test
+        fun givenIncompleteLongLengthWhenParseThenShouldRejectTruncatedInput() {
+            val bytes = byteArrayOf(0x04.toByte(), 0x82.toByte(), 0x01.toByte())
+            val tag = TLVTag.fromTlvBuffer(bytes)
+
+            assertFailsWith<IllegalArgumentException> {
+                TLVLength.fromTlvBuffer(bytes, tag)
+            }
+        }
+
+        @Test
+        fun givenIndefiniteLengthWhenParseThenShouldRejectUnsupportedEncoding() {
+            val bytes = byteArrayOf(0x04.toByte(), 0x80.toByte())
+            val tag = TLVTag.fromTlvBuffer(bytes)
+
+            assertFailsWith<IllegalArgumentException> {
+                TLVLength.fromTlvBuffer(bytes, tag)
+            }
+        }
+
         @Test
         fun givenAValidTlvWhenParseLengthThenShouldCorrectlyParseShortForm1ByteLength() {
             val shortFormLengthTlv = byteArrayOf(
@@ -84,6 +115,13 @@ class TLVLengthTest {
     }
 
     class LengthCreateTests {
+        @Test
+        fun givenANegativeLengthWhenCreateThenShouldRejectIt() {
+            assertFailsWith<IllegalArgumentException> {
+                TLVLength.fromLength(-1)
+            }
+        }
+
         @Test
         fun givenALengthValueWhenCreateFromLengthThenShouldCorrectlyCreateShortFormLength() {
             val length = TLVLength.fromLength(5)

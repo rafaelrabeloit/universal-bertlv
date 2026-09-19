@@ -62,6 +62,10 @@ class TLVValue<V> private constructor(
             offset: Int = 0,
         ): TLVValue<V> {
             val valueStart = offset + tag.size + length.size
+            require(offset >= 0) { "Offset must not be negative: $offset" }
+            require(valueStart <= bytes.size && length.length <= bytes.size - valueStart) {
+                "Truncated value at offset $valueStart: expected ${length.length} bytes"
+            }
             val valueBytes = bytes.copyOfRange(valueStart, valueStart + length.length)
             return TLVValue(
                 bytes = valueBytes,

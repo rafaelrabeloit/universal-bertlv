@@ -47,7 +47,11 @@ class TLVList private constructor(
             while (offset < bytes.size) {
                 val tlv = TLV.fromTlvBuffer(bytes, specifications, offset)
                 result.add(tlv)
-                offset += tlv.tlvTag.size + tlv.tlvLength.size + tlv.tlvValue.size
+                val consumed = tlv.tlvTag.size + tlv.tlvLength.size + tlv.tlvValue.size
+                require(consumed > 0 && consumed <= bytes.size - offset) {
+                    "Invalid TLV size $consumed at offset $offset"
+                }
+                offset += consumed
             }
 
             return TLVList(bytes, result)

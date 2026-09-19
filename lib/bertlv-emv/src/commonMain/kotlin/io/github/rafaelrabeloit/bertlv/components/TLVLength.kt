@@ -106,8 +106,13 @@ class TLVLength private constructor(
 
         fun fromTlvBuffer(bytes: ByteArray, tag: TLVTag, offset: Int = 0): TLVLength {
             val lengthOffset = offset + tag.size
+            require(offset >= 0) { "Offset must not be negative: $offset" }
+            require(lengthOffset < bytes.size) { "Missing length at offset $lengthOffset" }
             val form = determineForm(bytes[lengthOffset])
             val lengthSize = calculateLengthSize(form, bytes, lengthOffset)
+            require(lengthSize <= bytes.size - lengthOffset) {
+                "Truncated length at offset $lengthOffset"
+            }
             val lengthBytes = bytes.copyOfRange(lengthOffset, lengthOffset + lengthSize)
             val length = calculateLength(bytes, offset, tag, form, lengthSize)
 
@@ -115,6 +120,7 @@ class TLVLength private constructor(
         }
 
         fun fromLength(length: Int): TLVLength {
+            require(length >= 0) { "Length must not be negative: $length" }
             val form = determineFormFromLength(length)
             val bytes = createLengthBytes(length, form)
             return TLVLength(bytes, form, length)
@@ -161,6 +167,7 @@ class TLVLength private constructor(
                 Form.SHORT -> 1
                 Form.LONG -> {
                     val subsequentBytes = bytes[lengthOffset].toInt() and LENGTH_SHORT_MASK
+                    require(subsequentBytes > 0) { "Indefinite lengths are not supported" }
                     subsequentBytes + 1
                 }
             }

@@ -160,6 +160,7 @@ class TLVTag private constructor(
             offset: Int = 0,
             contextualize: Contextualize = { Context() },
         ): TLVTag {
+            require(offset in bytes.indices) { "Missing tag at offset $offset" }
             val tagHeader = bytes[offset]
             val form = determineForm(tagHeader)
             val tagLength = calculateTagLength(bytes, offset, form)
@@ -182,23 +183,17 @@ class TLVTag private constructor(
         }
 
         private fun calculateTagLength(bytes: ByteArray, offset: Int, form: Form): Int {
-            var tagLength = 1
+            if (form == Form.SHORT) return 1
 
-            if (form == Form.LONG) {
-                tagLength++
+            var index = offset + 1
+            require(index < bytes.size) { "Truncated multi-byte tag at offset $offset" }
 
-                for (n in 1 until bytes.size - offset) {
-                    val byte = bytes[offset + n]
+            while (true) {
+                if (!bytes[index].matches(TAG_CONTINUATION_MASK)) return index - offset + 1
 
-                    if (byte.matches(TAG_CONTINUATION_MASK)) {
-                        tagLength++
-                    } else {
-                        break
-                    }
-                }
+                index++
+                require(index < bytes.size) { "Truncated multi-byte tag at offset $offset" }
             }
-
-            return tagLength
         }
 
         private fun determineClassification(tagHeader: Byte): Classification {

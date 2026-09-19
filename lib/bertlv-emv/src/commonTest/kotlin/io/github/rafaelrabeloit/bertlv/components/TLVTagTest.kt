@@ -6,8 +6,16 @@ import io.github.rafaelrabeloit.bertlv.universal.UniversalTagDescription
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class TLVTagTest {
+
+    @Test
+    fun givenTruncatedMultiByteTagWhenParseThenShouldRejectInput() {
+        assertFailsWith<IllegalArgumentException> {
+            TLVTag.fromTlvBuffer(byteArrayOf(0x9F.toByte()))
+        }
+    }
 
     class TagParseTests {
         @Test
