@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.10
+
+* First public release as `universal_bertlv_web`.
+* Kotlin/JS web implementation for the Universal BERTLV Flutter plugin.
+
 ## [0.0.1] - 2026-02-28
 
 ### Added
