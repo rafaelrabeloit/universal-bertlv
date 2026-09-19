@@ -217,7 +217,7 @@ This creates a **federated plugin** pattern:
 When adding Kotlin/Native targets, **all `commonMain` dependencies must publish native variants** for those targets. This tripped us up:
 
 - `kotlinx-datetime:0.5.0` → lacked `androidNativeArm64` → bumped to `0.6.2` ✅
-- `bitfield-parser:0.1.0` → published JVM+iOS only → added Android Native targets and republished ✅
+- `universal-bitfield` → publishes the shared bitfield DSL; its tested Maven Central version is pinned by `bertlv-emv`.
 
 Always check that your KMP dependencies support the native targets you need.
 

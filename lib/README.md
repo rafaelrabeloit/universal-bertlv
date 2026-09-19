@@ -38,7 +38,7 @@ implementation("io.github.rafaelrabeloit:bertlv-emv:0.0.10")
 
 ## Dependencies
 
-- [BitField Parser](https://github.com/rafaelrabeloit/bitfield-parser) — declarative DSL for defining and parsing bitfield schemas, used by all bitfield-based ValueExplainers.
+- [Universal Bitfield](https://github.com/rafaelrabeloit/universal-bitfield) — declarative DSL for defining and parsing bitfield schemas, used by all bitfield-based ValueExplainers.
 
 ## Explicitly Handled EMV Tags
 
