@@ -147,9 +147,11 @@ class RealValueParser : TLVValue.ValueParser<Double> {
     override fun valueToString(value: Double): String = value.toString()
 
     /**
-     * Simple power function to calculate base^exponent for positive integer exponents
+     * Calculates base^exponent for signed integer exponents.
      */
     private fun power(base: Double, exponent: Int): Double {
+        if (exponent < 0) return POWER_INITIAL / power(base, -exponent)
+
         val result = when {
             exponent == 0 -> POWER_INITIAL
             exponent == 1 -> base

@@ -69,6 +69,18 @@ class RealValueParserTest {
     }
 
     @Test
+    fun givenBinaryEncodingWithNegativeExponentWhenParseThenShouldReturnFraction() {
+        val bytes = byteArrayOf(
+            0x80.toByte(), // binary, positive, base 2, single octet exponent
+            0xFF.toByte(), // exponent = -1
+            0x00.toByte(),
+            0x02.toByte(), // mantissa = 2
+        )
+
+        assertEquals(1.0, parser.bytesToValue(bytes), 0.001)
+    }
+
+    @Test
     fun givenEmptyBytesWhenParseThenShouldReturnZero() {
         // Per ASN.1 X.690: Empty content octets represent zero (0.0)
         val bytes = ByteArray(0)
