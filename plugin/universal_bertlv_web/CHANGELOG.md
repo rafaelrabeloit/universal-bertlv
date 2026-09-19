@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.11
+
+* Refresh bundled Kotlin/JS assets with Universal Bitfield 0.4.0.
+
 ## 0.0.10
 
 * First public release as `universal_bertlv_web`.

@@ -1,3 +1,7 @@
+## 0.0.11
+
+* Upgrade the Universal Bitfield runtime to 0.4.0.
+
 ## 0.0.10
 
 * First public release as `universal_bertlv`.
