@@ -12,20 +12,21 @@
 }(function (_, kotlin_kotlin) {
   'use strict';
   //region block: imports
-  var noWhenBranchMatchedException = kotlin_kotlin.$_$.m3;
+  var noWhenBranchMatchedException = kotlin_kotlin.$_$.n3;
   var Unit_instance = kotlin_kotlin.$_$.o;
   var toString = kotlin_kotlin.$_$.h2;
   var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.k;
   var ArrayList_init_$Create$ = kotlin_kotlin.$_$.d;
   var protoOf = kotlin_kotlin.$_$.e2;
   var initMetadataForObject = kotlin_kotlin.$_$.v1;
-  var initMetadataForClass = kotlin_kotlin.$_$.s1;
-  var VOID = kotlin_kotlin.$_$.b;
-  var numberRangeToNumber = kotlin_kotlin.$_$.z1;
+  var isBlank = kotlin_kotlin.$_$.s2;
   var checkIndexOverflow = kotlin_kotlin.$_$.s;
-  var toList = kotlin_kotlin.$_$.f1;
+  var initMetadataForClass = kotlin_kotlin.$_$.s1;
   var booleanArray = kotlin_kotlin.$_$.j1;
+  var numberRangeToNumber = kotlin_kotlin.$_$.z1;
   var joinToString = kotlin_kotlin.$_$.y;
+  var VOID = kotlin_kotlin.$_$.b;
+  var toList = kotlin_kotlin.$_$.f1;
   var LinkedHashMap_init_$Create$ = kotlin_kotlin.$_$.e;
   var toMap = kotlin_kotlin.$_$.g1;
   //endregion
@@ -147,6 +148,46 @@
     this.db_1 = name;
     this.eb_1 = expectedBytes;
     this.fb_1 = bytes;
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.text.isNotBlank' call
+    var this_0 = this.db_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!isBlank(this_0)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.BitFieldSchema.<anonymous>' call
+      var message = 'Schema name must not be blank';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(this.eb_1 > 0)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.BitFieldSchema.<anonymous>' call
+      var message_0 = "Schema '" + this.db_1 + "' must declare at least one byte";
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(this.fb_1.s() === this.eb_1)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.BitFieldSchema.<anonymous>' call
+      var message_1 = "Schema '" + this.db_1 + "' declares " + this.eb_1 + ' byte(s) but ' + this.fb_1.s() + ' byte definition(s) were provided';
+      throw IllegalArgumentException_init_$Create$(toString(message_1));
+    }
+    // Inline function 'kotlin.collections.forEachIndexed' call
+    var index = 0;
+    var tmp0_iterator = this.fb_1.p();
+    while (tmp0_iterator.q()) {
+      var item = tmp0_iterator.r();
+      // Inline function 'io.github.rafaelrabeloit.bitfield.BitFieldSchema.<anonymous>' call
+      var tmp1 = index;
+      index = tmp1 + 1 | 0;
+      var index_0 = checkIndexOverflow(tmp1);
+      // Inline function 'kotlin.require' call
+      // Inline function 'kotlin.contracts.contract' call
+      if (!(item.gb_1 === (index_0 + 1 | 0))) {
+        // Inline function 'io.github.rafaelrabeloit.bitfield.BitFieldSchema.<anonymous>.<anonymous>' call
+        var message_2 = "Schema '" + this.db_1 + "': byte at position " + (index_0 + 1 | 0) + ' has index ' + item.gb_1 + ', expected ' + (index_0 + 1 | 0);
+        throw IllegalArgumentException_init_$Create$(toString(message_2));
+      }
+    }
   }
   protoOf(BitFieldSchema).jb = function (data) {
     return BitFieldParser_instance.cb(this, data);
@@ -155,23 +196,129 @@
     this.gb_1 = index;
     this.hb_1 = label;
     this.ib_1 = fields;
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(this.gb_1 > 0)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.ByteSchema.<anonymous>' call
+      var message = 'Byte index must be positive: ' + this.gb_1;
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.text.isNotBlank' call
+    var this_0 = this.hb_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!isBlank(this_0)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.ByteSchema.<anonymous>' call
+      var message_0 = 'Byte ' + this.gb_1 + ' label must not be blank';
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.collections.isNotEmpty' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!this.ib_1.h()) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.ByteSchema.<anonymous>' call
+      var message_1 = 'Byte ' + this.gb_1 + " ('" + this.hb_1 + "') must define at least one field";
+      throw IllegalArgumentException_init_$Create$(toString(message_1));
+    }
+    var coveredBits = booleanArray(8);
+    var _iterator__ex2g4s = this.ib_1.p();
+    while (_iterator__ex2g4s.q()) {
+      var field = _iterator__ex2g4s.r();
+      // Inline function 'kotlin.require' call
+      var tmp;
+      var containsArg = field.kb();
+      if (0 <= containsArg ? containsArg <= 7 : false) {
+        var containsArg_0 = field.lb();
+        tmp = 0 <= containsArg_0 ? containsArg_0 <= 7 : false;
+      } else {
+        tmp = false;
+      }
+      // Inline function 'kotlin.contracts.contract' call
+      if (!tmp) {
+        // Inline function 'io.github.rafaelrabeloit.bitfield.ByteSchema.<anonymous>' call
+        var message_2 = 'Byte ' + this.gb_1 + " ('" + this.hb_1 + "'): field '" + field.mb() + "' has bits " + field.nb().toString() + ' outside valid range 0..7';
+        throw IllegalArgumentException_init_$Create$(toString(message_2));
+      }
+      var progression = field.nb();
+      var inductionVariable = progression.m7_1;
+      var last = progression.n7_1;
+      if (inductionVariable <= last)
+        do {
+          var bit = inductionVariable;
+          inductionVariable = inductionVariable + 1 | 0;
+          // Inline function 'kotlin.require' call
+          // Inline function 'kotlin.contracts.contract' call
+          if (!!coveredBits[bit]) {
+            // Inline function 'io.github.rafaelrabeloit.bitfield.ByteSchema.<anonymous>' call
+            var message_3 = 'Byte ' + this.gb_1 + " ('" + this.hb_1 + "'): bit " + bit + " is covered by multiple fields (conflict with '" + field.mb() + "')";
+            throw IllegalArgumentException_init_$Create$(toString(message_3));
+          }
+          coveredBits[bit] = true;
+        }
+         while (!(bit === last));
+    }
+    // Inline function 'kotlin.collections.filter' call
+    // Inline function 'kotlin.collections.filterTo' call
+    var this_1 = numberRangeToNumber(0, 7);
+    var destination = ArrayList_init_$Create$();
+    var inductionVariable_0 = this_1.m7_1;
+    var last_0 = this_1.n7_1;
+    if (inductionVariable_0 <= last_0)
+      do {
+        var element = inductionVariable_0;
+        inductionVariable_0 = inductionVariable_0 + 1 | 0;
+        // Inline function 'io.github.rafaelrabeloit.bitfield.ByteSchema.<anonymous>' call
+        if (!coveredBits[element]) {
+          destination.k(element);
+        }
+      }
+       while (!(element === last_0));
+    var uncovered = destination;
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.contracts.contract' call
+    if (!uncovered.h()) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.ByteSchema.<anonymous>' call
+      var message_4 = 'Byte ' + this.gb_1 + " ('" + this.hb_1 + "'): bits " + joinToString(uncovered, ', ') + ' are not covered by any field';
+      throw IllegalArgumentException_init_$Create$(toString(message_4));
+    }
   }
   function FieldDefinition() {
   }
-  protoOf(FieldDefinition).mb = function () {
-    return this.lb().m7_1;
+  protoOf(FieldDefinition).kb = function () {
+    return this.nb().m7_1;
   };
-  protoOf(FieldDefinition).nb = function () {
-    return this.lb().n7_1;
+  protoOf(FieldDefinition).lb = function () {
+    return this.nb().n7_1;
   };
   function RfuField(bits) {
     FieldDefinition.call(this);
     this.bb_1 = bits;
+    // Inline function 'kotlin.require' call
+    var tmp;
+    var tmp_0;
+    var containsArg = this.bb_1.m7_1;
+    if (0 <= containsArg ? containsArg <= 7 : false) {
+      var containsArg_0 = this.bb_1.n7_1;
+      tmp_0 = 0 <= containsArg_0 ? containsArg_0 <= 7 : false;
+    } else {
+      tmp_0 = false;
+    }
+    if (tmp_0) {
+      tmp = this.bb_1.m7_1 <= this.bb_1.n7_1;
+    } else {
+      tmp = false;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.RfuField.<anonymous>' call
+      var message = 'RFU field has bits ' + this.bb_1.toString() + ' outside valid range 0..7';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
   }
-  protoOf(RfuField).lb = function () {
+  protoOf(RfuField).nb = function () {
     return this.bb_1;
   };
-  protoOf(RfuField).kb = function () {
+  protoOf(RfuField).mb = function () {
     return 'RFU';
   };
   function SingleBitFlag(bit, name, setMeaning, unsetMeaning, onSet, onUnset) {
@@ -184,11 +331,28 @@
     this.ta_1 = unsetMeaning;
     this.ua_1 = onSet;
     this.va_1 = onUnset;
+    // Inline function 'kotlin.require' call
+    var containsArg = this.qa_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!(0 <= containsArg ? containsArg <= 7 : false)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.SingleBitFlag.<anonymous>' call
+      var message = 'Bit ' + this.qa_1 + ' is outside valid range 0..7';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.text.isNotBlank' call
+    var this_0 = this.ra_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!isBlank(this_0)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.SingleBitFlag.<anonymous>' call
+      var message_0 = 'Field name must not be blank';
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
   }
-  protoOf(SingleBitFlag).kb = function () {
+  protoOf(SingleBitFlag).mb = function () {
     return this.ra_1;
   };
-  protoOf(SingleBitFlag).lb = function () {
+  protoOf(SingleBitFlag).nb = function () {
     return numberRangeToNumber(this.qa_1, this.qa_1);
   };
   function MultiBitEnum(bits, name, values) {
@@ -196,11 +360,55 @@
     this.wa_1 = bits;
     this.xa_1 = name;
     this.ya_1 = values;
+    // Inline function 'kotlin.require' call
+    var tmp;
+    var tmp_0;
+    var containsArg = this.wa_1.m7_1;
+    if (0 <= containsArg ? containsArg <= 7 : false) {
+      var containsArg_0 = this.wa_1.n7_1;
+      tmp_0 = 0 <= containsArg_0 ? containsArg_0 <= 7 : false;
+    } else {
+      tmp_0 = false;
+    }
+    if (tmp_0) {
+      tmp = this.wa_1.m7_1 <= this.wa_1.n7_1;
+    } else {
+      tmp = false;
+    }
+    // Inline function 'kotlin.contracts.contract' call
+    if (!tmp) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.MultiBitEnum.<anonymous>' call
+      var message = "Enum '" + this.xa_1 + "' has bits " + this.wa_1.toString() + ' outside valid range 0..7';
+      throw IllegalArgumentException_init_$Create$(toString(message));
+    }
+    // Inline function 'kotlin.require' call
+    // Inline function 'kotlin.text.isNotBlank' call
+    var this_0 = this.xa_1;
+    // Inline function 'kotlin.contracts.contract' call
+    if (!!isBlank(this_0)) {
+      // Inline function 'io.github.rafaelrabeloit.bitfield.MultiBitEnum.<anonymous>' call
+      var message_0 = 'Field name must not be blank';
+      throw IllegalArgumentException_init_$Create$(toString(message_0));
+    }
+    var maxValue = (1 << ((this.wa_1.n7_1 - this.wa_1.m7_1 | 0) + 1 | 0)) - 1 | 0;
+    // Inline function 'kotlin.collections.forEach' call
+    var tmp0_iterator = this.ya_1.t1().p();
+    while (tmp0_iterator.q()) {
+      var element = tmp0_iterator.r();
+      // Inline function 'io.github.rafaelrabeloit.bitfield.MultiBitEnum.<anonymous>' call
+      // Inline function 'kotlin.require' call
+      // Inline function 'kotlin.contracts.contract' call
+      if (!(0 <= element ? element <= maxValue : false)) {
+        // Inline function 'io.github.rafaelrabeloit.bitfield.MultiBitEnum.<anonymous>.<anonymous>' call
+        var message_1 = "Enum '" + this.xa_1 + "': value " + element + ' is out of range for ' + ((this.wa_1.n7_1 - this.wa_1.m7_1 | 0) + 1 | 0) + '-bit field (valid: 0..' + maxValue + ')';
+        throw IllegalArgumentException_init_$Create$(toString(message_1));
+      }
+    }
   }
-  protoOf(MultiBitEnum).lb = function () {
+  protoOf(MultiBitEnum).nb = function () {
     return this.wa_1;
   };
-  protoOf(MultiBitEnum).kb = function () {
+  protoOf(MultiBitEnum).mb = function () {
     return this.xa_1;
   };
   function EnumValue(label, onMatch) {
@@ -237,30 +445,6 @@
     this.xb_1.k(builder.yb());
   };
   protoOf(BitFieldSchemaBuilder).yb = function () {
-    // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!(this.xb_1.s() === this.wb_1)) {
-      // Inline function 'io.github.rafaelrabeloit.bitfield.dsl.BitFieldSchemaBuilder.build.<anonymous>' call
-      var message = "Schema '" + this.vb_1 + "' declares " + this.wb_1 + ' byte(s) but ' + this.xb_1.s() + ' byte definition(s) were provided';
-      throw IllegalArgumentException_init_$Create$(toString(message));
-    }
-    // Inline function 'kotlin.collections.forEachIndexed' call
-    var index = 0;
-    var tmp0_iterator = this.xb_1.p();
-    while (tmp0_iterator.q()) {
-      var item = tmp0_iterator.r();
-      // Inline function 'io.github.rafaelrabeloit.bitfield.dsl.BitFieldSchemaBuilder.build.<anonymous>' call
-      var tmp1 = index;
-      index = tmp1 + 1 | 0;
-      var i = checkIndexOverflow(tmp1);
-      // Inline function 'kotlin.require' call
-      // Inline function 'kotlin.contracts.contract' call
-      if (!(item.gb_1 === (i + 1 | 0))) {
-        // Inline function 'io.github.rafaelrabeloit.bitfield.dsl.BitFieldSchemaBuilder.build.<anonymous>.<anonymous>' call
-        var message_0 = "Schema '" + this.vb_1 + "': byte at position " + (i + 1 | 0) + ' has index ' + item.gb_1 + ', expected ' + (i + 1 | 0);
-        throw IllegalArgumentException_init_$Create$(toString(message_0));
-      }
-    }
     return new BitFieldSchema(this.vb_1, this.wb_1, toList(this.xb_1));
   };
   function ByteSchemaBuilder(index, label) {
@@ -291,71 +475,6 @@
     this.cc_1.k(new RfuField(bits));
   };
   protoOf(ByteSchemaBuilder).yb = function () {
-    var _iterator__ex2g4s = this.cc_1.p();
-    while (_iterator__ex2g4s.q()) {
-      var field = _iterator__ex2g4s.r();
-      // Inline function 'kotlin.require' call
-      var tmp;
-      var containsArg = field.mb();
-      if (0 <= containsArg ? containsArg <= 7 : false) {
-        var containsArg_0 = field.nb();
-        tmp = 0 <= containsArg_0 ? containsArg_0 <= 7 : false;
-      } else {
-        tmp = false;
-      }
-      // Inline function 'kotlin.contracts.contract' call
-      if (!tmp) {
-        // Inline function 'io.github.rafaelrabeloit.bitfield.dsl.ByteSchemaBuilder.build.<anonymous>' call
-        var message = 'Byte ' + this.ac_1 + " ('" + this.bc_1 + "'): field '" + field.kb() + "' has bits " + field.lb().toString() + ' outside valid range 0..7';
-        throw IllegalArgumentException_init_$Create$(toString(message));
-      }
-    }
-    var coveredBits = booleanArray(8);
-    var _iterator__ex2g4s_0 = this.cc_1.p();
-    while (_iterator__ex2g4s_0.q()) {
-      var field_0 = _iterator__ex2g4s_0.r();
-      var progression = field_0.lb();
-      var inductionVariable = progression.m7_1;
-      var last = progression.n7_1;
-      if (inductionVariable <= last)
-        do {
-          var bit = inductionVariable;
-          inductionVariable = inductionVariable + 1 | 0;
-          // Inline function 'kotlin.require' call
-          // Inline function 'kotlin.contracts.contract' call
-          if (!!coveredBits[bit]) {
-            // Inline function 'io.github.rafaelrabeloit.bitfield.dsl.ByteSchemaBuilder.build.<anonymous>' call
-            var message_0 = 'Byte ' + this.ac_1 + " ('" + this.bc_1 + "'): bit " + bit + " is covered by multiple fields (conflict with '" + field_0.kb() + "')";
-            throw IllegalArgumentException_init_$Create$(toString(message_0));
-          }
-          coveredBits[bit] = true;
-        }
-         while (!(bit === last));
-    }
-    // Inline function 'kotlin.collections.filter' call
-    // Inline function 'kotlin.collections.filterTo' call
-    var this_0 = numberRangeToNumber(0, 7);
-    var destination = ArrayList_init_$Create$();
-    var inductionVariable_0 = this_0.m7_1;
-    var last_0 = this_0.n7_1;
-    if (inductionVariable_0 <= last_0)
-      do {
-        var element = inductionVariable_0;
-        inductionVariable_0 = inductionVariable_0 + 1 | 0;
-        // Inline function 'io.github.rafaelrabeloit.bitfield.dsl.ByteSchemaBuilder.build.<anonymous>' call
-        if (!coveredBits[element]) {
-          destination.k(element);
-        }
-      }
-       while (!(element === last_0));
-    var uncovered = destination;
-    // Inline function 'kotlin.require' call
-    // Inline function 'kotlin.contracts.contract' call
-    if (!uncovered.h()) {
-      // Inline function 'io.github.rafaelrabeloit.bitfield.dsl.ByteSchemaBuilder.build.<anonymous>' call
-      var message_1 = 'Byte ' + this.ac_1 + " ('" + this.bc_1 + "'): bits " + joinToString(uncovered, ', ') + ' are not covered by any field';
-      throw IllegalArgumentException_init_$Create$(toString(message_1));
-    }
     return new ByteSchema(this.ac_1, this.bc_1, toList(this.cc_1));
   };
   function MultiBitEnumBuilder(bits, name) {

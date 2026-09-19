@@ -20,9 +20,9 @@
   //region block: imports
   var imul = Math.imul;
   var protoOf = kotlin_kotlin.$_$.e2;
-  var THROW_CCE = kotlin_kotlin.$_$.i3;
+  var THROW_CCE = kotlin_kotlin.$_$.j3;
   var initMetadataForClass = kotlin_kotlin.$_$.s1;
-  var Exception = kotlin_kotlin.$_$.g3;
+  var Exception = kotlin_kotlin.$_$.h3;
   var Exception_init_$Init$ = kotlin_kotlin.$_$.i;
   var captureStack = kotlin_kotlin.$_$.k1;
   var arrayCopy = kotlin_kotlin.$_$.r;
@@ -34,12 +34,12 @@
   var toString = kotlin_kotlin.$_$.h2;
   var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.k;
   var toByte = kotlin_kotlin.$_$.f2;
-  var noWhenBranchMatchedException = kotlin_kotlin.$_$.m3;
+  var noWhenBranchMatchedException = kotlin_kotlin.$_$.n3;
   var copyOfRange = kotlin_kotlin.$_$.u;
-  var Enum = kotlin_kotlin.$_$.f3;
+  var Enum = kotlin_kotlin.$_$.g3;
   var enumEntries = kotlin_kotlin.$_$.i1;
   var getStringHashCode = kotlin_kotlin.$_$.q1;
-  var toString_0 = kotlin_kotlin.$_$.n3;
+  var toString_0 = kotlin_kotlin.$_$.o3;
   var hashCode = kotlin_kotlin.$_$.r1;
   var equals = kotlin_kotlin.$_$.p1;
   var initMetadataForObject = kotlin_kotlin.$_$.v1;
@@ -47,11 +47,11 @@
   var decodeToString = kotlin_kotlin.$_$.n2;
   var charSequenceLength = kotlin_kotlin.$_$.n1;
   var charSequenceGet = kotlin_kotlin.$_$.m1;
-  var isDigit = kotlin_kotlin.$_$.s2;
-  var toInt = kotlin_kotlin.$_$.z2;
+  var isDigit = kotlin_kotlin.$_$.t2;
+  var toInt = kotlin_kotlin.$_$.a3;
   var charArrayOf = kotlin_kotlin.$_$.l1;
   var indexOfAny = kotlin_kotlin.$_$.r2;
-  var toDouble = kotlin_kotlin.$_$.x2;
+  var toDouble = kotlin_kotlin.$_$.y2;
   var numberToInt = kotlin_kotlin.$_$.b2;
   var contains = kotlin_kotlin.$_$.m2;
   var endsWith = kotlin_kotlin.$_$.o2;
@@ -64,15 +64,15 @@
   var drop = kotlin_kotlin.$_$.v;
   var Collection = kotlin_kotlin.$_$.p;
   var isInterface = kotlin_kotlin.$_$.y1;
-  var Long = kotlin_kotlin.$_$.h3;
+  var Long = kotlin_kotlin.$_$.i3;
   var toLong = kotlin_kotlin.$_$.g2;
-  var Unit = kotlin_kotlin.$_$.j3;
+  var Unit = kotlin_kotlin.$_$.k3;
   var joinToString = kotlin_kotlin.$_$.y;
   var KtList = kotlin_kotlin.$_$.q;
   var isByteArray = kotlin_kotlin.$_$.w1;
-  var Char = kotlin_kotlin.$_$.d3;
+  var Char = kotlin_kotlin.$_$.e3;
   var setOf = kotlin_kotlin.$_$.c1;
-  var toString_1 = kotlin_kotlin.$_$.b3;
+  var toString_1 = kotlin_kotlin.$_$.c3;
   var UtcOffset = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.e;
   var asTimeZone = kotlin_org_jetbrains_kotlinx_kotlinx_datetime.$_$.f;
   var checkIndexOverflow = kotlin_kotlin.$_$.s;
@@ -81,7 +81,7 @@
   var sorted = kotlin_kotlin.$_$.e1;
   var collectionSizeOrDefault = kotlin_kotlin.$_$.t;
   var ArrayList_init_$Create$_0 = kotlin_kotlin.$_$.c;
-  var ensureNotNull = kotlin_kotlin.$_$.k3;
+  var ensureNotNull = kotlin_kotlin.$_$.l3;
   var initMetadataForInterface = kotlin_kotlin.$_$.u1;
   var StringBuilder_init_$Create$ = kotlin_kotlin.$_$.f;
   var until = kotlin_kotlin.$_$.k2;
@@ -89,28 +89,28 @@
   var emptyList = kotlin_kotlin.$_$.w;
   var toMutableList = kotlin_kotlin.$_$.h1;
   var StringBuilder_init_$Create$_0 = kotlin_kotlin.$_$.g;
-  var repeat = kotlin_kotlin.$_$.u2;
+  var repeat = kotlin_kotlin.$_$.v2;
   var listOf_0 = kotlin_kotlin.$_$.a1;
   var numberRangeToNumber = kotlin_kotlin.$_$.z1;
   var bitfield = kotlin_io_github_rafaelrabeloit_universal_bitfield.$_$.a;
   var chunked = kotlin_kotlin.$_$.l2;
-  var padStart = kotlin_kotlin.$_$.t2;
+  var padStart = kotlin_kotlin.$_$.u2;
   var sliceArray = kotlin_kotlin.$_$.d1;
   var joinToString_0 = kotlin_kotlin.$_$.x;
-  var takeLast = kotlin_kotlin.$_$.w2;
+  var takeLast = kotlin_kotlin.$_$.x2;
   var toString_2 = kotlin_kotlin.$_$.n;
   var compareTo = kotlin_kotlin.$_$.o1;
   var ClosedRange = kotlin_kotlin.$_$.i2;
   var contains_0 = kotlin_kotlin.$_$.j2;
   var Char__toInt_impl_vasixd = kotlin_kotlin.$_$.m;
   var numberToChar = kotlin_kotlin.$_$.a2;
-  var toLong_0 = kotlin_kotlin.$_$.a3;
+  var toLong_0 = kotlin_kotlin.$_$.b3;
   var equals_0 = kotlin_kotlin.$_$.p2;
   var hexToByteArray = kotlin_kotlin.$_$.q2;
-  var replace = kotlin_kotlin.$_$.v2;
-  var toHexString = kotlin_kotlin.$_$.y2;
+  var replace = kotlin_kotlin.$_$.w2;
+  var toHexString = kotlin_kotlin.$_$.z2;
   var isCharSequence = kotlin_kotlin.$_$.x1;
-  var trim = kotlin_kotlin.$_$.c3;
+  var trim = kotlin_kotlin.$_$.d3;
   var primitiveArrayConcat = kotlin_kotlin.$_$.a;
   //endregion
   //region block: pre-declaration
@@ -2326,8 +2326,8 @@
       var index_0 = checkIndexOverflow(tmp1);
       var def = item.sb_1;
       var tmp = index_0 + 1 | 0;
-      var tmp_0 = def.mb();
-      var tmp_1 = def.nb() + 1 | 0;
+      var tmp_0 = def.kb();
+      var tmp_1 = def.lb() + 1 | 0;
       var tmp_2;
       var tmp_3 = item.sb_1;
       if (tmp_3 instanceof RfuField) {

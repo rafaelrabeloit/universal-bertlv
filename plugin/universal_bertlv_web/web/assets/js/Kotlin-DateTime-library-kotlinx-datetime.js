@@ -22,7 +22,7 @@
   var ResolverStyle = $module$_js_joda_core_gcv2k.ResolverStyle;
   var protoOf = kotlin_kotlin.$_$.e2;
   var initMetadataForCompanion = kotlin_kotlin.$_$.t1;
-  var Long = kotlin_kotlin.$_$.h3;
+  var Long = kotlin_kotlin.$_$.i3;
   var toString = kotlin_kotlin.$_$.h2;
   var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.k;
   var toLong = kotlin_kotlin.$_$.g2;
@@ -31,11 +31,11 @@
   var ArithmeticException_init_$Create$ = kotlin_kotlin.$_$.h;
   var numberToLong = kotlin_kotlin.$_$.c2;
   var numberToInt = kotlin_kotlin.$_$.b2;
-  var THROW_CCE = kotlin_kotlin.$_$.i3;
-  var Comparable = kotlin_kotlin.$_$.e3;
+  var THROW_CCE = kotlin_kotlin.$_$.j3;
+  var Comparable = kotlin_kotlin.$_$.f3;
   var IllegalArgumentException_init_$Create$_0 = kotlin_kotlin.$_$.j;
   var objectCreate = kotlin_kotlin.$_$.d2;
-  var lazy = kotlin_kotlin.$_$.l3;
+  var lazy = kotlin_kotlin.$_$.m3;
   //endregion
   //region block: pre-declaration
   initMetadataForCompanion(Companion);
