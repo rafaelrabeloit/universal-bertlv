@@ -19,20 +19,16 @@ object TransactionStatusInformation : ValueExplainer<ByteArray> {
 
     private val schema = bitfield("Transaction Status Information", bytes = 2) {
         byte(1, "Byte 1") {
-            bit(0, "Offline Data Authentication Performed - Offline data authentication was performed")
-            bit(1, "Offline Data Authentication Failed - Offline data authentication failed")
-            bit(2, "SDA Performed - Static Data Authentication was performed")
-            bit(3, "DDA Performed - Dynamic Data Authentication was performed")
-            bit(4, "CDA Performed - Combined DDA/AC was performed")
-            bit(5, "Cardholder Verification Performed - Cardholder verification was performed")
-            bit(6, "Cardholder Verification Failed - Cardholder verification failed")
-            bit(7, "Cardholder Verification Not Performed - Cardholder verification was not performed")
+            bit(0, "Offline Data Authentication Was Performed")
+            bit(1, "Cardholder Verification Was Performed")
+            bit(2, "Card Risk Management Was Performed")
+            bit(3, "Issuer Authentication Was Performed")
+            bit(4, "Terminal Risk Management Was Performed")
+            bit(5, "Script Processing Was Performed")
+            rfu(6..7)
         }
         byte(2, "Byte 2") {
-            bit(0, "Issuer Authentication Performed - Issuer authentication was performed")
-            bit(1, "Issuer Authentication Failed - Issuer authentication failed")
-            bit(2, "Issuer Authentication Not Performed - Issuer authentication was not performed")
-            rfu(3..7)
+            rfu(0..7)
         }
     }
 

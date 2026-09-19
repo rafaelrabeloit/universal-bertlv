@@ -14,82 +14,47 @@ class TransactionStatusInformationTest {
     fun givenTransactionStatusInformationWithOfflineDataAuthenticationPerformedWhenExplainingThenShowsCorrectBitExplanation() {
         val statusInfo = byteArrayOf(0x80.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Offline Data Authentication Performed - Offline data authentication was performed")
-    }
-
-    @Test
-    fun givenTransactionStatusInformationWithOfflineDataAuthenticationFailedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x40.toByte(), 0x00)
-        val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Offline Data Authentication Failed - Offline data authentication failed")
-    }
-
-    @Test
-    fun givenTransactionStatusInformationWithSdaPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x20.toByte(), 0x00)
-        val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "SDA Performed - Static Data Authentication was performed")
-    }
-
-    @Test
-    fun givenTransactionStatusInformationWithDdaPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x10.toByte(), 0x00)
-        val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "DDA Performed - Dynamic Data Authentication was performed")
-    }
-
-    @Test
-    fun givenTransactionStatusInformationWithCdaPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x08.toByte(), 0x00)
-        val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "CDA Performed - Combined DDA/AC was performed")
+        assertContains(meaning, "Offline Data Authentication Was Performed")
     }
 
     @Test
     fun givenTransactionStatusInformationWithCardholderVerificationPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x04.toByte(), 0x00)
+        val statusInfo = byteArrayOf(0x40.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Cardholder Verification Performed - Cardholder verification was performed")
+        assertContains(meaning, "Cardholder Verification Was Performed")
     }
 
     @Test
-    fun givenTransactionStatusInformationWithCardholderVerificationFailedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x02.toByte(), 0x00)
+    fun givenTransactionStatusInformationWithCardRiskManagementPerformedWhenExplainingThenShowsCorrectBitExplanation() {
+        val statusInfo = byteArrayOf(0x20.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Cardholder Verification Failed - Cardholder verification failed")
-    }
-
-    @Test
-    fun givenTransactionStatusInformationWithCardholderVerificationNotPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x01.toByte(), 0x00)
-        val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Cardholder Verification Not Performed - Cardholder verification was not performed")
+        assertContains(meaning, "Card Risk Management Was Performed")
     }
 
     @Test
     fun givenTransactionStatusInformationWithIssuerAuthenticationPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x00, 0x80.toByte())
+        val statusInfo = byteArrayOf(0x10.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Issuer Authentication Performed - Issuer authentication was performed")
+        assertContains(meaning, "Issuer Authentication Was Performed")
     }
 
     @Test
-    fun givenTransactionStatusInformationWithIssuerAuthenticationFailedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x00, 0x40.toByte())
+    fun givenTransactionStatusInformationWithTerminalRiskManagementPerformedWhenExplainingThenShowsCorrectBitExplanation() {
+        val statusInfo = byteArrayOf(0x08.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Issuer Authentication Failed - Issuer authentication failed")
+        assertContains(meaning, "Terminal Risk Management Was Performed")
     }
 
     @Test
-    fun givenTransactionStatusInformationWithIssuerAuthenticationNotPerformedWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x00, 0x20.toByte())
+    fun givenTransactionStatusInformationWithScriptProcessingPerformedWhenExplainingThenShowsCorrectBitExplanation() {
+        val statusInfo = byteArrayOf(0x04.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Issuer Authentication Not Performed - Issuer authentication was not performed")
+        assertContains(meaning, "Script Processing Was Performed")
     }
 
     @Test
     fun givenTransactionStatusInformationWithRfuBitsSetWhenExplainingThenShowsCorrectBitExplanation() {
-        val statusInfo = byteArrayOf(0x00, 0x1F.toByte())
+        val statusInfo = byteArrayOf(0x03.toByte(), 0x80.toByte())
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
         assertContains(meaning, "RFU - Reserved for Future Use")
     }
@@ -98,17 +63,12 @@ class TransactionStatusInformationTest {
     fun givenTransactionStatusInformationWithAllBitsSetWhenExplainingThenShowsAllBitExplanations() {
         val statusInfo = byteArrayOf(0xFF.toByte(), 0xFF.toByte())
         val meaning = TransactionStatusInformation.explain(statusInfo, "\n").toString()
-        assertContains(meaning, "Offline Data Authentication Performed - Offline data authentication was performed")
-        assertContains(meaning, "Offline Data Authentication Failed - Offline data authentication failed")
-        assertContains(meaning, "SDA Performed - Static Data Authentication was performed")
-        assertContains(meaning, "DDA Performed - Dynamic Data Authentication was performed")
-        assertContains(meaning, "CDA Performed - Combined DDA/AC was performed")
-        assertContains(meaning, "Cardholder Verification Performed - Cardholder verification was performed")
-        assertContains(meaning, "Cardholder Verification Failed - Cardholder verification failed")
-        assertContains(meaning, "Cardholder Verification Not Performed - Cardholder verification was not performed")
-        assertContains(meaning, "Issuer Authentication Performed - Issuer authentication was performed")
-        assertContains(meaning, "Issuer Authentication Failed - Issuer authentication failed")
-        assertContains(meaning, "Issuer Authentication Not Performed - Issuer authentication was not performed")
+        assertContains(meaning, "Offline Data Authentication Was Performed")
+        assertContains(meaning, "Cardholder Verification Was Performed")
+        assertContains(meaning, "Card Risk Management Was Performed")
+        assertContains(meaning, "Issuer Authentication Was Performed")
+        assertContains(meaning, "Terminal Risk Management Was Performed")
+        assertContains(meaning, "Script Processing Was Performed")
         assertContains(meaning, "RFU - Reserved for Future Use")
     }
 
@@ -124,6 +84,6 @@ class TransactionStatusInformationTest {
     fun givenTransactionStatusInformationWithCustomLineSeparatorWhenExplainingThenUsesCorrectSeparator() {
         val statusInfo = byteArrayOf(0x80.toByte(), 0x00)
         val meaning = TransactionStatusInformation.explain(statusInfo, "|").toString()
-        assertContains(meaning, "Offline Data Authentication Performed - Offline data authentication was performed|")
+        assertContains(meaning, "Offline Data Authentication Was Performed|")
     }
 }

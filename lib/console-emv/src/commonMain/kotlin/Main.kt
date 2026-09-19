@@ -1,4 +1,4 @@
-import io.github.rafaelrabeloit.bertlv.TLV
+import io.github.rafaelrabeloit.bertlv.TLVList
 import io.github.rafaelrabeloit.bertlv.universal.ASNOneSpecification
 import io.github.rafaelrabeloit.emv.EmvSpecification
 
@@ -41,11 +41,11 @@ fun main(args: Array<String>) {
                 // Convert hex string to byte array
                 val bytes = hexString.hexToByteArray()
 
-                // Parse TLV using both ASN.1 and EMV specifications
-                val tlv = TLV.fromTlvBuffer(bytes, listOf(ASNOneSpecification, EmvSpecification))
+                // Parse concatenated TLV data using both ASN.1 and EMV specifications
+                val tlvList = TLVList.fromTlvListBuffer(bytes, listOf(ASNOneSpecification, EmvSpecification))
 
                 // Extract and print components
-                printTlvComponents(tlv)
+                printTlvComponents(tlvList)
             } catch (e: Exception) {
                 println("Error parsing TLV data: ${e.message}")
                 e.printStackTrace()
@@ -61,9 +61,13 @@ fun main(args: Array<String>) {
 /**
  * Prints the TLV components using the explain method for detailed analysis.
  */
-private fun printTlvComponents(tlv: TLV<*>) {
-    // Print detailed explanation using the explain method
-    println(tlv.explain().toString())
+private fun printTlvComponents(tlvList: TLVList) {
+    tlvList.tlvs.forEachIndexed { index, tlv ->
+        if (index > 0) {
+            println()
+        }
+        println(tlv.explain().toString())
+    }
 }
 
 /**
@@ -73,9 +77,10 @@ private fun printUsage() {
     println("Usage: console-emv <command> <arguments>")
     println()
     println("Commands:")
-    println("  tlv <hex_string>    Parse TLV data from hex string")
+    println("  tlv <hex_string>    Parse TLV or concatenated TLV list from hex string")
     println()
     println("Examples:")
     println("  console-emv tlv 95050400000000")
     println("  console-emv tlv 5A08123456789012345F")
+    println("  console-emv tlv 9505040000000082021C00")
 }
