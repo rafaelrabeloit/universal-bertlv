@@ -9,6 +9,7 @@ on:
         type: string
 
 permissions:
+  actions: write
   contents: write
   packages: read
 
@@ -77,3 +78,11 @@ jobs:
             --title "v${{ inputs.version }}" \
             --generate-notes \
             --target main
+
+      - name: Publish Flutter packages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run "Publish Flutter packages to pub.dev" \
+            --ref main \
+            -f version="${{ inputs.version }}"
