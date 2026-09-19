@@ -2,7 +2,7 @@ name: universal_bertlv_web
 description: >-
   Universal BERTLV — Web implementation of the universal_bertlv plugin using
   dart:js_interop.
-version: 0.0.10
+version: 0.0.11
 homepage: https://github.com/rafaelrabeloit/universal-bertlv
 
 environment:

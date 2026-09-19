@@ -3,7 +3,7 @@ description: >-
   Universal BERTLV — Flutter plugin for EMV BER-TLV parsing and tag
   explanation. Delegates to platform-specific implementations (mobile via
   dart:ffi, web via dart:js_interop).
-version: 0.0.10
+version: 0.0.11
 homepage: https://github.com/rafaelrabeloit/universal-bertlv
 
 environment:
