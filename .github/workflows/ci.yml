@@ -33,17 +33,17 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run JVM tests
-        run: ./gradlew :bertlv-emv:jvmTest :console-emv:jvmTest
+        run: ./gradlew :universal-bertlv:jvmTest :console-emv:jvmTest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run JS tests
-        run: ./gradlew :bertlv-emv:jsTest
+        run: ./gradlew :universal-bertlv:jsTest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Regenerate web JS artifacts
-        run: ./gradlew :bertlv-emv:copyJsToWebPlugin
+        run: ./gradlew :universal-bertlv:copyJsToWebPlugin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -51,14 +51,14 @@ jobs:
         id: staleness
         run: |
           cd "$GITHUB_WORKSPACE"
-          CHANGED=$(git diff --name-only -- plugin/bertlv_emv_web/web/assets/js/)
-          UNTRACKED=$(git ls-files --others --exclude-standard -- plugin/bertlv_emv_web/web/assets/js/)
+          CHANGED=$(git diff --name-only -- plugin/universal_bertlv_web/web/assets/js/)
+          UNTRACKED=$(git ls-files --others --exclude-standard -- plugin/universal_bertlv_web/web/assets/js/)
           if [ -z "$CHANGED" ] && [ -z "$UNTRACKED" ]; then
             echo "All web JS artifacts are up-to-date."
             echo "stale=false" >> "$GITHUB_OUTPUT"
           else
             echo "::warning::Web JS artifacts were stale and have been regenerated."
-            git status -- plugin/bertlv_emv_web/web/assets/js/
+            git status -- plugin/universal_bertlv_web/web/assets/js/
             echo "stale=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -68,12 +68,12 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A plugin/bertlv_emv_web/web/assets/js/
+          git add -A plugin/universal_bertlv_web/web/assets/js/
           git commit -m "chore: regenerate web JS artifacts [skip ci]"
           git push
 
       - name: Fail PR if artifacts are stale
         if: github.event_name == 'pull_request' && steps.staleness.outputs.stale == 'true'
         run: |
-          echo "::error::Web JS artifacts are stale. Regenerate with './gradlew :bertlv-emv:copyJsToWebPlugin' and commit, or merge to main where CI will auto-fix."
+          echo "::error::Web JS artifacts are stale. Regenerate with './gradlew :universal-bertlv:copyJsToWebPlugin' and commit, or merge to main where CI will auto-fix."
           exit 1

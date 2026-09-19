@@ -8,9 +8,9 @@ Part of the [Universal BERTLV](../README.md) project — a cross-platform BER-TL
 
 | Package | Description |
 |---------|-------------|
-| [`bertlv_emv`](bertlv_emv/) | App-facing API (platform interface) |
-| [`bertlv_emv_web`](bertlv_emv_web/) | Web implementation (`dart:js_interop`) |
-| [`bertlv_emv_mobile`](bertlv_emv_mobile/) | Android & iOS implementation (`dart:ffi` + Kotlin/Native) |
+| [`universal_bertlv`](universal_bertlv/) | App-facing API (platform interface) |
+| [`universal_bertlv_web`](universal_bertlv_web/) | Web implementation (`dart:js_interop`) |
+| [`universal_bertlv_mobile`](universal_bertlv_mobile/) | Android & iOS implementation (`dart:ffi` + Kotlin/Native) |
 
 ## Distribution
 

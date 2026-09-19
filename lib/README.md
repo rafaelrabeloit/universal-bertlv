@@ -9,7 +9,7 @@ Part of the [Universal BERTLV](../README.md) project — a cross-platform BER-TL
 Published on Maven Central and GitHub Packages:
 
 ```
-io.github.rafaelrabeloit:bertlv-emv:0.0.10
+io.github.rafaelrabeloit:universal-bertlv:0.0.10
 ```
 
 For Maven Central, add the dependency directly. GitHub Packages remains
@@ -33,7 +33,7 @@ maven {
 Then add the dependency:
 
 ```kotlin
-implementation("io.github.rafaelrabeloit:bertlv-emv:0.0.10")
+implementation("io.github.rafaelrabeloit:universal-bertlv:0.0.10")
 ```
 
 ## Dependencies

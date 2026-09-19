@@ -1,0 +1,41 @@
+name: Publish Flutter packages to pub.dev
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pub.dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Derive release version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Publish app-facing package
+        working-directory: plugin/universal_bertlv
+        run: dart pub publish --force
+
+      - name: Publish web implementation
+        run: |
+          stage=$(mktemp -d)
+          cp -a plugin/universal_bertlv_web/. "$stage"
+          perl -0pi -e 's#universal_bertlv:\n    path: \../universal_bertlv#universal_bertlv: ^$ENV{VERSION}#' "$stage/pubspec.yaml"
+          cd "$stage"
+          dart pub publish --force
+
+      - name: Publish mobile implementation
+        run: |
+          stage=$(mktemp -d)
+          cp -a plugin/universal_bertlv_mobile/. "$stage"
+          perl -0pi -e 's#universal_bertlv:\n    path: \../universal_bertlv#universal_bertlv: ^$ENV{VERSION}#' "$stage/pubspec.yaml"
+          cd "$stage"
+          dart pub publish --force

@@ -1,7 +1,7 @@
 # Flutter Release Contract
 
-Universal BERTLV has four release surfaces: the KMP core, the `bertlv_emv`
-Flutter API, and its `bertlv_emv_web` and `bertlv_emv_mobile` implementations.
+Universal BERTLV has four release surfaces: the KMP core, the `universal_bertlv`
+Flutter API, and its `universal_bertlv_web` and `universal_bertlv_mobile` implementations.
 They share one version and must be released from the same tag.
 
 ## Current distribution

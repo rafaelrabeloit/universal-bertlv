@@ -1,0 +1,27 @@
+name: universal_bertlv_example
+description: Demonstrates the Universal BERTLV plugin on Android, iOS, and Web.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  universal_bertlv:
+    path: ../
+  universal_bertlv_mobile:
+    path: ../../universal_bertlv_mobile
+  universal_bertlv_web:
+    path: ../../universal_bertlv_web
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  uses-material-design: true

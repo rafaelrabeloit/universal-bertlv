@@ -1,0 +1,37 @@
+name: universal_bertlv_mobile
+description: >-
+  Universal BERTLV — Android and iOS implementation of universal_bertlv using
+  Kotlin/Native + dart:ffi.
+version: 0.0.10
+homepage: https://github.com/rafaelrabeloit/universal-bertlv
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ffi: ^2.1.0
+  universal_bertlv:
+    path: ../universal_bertlv
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  ffigen: ^14.0.0
+
+flutter:
+  plugin:
+    implements: universal_bertlv
+    platforms:
+      android:
+        package: com.example.universal_bertlv
+        pluginClass: BertlvEmvPlugin
+        dartPluginClass: BertlvEmvMobile
+        ffiPlugin: true
+      ios:
+        pluginClass: BertlvEmvPlugin
+        dartPluginClass: BertlvEmvMobile
+        ffiPlugin: true

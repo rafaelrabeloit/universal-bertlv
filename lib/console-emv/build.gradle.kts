@@ -10,7 +10,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":bertlv-emv"))
+                implementation(project(":universal-bertlv"))
             }
         }
 

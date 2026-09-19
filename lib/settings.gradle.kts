@@ -48,5 +48,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "universal-bertlv"
-include(":bertlv-emv")
+include(":universal-bertlv")
 include(":console-emv")

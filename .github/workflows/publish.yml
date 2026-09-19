@@ -37,12 +37,12 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run tests
-        run: ./gradlew :bertlv-emv:jvmTest :bertlv-emv:jsTest
+        run: ./gradlew :universal-bertlv:jvmTest :universal-bertlv:jsTest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to GitHub Packages
-        run: ./gradlew :bertlv-emv:publishAllPublicationsToGitHubPackagesRepository
+        run: ./gradlew :universal-bertlv:publishAllPublicationsToGitHubPackagesRepository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
@@ -72,12 +72,12 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run tests
-        run: ./gradlew :bertlv-emv:jvmTest :bertlv-emv:jsTest :bertlv-emv:iosSimulatorArm64Test
+        run: ./gradlew :universal-bertlv:jvmTest :universal-bertlv:jsTest :universal-bertlv:iosSimulatorArm64Test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish and release to Maven Central
-        run: ./gradlew :bertlv-emv:publishToMavenCentral --no-configuration-cache
+        run: ./gradlew :universal-bertlv:publishToMavenCentral --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}

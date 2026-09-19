@@ -114,7 +114,7 @@ The application uses EMV specification knowledge to provide enhanced explanation
 ## Implementation
 
 - **Main Class**: `Main.kt` in `commonMain` source set
-- **Dependencies**: Uses the `bertlv-emv` library for TLV parsing and EMV specification support
+- **Dependencies**: Uses the `universal-bertlv` library for TLV parsing and EMV specification support
 - **Platform**: Kotlin Multiplatform with JVM target for console execution
 - **Build**: Configured as a fat JAR with all dependencies included
 - **Explainable Architecture**: All TLV components implement `Explainable` interface for detailed analysis

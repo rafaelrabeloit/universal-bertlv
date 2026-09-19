@@ -11,7 +11,7 @@ Flutter plugins traditionally use **platform channels** (MethodChannel) to commu
 - **Platform-specific bridges** — You write the bridge twice: Kotlin for Android, Swift for iOS
 - **No code sharing** — The native implementation is duplicated per platform
 
-For a library like **bertlv-emv** (EMV TLV parsing + bitfield explanation), where all operations are **synchronous data transformations** with no platform API dependencies, method channels are pure overhead.
+For a library like **universal-bertlv** (EMV TLV parsing + bitfield explanation), where all operations are **synchronous data transformations** with no platform API dependencies, method channels are pure overhead.
 
 ## The Solution: Kotlin/Native → .so → dart:ffi
 
@@ -76,7 +76,7 @@ fun emvFree(ptr: CPointer<ByteVar>?) {
 When Kotlin/Native builds the shared library, it:
 1. Compiles `commonMain` + `nativeMain` to native machine code
 2. Generates a `.so` (Android) / `.dylib` (macOS) / `.framework` (iOS)
-3. **Auto-generates a C header** (`libbertlv_emv_api.h`) with all `@CName` exports
+3. **Auto-generates a C header** (`libuniversal_bertlv_api.h`) with all `@CName` exports
 
 ### Dart FFI Integration
 
@@ -90,7 +90,7 @@ class BertlvEmv {
 
   BertlvEmv() {
     _lib = Platform.isAndroid
-        ? DynamicLibrary.open('libbertlv_emv.so')
+        ? DynamicLibrary.open('libuniversal_bertlv.so')
         : DynamicLibrary.process(); // iOS: statically linked
 
     _parseTlv = _lib.lookupFunction<
@@ -136,7 +136,7 @@ name: BertlvEmvBindings
 output: lib/src/ffi_bindings.g.dart
 headers:
   entry-points:
-    - '../../lib/bertlv-emv/build/bin/androidNativeArm64/releaseShared/libbertlv_emv_api.h'
+    - '../../lib/universal-bertlv/build/bin/androidNativeArm64/releaseShared/libuniversal_bertlv_api.h'
 functions:
   include:
     - 'emv_.*'
@@ -149,11 +149,11 @@ functions:
 cd lib && ./gradlew linkReleaseSharedAndroidNativeArm64
 
 # 2. Copy .so to Flutter plugin
-cp build/bin/androidNativeArm64/releaseShared/libbertlv_emv.so \
-   ../plugin/bertlv_emv_mobile/android/src/main/jniLibs/arm64-v8a/
+cp build/bin/androidNativeArm64/releaseShared/libuniversal_bertlv.so \
+   ../plugin/universal_bertlv_mobile/android/src/main/jniLibs/arm64-v8a/
 
 # 3. Generate Dart FFI bindings from C header
-cd ../plugin/bertlv_emv_mobile && dart run ffigen --config ffigen.yaml
+cd ../plugin/universal_bertlv_mobile && dart run ffigen --config ffigen.yaml
 
 # 4. Build Flutter app
 flutter build apk
@@ -180,9 +180,9 @@ external String emvParseTlv(String hex);
 ```
 
 This creates a **federated plugin** pattern:
-- `bertlv_emv_android` → `dart:ffi` → Kotlin/Native `.so`
-- `bertlv_emv_ios` → `dart:ffi` → Kotlin/Native `.framework`
-- `bertlv_emv_web` → `dart:js_interop` → Kotlin/JS module
+- `universal_bertlv_android` → `dart:ffi` → Kotlin/Native `.so`
+- `universal_bertlv_ios` → `dart:ffi` → Kotlin/Native `.framework`
+- `universal_bertlv_web` → `dart:js_interop` → Kotlin/JS module
 
 ## Comparison with Traditional Approaches
 
@@ -217,7 +217,7 @@ This creates a **federated plugin** pattern:
 When adding Kotlin/Native targets, **all `commonMain` dependencies must publish native variants** for those targets. This tripped us up:
 
 - `kotlinx-datetime:0.5.0` → lacked `androidNativeArm64` → bumped to `0.6.2` ✅
-- `universal-bitfield` → publishes the shared bitfield DSL; its tested Maven Central version is pinned by `bertlv-emv`.
+- `universal-bitfield` → publishes the shared bitfield DSL; its tested Maven Central version is pinned by `universal-bertlv`.
 
 Always check that your KMP dependencies support the native targets you need.
 

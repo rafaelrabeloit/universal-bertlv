@@ -1,7 +1,7 @@
 <!-- Badges -->
 [![CI](https://img.shields.io/github/actions/workflow/status/rafaelrabeloit/universal-bertlv/ci.yml?branch=main&label=CI)](https://github.com/rafaelrabeloit/universal-bertlv/actions)
-[![pub.dev](https://img.shields.io/pub/v/bertlv_emv?label=pub.dev)](https://pub.dev/packages/bertlv_emv)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.rafaelrabeloit/bertlv-emv?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.rafaelrabeloit/bertlv-emv)
+[![pub.dev](https://img.shields.io/pub/v/universal_bertlv?label=pub.dev)](https://pub.dev/packages/universal_bertlv)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.rafaelrabeloit/universal-bertlv?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.rafaelrabeloit/universal-bertlv)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 # Universal BERTLV
@@ -29,22 +29,22 @@ Universal BERTLV provides:
 ├─────────────────────────────────────────────┤
 │          plugin/ — Flutter Plugin           │
 │  ┌─────────────┐  ┌──────────────────────┐  │
-│  │ bertlv_emv  │  │  Platform packages   │  │
+│  │ universal_bertlv  │  │  Platform packages   │  │
 │  │ (interface) │  │  _web  │  _mobile    │  │
 │  └─────────────┘  └──────────────────────┘  │
 ├─────────────────────────────────────────────┤
 │        lib/ — Kotlin Multiplatform          │
-│           bertlv-emv (core)                 │
+│           universal-bertlv (core)                 │
 │      JS • JVM • Android • iOS (Native)     │
 └─────────────────────────────────────────────┘
 ```
 
 | Layer | Path | Role |
 |-------|------|------|
-| **Core** | `lib/bertlv-emv` | KMP library — parser, tag registry, value explainers |
-| **Plugin interface** | `plugin/bertlv_emv` | Platform-agnostic Dart API (federated plugin) |
-| **Web impl** | `plugin/bertlv_emv_web` | `dart:js_interop` bridge to KMP JS output |
-| **Mobile impl** | `plugin/bertlv_emv_mobile` | `dart:ffi` bridge to Kotlin/Native |
+| **Core** | `lib/universal-bertlv` | KMP library — parser, tag registry, value explainers |
+| **Plugin interface** | `plugin/universal_bertlv` | Platform-agnostic Dart API (federated plugin) |
+| **Web impl** | `plugin/universal_bertlv_web` | `dart:js_interop` bridge to KMP JS output |
+| **Mobile impl** | `plugin/universal_bertlv_mobile` | `dart:ffi` bridge to Kotlin/Native |
 
 ## Installation
 
@@ -55,35 +55,35 @@ release and declare the app-facing package plus the required platform package:
 
 ```yaml
 dependencies:
-  bertlv_emv:
+  universal_bertlv:
     git:
       url: https://github.com/rafaelrabeloit/universal-bertlv.git
       ref: v0.0.10
-      path: plugin/bertlv_emv
-  bertlv_emv_web:
+      path: plugin/universal_bertlv
+  universal_bertlv_web:
     git:
       url: https://github.com/rafaelrabeloit/universal-bertlv.git
       ref: v0.0.10
-      path: plugin/bertlv_emv_web
+      path: plugin/universal_bertlv_web
 ```
 
-For Android/iOS, replace `bertlv_emv_web` with `bertlv_emv_mobile`.
+For Android/iOS, replace `universal_bertlv_web` with `universal_bertlv_mobile`.
 
 ### Kotlin / JVM (Maven Central)
 
 ```kotlin
 // build.gradle.kts
-implementation("io.github.rafaelrabeloit:bertlv-emv:0.0.10")
+implementation("io.github.rafaelrabeloit:universal-bertlv:0.0.10")
 ```
 
-GitHub Packages is also available for snapshot builds — see `lib/bertlv-emv/build.gradle.kts`.
+GitHub Packages is also available for snapshot builds — see `lib/universal-bertlv/build.gradle.kts`.
 
 ## Usage
 
 ### Dart / Flutter
 
 ```dart
-import 'package:bertlv_emv/bertlv_emv.dart';
+import 'package:universal_bertlv/universal_bertlv.dart';
 
 final parser = BertlvEmv();
 final result = await parser.parse('6F1A840E315041592E5359532E4444463031A5088801025F2D02656E');

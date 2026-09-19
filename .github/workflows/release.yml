@@ -34,25 +34,25 @@ jobs:
       - name: Bump version in build.gradle.kts
         run: |
           sed -i 's/^version = ".*"/version = "${{ inputs.version }}"/' \
-            lib/bertlv-emv/build.gradle.kts
+            lib/universal-bertlv/build.gradle.kts
 
       - name: Bump version in pubspec.yaml files
         run: |
-          for f in plugin/bertlv_emv/pubspec.yaml \
-                   plugin/bertlv_emv_web/pubspec.yaml \
-                   plugin/bertlv_emv_mobile/pubspec.yaml; do
+          for f in plugin/universal_bertlv/pubspec.yaml \
+                   plugin/universal_bertlv_web/pubspec.yaml \
+                   plugin/universal_bertlv_mobile/pubspec.yaml; do
             sed -i "s/^version: .*/version: ${{ inputs.version }}/" "$f"
           done
 
       - name: Run tests
         working-directory: lib
-        run: ./gradlew :bertlv-emv:jvmTest :console-emv:jvmTest :bertlv-emv:jsTest
+        run: ./gradlew :universal-bertlv:jvmTest :console-emv:jvmTest :universal-bertlv:jsTest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Regenerate web JS artifacts (clean build to pick up bumped version)
         working-directory: lib
-        run: ./gradlew clean :bertlv-emv:copyJsToWebPlugin --no-build-cache
+        run: ./gradlew clean :universal-bertlv:copyJsToWebPlugin --no-build-cache
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,11 +60,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add lib/bertlv-emv/build.gradle.kts \
-                 plugin/bertlv_emv/pubspec.yaml \
-                 plugin/bertlv_emv_web/pubspec.yaml \
-                 plugin/bertlv_emv_mobile/pubspec.yaml
-          git add -A plugin/bertlv_emv_web/web/assets/js/
+          git add lib/universal-bertlv/build.gradle.kts \
+                 plugin/universal_bertlv/pubspec.yaml \
+                 plugin/universal_bertlv_web/pubspec.yaml \
+                 plugin/universal_bertlv_mobile/pubspec.yaml
+          git add -A plugin/universal_bertlv_web/web/assets/js/
           git diff --cached --quiet && echo "Nothing to commit" || \
             (git commit -m "release: v${{ inputs.version }} [skip ci]" && \
              git pull --rebase origin main && git push)

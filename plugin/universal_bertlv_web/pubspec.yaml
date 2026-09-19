@@ -1,0 +1,35 @@
+name: universal_bertlv_web
+description: >-
+  Universal BERTLV — Web implementation of the universal_bertlv plugin using
+  dart:js_interop.
+version: 0.0.10
+homepage: https://github.com/rafaelrabeloit/universal-bertlv
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.10.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  web: ^1.0.0
+  universal_bertlv:
+    path: ../universal_bertlv
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+
+flutter:
+  plugin:
+    implements: universal_bertlv
+    platforms:
+      web:
+        pluginClass: BertlvEmvWeb
+        fileName: universal_bertlv_web.dart
+
+  assets:
+    - web/assets/js/
