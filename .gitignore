@@ -14,6 +14,10 @@ local.properties
 pubspec.lock
 *.g.dart
 
+# Generated Kotlin/JS payload for the web implementation. It is built in CI and
+# included in the pub.dev tarball, but is not source-controlled.
+plugin/universal_bertlv_web/web/assets/js/
+
 # IDE
 .idea/
 *.iml
