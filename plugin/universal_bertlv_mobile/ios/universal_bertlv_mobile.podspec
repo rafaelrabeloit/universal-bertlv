@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'universal_bertlv_mobile'
-  s.version          = '0.0.1'
+  s.version          = '0.0.11'
   s.summary          = 'EMV BER-TLV parser via Kotlin/Native + dart:ffi.'
   s.description      = 'Flutter FFI plugin for universal-bertlv Kotlin/Native library.'
-  s.homepage         = 'https://github.com/rafaelrabeloit/emv-tools'
+  s.homepage         = 'https://github.com/rafaelrabeloit/universal-bertlv'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Rafael' => 'rafael@example.com' }
   s.source           = { :path => '.' }

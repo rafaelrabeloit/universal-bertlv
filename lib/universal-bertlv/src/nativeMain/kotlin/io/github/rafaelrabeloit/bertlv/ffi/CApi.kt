@@ -82,7 +82,7 @@ fun emvExplainTag(
 @OptIn(ExperimentalNativeApi::class)
 @CName("emv_version")
 fun emvVersion(): CPointer<ByteVar> {
-    return "0.0.1".allocCString()
+    return LIB_VERSION.allocCString()
 }
 
 @OptIn(ExperimentalNativeApi::class)

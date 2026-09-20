@@ -187,8 +187,34 @@ val generateVersionFile = tasks.register("generateVersionFile") {
     }
 }
 
-kotlin.sourceSets.named("jsMain") {
+// The native C API and JS API both expose the library version. Keep their
+// source of truth generated from the Gradle project version.
+kotlin.sourceSets.named("commonMain") {
     kotlin.srcDir(generateVersionFile.map { it.outputs.files.singleFile })
+}
+
+tasks.register("verifyVersionMetadata") {
+    description = "Verify that Flutter and Kotlin/Native version metadata matches Gradle"
+    group = "verification"
+
+    val mobilePodspec = rootProject.projectDir.resolve(
+        "../plugin/universal_bertlv_mobile/ios/universal_bertlv_mobile.podspec",
+    )
+    val nativeApi = projectDir.resolve(
+        "src/nativeMain/kotlin/io/github/rafaelrabeloit/bertlv/ffi/CApi.kt",
+    )
+    inputs.files(mobilePodspec, nativeApi)
+    inputs.property("version", version.toString())
+
+    doLast {
+        val expected = version.toString()
+        check(mobilePodspec.readText().contains("s.version          = '$expected'")) {
+            "iOS podspec version must match Gradle version $expected"
+        }
+        check(nativeApi.readText().contains("return LIB_VERSION.allocCString()")) {
+            "Kotlin/Native emvVersion() must use the generated Gradle version"
+        }
+    }
 }
 
 // Copy JS production distribution to Flutter web plugin

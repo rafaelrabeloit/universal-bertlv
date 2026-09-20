@@ -45,9 +45,14 @@ jobs:
             sed -i "s/^version: .*/version: ${{ inputs.version }}/" "$f"
           done
 
+      - name: Bump iOS plugin metadata
+        run: |
+          sed -i "s/^  s.version          = '.*'/  s.version          = '${{ inputs.version }}'/" \
+            plugin/universal_bertlv_mobile/ios/universal_bertlv_mobile.podspec
+
       - name: Run tests
         working-directory: lib
-        run: ./gradlew :universal-bertlv:jvmTest :console-emv:jvmTest :universal-bertlv:jsTest
+        run: ./gradlew :universal-bertlv:jvmTest :console-emv:jvmTest :universal-bertlv:jsTest :universal-bertlv:verifyVersionMetadata
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,24 +69,24 @@ jobs:
           git add lib/universal-bertlv/build.gradle.kts \
                  plugin/universal_bertlv/pubspec.yaml \
                  plugin/universal_bertlv_web/pubspec.yaml \
-                 plugin/universal_bertlv_mobile/pubspec.yaml
+                 plugin/universal_bertlv_mobile/pubspec.yaml \
+                 plugin/universal_bertlv_mobile/ios/universal_bertlv_mobile.podspec
           git diff --cached --quiet && echo "Nothing to commit" || \
             (git commit -m "release: v${{ inputs.version }} [skip ci]" && \
              git pull --rebase origin main && git push)
 
       - name: Create GitHub Release
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # A release made with GITHUB_TOKEN cannot trigger the release-event
+          # OIDC workflow that pub.dev trusts. This fine-grained PAT needs
+          # Contents: write on this repository.
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
+          test -n "$GH_TOKEN" || {
+            echo "::error::RELEASE_TOKEN is required to trigger trusted pub.dev publishing"
+            exit 1
+          }
           gh release create "v${{ inputs.version }}" \
             --title "v${{ inputs.version }}" \
             --generate-notes \
             --target main
-
-      - name: Publish Flutter packages
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh workflow run "Publish Flutter packages to pub.dev" \
-            --ref main \
-            -f version="${{ inputs.version }}"
