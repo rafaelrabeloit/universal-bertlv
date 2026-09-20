@@ -18,6 +18,9 @@ pubspec.lock
 # included in the pub.dev tarball, but is not source-controlled.
 plugin/universal_bertlv_web/web/assets/js/
 
+# Local Kotlin/JS Yarn dependency store.
+lib/kotlin-js-store/
+
 # IDE
 .idea/
 *.iml
