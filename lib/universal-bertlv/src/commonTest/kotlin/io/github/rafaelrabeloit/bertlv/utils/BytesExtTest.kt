@@ -41,4 +41,9 @@ class BytesExtTest {
 
         assertEquals("A00001", hex)
     }
+
+    @Test
+    fun givenIntAndByteCountWhenConvertToByteArrayThenShouldUseFixedWidth() {
+        assertContentEquals(byteArrayOf(0x00, 0x9F.toByte()), 0x9F.toByteArray(2))
+    }
 }
